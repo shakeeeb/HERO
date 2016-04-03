@@ -2,6 +2,7 @@ package data.model;
 
 import com.googlecode.objectify.Ref;
 import com.googlecode.objectify.annotation.*;
+import com.googlecode.objectify.condition.IfFalse;
 
 import java.util.Date;
 
@@ -17,9 +18,9 @@ public class Chapter {
     private String name;
     @Load private Ref<UserData> author;
     @Load private Ref<Series> series;
-    private Date dateCreated;
+    private Date dateCreated; // generate
     @Index private int chapterNumber;
-    private Boolean approved = false;
+    @Index(IfFalse.class) private Boolean approved = false;
 
     public Chapter(){
         // each chapter must have a single page
@@ -59,6 +60,7 @@ public class Chapter {
         root = Ref.create(p);
     }
 
+    //major constructor
     public Chapter(String theName, UserData theAuthor, Series theSeries, int chapterNo, Page theRoot){
         this.name = theName;
         this.author = Ref.create(theAuthor);
@@ -141,5 +143,8 @@ public class Chapter {
     public void setApproved(Boolean approved) {
         this.approved = approved;
     }
+
+    // extended methods
+
 
 }

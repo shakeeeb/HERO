@@ -227,11 +227,11 @@ public class Page {
         }
     }
 
-    public void removeOption(int optionIndex){
+    public boolean removeOption(int optionIndex){
         // gotta check all cases
         if(numOptions == 0){
             // there are no options to remove
-            return;
+            return false;
         } else if (numOptions == 2){
             // two options, just turn one into next
             options.remove(optionIndex);
@@ -239,16 +239,54 @@ public class Page {
             this.Next = options.get(0);
             options = null;
             numOptions = 1;
-
+            return true;
         } else if (numOptions == 1){
             // a single option, meaning it's a next. delete the next
             this.Next = null;
             numOptions = 0;
+            return true;
         } else {
             // many options
             options.remove(optionIndex);
             optionDescriptors.remove(optionIndex);
             numOptions = options.size();
+            return true;
+        }
+    }
+
+    public boolean removeOption(Page removeMe){
+        Ref<Page> toRemove = Ref.create(removeMe);
+        if(numOptions == 0){
+            // no pages to remove
+            return false;
+        } else if(numOptions == 2){
+            int index = options.indexOf(toRemove);
+            if(options.remove(toRemove)){
+                options.remove(toRemove);
+                optionDescriptors.remove(index);
+                this.Next = options.get(0);
+                options = null;
+                numOptions = 1;
+                return true;
+            } else {
+                //failure to remove
+                return false;
+            }
+        } else if(numOptions == 1){
+            // a single option, meaning it's next
+            this.Next = null;
+            numOptions = 0;
+            return true;
+        } else {
+            // many options
+            int index = options.indexOf(toRemove);
+            optionDescriptors.remove(index);
+            if(options.remove(toRemove)){
+                numOptions = options.size();
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 
@@ -262,27 +300,61 @@ public class Page {
             numPriors = priors.size();
         }
     }
-
-    public void removePrior(int priorIndex){
+    // TODO edit this shit so if(removebleh){ return true} else { return false}
+    public boolean removePrior(int priorIndex){
         // gotta check all cases
         if(numPriors == 0){
             // there are no options to remove
-            return;
+            return false;
         } else if (numPriors == 2){
             // two options, just turn one into next
             priors.remove(priorIndex);
             this.Prev = priors.get(0);
             priors = null;
             numPriors = 1;
-
+            return true;
         } else if (numPriors == 1){
             // a single option, meaning it's a next. delete the next
             this.Prev = null;
             numPriors = 0;
+            return true;
         } else {
             // many priors
             priors.remove(priorIndex);
             numPriors = priors.size();
+            return true;
+        }
+    }
+
+    public boolean removePrior(Page RemoveMe){
+        // check all cases
+        Ref<Page> toRemove = Ref.create(RemoveMe);
+        if(numPriors == 0){
+            return false;
+        } else if(numPriors == 2){
+            if(priors.remove(toRemove)){
+                this.Prev = priors.get(0);
+                priors = null;
+                numPriors = 1;
+                return true;
+            } else {
+                return false;
+            }
+        } else if(numPriors == 1){
+            if(priors.remove(toRemove)){
+                // a single option, meaning it's a next. delete the next
+                this.Prev = null;
+                numPriors = 0;
+                return true;
+            } else {
+                //failure to remove
+                return false;
+            }
+        } else {
+            // many priors
+            priors.remove(toRemove);
+            numPriors = priors.size();
+            return true;
         }
     }
 

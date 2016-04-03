@@ -1,10 +1,7 @@
 package data.model;
 
 import com.googlecode.objectify.Ref;
-import com.googlecode.objectify.annotation.Cache;
-import com.googlecode.objectify.annotation.Entity;
-import com.googlecode.objectify.annotation.Id;
-import com.googlecode.objectify.annotation.Load;
+import com.googlecode.objectify.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,19 +13,20 @@ import java.util.Date;
 @Cache
 public class Series {
     @Id private String name;
-    private ArrayList<String> tags;
+    @Index private String mainGenre;
+    @Index private ArrayList<String> tags = null;
     @Load private Ref<UserData> author;
-    private int rating;
-    private int totalStars;
-    private int totalPossibleStars;
+    @Index private double rating = 0;
+    private int totalStars = 0;
+    private int totalPossibleStars = 0;
     @Load private ArrayList<Ref<UserData>> subscribers;
     private int numChapters = 0;
     @Load private ArrayList<Ref<Chapter>> chapters;
-    private String description;
+    private String description = null;
     @Load private ArrayList<Ref<Comment>> comments;
-    private Boolean isApproved = false;
-    private String bannerURL;
-    private Date updateTime;
+    @Index private Boolean isApproved = false;
+    private String bannerURL = null;
+    @Index private Date updateTime;
 
     public Series(){
         this.updateTime = new Date();
@@ -38,6 +36,20 @@ public class Series {
         this.updateTime = new Date();
         this.name = theName;
         this.author = Ref.create(theAuthor);
+        this.subscribers = new ArrayList<Ref<UserData>>();
+        this.chapters = new ArrayList<Ref<Chapter>>();
+        this.comments = new ArrayList<Ref<Comment>>();
+    }
+
+    public Series(String theName, UserData theAuthor, String description, String genre){
+        this.updateTime = new Date();
+        this.name = theName;
+        this.author = Ref.create(theAuthor);
+        this.description = description;
+        this.mainGenre = genre;
+        this.subscribers = new ArrayList<Ref<UserData>>();
+        this.chapters = new ArrayList<Ref<Chapter>>();
+        this.comments = new ArrayList<Ref<Comment>>();
     }
 
     //GETTER SETTER
@@ -57,19 +69,19 @@ public class Series {
         this.tags = tags;
     }
 
-    public Ref<UserData> getAuthor() {
-        return author;
+    public UserData getAuthor() {
+        return author.get();
     }
 
-    public void setAuthor(Ref<UserData> author) {
-        this.author = author;
+    public void setAuthor(UserData author) {
+        this.author = Ref.create(author);
     }
 
-    public int getRating() {
+    public double getRating() {
         return rating;
     }
 
-    public void setRating(int rating) {
+    public void setRating(double rating) {
         this.rating = rating;
     }
 
@@ -152,4 +164,38 @@ public class Series {
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
+
+    public void setMainGenre(String genre){
+        this.mainGenre = genre;
+    }
+
+    public String getMainGenre(String genre){
+        return this.mainGenre;
+    }
+
+    //extended methods
+
+    public boolean addChapter(Chapter c){
+        this.chapters.add(Ref.create(c));
+        numChapters++;
+        return true;
+    }
+
+    public boolean removeChapter(Chapter c){
+        if(numChapters == 0){
+            // no chapters to remove
+            System.out.println("no chapters to remove");
+            return false;
+        }
+        else {
+            if(this.chapters.remove(Ref.create(c))){
+                numChapters--;
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
+
 }

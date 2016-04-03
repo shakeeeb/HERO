@@ -28,4 +28,10 @@ public class ExampleModel {
      *
      * DbContext will be the database access point
      */
+
+    //TODO finish up basic queries for Page, Chapter, Series, UserData and equivalent Repos
+    //TODO finish up advanced queries for Page, Chapter, Series, UserData Repositories
+    //TODO finish up relation management in the Respective Repositories
+    //TODO change the Getters and Setters for Ref<Object> so they return Object not Ref
+    // arraylists too
 }

@@ -4,7 +4,9 @@ import com.googlecode.objectify.Ref;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 
+import com.googlecode.objectify.annotation.Index;
 import com.googlecode.objectify.annotation.Load;
+import com.googlecode.objectify.condition.IfTrue;
 
 import java.util.ArrayList;
 
@@ -20,7 +22,7 @@ public class UserData {
     @Load private ArrayList<Ref<Rating>> ratings;
     @Load private ArrayList<Ref<Series>> viewed;
     int totalSeriesViewed = 0;
-    private Boolean isAdmin = false;
+    @Index(IfTrue.class) private Boolean isAdmin = false;
     private String aboutMe;
     private String profilePic;
 
@@ -169,25 +171,26 @@ public class UserData {
         bookmarks.add(Ref.create(newBookmark));
     }
 
-    public void removeBookmark(int index){
-        bookmarks.remove(index);
-    }
-
-    public void removeBookmark(Page removeMe){
+    public boolean removeBookmark(Page removeMe){
         Ref<Page> toRemove = Ref.create(removeMe);
-        for(Ref<Page>bookmark : bookmarks){
-            bookmarks.remove(toRemove);
+        if(bookmarks.remove(toRemove)){
+            return true;
+        } else {
+            return false;
         }
     }
 
-    public void addSeries(Series newSeries){
+    public boolean addSeries(Series newSeries){
         mySeries.add(Ref.create(newSeries));
+        return true;
     }
 
-    public void removeSeries(Series removeMe){
+    public boolean removeSeries(Series removeMe){
         Ref<Series> toRemove = Ref.create(removeMe);
-        for(Ref<Series> series : mySeries){
-            mySeries.remove(toRemove);
+        if(mySeries.remove(toRemove)){
+            return true;
+        } else {
+            return false;
         }
     }
 
@@ -195,10 +198,12 @@ public class UserData {
         ratings.add(Ref.create(newRating));
     }
 
-    public void removeRating(Rating removeMe){
+    public boolean removeRating(Rating removeMe){
         Ref<Rating> toRemove = Ref.create(removeMe);
-        for(Ref<Rating> rating: ratings){
-            ratings.remove(rating);
+        if(ratings.remove(toRemove)){
+            return true;
+        } else {
+            return false;
         }
     }
 
@@ -207,6 +212,7 @@ public class UserData {
         if(viewed.size() >= 10){
             // replace a thing already in the arraylist
             viewed.remove(totalSeriesViewed % 10);
+            viewed.add(Ref.create(series));
         } else {
             // just add it to an arraylist
             viewed.add(Ref.create(series));
