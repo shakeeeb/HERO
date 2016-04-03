@@ -1,0 +1,95 @@
+#chapter-workspace-container {
+    background: white;
+    display: inline-block;
+    width: 100%;
+}
+
+#chapter-form {
+    padding: 10px;
+    background-color: #e0e0e0;
+    border-right: solid 1px grey;
+    float: left;
+    height: 100%;
+    width: 20%;
+
+}
+#page-flow {
+    background-color: #e0e0e0;
+    border: solid 1px;
+    width: 97%;
+    height: 630px;
+    margin: 0 auto;
+}
+#chapter-page-flow {
+    padding-left: 10px;
+    height: 100%;
+    width: 80%;
+    float:left;
+}
+
+#summary-input {
+    height: 400px;
+    width: 90%;
+}
+
+#title-input {
+    height: 40px;
+    width: 90%;
+}
+
+#save-chapter-button {
+    width:80%;
+
+}
+#cancel-chapter-button {
+    width:60%;
+}
+
+#chapter-form{
+    justify-content:center;
+    align-items:center;
+
+}
+
+#search-container {
+    background-color: gainsboro;
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+}
+
+#refine-menu-container {
+    width: 300px;
+    height: 675px;
+    float: left;
+}
+
+#refine-menu {
+    background-color: gainsboro;
+    width: 280px;
+    height: 655px;
+
+}
+
+#result-container {
+    background-color: white;
+    padding: 20px;
+    height: 655px;
+
+
+}
+
+
+.search-result {
+    height: 150px;
+    width: 1200px;
+    background-color: ghostwhite;
+    border: solid 1px;
+    margin: 10px;
+
+}
+#result-page-menu {
+    width: 1200px;
+    height: 55px;
+    background-color: #2e6da4;
+}

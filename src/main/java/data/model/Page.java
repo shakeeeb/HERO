@@ -1,0 +1,298 @@
+package data.model;
+
+import com.googlecode.objectify.Ref;
+import com.googlecode.objectify.annotation.*;
+
+import java.util.ArrayList;
+
+/**
+ * Created by shakeeb on 3/30/16.
+ */
+
+/**
+ * goddamnit ben
+ */
+@Entity
+@Cache
+public class Page {
+    @Id private String pageId; // id is a concat of seriesname,chaptername,pagenumber
+    @Load private Ref<Series> series;
+    @Load private Ref<Chapter> chapter;
+    @Index private String chapterNameSeriesName;
+    private int pageNumber;
+    private int pageLevel;
+    private int numOptions = 0;
+    private int numPriors = 0;
+    private String imagePath;
+    @Load private Ref<Page> Next = null;
+    @Load private Ref<Page> Prev = null;
+    @Load private ArrayList<Ref<Page>> options = null;
+    @Load private ArrayList<Ref<Page>> priors = null;
+    private ArrayList<String> optionDescriptors;
+
+
+
+    /**
+     * OverLoaded Constructors
+     */
+    // need to manage the tree at this level
+    public Page(){
+        optionDescriptors = new ArrayList<String>();
+        options = new ArrayList<Ref<Page>>();
+        priors = new ArrayList<Ref<Page>>();
+    }
+
+    public Page(String Id){
+        optionDescriptors = new ArrayList<String>();
+        options = new ArrayList<Ref<Page>>();
+        priors = new ArrayList<Ref<Page>>();
+        this.pageId = Id;
+    }
+
+    // add imagepaths later
+    public Page(Series mySeries, Chapter theChapter, int pgNo, int pgLvl){
+        optionDescriptors = new ArrayList<String>();
+        options = new ArrayList<Ref<Page>>();
+        priors = new ArrayList<Ref<Page>>();
+        this.pageId = mySeries.getName() + theChapter.getName() + pgNo; // id
+        this.series = Ref.create(mySeries);
+        this.chapter = Ref.create(theChapter);
+        this.chapterNameSeriesName = theChapter.getChapterId();
+        this.pageLevel = pgLvl;
+    }
+
+    public Page(Series mySeries, Chapter theChapter, int pgNo){
+        optionDescriptors = new ArrayList<String>();
+        options = new ArrayList<Ref<Page>>();
+        priors = new ArrayList<Ref<Page>>();
+        this.pageId = mySeries.getName() + theChapter.getName() + pgNo;
+        this.series = Ref.create(mySeries);
+        this.chapter = Ref.create(theChapter);
+        this.chapterNameSeriesName = theChapter.getChapterId();
+    }
+
+    //GETTER SETTER
+    public String getPageId() {
+        return pageId;
+    }
+
+    public void setPageId(String pageId) {
+        this.pageId = pageId;
+    }
+
+    public Ref<Series> getSeries() {
+        return series;
+    }
+
+    public void setSeries(Ref<Series> series) {
+        this.series = series;
+    }
+
+    public Ref<Chapter> getChapter() {
+        return chapter;
+    }
+
+    public void setChapter(Ref<Chapter> chapter) {
+        this.chapter = chapter;
+    }
+
+    public int getPageNumber() {
+        return pageNumber;
+    }
+
+    public void setPageNumber(int pageNumber) {
+        this.pageNumber = pageNumber;
+    }
+
+    public int getPageLevel() {
+        return pageLevel;
+    }
+
+    public void setPageLevel(int pageLevel) {
+        this.pageLevel = pageLevel;
+    }
+
+    public int getNumOptions() {
+        return numOptions;
+    }
+
+    public void setNumOptions(int numOptions) {
+        this.numOptions = numOptions;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
+    public Ref<Page> getNext() {
+        return Next;
+    }
+
+    public void setNext(Page newNext) {
+        if(numOptions == 0){
+            numOptions = 1;
+            this.Next = Ref.create(newNext);
+        } else if (numOptions == 1){ // theres a next but no other options
+            // these both become options
+            Page oldNext = this.Next.get();
+            this.Next = null;
+            options.add(Ref.create(oldNext));
+            options.add(Ref.create(newNext));
+            numOptions = options.size();
+        } else { // there are options, and we're just adding on another option
+            options.add(Ref.create(newNext));
+            numOptions = options.size();
+        }
+    }
+
+    public ArrayList<Page> getPriors(){
+        ArrayList<Page> returner = new ArrayList<Page>();
+        for(Ref<Page> p : priors){
+            returner.add(p.get());
+        }
+        return returner;
+    }
+
+    public void setPriors(ArrayList<Page> newPriors){
+        ArrayList<Ref<Page>> setOpts = new ArrayList<Ref<Page>>();
+        for(Page p :newPriors){
+            setOpts.add(Ref.create(p));
+        }
+        this.priors = setOpts;
+    }
+
+    public Page getPrev() {
+        Page previous = Prev.get();
+        return previous;
+    }
+
+    public void setPrev(Page newPrev) {
+        //this.Prev = Ref.create(previous);
+        if(numPriors == 0){
+            numPriors = 1;
+            this.Prev = Ref.create(newPrev);
+        } else if (numPriors == 1){ // theres a prev but no other priors
+            // these both become priors
+            Page oldPrev = this.Prev.get();
+            this.Prev = null;
+            priors.add(Ref.create(oldPrev));
+            priors.add(Ref.create(newPrev));
+            numPriors = priors.size();
+        } else { // there are options, and we're just adding on another option
+            priors.add(Ref.create(newPrev));
+            numOptions = priors.size();
+        }
+    }
+
+    public ArrayList<Page> getOptions() {
+        ArrayList<Page> returner = new ArrayList<Page>();
+        for(Ref<Page> p : options){
+            returner.add(p.get());
+        }
+        return returner;
+    }
+
+    public void setOptions(ArrayList<Page> newOptions) {
+        ArrayList<Ref<Page>> setOpts = new ArrayList<Ref<Page>>();
+        for(Page p :newOptions){
+            setOpts.add(Ref.create(p));
+        }
+        this.options = setOpts;
+    }
+
+    public ArrayList<String> getOptionDescriptors() {
+        return optionDescriptors;
+    }
+
+    public void setOptionDescriptors(ArrayList<String> optionDescriptors) {
+        this.optionDescriptors = optionDescriptors;
+    }
+
+    /**
+     * this adds an option and a descriptor
+     */
+    public void addOption(Page option, String optionDescriptor){
+        // gotta check all cases of next
+        if(numOptions == 0){ // totally new, no next. shouldnt be used this way, but... gotta be exhaustive
+            Next = Ref.create(option);
+            numOptions = 1;
+        } else {
+            options.add(Ref.create(option));
+            optionDescriptors.add(optionDescriptor);
+            numOptions = options.size();
+        }
+    }
+
+    public void removeOption(int optionIndex){
+        // gotta check all cases
+        if(numOptions == 0){
+            // there are no options to remove
+            return;
+        } else if (numOptions == 2){
+            // two options, just turn one into next
+            options.remove(optionIndex);
+            optionDescriptors.remove(optionIndex);
+            this.Next = options.get(0);
+            options = null;
+            numOptions = 1;
+
+        } else if (numOptions == 1){
+            // a single option, meaning it's a next. delete the next
+            this.Next = null;
+            numOptions = 0;
+        } else {
+            // many options
+            options.remove(optionIndex);
+            optionDescriptors.remove(optionIndex);
+            numOptions = options.size();
+        }
+    }
+
+    public void addPrior(Page prior){
+        // gotta check all cases of next
+        if(numPriors == 0){ // totally new, no prev. shouldnt be used this way, but... gotta be exhaustive
+            Prev = Ref.create(prior);
+            numPriors = 1;
+        } else {
+            priors.add(Ref.create(prior));
+            numPriors = priors.size();
+        }
+    }
+
+    public void removePrior(int priorIndex){
+        // gotta check all cases
+        if(numPriors == 0){
+            // there are no options to remove
+            return;
+        } else if (numPriors == 2){
+            // two options, just turn one into next
+            priors.remove(priorIndex);
+            this.Prev = priors.get(0);
+            priors = null;
+            numPriors = 1;
+
+        } else if (numPriors == 1){
+            // a single option, meaning it's a next. delete the next
+            this.Prev = null;
+            numPriors = 0;
+        } else {
+            // many priors
+            priors.remove(priorIndex);
+            numPriors = priors.size();
+        }
+    }
+
+    public String getChapterNameSeriesName(){
+        return this.chapterNameSeriesName;
+    }
+
+    public void setChapterNameSeriesName(String chapterNameSeriesName){
+        this.chapterNameSeriesName = chapterNameSeriesName;
+    }
+
+
+}
