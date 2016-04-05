@@ -137,9 +137,9 @@ body {
 
 .series-num-chapters{
     float:right;
-    margin-top:2%;
-    margin-right:28%;
-    width:60%;
+    margin-top:50px;
+    margin-right:300px;
+    width:700px;
 }
 
 .completeness{
@@ -317,4 +317,18 @@ body {
 
 #anchor-home{
     color:orange;
+}
+
+#edit-draft-button{
+    margin-left: 900px;
+    margin-top: -80px;
+
+}
+
+#series-overview-author{
+    margin-left: 1000px;
+}
+
+#series-overview-name{
+    margin-bottom:-20px;
 }
