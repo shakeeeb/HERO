@@ -20,11 +20,11 @@
     <br><br><br>
     <div>
         <row>
-            <div>Series Name</div>
+            <div id="series-overview-name">Series Name</div>
             <div id="series-overview-author">By Author</div>
         </row>
     </div>
-                <div id="series-authored-story-1" class="orange-span one-story">
+    <div id="series-authored-story-1" class="orange-span one-story">
                 <span id="authored-story-1-image" class="author-story-wrap">
                     <img src="/resources/images/logo.png" height="122px" width="122px">
                 </span>
@@ -36,11 +36,7 @@
                     <button id="edit-draft-button" type="submit" class="btn btn-default">Edit Draft</button>
                     </span>
                 </span>
-
-
-
-
-            </div>
+    </div>
 </div>
 </body>
 </html>
