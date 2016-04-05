@@ -1,0 +1,196 @@
+body, html {
+    /*margin-top: auto;*/
+    /*overflow: hidden;*/
+    /*height:200px;*/
+    /*background-color: #f4f4f4;*/
+}
+
+h1.greeting {
+    /* Font Family: Titillium Web */
+    color: #00c6df;
+    margin-left: 60px;
+}
+h2 {
+    color: #757575;
+}
+h3 {
+    color: #00c6df;
+}
+.comic_authorization_image {
+    padding-top: 25px;
+    padding-bottom: 25px;
+    padding-right: 25px;
+}
+
+.button-ok {
+    background: #F9A825;
+    color: #ffffff;
+    font-weight: 900;
+}
+
+.button-negative {
+    background: #9E9E9E;
+    color: #ffffff;
+    font-weight: 900;
+}
+
+.approve-comic {
+    margin-right: 10px;
+    margin-top: 15px;
+}
+
+.delete-comic {
+    margin-top:15px;
+    margin-right: 30px;
+}
+
+.submitted-comics {
+    width: 200px;
+    margin-left: 200px;
+    background-color: #f4f4f4;
+}
+.reported-comics {
+    margin-left: 50px;
+}
+
+.submitted-comics-header {
+    margin-left: -105px;
+    width: 400px;
+    table-layout: fixed;
+    border-collapse: collapse;
+    z-index: -1;
+}
+
+.submitted-comic-info {
+    margin-top: 35px;
+}
+
+.vertical-line {
+    width: 1px; /* Line width */
+    background-color: black; /* Line color */
+    height: 100%; /* Override in-line if you want specific height. */
+    margin-left: 20px;
+    float: left; /* Causes the line to float to left of content.
+    You can instead use position:absolute or display:inline-block
+    if this fits better with your design */
+    border: 1px inset;
+}
+
+.admin-page-main {
+    margin-top: 1%;
+    height: 70%;
+    overflow: scroll;
+}
+
+@media (min-width: 768px){
+    #left {
+        position: absolute;
+        margin-left: 45px;
+        top: 0px;
+        bottom: 0;
+        left: 0;
+        width: 50%;
+        overflow-y: scroll;
+    }
+
+    #right {
+        position: absolute;
+        margin-right: 50px;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        overflow-y: scroll;
+        width: 50%;
+    }
+}
+
+#left {
+    margin-top: 220px;
+    background-color: white;
+    text-align: center;
+    height:500px;
+    width: 45%;
+    padding: 15px 15px 15px 30px;
+}
+
+#right {
+    margin-top: 220px;
+    height:500px;
+    width: 45%;
+    background-color: white;
+    text-align: center;
+    padding: 15px 15px 15px 15px;
+}
+
+.submitted-comics-title {
+    width: 200px;
+    margin-top: -10px;
+}
+
+.submitted-comics-author {
+    width: 200px;
+}
+
+.approve-comic-button {
+    margin-left: 145px;
+}
+
+.delete-comic-button {
+    margin-left: 153px;
+    margin-bottom: 25px;
+}
+
+#admin-page-body {
+    background-color: #f4f4f4;
+}
+
+.page-reader-header {
+    background-color: #f4f4f4;
+    width: 900px;
+    clear:both;
+}
+
+#page-number-reader-page {
+    display: inline-block;
+    float: right;
+}
+
+#chapter-name-reader-page {
+    display: inline-block;
+}
+
+#comic-name-reader-page {
+    display: inline-block;
+}
+
+#page-reader-main {
+    height: 1307px;
+    width: 775px;
+    margin-left: 155px;
+}
+#page-reader-example-img {
+    height: 1307px;
+    width: 800px;
+}
+
+#page-reader-body{
+    height: 2000px;
+    background-color:black;
+}
+
+.fixed-settings-page-column {
+    height:800px;
+    /*overflow:hidden;*/
+    background:orange;
+}
+
+.scrollit {
+    height:800px;
+    /*overflow-y:scroll;*/
+    background:lightgray;
+}
+
+#settings-profile-picture {
+    margin-top: 25px;
+    margin-left: 64px;
+}
