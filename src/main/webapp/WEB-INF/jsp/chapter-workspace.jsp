@@ -19,23 +19,21 @@
         <div id="chapter-form">
             <form action="#" class="chapter-form">
                 <div class="form-group">
-                    <input id="title-input" type="text" name="title" value="Title">
-                </div>
-                <br>
-                <div class="form-group">
-                    <input id="summary-input" type="text" name="summary" value="Summary of Chapter">
+                    <input id="title-input" class="center-block" type="text" name="title" placeholder="Title">
                 </div>
                 <div class="form-group">
+                    <textarea id="summary-input" form="chapter-form" placeholder="Summary of Chapter" class="center-block"></textarea>
+                </div>
+                <div id="cover-upload-container" class="form-group">
                     <label for="cover-upload-input">Cover Page Upload</label>
                     <br>
                     <input id="cover-upload-input" type="file" name="coverupload" value="upload">
                 </div>
                 <br>
 
-                <button id="save-chapter-button" type="submit" class="btn btn-default">save</button>
-                <br>
-                <br>
-                <button id="cancel-chapter-button" type="button" class="btn btn-default btn-sm">cancel</button>
+                <button id="save-chapter-button" type="submit" class="center-block btn btn-default">save</button>
+
+                <button id="cancel-chapter-button" type="button" class="center-block btn btn-default btn-sm">cancel</button>
             </form>
         </div>
         <div id="chapter-page-flow">

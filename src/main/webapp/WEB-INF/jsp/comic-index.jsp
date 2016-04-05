@@ -8,9 +8,18 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Hero - Comic Index</title>
+    <title>Comic Index</title>
 </head>
 <body>
-    <p>Hello world, comic index</p>
+  <div class="container-flud">
+      <div class="genre-list">
+
+      </div>
+      <div class="series-table">
+
+      </div>
+
+  </div>
+
 </body>
 </html>

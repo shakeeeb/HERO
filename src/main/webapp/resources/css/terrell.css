@@ -6,6 +6,7 @@
 
 #chapter-form {
     padding: 10px;
+    padding-top: 15px;
     background-color: #e0e0e0;
     border-right: solid 1px grey;
     float: left;
@@ -28,7 +29,7 @@
 }
 
 #summary-input {
-    height: 400px;
+    height: 350px;
     width: 90%;
 }
 
@@ -52,44 +53,120 @@
 }
 
 #search-container {
-    background-color: gainsboro;
-    width: 100%;
-    height: 100%;
-    display: inline-block;
+    padding-top: 25px;
+
 }
 
 #refine-menu-container {
-    width: 300px;
-    height: 675px;
     float: left;
+    width: 300px;
+    height: 690px;
+    background-color: #fff;
 }
+
 
 #refine-menu {
     background-color: gainsboro;
     width: 280px;
-    height: 655px;
-
+    height: 625px;
+    border: solid 1px black;
+    padding: 20px;
 }
 
 #result-container {
-    background-color: white;
-    padding: 20px;
-    height: 655px;
-
+    float: left;
+    width: 950px;
+    height: 690px;
 
 }
 
+.center-block- {
+    float: none;
+    margin-left: auto;
+    margin-right: auto;
+}
 
 .search-result {
     height: 150px;
-    width: 1200px;
-    background-color: ghostwhite;
-    border: solid 1px;
-    margin: 10px;
+    width: 925px;
+    margin-bottom: 20px;
+    padding: 12px;
+    background-color: gainsboro;
 
 }
 #result-page-menu {
-    width: 1200px;
-    height: 55px;
+    width: 100px;
+    height: 40px;
     background-color: #2e6da4;
+    width: 500px;
+}
+
+#search-label {
+    font-size: large;
+    margin-bottom: 20px;
+    padding-left: 25px;
+}
+
+.result-image-container {
+    float: left;
+    height: 125px;
+    width: 125px;
+
+}
+
+.result-image {
+    height: 125px;
+    width: 125px;
+}
+.left-result-container {
+    float: left;
+    width: 320px;
+    padding: 14px;
+}
+
+.result-description-container {
+    float:left;
+    width: 450px;
+}
+
+.result-description {
+    padding:20px;
+    height: 120px;
+    width: 400px;
+}
+
+#refine-search-label {
+
+}
+
+.refine-search-item {
+    margin-bottom: 20px;
+}
+
+.search-radio p {
+    font-style: normal;
+    font-weight: normal;
+    margin-bottom:  2px;
+}
+
+#save-chapter-button {
+    margin-bottom: 17px;
+}
+
+#summary-input {
+    resize: none;
+}
+
+#cover-upload-container {
+    margin-bottom: 30px;
+}
+
+#navbar-logo {
+    margin: 3px;
+    margin-left: 4px;
+}
+
+.vertical-center {
+    display: flex;
+    align-items: center;
 }
