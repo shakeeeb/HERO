@@ -176,7 +176,23 @@
 
 }
 
-.series-image img {
-    height: 200px;
-    width: 200px;
+.series-image {
+    height: 300px;
+    width: 250px;
+}
+
+.genre-container {
+    width: 100%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-bottom: solid 1px;
+
+}
+
+.genre-list li {
+    display: inline;
+    text-align: center;
+    font-size: x-large;
+    margin-left: 40px;
+
 }

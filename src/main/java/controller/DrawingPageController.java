@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class DrawingPageController {
-    @RequestMapping(value="drawing-page", method = RequestMethod.GET)
+    @RequestMapping(value="draw", method = RequestMethod.GET)
     public String drawingPageController(ModelMap model) {
         System.out.println("Going to drawing-page ");
-        return "drawing-page";
+        return "draw";
     }
 }
