@@ -170,3 +170,13 @@
     display: flex;
     align-items: center;
 }
+
+.series-item {
+    margin-bottom: 25px;
+
+}
+
+.series-image img {
+    height: 200px;
+    width: 200px;
+}
