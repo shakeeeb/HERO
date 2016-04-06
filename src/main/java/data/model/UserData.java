@@ -10,9 +10,7 @@ import com.googlecode.objectify.condition.IfTrue;
 
 import java.util.ArrayList;
 
-/**
- * Created by shakeeb on 3/30/16.
- */
+
 @Entity
 public class UserData {
     @Id private String email;
@@ -182,6 +180,7 @@ public class UserData {
 
     public boolean addSeries(Series newSeries){
         mySeries.add(Ref.create(newSeries));
+
         return true;
     }
 

@@ -19,6 +19,7 @@ public class DashboardController {
     @RequestMapping(value="dashboard", method = RequestMethod.GET)
     public String dashboardController(ModelMap model) {
         System.out.println("Going to dashboard ");
+        // check if the user's logged in lol
         UserService service = UserServiceFactory.getUserService();
         User u = service.getCurrentUser();
         DbContext db = new DbContext();

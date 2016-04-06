@@ -14,6 +14,10 @@ public class DbContext {
     public static PageRepository pageRepo;
     public static CommentRepository commentRepo;
 
+    public DbContext(){
+        this.init();
+    }
+
     public void init(){
         userRepo = new UserRepository();
         chapterRepo = new ChapterRepository();
