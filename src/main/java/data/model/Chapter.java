@@ -6,9 +6,6 @@ import com.googlecode.objectify.condition.IfFalse;
 
 import java.util.Date;
 
-/**
- * Created by shakeeb on 3/30/16.
- */
 @Entity
 @Cache
 public class Chapter {
