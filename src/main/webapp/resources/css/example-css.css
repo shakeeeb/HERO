@@ -332,3 +332,14 @@ body {
 #series-overview-name{
     margin-bottom:-20px;
 }
+
+#drawing-upload-input{
+    float:right;
+    margin-top:-25px;
+}
+
+#drawing-upload-container{
+    padding-top: 25px;
+    padding-left: 375px;
+    padding-right:325px;
+}

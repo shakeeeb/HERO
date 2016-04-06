@@ -26,9 +26,24 @@
             <br>
         </form>
     </div>
-    <br><br><br><br><br><br><br>
-    <br><br><br><br><br><br><br>
-    button
+    <br>
+
+    <br><br><br><br><br><br>
+    <br><br><br><br><br><br>
+    <br><br><br><br><br><br>
+    <div>
+        <!--Drawing Application here-->
+    </div>
+    <br><br><br><br><br><br>
+    <br><br><br><br><br><br>
+    <br><br><br><br><br><br>
+
+    <div id="chapter-form">
+        <form action="#" class="chapter-form">
+            <button id="save-drawing" type="submit" class="btn btn-default">Save</button>
+        </form>
+    </div>
+
 </div>
 </body>
 </html>
