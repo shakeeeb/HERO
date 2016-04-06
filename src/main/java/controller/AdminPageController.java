@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class AdminPageController {
-    @RequestMapping(value="admin-page", method = RequestMethod.GET)
+    @RequestMapping(value="admin", method = RequestMethod.GET)
     public String adminPage(ModelMap model) {
         System.out.println("Going to admin-page ");
-        return "admin-page";
+        return "admin";
     }
 }

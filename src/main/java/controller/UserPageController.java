@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class UserPageController {
-    @RequestMapping(value="user-page", method = RequestMethod.GET)
+    @RequestMapping(value="user", method = RequestMethod.GET)
     public String userPageController(ModelMap model) {
         System.out.println("Going to user-page ");
-        return "user-page";
+        return "user";
     }
 }

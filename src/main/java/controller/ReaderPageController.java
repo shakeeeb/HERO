@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class ReaderPageController {
-    @RequestMapping(value="reader-page", method = RequestMethod.GET)
+    @RequestMapping(value="read", method = RequestMethod.GET)
     public String readerPageController(ModelMap model) {
         System.out.println("Going to reader-page ");
-        return "reader-page";
+        return "read";
     }
 }
