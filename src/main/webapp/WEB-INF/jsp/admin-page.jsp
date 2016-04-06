@@ -17,7 +17,7 @@
     <%@ include file="/resources/layouts/navbar.jsp" %>
 </div>
 </br></br></br></br>
-<h1 class="greeting text-left">Hello GLORIOUS Leader Miuki,</h1>
+<h1 class="greeting text-left">Hey, how's it going.. GLORIOUS Leader Miuki,</h1>
 
 <div class="row">
     <%--<div class="col-md-5 text-center">--%>
