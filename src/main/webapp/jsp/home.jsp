@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="/resources/css/terrell.css">
 <body>
 <div class="container">
-<%@ include file="/resources/layouts/navbartest.jsp" %>
+<%@ include file="/resources/layouts/navbar.jsp" %>
 
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
     <h1 id="logo-placeholder">LOGO HERE</h1>
