@@ -16,7 +16,7 @@
 <div class="container">
     <%@ include file="/resources/layouts/navbar.jsp" %>
 </div>
-</br></br></br></br>
+</br></br></br>
 <h1 class="greeting text-left">Hey, how's it going.. GLORIOUS Leader Miuki,</h1>
 
 <div class="row">
@@ -27,7 +27,7 @@
         <h2 class="submitted-comics-header">Submitted Comics </h2>
     </div>
     <div class="col-md-5 text-center">
-        <h2>Reported Comics</h2>
+        <h2 id="reported-comics-header">Reported Comics</h2>
     </div>
 </div>
 

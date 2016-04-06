@@ -15,11 +15,11 @@
 </head>
 <body id="reader-page-body">
 <%@ include file="/resources/layouts/navbar.jsp" %>
-<br><br><br><br>
+<br><br>
 
 <div class="container">
 
-    <div class="col-md-8 col-md-offset-2 page-header orange-span ">
+    <div class="col-md-8 col-md-offset-2 page-header orange-span" id="page-read-header">
         <h2 id="comic-name-reader-page">Comic Name</h2>
         <h2 id="chapter-name-reader-page">Chapter Name</h2>
         <h2 id="page-number-reader-page">Page Number</h2>
