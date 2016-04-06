@@ -10,8 +10,42 @@
 <html>
 <head>
     <title>Hero - Dashboard</title>
+    <%@ include file="/resources/layouts/styles.jsp" %>
+    <%@ include file="/resources/layouts/scripts.jsp" %>
 </head>
 <body>
-    <p>Hello world, dashboard.</p>
+<div class="container">
+    <%@ include file="/resources/layouts/navbar.jsp" %>
+    <br><br><br><br><br><br>
+    <div id="dashboard-greeting">Hello Ben10!</div>
+    <button type="button" id="dashboard-my-series" class="btn">My Series!</button>
+
+    <div id="dashboard-subscription" class="orange-span">
+        <div id="dashboard-subscription-text" class="orange-span">
+            <div class="dashboard-text">Subscription</div>
+            <div id="close-subscription" class="dashboard-close">X</div>
+            <br>
+        </div>
+    <br><br><br><br><br><br><br><br><br><br>
+    </div>
+    <br><br>
+    <div id="dashboard-recent" class="orange-span">
+        <div id="dashboard-recent-text" class="orange-span">
+            <div class="dashboard-text">Recent</div>
+            <div id="close-recent" class="dashboard-close">X</div>
+            <br>
+        </div>
+    <br><br><br><br><br><br><br><br><br><br>
+    </div>
+    <br><br>
+    <div id="dashboard-suggestion" class="orange-span">
+        <div id="dashboard-suggestion-text" class="orange-span">
+            <div class="dashboard-text">Suggestion</div>
+            <div id="close-suggestion" class="dashboard-close">X</div>
+            <br>
+        </div>
+    <br><br><br><br><br><br><br><br><br><br>
+    </div>
+</div>
 </body>
 </html>
