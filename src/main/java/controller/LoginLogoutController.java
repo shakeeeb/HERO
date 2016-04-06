@@ -21,7 +21,7 @@ public class LoginLogoutController {
     @RequestMapping(value="login", method = RequestMethod.GET)
     protected void login(HttpServletResponse response) throws ServletException, IOException {
         UserService userService = UserServiceFactory.getUserService();
-        response.sendRedirect(userService.createLoginURL("dashboard"));
+        response.sendRedirect(userService.createLoginURL("/dashboard"));
     }
 
     @RequestMapping(value="logout", method = RequestMethod.GET)
@@ -29,9 +29,9 @@ public class LoginLogoutController {
         UserService userService = UserServiceFactory.getUserService();
 
         if(userService.getCurrentUser() != null) {
-            response.sendRedirect(userService.createLogoutURL("home"));
+            response.sendRedirect(userService.createLogoutURL("/home"));
         } else {
-            response.sendRedirect("home");
+            response.sendRedirect("/home");
         }
 
     }

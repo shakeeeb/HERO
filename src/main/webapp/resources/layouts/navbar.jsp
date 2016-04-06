@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-lg-offset-1 col-lg-1">
                 <div class="navbar-header">
-                    <a href="index.jsp"><img src="https://placehold.it/50x50?text=hero" height="50px" width="50px">  </a>
+                    <a href="/home"><img src="https://placehold.it/50x50?text=hero" height="50px" width="50px">  </a>
                 </div> <!-- navbar-header-->
             </div><!--col-sm-4-->
                 <form class="navbar-form navbar-left navbar-input-group searchForm" role="search">
@@ -15,7 +15,7 @@
                         </div>
                 </form>
                     <div class="hamburger navbar-right">
-                        <a href="index.jsp"><img src="https://placehold.it/50x50?text=menu" height="50px" width="50px">  </a>
+                        <a href="/home"><img src="https://placehold.it/50x50?text=menu" height="50px" width="50px">  </a>
                     </div> <!-- hamburger-->
         </div>
     </div><!--container-->
