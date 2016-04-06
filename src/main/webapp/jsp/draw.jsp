@@ -9,8 +9,26 @@
 <html>
 <head>
     <title>Hero - Drawing Page</title>
+    <%@ include file="/resources/layouts/styles.jsp" %>
+    <%@ include file="/resources/layouts/scripts.jsp" %>
 </head>
 <body>
-    <p>Hello world, drawing page!</p>
+<div class="container">
+    <%@ include file="/resources/layouts/navbar.jsp" %>
+    <br><br><br>
+    <div id="chapter-form">
+        <form action="#" class="drawing-upload-form">
+            <div id="drawing-upload-container" class="form-group">
+                <label for="drawing-upload-input">Select File to Upload</label>
+                <br>
+                <input id="drawing-upload-input" type="file" name="coverupload" value="upload">
+            </div>
+            <br>
+        </form>
+    </div>
+    <br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br>
+    button
+</div>
 </body>
 </html>
