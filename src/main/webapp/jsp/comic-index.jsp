@@ -34,9 +34,7 @@
 <br>
   <div class="container">
 
-
-
-      <!-- Projects Row -->
+      <!-- Series Row -->
       <div class="row">
           <div class="col-md-3 series-item">
               <a href="#">
@@ -61,7 +59,7 @@
       </div>
       <!-- /.row -->
 
-      <!-- Projects Row -->
+      <!-- Series Row -->
       <div class="row">
           <div class="col-md-3 series-item">
               <a href="#">

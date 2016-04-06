@@ -147,7 +147,7 @@
                     </div>
                 </div>
 
-                <!-- the first search result -->
+                <!-- the second search result -->
                 <div class="search-result center-block-" id="result-2">
                     <div class="result-image-container">
                         <img class="result-image" src="https://placehold.it/125/ffa500/ffffff/text=Secret+Scientist">

@@ -183,22 +183,33 @@
 
 .genre-container {
     width: 100%;
-    padding-top: 5px;
-    padding-bottom: 5px;
     border-bottom: solid 1px;
 
+}
+.genre-list {
+    margin-top: 5px;
+    margin-bottom: 10px;
 }
 
 .genre-list li {
     display: inline;
     text-align: center;
     font-size: x-large;
-    margin-left: 40px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 13px;
+    padding-bottom: 13px;
+
 
 }
 
+.genre-list li:hover {
+    background-color: darkorange;
+    color: white;
+}
 
-.business-header {
+
+.series-banner {
     height: 300px;
     background: url('http://placehold.it/1920x400') center center no-repeat scroll;
     -webkit-background-size: cover;
@@ -217,16 +228,15 @@
 }
 
 .chapter-list-container {
-    background-color: pink;
+    background-color: floralwhite;
 }
 
 .series-info-container {
-    background-color: #00ACC1;
+    background-color: gainsboro;
     height: 300px;
 }
 
 .chapter-list-header {
-    background-color: #4cae4c;
     padding-left: 5px;
     padding-top: 0px;
     padding-bottom: 0px;
@@ -234,7 +244,42 @@
 }
 
 .chapter-list-item {
-    height: 150px;
-    background-color: #ac2925;
+    background-color: whitesmoke;
+    border: solid 1px black;
     margin-bottom: 20px;
+
+}
+
+.inline {
+    display: inline-block;
+}
+
+.pull-right {
+    float: right !important;
+}
+
+.chapter-date {
+    width: 120px;
+    background: #f4f4f4;
+    padding: 20px;
+}
+
+.series-description {
+    padding: 10px;
+    width: 350px;
+    height: 150px;
+    margin-bottom: 20px;
+}
+
+.series-info-container {
+    padding: 20px;
+}
+
+.subscribe-button {
+    margin-bottom: 10px;
+    width: 150px;
+}
+
+.start-beginning-button{
+    width: 165px;
 }
