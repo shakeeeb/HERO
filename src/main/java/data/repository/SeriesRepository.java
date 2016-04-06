@@ -41,6 +41,8 @@ public class SeriesRepository {
         return returner;
     }
 
+    // TODO add queries
+
     //exists(Id)
     public boolean exists(String Id){
         Series s = ofy().load().type(Series.class).id(Id).now();
@@ -65,7 +67,7 @@ public class SeriesRepository {
 
     //update(Id, stuff to update...)
     public void updateSeries(Series s){
-        ofy().load().entity(s);
+        ofy().save().entity(s).now();
     }
 
     //delete(Id)

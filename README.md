@@ -5,7 +5,7 @@ Comics are a classic way for authors and artists to express and readers to enjoy
 Version: 1
 ## TODO
 * Dashboard JSP
-* Chapter Workspace JSP
+* [done] Chapter Workspace JSP 
 * Drawing JSP
 * Datastore Queries
 

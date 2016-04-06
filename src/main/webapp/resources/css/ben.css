@@ -46,7 +46,8 @@ h3 {
 
 .submitted-comics {
     width: 200px;
-    margin-left: 200px;
+    margin-left: 50px;
+    margin-right: 50px;
     background-color: #f4f4f4;
 }
 .reported-comics {
@@ -54,11 +55,16 @@ h3 {
 }
 
 .submitted-comics-header {
+    margin-top: 5px;
     margin-left: -105px;
     width: 400px;
     table-layout: fixed;
     border-collapse: collapse;
     z-index: -1;
+}
+
+#reported-comics-header {
+    margin-top: 5px;
 }
 
 .submitted-comic-info {
@@ -105,21 +111,21 @@ h3 {
 }
 
 #left {
-    margin-top: 220px;
+    margin-top: 175px;
     background-color: white;
     text-align: center;
     height:500px;
     width: 45%;
-    padding: 15px 15px 15px 30px;
+    padding: 15px 15px 15px 0px;
 }
 
 #right {
-    margin-top: 220px;
+    margin-top: 175px;
     height:500px;
     width: 45%;
     background-color: white;
     text-align: center;
-    padding: 15px 15px 15px 15px;
+    padding: 15px 15px 0px 0px;
 }
 
 .submitted-comics-title {
@@ -148,6 +154,11 @@ h3 {
     background-color: #f4f4f4;
     width: 900px;
     clear:both;
+}
+
+#page-read-header {
+    width: 798px;
+    margin-left: 171px;
 }
 
 #page-number-reader-page {
@@ -179,18 +190,47 @@ h3 {
 }
 
 .fixed-settings-page-column {
-    height:800px;
+    height:600px;
     /*overflow:hidden;*/
-    background:orange;
 }
 
 .scrollit {
-    height:800px;
+    height:600px;
     /*overflow-y:scroll;*/
-    background:lightgray;
 }
 
 #settings-profile-picture {
     margin-top: 25px;
-    margin-left: 64px;
+    margin-left: 85px;
+}
+
+#upload-profile-picture {
+    margin-top: 20px;
+    margin-left: 125px;
+}
+
+#edit-settings-save {
+    margin-top: 20px;
+    margin-left: 168px;
+}
+
+#edit-settings-cancel {
+    margin-top: 20px;
+    margin-left: 170px;
+}
+
+#nickname {
+    margin-top: 20px;
+    margin-left: 30px;
+    width: 500px;
+    height: 100px;
+    font-size: xx-large;
+}
+
+#about-me {
+    margin-left: 30px;
+    margin-top: 30px;
+    width: 800px;
+    height: 400px;
+    font-size: xx-large;
 }

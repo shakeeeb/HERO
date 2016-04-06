@@ -61,6 +61,12 @@ public class Page {
         this.pageLevel = pgLvl;
     }
 
+    /**
+     * major constructor
+     * @param mySeries
+     * @param theChapter
+     * @param pgNo
+     */
     public Page(Series mySeries, Chapter theChapter, int pgNo){
         optionDescriptors = new ArrayList<String>();
         options = new ArrayList<Ref<Page>>();
@@ -356,6 +362,17 @@ public class Page {
             numPriors = priors.size();
             return true;
         }
+    }
+
+    /**
+     * this is if i wasnt able to give it all 3 major things upon cosntruction
+     */
+    public void generateId(){
+        // based on the chapter, the series, pgno
+        Chapter c = chapter.get();
+        Series s = series.get();
+        this.pageId = c.getName() + s.getName() + pageNumber;
+        this.chapterNameSeriesName = c.getName() + s.getName();
     }
 
     public String getChapterNameSeriesName(){
