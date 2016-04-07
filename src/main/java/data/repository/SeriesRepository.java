@@ -54,12 +54,13 @@ public class SeriesRepository {
     }
 
     //create(Id, stuff)
-    public void create(String name, String mainGenre, UserData author, String desc){
+    public Series create(String name, String mainGenre, UserData author, String desc){
         // manage the relation, ie add the series to the list of series for the user
         Series s = new Series(name, author, desc, mainGenre);
         author.addSeries(s);
         ofy().save().entity(s);
         ofy().save().entity(author);
+        return s;
     }
 
 

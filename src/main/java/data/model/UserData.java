@@ -217,4 +217,16 @@ public class UserData {
             viewed.add(Ref.create(series));
         }
     }
+
+    public Series getSpecificSeries(String SeriesName){
+        Series returner = null;
+        for(Ref<Series> s: mySeries){
+            returner = s.get();
+            if(returner.getName().equals(SeriesName)){
+                return returner;
+            }
+
+        }
+        return null;
+    }
 }

@@ -35,8 +35,9 @@ public class PageRepository {
 
     //create(Id, stuff)
 
-    public void create(Series theSeries, Chapter theChapter, int PageNumber){
+    public Page create(Series theSeries, Chapter theChapter, int PageNumber){
         Page p = new Page(theSeries, theChapter, PageNumber);
+        return p;
     }
 
     //overload create with a whole bunch of stuff

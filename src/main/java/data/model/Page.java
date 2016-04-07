@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class Page {
     @Id private String pageId; // id is a concat of seriesname,chaptername,pagenumber
     @Load private Ref<Series> series;
-    @Load private Ref<Chapter> chapter;
+    @Parent @Load private Ref<Chapter> chapter;
     @Index private String chapterNameSeriesName;
     private int pageNumber;
     private int pageLevel;

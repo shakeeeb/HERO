@@ -33,16 +33,18 @@ public class ChapterRepository {
     }
 
     //create(Id, stuff)
-    public void create(String theName, UserData theAuthor, Series theSeries, int chapterNo){
+    public Chapter create(String theName, UserData theAuthor, Series theSeries, int chapterNo){
         //public Chapter(String theName, UserData theAuthor, Series theSeries, int chapterNo, Page theRoot)
-        Page p = new Page();
-        Chapter c = new Chapter(theName, theAuthor, theSeries, chapterNo, p);
-        p.generateId();
-        //c.setRoot(p);
+        //Page p = new Page();
+        Chapter c = new Chapter(theName, theAuthor, theSeries, chapterNo);
         ofy().save().entity(c).now();
+        Page p = new Page(theSeries, c, 0);
+        //p.generateId();
+        c.setRoot(p);
+
         // update the series so it knows its got a new chapter, and increment the number of chapters
         theSeries.addChapter(c);
-
+        return c;
         // the root should know the chapter it's involved in
     }
 

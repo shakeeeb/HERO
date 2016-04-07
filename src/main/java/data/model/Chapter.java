@@ -14,7 +14,7 @@ public class Chapter {
     @Load private Ref<Page> root;
     private String name;
     @Load private Ref<UserData> author;
-    @Load private Ref<Series> series;
+    @Parent @Load private Ref<Series> series;
     private Date dateCreated; // generate
     @Index private int chapterNumber;
     @Index(IfFalse.class) private Boolean approved = false;
@@ -30,8 +30,8 @@ public class Chapter {
      * overloaded Constructors
      */
     public Chapter(String Id){
-        Page p = new Page();
-        root = Ref.create(p);
+        //Page p = new Page();
+        //root = Ref.create(p);
         this.chapterId = Id;
     }
 
@@ -42,8 +42,8 @@ public class Chapter {
         this.series = Ref.create(theSeries);
         this.chapterNumber = chapterNo;
         this.dateCreated = new Date();
-        Page p = new Page();
-        root = Ref.create(p);
+        //Page p = new Page();
+        //root = Ref.create(p);
     }
 
     //without id
@@ -53,8 +53,9 @@ public class Chapter {
         this.series = Ref.create(theSeries);
         this.chapterNumber = chapterNo;
         this.dateCreated = new Date();
-        Page p = new Page();
-        root = Ref.create(p);
+        this.chapterId = theName + theSeries.getName();
+        //Page p = new Page();
+        //root = Ref.create(p);
     }
 
     //major constructor
@@ -64,7 +65,7 @@ public class Chapter {
         this.series = Ref.create(theSeries);
         this.chapterNumber = chapterNo;
         this.dateCreated = new Date();
-        this.root = Ref.create(theRoot);
+        //this.root = Ref.create(theRoot);
         this.chapterId = theName + theSeries.getName();
     }
 
@@ -89,8 +90,8 @@ public class Chapter {
         return root;
     }
 
-    public void setRoot(Ref<Page> root) {
-        this.root = root;
+    public void setRoot(Page root) {
+        this.root = Ref.create(root);
     }
 
     public String getName() {

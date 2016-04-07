@@ -18,18 +18,6 @@ import data.*;
 public class DashboardController {
     @RequestMapping(value="dashboard", method = RequestMethod.GET)
     public String dashboardController(ModelMap model) {
-        System.out.println("Going to dashboard ");
-        // check if the user's logged in lol
-        UserService service = UserServiceFactory.getUserService();
-        User u = service.getCurrentUser();
-        DbContext db = new DbContext();
-        u.getNickname(); // email
-        db.userRepo.createUser(u.getNickname());
-        //db.userRepo.getUserById();
-        UserData m = db.userRepo.getUserById(u.getNickname());
-        m.setAboutMe("im a little teapot, short and stout. this is my handle. this is my spout.");
-        db.userRepo.updateUser(m);
-
         return "dashboard";
     }
 }

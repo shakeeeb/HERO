@@ -101,12 +101,20 @@ public class Series {
         this.totalPossibleStars = totalPossibleStars;
     }
 
-    public ArrayList<Ref<UserData>> getSubscribers() {
-        return subscribers;
+    public ArrayList<UserData> getSubscribers() {
+        ArrayList<UserData> returner = new ArrayList<UserData>();
+        for(Ref<UserData> r: subscribers){
+            returner.add(r.get());
+        }
+        return returner;
     }
 
-    public void setSubscribers(ArrayList<Ref<UserData>> subscribers) {
-        this.subscribers = subscribers;
+    public void setSubscribers(ArrayList<UserData> subs) {
+        ArrayList<Ref<UserData>> intermediary = new ArrayList<Ref<UserData>>();
+        for(UserData u :subs){
+            intermediary.add(Ref.create(u));
+        }
+        this.subscribers = intermediary;
     }
 
     public int getNumChapters() {
@@ -126,19 +134,28 @@ public class Series {
     }
 
     public ArrayList<Ref<Chapter>> getChapters() {
+
         return chapters;
     }
 
-    public void setChapters(ArrayList<Ref<Chapter>> chapters) {
-        this.chapters = chapters;
+    public void setChapters(ArrayList<Chapter> chapters) {
+        ArrayList<Ref<Chapter>> intermediary = new ArrayList<Ref<Chapter>>();
+        for(Chapter c: chapters){
+            intermediary.add(Ref.create(c));
+        }
+        this.chapters = intermediary;
     }
 
     public ArrayList<Ref<Comment>> getComments() {
         return comments;
     }
 
-    public void setComments(ArrayList<Ref<Comment>> comments) {
-        this.comments = comments;
+    public void setComments(ArrayList<Comment> comments) {
+        ArrayList<Ref<Comment>> intermediary = new ArrayList<Ref<Comment>>();
+        for(Comment c :comments){
+            intermediary.add(Ref.create(c));
+        }
+        this.comments = intermediary;
     }
 
     public String getBannerURL() {
@@ -178,6 +195,7 @@ public class Series {
     public boolean addChapter(Chapter c){
         this.chapters.add(Ref.create(c));
         numChapters++;
+        this.updateTime = new Date();
         return true;
     }
 

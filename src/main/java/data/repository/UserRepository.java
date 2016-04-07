@@ -38,10 +38,11 @@ public class UserRepository {
     }
 
     //create(Id, stuff)
-    public void createUser(String email){
+    public UserData create(String email){
         // creates a new user and places it into the datastore
         UserData u = new UserData(email);
         ofy().save().entity(u).now();
+        return u;
     }
 
     //update(Id, stuff to update...)
@@ -53,7 +54,7 @@ public class UserRepository {
      * ie, the data logic was handled outside of here
      * @param u
      */
-    public void updateUser(UserData u){
+    public void update(UserData u){
         ofy().save().entity(u).now();
     }
 
