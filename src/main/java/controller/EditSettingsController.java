@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class EditSettingsController {
-    @RequestMapping(value="edit-settings", method = RequestMethod.GET)
+    @RequestMapping(value="settings", method = RequestMethod.GET)
     public String editSettingsController(ModelMap model) {
         System.out.println("Going to edit-settings ");
-        return "edit-settings";
+        return "settings";
     }
 }
