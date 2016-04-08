@@ -283,3 +283,47 @@
 .start-beginning-button{
     width: 165px;
 }
+
+#drawing-container {
+    background-color: #888888;
+    display: inline-block;
+    width: 1300px;
+    height: 1407px;
+    border: solid dimgrey 1px;
+}
+
+#drawing-top-toolbar {
+    background-color: whitesmoke;
+    height: 50px;
+    border-bottom: solid black 1px;
+
+}
+
+#drawing-side-toolbar {
+    width: 200px;
+    background-color: #c0a16b;
+    border-right: solid 2px grey;
+    float: left;
+    padding: 10px;
+}
+
+#drawing-canvas {
+    height: 1307px;
+    width: 800px;
+    background-color: white;
+    float:left;
+    border: solid black 1px;
+}
+
+.drawing-tool {
+    background-color: #66512c;
+    width: 180px;
+    height: 110px;
+    border-bottom: solid #8a6d3b 1px;
+}
+
+.color-wheel {
+    background-color: grey;
+    width: 180px;
+    height: 180px;
+}
