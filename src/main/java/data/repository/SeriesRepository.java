@@ -1,5 +1,6 @@
 package data.repository;
 
+import com.googlecode.objectify.cmd.Query;
 import data.model.*;
 import java.util.ArrayList;
 import static com.googlecode.objectify.ObjectifyService.ofy;
@@ -42,6 +43,40 @@ public class SeriesRepository {
     }
 
     // TODO add queries
+    // certain kinds of queries-- refine vs. query
+    //refine will be sent a query obejct and refine it
+
+    public Query<Series> grabQueryByMainGenre(String Genre){
+        return ofy().load().type(Series.class).filter("mainGenre", Genre);
+    }
+
+    public Query<Series> refineQueryBySeries(Query<Series> toRefine, String Genre){
+        return toRefine.filter("mainGenre", Genre);
+    }
+
+    public Query<Series> grabQueryByTag(String Genre){
+        return ofy().load().type(Series.class).filter("tags", Genre);
+    }
+
+    public Query<Series> refineQueryByTag(Query<Series> toRefine, String Genre){
+        return toRefine.filter("tags", Genre);
+    }
+
+    public Query<Series> grabQueryByLatestUpdate(){
+        return ofy().load().type(Series.class).order("-updateTime");
+    }
+
+    public Query<Series> refineQueryByLatestUpdate(Query<Series> toRefine){
+        return toRefine.order("-updateTime");
+    }
+
+    public Query<Series> grabQueryByStarCount(double starCount){
+        return ofy().load().type(Series.class).filter("rating >", starCount);
+    }
+
+    public Query<Series> refineByStarCount(Query<Series> toRefine, double starCount){
+        return toRefine.filter("rating >", starCount);
+    }
 
     //exists(Id)
     public boolean exists(String Id){

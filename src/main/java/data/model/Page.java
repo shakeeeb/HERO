@@ -5,9 +5,6 @@ import com.googlecode.objectify.annotation.*;
 
 import java.util.ArrayList;
 
-/**
- * Created by shakeeb on 3/30/16.
- */
 
 /**
  * goddamnit ben
