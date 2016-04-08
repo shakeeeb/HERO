@@ -37,6 +37,8 @@ public class PageRepository {
 
     public Page create(Series theSeries, Chapter theChapter, int PageNumber){
         Page p = new Page(theSeries, theChapter, PageNumber);
+        // DONT SAVE ON CREATION TO DATASTORE
+        // only save to datastore later...
         return p;
     }
 
@@ -48,7 +50,10 @@ public class PageRepository {
     }
 
     //delete(Id)
-    public void delete(Page p){
+    public void delete(Chapter c, Page p){
+        // for any page which links to this page
+        // make a find child/ haschild
+        // its a big deal to edit up the chapter
         ofy().delete().entity(p);
         // delete all links to the object
     }
