@@ -19,8 +19,7 @@
 <br>
 <br>
 <!-- Image Background Page Header -->
-<!-- Note: The background image is set within the business-casual.css file. -->
-<header class="business-header">
+<header class="series-banner">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -35,25 +34,61 @@
 
     <div class="row">
         <div class="col-sm-8 chapter-list-container">
-            <div class = "chapter-list-header">
+            <div class="chapter-list-header">
                 <h3>{Series}</h3>
                 <h4>{Author}</h4>
             </div>
-            <div class="chapter-list-item">
-                test1
+            <div class="chapter-list">
+
+            <div class="chapter-list-item center-block-" id="chapter-N">
+                <div class="inline">
+                    <img src="https://placehold.it/125/ffa500/ffffff">
+                </div>
+                <div class="inline">
+                    <div class="inline">{Chapter #}</div>
+                    <div class="inline">{Title}</div>
+
+                <div>
+                    <p>An epic hero goes to the mountains</p>
+                </div>
+
+                </div>
+                <div class="pull-right chapter-date">
+                    04/05/1993
+                </div>
             </div>
-            <div class="chapter-list-item">
-                test2
+
+            <div class="chapter-list-item center-block-" id="chapter-N-1">
+                <div class="inline">
+                    <img src="https://placehold.it/125/ffa500/ffffff">
+                </div>
+                <div class="inline">
+                    <div class="inline">{Chapter #}</div>
+                    <div class="inline">{Title}</div>
+
+                    <div>
+                        <p>An epic hero goes to the beach</p>
+                    </div>
+
+                </div>
+                <div class="pull-right chapter-date">
+                    05/04/1994
+                </div>
             </div>
-            <div class="chapter-list-item">
-                test3
-            </div>
-            <div class="chapter-list-item">
-                test4
-            </div>
+        </div>
         </div>
 
         <div class="col-sm-4 series-info-container">
+            <div class="series-description">
+                <p>An epic hero goes on adventures</p>
+            </div>
+
+            <div class="text-center">
+               <span><button class="btn btn-default subscribe-button">Subscribe</button></span>
+            </div>
+            <div class="text-center">
+               <span><button class="btn btn-default start-beginning-button">Start From Beginning</button></span>
+            </div>
         </div>
     </div>
     <!-- /.row -->
@@ -64,11 +99,6 @@
 </div>
 <!-- /.container -->
 
-<!-- jQuery -->
-<script src="js/jquery.js"></script>
-
-<!-- Bootstrap Core JavaScript -->
-<script src="js/bootstrap.min.js"></script>
 
 </body>
 
