@@ -286,6 +286,8 @@
 
 #drawing-container {
     background-color: #888888;
+    background-image: url("/resources/images/background-textures/grey_wash_wall.png");
+    background-repeat: repeat;
     display: inline-block;
     width: 1300px;
     height: 1407px;
@@ -294,8 +296,9 @@
 
 #drawing-top-toolbar {
     background-color: whitesmoke;
-    height: 50px;
+    height: 35px;
     border-bottom: solid black 1px;
+    padding: 4px;
 
 }
 
@@ -307,12 +310,14 @@
     padding: 10px;
 }
 
-#drawing-canvas {
-    height: 1307px;
-    width: 800px;
+#drawing-canvas-container {
+    /*height: 1307px;*/
+    /*width: 800px;*/
     background-color: white;
     float:left;
-    border: solid black 1px;
+    border: solid black 2px;
+    border-top: 0px;
+    border-left: 0px;
 }
 
 .drawing-tool {
@@ -320,10 +325,23 @@
     width: 180px;
     height: 110px;
     border-bottom: solid #8a6d3b 1px;
+    display: inline-block;
 }
 
 .color-wheel {
-    background-color: grey;
+    background-color: #dddddd;
     width: 180px;
     height: 180px;
 }
+
+#undo-redo-buttons {
+    margin-left: 20px;}
+
+.toolbar-item {
+    float: left;
+    margin-right: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: grey;
+}
+

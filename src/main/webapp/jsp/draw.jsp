@@ -12,48 +12,53 @@
     <%@ include file="/resources/layouts/styles.jsp" %>
     <%@ include file="/resources/layouts/scripts.jsp" %>
     <link rel="stylesheet" href="/resources/css/terrell.css">
+
+    <!-- Get version 1.1.0 of Fabric.js from CDN -->
+    <script src="/resources/scripts/fabric/fabric.js"></script>
+    <script src="/resources/scripts/widgets/drawing.js"></script>
 </head>
 <body>
 <div>
     <%@ include file="/resources/layouts/navbar.jsp" %>
     <br><br><br>
-    <div>
-        <form action="#" class="drawing-upload-form">
-            <div id="drawing-upload-container" class="form-group">
-                <label for="drawing-upload-input">Select File to Upload</label>
-                <br>
-                <input id="drawing-upload-input" type="file" name="coverupload" value="upload">
-            </div>
-            <br>
-        </form>
-    </div>
-    <br>
-    <div>
 
+    <div>
         <!--Drawing Application here-->
         <div id="drawing-container">
             <!-- Drawing -->
             <div id="drawing-top-toolbar">
-                {TOP TOOLBAR}
+
+                <div id="undo-redo-buttons" class="toolbar-item">
+                    <button id="undo-button">UNDO</button>
+                    <button id="redo-button">REDO</button>
+                </div>
+
+                <div id="top-tools-container" class="toolbar-item">
+
+
+                    <div id="brush-width-slider">
+                     <input type="range" name="width-slider" min="1" max="150">
+                    </div>
+
+                </div>
+
+
+
             </div>
             <!-- /.drawing-top-toolbar -->
 
             <!-- Drawing side toolbar -->
             <div id="drawing-side-toolbar">
-                <div class="drawing-tool">
+                <div id="selection-tool" class="drawing-tool">
                     {SELECTION}
                 </div>
 
-                <div class="drawing-tool">
+                <div id="pencil-tool" class="drawing-tool">
                     {PENCIL}
                 </div>
 
                 <div class="drawing-tool">
                     {BRUSH}
-                </div>
-
-                <div class="drawing-tool">
-                    {FILL}
                 </div>
 
                 <div class="drawing-tool">
@@ -83,21 +88,27 @@
 
             <!-- Drawing-canvas -->
             <div id="drawing-canvas-container">
-                <canvas id="drawing-canvas">
-                </canvas>
+                <canvas id="drawing-canvas" width="800" height="1307"></canvas>
 
             </div>
             <!-- /.drawing-canvas -->
         </div>
         <!-- /.drawing-container -->
     </div>
-    <br><br><br><br><br><br>
-    <br><br><br><br><br><br>
-    <br><br><br><br><br><br>
-
     <div>
         <form action="#">
             <button id="save-drawing" type="submit" class="btn btn-default">Save</button>
+        </form>
+    </div>
+
+    <div>
+        <form action="#" class="drawing-upload-form">
+            <div id="drawing-upload-container" class="form-group">
+                <label for="drawing-upload-input">Select File to Upload</label>
+                <br>
+                <input id="drawing-upload-input" type="file" name="coverupload" value="upload">
+            </div>
+            <br>
         </form>
     </div>
 
