@@ -478,6 +478,11 @@ public class Page {
         }
     }
 
+    /**
+     *
+     * @param p
+     * @return
+     */
     public boolean isParentOf(Page p){
         ArrayList<Page> searcher = new ArrayList<Page>();
         for(Ref<Page> ref : options){
@@ -487,6 +492,35 @@ public class Page {
             return true;
         }
         return false;
+    }
+
+    /**
+     *
+     * @param p
+     * @param returner
+     * @return
+     */
+    public void getChildrenOf(Page p, ArrayList<Page> returner){
+        if(this.options.isEmpty()){
+            return;
+        }
+        else if(this.equals(p)){
+           //ArrayList<Page> returner = new ArrayList<Page>();
+            for(Ref<Page> ref: options){
+                returner.add(ref.get());
+            }
+            return;
+        } else {
+            // THIS SHIT AGAIN
+            ArrayList<Page> searcher = new ArrayList<Page>();
+            for(Ref<Page> ref : options){
+                searcher.add(ref.get());
+            }
+            for(Page q : searcher){
+                q.getChildrenOf(p, returner);
+            }
+        }
+        return;
     }
 
 

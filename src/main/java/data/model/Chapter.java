@@ -173,9 +173,9 @@ public class Chapter {
         // find the page in the tree
         // find any pages that link to that page
         // and any pages that that page links to
-        ArrayList<Page> parents = new ArrayList<Page>();
-        ArrayList<Page> orphans = new ArrayList<Page>();
-        Page cursor = root.get();
+        ArrayList<Page> parents = getParentsOf(toDelete);
+        ArrayList<Page> orphans = getChildrenOf(toDelete);
+
         // getparentsof
         // getchildrenof
 
@@ -188,7 +188,9 @@ public class Chapter {
     }
 
     public ArrayList<Page> getChildrenOf(Page p){
-        return new ArrayList<Page>();
+        ArrayList<Page> returner = new ArrayList<Page>();
+        this.root.get().getChildrenOf(p, returner);
+        return returner;
     }
 
 

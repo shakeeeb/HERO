@@ -29,15 +29,10 @@ public class TestingController {
         UserData m = db.userRepo.getUserById(u.getNickname());
         m.setAboutMe("im a little teapot, short and stout. this is my handle. this is my spout.");
         db.userRepo.update(m);
-
-        db.seriesRepo.create("Secret Scientist", "Sci-fi", m, "A series about a scientist doing science");
-        db.seriesRepo.create("Epic Pirate", "Action", m, "CHAD?!");
-        db.seriesRepo.create("Fashion Diva", "Drama", m, "Fashion Diva goes shopping for bags");
-        db.seriesRepo.create("The Life Of Pablo", "Horror", m, "Kanye west loves his mother");
         Series s = db.seriesRepo.create("Catbug", "Comedy", m, "REBECCAAAAAAA");
         db.seriesRepo.create("Computer Science", "Life", m, "it is i, computer. feed me a cat.");
         Chapter c = db.chapterRepo.create("the secret wedding", m, s, 1); // there should be a better way to set numbers
-        db.pageRepo.create(s, c, 2);
+        db.pageRepo.create(s, c, 2); // there has to be a better way to do these numbers
         return "testing";
     }
 }
