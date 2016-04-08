@@ -50,6 +50,7 @@ h3 {
     margin-right: 50px;
     background-color: #f4f4f4;
 }
+
 .reported-comics {
     margin-left: 50px;
 }
@@ -233,4 +234,38 @@ h3 {
     width: 800px;
     height: 400px;
     font-size: xx-large;
+}
+
+#last-read-page-chapter-index {
+    margin-right: 130px;
+    font-size: 100px;
+    color: #F9A825;
+}
+
+#last-read-page-replay {
+    font-size: 100px;
+    color: #F9A825;
+}
+#last-read-page-next-chapter {
+    margin-left: 130px;
+    font-size: 100px;
+    color: #F9A825;
+}
+
+#page-reader-button-container {
+    width: 800px;
+    margin-left: 350px;
+    border-style: solid;
+    border-color: #F9A825;
+    padding-top: 14px;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+#last-read-page-main {
+    width: 800px;
+    margin-left: 335px;
+    height: 800px;
+    border-style: solid;
+    border-color: #F9A825;
 }
