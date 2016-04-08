@@ -1,9 +1,11 @@
 package data.model;
 
+import com.google.appengine.repackaged.com.google.protos.gdata.proto2api.Core;
 import com.googlecode.objectify.Ref;
 import com.googlecode.objectify.annotation.*;
 import com.googlecode.objectify.condition.IfFalse;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 @Entity
@@ -18,6 +20,7 @@ public class Chapter {
     private Date dateCreated; // generate
     @Index private int chapterNumber;
     @Index(IfFalse.class) private Boolean approved = false;
+    private ArrayList<Ref<Page>> orphans;
 
     public Chapter(){
         // each chapter must have a single page
@@ -142,7 +145,53 @@ public class Chapter {
         this.approved = approved;
     }
 
+    public void setOrphans(ArrayList<Page> unlinked){
+        for(Page p : unlinked){
+            orphans.add(Ref.create(p));
+        }
+    }
+
+    public ArrayList<Page> getOrphans(){
+        ArrayList<Page> returner = new ArrayList<Page>();
+        for(Ref<Page> ref : orphans){
+            returner.add(ref.get());
+        }
+        return returner;
+    }
+
+    public void addOrphan(Page orphan){
+        orphans.add(Ref.create(orphan));
+    }
+
+    public void removeOrphan(Page orphan){
+        orphans.remove(orphan);
+    }
+
     // extended methods
+
+    public void deletePage(Page toDelete){
+        // find the page in the tree
+        // find any pages that link to that page
+        // and any pages that that page links to
+        ArrayList<Page> parents = new ArrayList<Page>();
+        ArrayList<Page> orphans = new ArrayList<Page>();
+        Page cursor = root.get();
+        // getparentsof
+        // getchildrenof
+
+    }
+
+    public ArrayList<Page> getParentsOf(Page p){
+        ArrayList<Page> returner = new ArrayList<Page>();
+        this.root.get().getParentsOf(p, returner);
+        return returner;
+    }
+
+    public ArrayList<Page> getChildrenOf(Page p){
+        return new ArrayList<Page>();
+    }
+
+
 
 
 }

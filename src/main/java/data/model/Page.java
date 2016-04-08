@@ -409,5 +409,87 @@ public class Page {
         this.chapterNameSeriesName = chapterNameSeriesName;
     }
 
+    public boolean hasOption(Page p){
+        if(options.isEmpty()){
+            return false;
+        }
+        for (Ref<Page> ref: options){
+            if(options.contains(p));
+            return true;
+        }
+        return false;
+    }
+
+    public boolean contains(Page p){
+        // to see if this subtree contains the given page
+        if(this.hasOption(p)){
+            return true;
+        } else {
+            for(Ref<Page> ref: options){
+                return ref.get().contains(p);
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean equals(Object o){
+        if(o instanceof Page){
+            Page p = (Page)o;
+            if (p.getPageId().equals(this.pageId)){
+                return true;
+            }
+        } else {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * getParents of
+     * @param p
+     * @return
+     */
+    public void getParentsOf(Page p, ArrayList<Page> returner){
+        if(this.options.isEmpty()){
+            // end of list
+            return;
+        }
+        else if(this.isParentOf(p)){
+            if(returner.contains(this)){
+                // already visited this node
+                return;
+            } else {
+                // havent visited this node yet
+                returner.add(this);
+            }
+        } else {
+            //its not a parent
+            // transform the Ref<Pages> to <Pages>
+            // search that
+            ArrayList<Page> searcher = new ArrayList<Page>();
+            for(Ref<Page> ref : options){
+                searcher.add(ref.get());
+            }
+            for(Page q : searcher){
+                q.getParentsOf(p, returner);
+            }
+            return;
+        }
+    }
+
+    public boolean isParentOf(Page p){
+        ArrayList<Page> searcher = new ArrayList<Page>();
+        for(Ref<Page> ref : options){
+            searcher.add(ref.get());
+        }
+        if(searcher.contains(p)){
+            return true;
+        }
+        return false;
+    }
+
+
+
 
 }

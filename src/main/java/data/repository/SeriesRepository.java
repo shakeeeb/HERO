@@ -102,12 +102,12 @@ public class SeriesRepository {
     //overload create with a whole bunch of stuff
 
     //update(Id, stuff to update...)
-    public void updateSeries(Series s){
+    public void update(Series s){
         ofy().save().entity(s).now();
     }
 
     //delete(Id)
-    public void deleteSeries(String Id){
+    public void delete(String Id){
         // when you delete a series, you've got to delete everyhting within the series too...
         // as well as delete the links to a series
         // at least, unlink it from the author
