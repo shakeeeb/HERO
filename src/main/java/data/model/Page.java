@@ -27,6 +27,9 @@ public class Page {
     @Load private ArrayList<Ref<Page>> priors = null;
     private ArrayList<String> optionDescriptors;
 
+    //NOTE - DO NOT USE PRIORS OR PREV -> SINGLE LINK
+    // IT SHOULD BE REMOVED AT SOME POINT
+
 
 
     /**
@@ -83,20 +86,20 @@ public class Page {
         this.pageId = pageId;
     }
 
-    public Ref<Series> getSeries() {
-        return series;
+    public Series getSeries() {
+        return series.get();
     }
 
-    public void setSeries(Ref<Series> series) {
-        this.series = series;
+    public void setSeries(Series s) {
+        this.series = Ref.create(s);
     }
 
-    public Ref<Chapter> getChapter() {
-        return chapter;
+    public Chapter getChapter() {
+        return chapter.get();
     }
 
-    public void setChapter(Ref<Chapter> chapter) {
-        this.chapter = chapter;
+    public void setChapter(Chapter c) {
+        this.chapter = Ref.create(c);
     }
 
     public int getPageNumber() {
@@ -131,8 +134,8 @@ public class Page {
         this.imagePath = imagePath;
     }
 
-    public Ref<Page> getNext() {
-        return Next;
+    public Page getNext() {
+        return Next.get();
     }
 
     public void setNext(Page newNext) {
@@ -152,6 +155,10 @@ public class Page {
         }
     }
 
+    /**
+     * DEPRECATED DO NOT USE
+     * @return
+     */
     public ArrayList<Page> getPriors(){
         ArrayList<Page> returner = new ArrayList<Page>();
         for(Ref<Page> p : priors){
@@ -160,6 +167,10 @@ public class Page {
         return returner;
     }
 
+    /**
+     * DEPRECATED DO NOT USE
+     * @param newPriors
+     */
     public void setPriors(ArrayList<Page> newPriors){
         ArrayList<Ref<Page>> setOpts = new ArrayList<Ref<Page>>();
         for(Page p :newPriors){
@@ -173,6 +184,10 @@ public class Page {
         return previous;
     }
 
+    /**
+     * DEPRECATED DONT USE
+     * @param newPrev
+     */
     public void setPrev(Page newPrev) {
         //this.Prev = Ref.create(previous);
         if(numPriors == 0){
@@ -293,6 +308,10 @@ public class Page {
         }
     }
 
+    /**
+     * DEPRECATED DO NOT USE
+     * @param prior
+     */
     public void addPrior(Page prior){
         // gotta check all cases of next
         if(numPriors == 0){ // totally new, no prev. shouldnt be used this way, but... gotta be exhaustive
@@ -303,7 +322,12 @@ public class Page {
             numPriors = priors.size();
         }
     }
-    // TODO edit this shit so if(removebleh){ return true} else { return false}
+
+    /**
+     * DEPRECATED DO NOT USE
+     * @param priorIndex
+     * @return
+     */
     public boolean removePrior(int priorIndex){
         // gotta check all cases
         if(numPriors == 0){
@@ -329,6 +353,11 @@ public class Page {
         }
     }
 
+    /**
+     * DEPRECATED DO NOT USE
+     * @param RemoveMe
+     * @return
+     */
     public boolean removePrior(Page RemoveMe){
         // check all cases
         Ref<Page> toRemove = Ref.create(RemoveMe);

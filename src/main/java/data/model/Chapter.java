@@ -86,8 +86,8 @@ public class Chapter {
         this.published = published;
     }
 
-    public Ref<Page> getRoot() {
-        return root;
+    public Page getRoot() {
+        return root.get();
     }
 
     public void setRoot(Page root) {
@@ -102,20 +102,20 @@ public class Chapter {
         this.name = name;
     }
 
-    public Ref<UserData> getAuthor() {
-        return author;
+    public UserData getAuthor() {
+        return author.get();
     }
 
-    public void setAuthor(Ref<UserData> author) {
-        this.author = author;
+    public void setAuthor(UserData a) {
+        this.author = Ref.create(a);
     }
 
-    public Ref<Series> getSeries() {
-        return series;
+    public Series getSeries() {
+        return series.get();
     }
 
-    public void setSeries(Ref<Series> series) {
-        this.series = series;
+    public void setSeries(Series s) {
+        this.series = Ref.create(s);
     }
 
     public Date getDateCreated() {
