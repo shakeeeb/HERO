@@ -11,12 +11,13 @@
     <title>Hero - Drawing Page</title>
     <%@ include file="/resources/layouts/styles.jsp" %>
     <%@ include file="/resources/layouts/scripts.jsp" %>
+    <link rel="stylesheet" href="/resources/css/terrell.css">
 </head>
 <body>
-<div class="container">
+<div>
     <%@ include file="/resources/layouts/navbar.jsp" %>
     <br><br><br>
-    <div id="chapter-form">
+    <div>
         <form action="#" class="drawing-upload-form">
             <div id="drawing-upload-container" class="form-group">
                 <label for="drawing-upload-input">Select File to Upload</label>
@@ -27,19 +28,75 @@
         </form>
     </div>
     <br>
-
-    <br><br><br><br><br><br>
-    <br><br><br><br><br><br>
-    <br><br><br><br><br><br>
     <div>
+
         <!--Drawing Application here-->
+        <div id="drawing-container">
+            <!-- Drawing -->
+            <div id="drawing-top-toolbar">
+                {TOP TOOLBAR}
+            </div>
+            <!-- /.drawing-top-toolbar -->
+
+            <!-- Drawing side toolbar -->
+            <div id="drawing-side-toolbar">
+                <div class="drawing-tool">
+                    {SELECTION}
+                </div>
+
+                <div class="drawing-tool">
+                    {PENCIL}
+                </div>
+
+                <div class="drawing-tool">
+                    {BRUSH}
+                </div>
+
+                <div class="drawing-tool">
+                    {FILL}
+                </div>
+
+                <div class="drawing-tool">
+                    {ERASER*}
+                </div>
+
+                <div class="drawing-tool">
+                    {LINE}
+                </div>
+
+                <div class="drawing-tool">
+                    {TEXT}
+                </div>
+
+                <div class="drawing-tool">
+                    {SHAPES}
+                </div>
+
+                <div class="color-wheel">
+                    {COLOR SELECTOR}
+                </div>
+
+
+
+            </div>
+            <!-- /.drawing-side-toolbar -->
+
+            <!-- Drawing-canvas -->
+            <div id="drawing-canvas-container">
+                <canvas id="drawing-canvas">
+                </canvas>
+
+            </div>
+            <!-- /.drawing-canvas -->
+        </div>
+        <!-- /.drawing-container -->
     </div>
     <br><br><br><br><br><br>
     <br><br><br><br><br><br>
     <br><br><br><br><br><br>
 
-    <div id="chapter-form">
-        <form action="#" class="chapter-form">
+    <div>
+        <form action="#">
             <button id="save-drawing" type="submit" class="btn btn-default">Save</button>
         </form>
     </div>
