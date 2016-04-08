@@ -133,9 +133,12 @@ public class Series {
         this.description = description;
     }
 
-    public ArrayList<Ref<Chapter>> getChapters() {
-
-        return chapters;
+    public ArrayList<Chapter> getChapters() {
+        ArrayList<Chapter> returner = new ArrayList<Chapter>();
+        for(Ref<Chapter> ref: chapters){
+            returner.add(ref.get());
+        }
+        return returner;
     }
 
     public void setChapters(ArrayList<Chapter> chapters) {
@@ -145,7 +148,7 @@ public class Series {
         }
         this.chapters = intermediary;
     }
-
+    //TODO return ArrayList<comments> instead of ArrayList<Ref<comments>>
     public ArrayList<Ref<Comment>> getComments() {
         return comments;
     }
@@ -213,6 +216,22 @@ public class Series {
                 return false;
             }
         }
+    }
+
+    public boolean removeChapter(int chapterNumber){
+        if(numChapters == 0){
+            System.out.println("no Chapters to remove");
+            return false;
+        }
+        for(Ref<Chapter> ref: chapters){
+            Chapter r = ref.get();
+            if(r.getChapterNumber() == chapterNumber){
+                chapters.remove(ref);
+                numChapters = chapters.size();
+                return true;
+            }
+        }
+        return false;
     }
 
 
