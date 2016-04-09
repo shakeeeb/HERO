@@ -118,7 +118,12 @@ $(document).ready(function(){
         }));
     });
 
-    
+
+    $("#eraser-tool").click(function(){
+        canvas.remove(canvas.getActiveObject());
+    });
+
+
     // this is just a testing function
     $(".drawing-tool").click(function() {
         // clear whichever tool was being used
