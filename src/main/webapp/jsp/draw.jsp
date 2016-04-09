@@ -69,7 +69,7 @@
                     {BRUSH}
                 </div>
 
-                <div class="drawing-tool">
+                <div id="eraser-tool" class="drawing-tool">
                     {ERASER*}
                 </div>
 
