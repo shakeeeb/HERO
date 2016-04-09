@@ -440,7 +440,7 @@ public class Page {
                 return true;
             }
         } else {
-            return true;
+            return false;
         }
         return false;
     }
@@ -521,6 +521,15 @@ public class Page {
             }
         }
         return;
+    }
+
+    public void getAllPages(ArrayList<Page> returner){
+        //gets all pages in the whatever
+        if(this.options.isEmpty()){
+            return;
+        } else if(returner.contains(this)){
+            return;
+        } 
     }
 
 

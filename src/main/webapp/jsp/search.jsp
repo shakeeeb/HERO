@@ -13,6 +13,8 @@
     <%@ include file="/resources/layouts/styles.jsp" %>
     <%@ include file="/resources/layouts/scripts.jsp" %>
     <link rel="stylesheet" href="/resources/css/terrell.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="/resources/scripts/jquery/example-jquery.js"></script>
 </head>
 <body>
 

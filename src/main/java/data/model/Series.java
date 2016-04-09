@@ -234,5 +234,18 @@ public class Series {
         return false;
     }
 
+    @Override
+    public boolean equals(Object o){
+        if(o instanceof Page){
+            Series s = (Series)o;
+            if (s.getName().equals(this.name)){
+                return true;
+            }
+        } else {
+            return false;
+        }
+        return false;
+    }
+
 
 }
