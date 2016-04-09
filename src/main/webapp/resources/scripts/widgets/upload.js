@@ -106,7 +106,7 @@ $(document).ready(function(){
             top: 10 ,
         }));
     });
-
+    
 
     // this is just a testing function
     $(".drawing-tool").click(function() {

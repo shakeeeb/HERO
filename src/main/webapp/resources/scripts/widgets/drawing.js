@@ -36,7 +36,7 @@ $(document).ready(function(){
     // when the selection tool is clicked
     $("#selection-tool").click(function() {
 
-       // turn off free drawing mode
+        // turn off free drawing mode
         canvas.isDrawingMode = false;
 
     });
@@ -95,6 +95,18 @@ $(document).ready(function(){
         $(".drawing-tool").css("background-color", "#66512c")
 
     }
+
+
+
+    /*When the text tool is clicked*/
+    $("#text-tool").click(function(){
+        canvas.add(new fabric.IText('Double click me and type!', {
+            fontFamily: 'arial black',
+            left: 10,
+            top: 10 ,
+        }));
+    });
+
 
     // this is just a testing function
     $(".drawing-tool").click(function() {
