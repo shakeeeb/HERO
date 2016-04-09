@@ -60,12 +60,40 @@ $(document).ready(function(){
     //});
 
     $("#brush-width-slider").on("change", function(){
-        alert(this.value);
-        //console.log(this.value)
+        console.log(this.value)
     });
 
+
+    //$('drawing-mode-selector').onchange = function() {
+    //    if (this.value === 'hline') {
+    //        canvas.freeDrawingBrush = vLinePatternBrush;
+    //    }
+    //    else if (this.value === 'vline') {
+    //        canvas.freeDrawingBrush = hLinePatternBrush;
+    //    }
+    //    else if (this.value === 'square') {
+    //        canvas.freeDrawingBrush = squarePatternBrush;
+    //    }
+    //    else if (this.value === 'diamond') {
+    //        canvas.freeDrawingBrush = diamondPatternBrush;
+    //    }
+    //    else if (this.value === 'texture') {
+    //        canvas.freeDrawingBrush = texturePatternBrush;
+    //    }
+    //    else {
+    //        canvas.freeDrawingBrush = new fabric[this.value + 'Brush'](canvas);
+    //    }
+    //
+    //    if (canvas.freeDrawingBrush) {
+    //        canvas.freeDrawingBrush.color = drawingColorEl.value;
+    //        canvas.freeDrawingBrush.width = parseInt(drawingLineWidthEl.value, 10) || 1;
+    //        canvas.freeDrawingBrush.shadowBlur = parseInt(drawingShadowWidth.value, 10) || 0;
+    //    }
+    //};
+
     function clearToolSelections() {
-        $(".drawing-tool").css("background-color", "#66512c");
+        $(".drawing-tool").css("background-color", "#66512c")
+
     }
 
 
@@ -78,7 +106,7 @@ $(document).ready(function(){
             top: 10 ,
         }));
     });
-
+    
 
     // this is just a testing function
     $(".drawing-tool").click(function() {

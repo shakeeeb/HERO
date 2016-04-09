@@ -15,13 +15,14 @@
 
     <!-- Get version 1.1.0 of Fabric.js from CDN -->
     <script src="/resources/scripts/fabric/fabric.js"></script>
-    <script src="/resources/scripts/widgets/drawing.js"></script>
+
+    <script src="/resources/scripts/widgets/upload.js"></script>
+
 </head>
 <body>
 <div>
     <%@ include file="/resources/layouts/navbar.jsp" %>
     <br><br><br>
-
     <div>
         <!--Drawing Application here-->
         <div id="drawing-container">
@@ -37,7 +38,7 @@
 
 
                     <div id="brush-width-slider">
-                     <input type="range" name="width-slider" min="1" max="150" step="1" value="1">
+                        <input type="range" name="width-slider" min="1" max="150">
                     </div>
 
                 </div>
@@ -69,7 +70,7 @@
                     {LINE}
                 </div>
 
-                <div class="drawing-tool">
+                <div id="text-tool" class="drawing-tool">
                     {TEXT}
                 </div>
 
@@ -88,17 +89,12 @@
 
             <!-- Drawing-canvas -->
             <div id="drawing-canvas-container">
-                <canvas id="drawing-canvas" width="800" height="1307"></canvas>
+                <canvas id="imageCanvas" width="800" height="1307"></canvas>
 
             </div>
             <!-- /.drawing-canvas -->
         </div>
         <!-- /.drawing-container -->
-    </div>
-    <div>
-        <form action="#">
-            <button id="save-drawing" type="submit" class="btn btn-default">Save</button>
-        </form>
     </div>
 
     <div>
