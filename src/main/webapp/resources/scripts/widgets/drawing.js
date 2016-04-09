@@ -38,6 +38,19 @@ $(document).ready(function(){
         canvas.freeDrawingBrush.color = "black";
     });
 
+    // when the brush width slider is changed
+
+
+    //$("#brush-width-slider").change(function() {
+    //    alert(this.value);
+    //    canvas.freeDrawingBrush.width = parseInt(this.value, 10) || 1;
+    //    //this.previousSibling.innerHTML = this.value;
+    //});
+
+    $("#brush-width-slider").on("change", function(){
+        console.log(this.value)
+    });
+
 
     //$('drawing-mode-selector').onchange = function() {
     //    if (this.value === 'hline') {

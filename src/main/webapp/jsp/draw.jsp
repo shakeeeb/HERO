@@ -37,7 +37,7 @@
 
 
                     <div id="brush-width-slider">
-                     <input type="range" name="width-slider" min="1" max="150">
+                     <input type="range" name="width-slider" min="1" max="150" step="1" value="1">
                     </div>
 
                 </div>
