@@ -5,10 +5,22 @@
 
 $(document).ready(function(){
 
-    var canvas;
+    var imageLoader = document.getElementById('drawing-upload-input');
+    imageLoader.addEventListener('change', handleImage, false);
+    var canvas = new fabric.Canvas('imageCanvas');
 
-    // initialize canvas
-    canvas = new fabric.Canvas('drawing-canvas');
+    function handleImage(e){
+        var reader = new FileReader();
+        reader.onload = function(event){
+            var img = new Image();
+            img.onload = function(){
+                var imgInstance = new fabric.Image(img)
+                canvas.add(imgInstance);
+            }
+            img.src = event.target.result;
+        }
+        reader.readAsDataURL(e.target.files[0]);
+    }
 
     // testing if canvas works by adding a rectengular
     var rect = new fabric.Rect({
