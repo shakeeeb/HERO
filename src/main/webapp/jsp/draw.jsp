@@ -16,7 +16,7 @@
     <!-- Get version 1.1.0 of Fabric.js from CDN -->
     <script src="/resources/scripts/fabric/fabric.js"></script>
 
-    <script src="/resources/scripts/widgets/upload.js"></script>
+    <script src="/resources/scripts/widgets/drawing.js"></script>
 
 </head>
 <body>
@@ -38,12 +38,19 @@
 
 
                     <div id="brush-width-slider">
-                        <input type="range" name="width-slider" min="1" max="150">
+                        <input type="range" id="brush-width" name="width-slider" min="1" max="150">
                     </div>
 
                 </div>
 
 
+                <div id="font-dropdown" class="dropdown">
+                    <select id="fonts">
+                        <option value="1">Serif</option>
+                        <option value="2">San-serif</option>
+                    </select>
+                    <input id="font-button" type="button" value="Change!" />
+                </div>
 
             </div>
             <!-- /.drawing-top-toolbar -->

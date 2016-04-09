@@ -118,7 +118,7 @@ $(document).ready(function(){
         }));
     });
 
-
+    
     // this is just a testing function
     $(".drawing-tool").click(function() {
         // clear whichever tool was being used

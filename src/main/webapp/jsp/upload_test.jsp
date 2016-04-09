@@ -44,13 +44,11 @@
                 </div>
 
                 <div id="font-dropdown" class="dropdown">
-                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" onchange="fontChange()">Fonts
-                        <span class="caret"></span></button>
-                    <ul class="dropdown-menu">
-                        <li value="ariel"><a href="#">Ariel</a></li>
-                        <li value="courier"><a href="#">Courier</a></li>
-                        <li value="timess"><a href="#">Times</a></li>
-                    </ul>
+                    <select id="fonts">
+                        <option value="1">Serif</option>
+                        <option value="2">San-serif</option>
+                    </select>
+                    <input id="font-button" type="button" value="Change!" />
                 </div>
 
 

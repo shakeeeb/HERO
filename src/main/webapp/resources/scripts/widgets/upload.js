@@ -97,16 +97,27 @@ $(document).ready(function(){
     }
 
 
+    var fontVar = 'sans-serif';
+    /* Change fonts */
+    $('#font-button').click(function(){
+        if($("#fonts option:selected").val() == 1){
+            fontVar = 'serif';
+        }
+        else if($("#fonts option:selected").val() == 2){
+            fontVar = 'sans-serif';
+        }
+    });
+
 
     /*When the text tool is clicked*/
     $("#text-tool").click(function(){
         canvas.add(new fabric.IText('Double click me and type!', {
-            fontFamily: 'arial black',
+            fontFamily: fontVar,
             left: 10,
             top: 10 ,
         }));
     });
-    
+
 
     // this is just a testing function
     $(".drawing-tool").click(function() {
