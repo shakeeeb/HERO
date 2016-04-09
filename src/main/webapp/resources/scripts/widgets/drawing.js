@@ -53,15 +53,15 @@ $(document).ready(function(){
     // when the brush width slider is changed
 
 
-    //$("#brush-width-slider").change(function() {
-    //    alert(this.value);
-    //    canvas.freeDrawingBrush.width = parseInt(this.value, 10) || 1;
-    //    //this.previousSibling.innerHTML = this.value;
-    //});
-
-    $("#brush-width-slider").on("change", function(){
-        console.log(this.value)
+    $("#brush-width").change(function() {
+        console.log( $(this).val() );
+        canvas.freeDrawingBrush.width = parseInt(this.value, 10) || 1;
+        //this.previousSibling.innerHTML = this.value;
     });
+
+    //$("#brush-width-slider").on("change", function(){
+    //    console.log(this.value)
+    //});
 
 
     //$('drawing-mode-selector').onchange = function() {
@@ -97,11 +97,22 @@ $(document).ready(function(){
     }
 
 
+    var fontVar = 'sans-serif';
+    /* Change fonts */
+    $('#font-button').click(function(){
+        if($("#fonts option:selected").val() == 1){
+            fontVar = 'serif';
+        }
+        else if($("#fonts option:selected").val() == 2){
+            fontVar = 'sans-serif';
+        }
+    });
+
 
     /*When the text tool is clicked*/
     $("#text-tool").click(function(){
         canvas.add(new fabric.IText('Double click me and type!', {
-            fontFamily: 'arial black',
+            fontFamily: fontVar,
             left: 10,
             top: 10 ,
         }));
