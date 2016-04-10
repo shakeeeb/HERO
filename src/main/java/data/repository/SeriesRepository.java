@@ -15,6 +15,10 @@ public class SeriesRepository {
         return returner;
     }
 
+    public Query<Series> getAllSeriesAsAQuery(){
+       return ofy().load().type(Series.class);
+    }
+
     //getById(Id)
     public Series getById(String Id){
         return ofy().load().type(Series.class).id(Id).now();

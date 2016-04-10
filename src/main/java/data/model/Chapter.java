@@ -214,6 +214,12 @@ public class Chapter {
         return false;
     }
 
+    public ArrayList<Page> getAllPages(){
+        ArrayList<Page> returner = new ArrayList<Page>();
+        root.get().getAllPages(returner);
+        return returner;
+    }
+
 
 
 

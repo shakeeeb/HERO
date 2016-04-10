@@ -53,6 +53,10 @@ public class ChapterRepository {
     //update(Id, stuff to update...)
     public void update(Chapter c){
         // save each page in the chapter
+        ArrayList<Page> pages = c.getAllPages();
+        for(Page p: pages){
+            ofy().save().entity(p).now();
+        }
         ofy().save().entity(c).now();
     }
 

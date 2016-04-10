@@ -526,13 +526,30 @@ public class Page {
     public void getAllPages(ArrayList<Page> returner){
         //gets all pages in the whatever
         if(this.options.isEmpty()){
+            if(!returner.contains(this)){
+                returner.add(this);
+            }
             return;
         } else if(returner.contains(this)){
+            // this has already been visited, meaning the children were also already visited
             return;
-        } 
+        } else {
+            // options are not empty, call this on options after placing itself in
+            // THIS SHIT AGAIN
+            ArrayList<Page> searcher = new ArrayList<Page>();
+            for(Ref<Page> ref : options){
+                searcher.add(ref.get());
+            }
+            for(Page p : searcher){
+                p.getAllPages(returner);
+            }
+            return;
+        }
     }
 
-
-
-
 }
+
+
+
+
+
