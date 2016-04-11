@@ -3,17 +3,17 @@
  * Created by Terrell Mack on 3/30/16.
  */
 
-$(document).ready(function () {
+$(document).ready(function(){
 
     var imageLoader = document.getElementById('drawing-upload-input');
     imageLoader.addEventListener('change', handleImage, false);
     var canvas = new fabric.Canvas('imageCanvas');
 
-    function handleImage(e) {
+    function handleImage(e){
         var reader = new FileReader();
-        reader.onload = function (event) {
+        reader.onload = function(event){
             var img = new Image();
-            img.onload = function () {
+            img.onload = function(){
                 var imgInstance = new fabric.Image(img)
                 canvas.add(imgInstance);
             }
@@ -34,7 +34,7 @@ $(document).ready(function () {
 
 
     // when the selection tool is clicked
-    $("#selection-tool").click(function () {
+    $("#selection-tool").click(function() {
 
         // turn off free drawing mode
         canvas.isDrawingMode = false;
@@ -42,7 +42,7 @@ $(document).ready(function () {
     });
 
     // when the pencil tool is clicked
-    $("#pencil-tool").click(function () {
+    $("#pencil-tool").click(function() {
 
         // turn on free drawing mode
         canvas.isDrawingMode = true;
@@ -53,15 +53,15 @@ $(document).ready(function () {
     // when the brush width slider is changed
 
 
-    $("#brush-width").change(function () {
-        console.log($(this).val());
-        canvas.freeDrawingBrush.width = parseInt(this.value, 10) || 1;
-        //this.previousSibling.innerHTML = this.value;
-    });
-
-    //$("#brush-width-slider").on("change", function(){
-    //    console.log(this.value)
+    //$("#brush-width-slider").change(function() {
+    //    alert(this.value);
+    //    canvas.freeDrawingBrush.width = parseInt(this.value, 10) || 1;
+    //    //this.previousSibling.innerHTML = this.value;
     //});
+
+    $("#brush-width-slider").on("change", function(){
+        console.log(this.value)
+    });
 
 
     //$('drawing-mode-selector').onchange = function() {
@@ -99,32 +99,28 @@ $(document).ready(function () {
 
     var fontVar = 'sans-serif';
     /* Change fonts */
-    $('#font-button').click(function () {
-        if ($("#fonts option:selected").val() == 1) {
+    $('#font-button').click(function(){
+        if($("#fonts option:selected").val() == 1){
             fontVar = 'serif';
         }
-        else if ($("#fonts option:selected").val() == 2) {
+        else if($("#fonts option:selected").val() == 2){
             fontVar = 'sans-serif';
         }
     });
 
 
     /*When the text tool is clicked*/
-    $("#text-tool").click(function () {
+    $("#text-tool").click(function(){
         canvas.add(new fabric.IText('Double click me and type!', {
             fontFamily: fontVar,
             left: 10,
-            top: 10,
+            top: 10 ,
         }));
     });
 
 
-    $("#eraser-tool").click(function () {
-        canvas.remove(canvas.getActiveObject())
-    });
-
     // this is just a testing function
-    $(".drawing-tool").click(function () {
+    $(".drawing-tool").click(function() {
         // clear whichever tool was being used
         clearToolSelections();
         $(this).css("background-color", "white");
