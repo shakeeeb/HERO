@@ -13,6 +13,7 @@ import java.util.Date;
 @Cache
 public class Series {
     @Id private String name;
+    @Index private String nameCopy;
     @Index private String mainGenre;
     @Index private ArrayList<String> tags = null;
     @Load private Ref<UserData> author;
@@ -26,6 +27,7 @@ public class Series {
     @Load private ArrayList<Ref<Comment>> comments;
     @Index private Boolean isApproved = false;
     private String bannerURL = null;
+    private String authorName;
     @Index private Date updateTime;
 
     public Series(){
@@ -35,7 +37,9 @@ public class Series {
     public Series(String theName, UserData theAuthor){
         this.updateTime = new Date();
         this.name = theName;
+        this.nameCopy = theName.toLowerCase();
         this.author = Ref.create(theAuthor);
+        this.authorName = theAuthor.getNickname();
         this.subscribers = new ArrayList<Ref<UserData>>();
         this.chapters = new ArrayList<Ref<Chapter>>();
         this.comments = new ArrayList<Ref<Comment>>();
@@ -44,7 +48,9 @@ public class Series {
     public Series(String theName, UserData theAuthor, String description, String genre){
         this.updateTime = new Date();
         this.name = theName;
+        this.nameCopy = theName.toLowerCase();
         this.author = Ref.create(theAuthor);
+        this.authorName = theAuthor.getNickname();
         this.description = description;
         this.mainGenre = genre;
         this.subscribers = new ArrayList<Ref<UserData>>();
@@ -245,6 +251,19 @@ public class Series {
             return false;
         }
         return false;
+    }
+
+    @Override
+    public String toString(){
+        return this.name;
+    }
+
+    public void setAuthorName(String newName){
+        this.authorName = newName;
+    }
+
+    public String getAuthorName(){
+        return this.authorName;
     }
 
 

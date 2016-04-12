@@ -30,11 +30,11 @@
                     <a href="/home"><img src="https://placehold.it/50x50?text=hero" height="50px" width="50px">  </a>
                 </div> <!-- navbar-header-->
             </div><!--col-sm-4-->
-            <form class="navbar-form navbar-left navbar-input-group searchForm" role="search">
+            <form action = "/search" method ="get" class="navbar-form navbar-left navbar-input-group searchForm" role="search">
                 <div class="input-group col-xs-12">
-                    <input id="search-input" type="text" class="form-control"  placeholder="Start your adventure...">
+                    <input id="search-input" name="search-input" type="text" class="form-control"  placeholder="Start your adventure...">
                             <span class="input-group-btn">
-                                <button id="SearchButton" class="btn btn-default" type="button">Search</button>
+                                <button id="SearchButton" class="btn btn-default" type="submit">Search</button>
                             </span>
                 </div>
             </form>

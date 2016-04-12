@@ -144,7 +144,7 @@ public class Page {
             this.Next = Ref.create(newNext);
         } else if (numOptions == 1){ // theres a next but no other options
             // these both become options
-            Page oldNext = this.Next.get();
+            Page oldNext = this.Next.get(); //FUCK this hasnt been stored in the datastore yet!
             this.Next = null;
             options.add(Ref.create(oldNext));
             options.add(Ref.create(newNext));

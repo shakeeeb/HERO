@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class TestingController {
     @RequestMapping(value="testing", method = RequestMethod.GET)
-    public String adminPage(ModelMap model) {
+    public String testingController(ModelMap model) {
         System.out.println("Going to testing zone ");
         // check if the user's logged in lol
         UserService service = UserServiceFactory.getUserService();

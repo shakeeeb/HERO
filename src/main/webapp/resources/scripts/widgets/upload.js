@@ -87,7 +87,7 @@ $(document).ready(function(){
         console.log(this.value);
         colorVar = this.value;
         canvas.freeDrawingBrush.color = this.value;
-
+        
     });
 
 

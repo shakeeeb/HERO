@@ -14,7 +14,7 @@
     <%@ include file="/resources/layouts/scripts.jsp" %>
     <link rel="stylesheet" href="/resources/css/terrell.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-    <script src="/resources/scripts/jquery/example-jquery.js"></script>
+    <script src="/resources/scripts/jquery/search-handler.js"></script>
 </head>
 <body>
 
@@ -26,48 +26,48 @@
     <div id="refine-menu-container">
         <div id="refine-menu" class="center-block-">
             <p id="refine-search-label" class="text-center">Refine Search</p>
-            <form action="#">
+            <form action="/search/refine">
 
 
             <div class="refine-search-item">
               <label>Genre</label>
                 <div class="search-radio">
                     <p>
-                        <input type="radio" name="genre-radios" id="all-genre-button" value="all-genre" checked>
+                        <input type="radio" name="genre-radio" id="all-genre-button" value="all-genre" checked>
                         All
                     </p>
                 </div>
                 <div class="search-radio">
                     <p>
-                        <input type="radio" name="genre-radios" id="adventure-genre-button" value="adventure-genre">
+                        <input type="radio" name="genre-radio" id="adventure-genre-button" value="adventure-genre">
                         Adventure
                     </p>
                 </div>
                 <div class="search-radio">
                     <p>
-                        <input type="radio" name="genre-radios" id="comedy-genre-button" value="commedy-genre">
+                        <input type="radio" name="genre-radio" id="comedy-genre-button" value="commedy-genre">
                         Comedy
                     </p>
                 </div>
                 <div class="search-radio">
                     <p>
-                        <input type="radio" name="genre-radios" id="action-genre-button" value="action-genre">
+                        <input type="radio" name="genre-radio" id="action-genre-button" value="action-genre">
                         Action
                     </p>
                 </div>
                 <div class="search-radio">
                     <p>
-                        <input type="radio" name="genre-radios" id="thriller-genre-button" value="thriller-genre">
+                        <input type="radio" name="genre-radio" id="thriller-genre-button" value="thriller-genre">
                         Thriller
                     </p>
                 </div>
-                <input type="text" class="form-control" id="tag-input" placeholder="Other">
+                <input type="text" name="tag-input" class="form-control" id="tag-input" placeholder="Other">
             </div>
 
 
                 <div class="refine-search-item">
                 <label>Author</label>
-                <input type="text" class="form-control" id="author-input" placeholder="Ben">
+                <input type="text" name="author-input" class="form-control" id="author-input" placeholder="Ben">
                     </div>
 
                 <div class="refine-search-item">
@@ -114,7 +114,7 @@
                 </div>
                 <div class="search-radio">
                     <p>
-                        <input type="radio" name="rating-radio" id="one-stars-button" value="pme-stars">
+                        <input type="radio" name="rating-radio" id="one-stars-button" value="one-stars">
                         1 Stars or up
                     </p>
                 </div>
@@ -131,8 +131,15 @@
         <!-- List of results -->
 
 
+
         <div id="result-list-container">
-            <label id="search-label"> Search Results</label>
+
+            <label id="search-label">Search Results: <div id="test2">${query}</div> </label>
+            <!-- the entire search list is here-->
+            <!-- use JSTL to go through the model-->
+            <!-- however, this means that we aren't returning JSON -->
+            <!-- if we did return JSON we can parse through it in the jquery-->
+            <!-- it oculd be built in the jquery, and then injected-->
             <div id="result-list" >
                 <!-- the first search result -->
                 <div class="search-result center-block-" id="result-1">

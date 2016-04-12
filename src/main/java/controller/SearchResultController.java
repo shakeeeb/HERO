@@ -5,9 +5,7 @@ import data.DbContext;
 import data.model.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -21,10 +19,34 @@ import java.util.List;
 @Controller
 public class SearchResultController {
     protected DbContext db = new DbContext();
+
     @RequestMapping(value="search", method = RequestMethod.GET)
-    public String searchResultController(ModelMap model, HttpSession session, HttpServletRequest req) {
+    public String searchView(ModelMap model, HttpSession session, HttpServletRequest req){
         System.out.println("Going to search page ");
-        String searchInput = req.getParameter("search-input").toLowerCase();
+        String searchInput = req.getParameter("search-input");//.toLowerCase();
+        if(searchInput != null){
+            searchInput = searchInput.toLowerCase();
+        }
+        System.out.println("Searching for: " + searchInput);
+//        newSearch(searchInput);
+        model.addAttribute("query", searchInput);
+        return "search";
+    }
+
+//    @RequestMapping(value="search/{query}", method = RequestMethod.GET)
+//    public @ResponseBody String querySearch(@PathVariable(value="query") String query) {
+//        System.out.println(query);
+//        return "your query was " + query;
+//    }
+
+
+    @RequestMapping(value="search/refine/{query}", method = RequestMethod.GET)
+    public @ResponseBody String searchResultController(@PathVariable(value="query") String query, ModelMap model, HttpSession session, HttpServletRequest req) {
+        System.out.println("refining the search");
+        String searchInput = req.getParameter("search-input");//.toLowerCase();
+        if(searchInput != null){
+            searchInput = searchInput.toLowerCase();
+        }
         System.out.println("Search Input:" + searchInput);
         String genre = req.getParameter("search-radio");
         System.out.println("Genre: " + genre);
@@ -43,20 +65,17 @@ public class SearchResultController {
         Query<Series> q;
         if(searchInput != null){
             // new search
-            q = newSearch(searchInput, genre, tag, author);
+            q = newSearch(searchInput);
         } else {
             // refine a prior search
             // grab the query... if it's null, just grab everything
             // okay so i can't store queries in the session object
             // ughhhhhhhh
             //q = (Query<Series>)session.getAttribute("priorQuery");
-            q = db.seriesRepo.getAllSeriesAsAQuery();
+            q = db.seriesRepo.grabQueryByName(query);
             q = refineSearch(q, genre, tag, author, rating, date);
 
         }
-        //session.setAttribute("priorQuery", q);
-        //DbContext db = new DbContext();
-        // i can't really refine objects
         System.out.println("query returned");
         List<Series> s = q.list();
         for(Series s3:s){
@@ -66,7 +85,8 @@ public class SearchResultController {
         // return things as JSON
         model.addAttribute("seriesList", s.toString());
         // if i can figure out a way to actually refine queries
-        return "search";
+        return s.toString();
+
     }
 
     public Query<Series> refineSearch(Query<Series> q, String genre, String tag, String author, int rating, int date){
@@ -95,7 +115,7 @@ public class SearchResultController {
         return q;
     }
 
-    public Query<Series> newSearch(String searchInput, String genre, String tag, String author){
+    public Query<Series> newSearch(String searchInput){
         // search input is going to be series title
         //ArrayList<Series> returner = new ArrayList<Series>();
         Query<Series> q = null;
