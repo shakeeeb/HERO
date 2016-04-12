@@ -2,13 +2,13 @@
 
 Comics are a classic way for authors and artists to express and readers to enjoy themselves. Hero expands the idea of the comic story where creators can create Choose-Your-Own-Adventure style stories, where a single story can take different paths.
 
-Version: 1
+Version: 2
 ## TODO
-* Dashboard JSP
-* [done] Chapter Workspace JSP 
-* Drawing JSP
-* Datastore Queries
-
+* Add colors to Draw page
+* Add tool icons to draw page
+* Add font size to draw page?
+* Search page functionality
+* Read page functionality
 
 ## Configurations
 

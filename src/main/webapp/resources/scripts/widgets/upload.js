@@ -1,9 +1,6 @@
-/**
- * Drawing application for HERO
- * Created by Terrell Mack on 3/30/16.
- */
-
 $(document).ready(function(){
+
+    var brushWidthVar = 3;
 
     var imageLoader = document.getElementById('drawing-upload-input');
     imageLoader.addEventListener('change', handleImage, false);
@@ -43,11 +40,11 @@ $(document).ready(function(){
 
     // when the pencil tool is clicked
     $("#pencil-tool").click(function() {
-
+        console.log("Width pencil: "+ brushWidthVar)
         // turn on free drawing mode
         canvas.isDrawingMode = true;
-        canvas.freeDrawingBrush.width = 3;
-        canvas.freeDrawingBrush.color = "black";
+        canvas.freeDrawingBrush.width = brushWidthVar;
+        canvas.freeDrawingBrush.color = colorVar;
     });
 
     // when the brush width slider is changed
@@ -59,37 +56,14 @@ $(document).ready(function(){
     //    //this.previousSibling.innerHTML = this.value;
     //});
 
-    $("#brush-width-slider").on("change", function(){
-        console.log(this.value)
+
+    $("#brush-width").change(function(){
+        alert(this);
+        console.log("Width: "+ this.value)
+        brushWidthVar = this.value;
+        canvas.freeDrawingBrush.width = brushWidthVar;
+        canvas.freeDrawingBrush.color = colorVar;
     });
-
-
-    //$('drawing-mode-selector').onchange = function() {
-    //    if (this.value === 'hline') {
-    //        canvas.freeDrawingBrush = vLinePatternBrush;
-    //    }
-    //    else if (this.value === 'vline') {
-    //        canvas.freeDrawingBrush = hLinePatternBrush;
-    //    }
-    //    else if (this.value === 'square') {
-    //        canvas.freeDrawingBrush = squarePatternBrush;
-    //    }
-    //    else if (this.value === 'diamond') {
-    //        canvas.freeDrawingBrush = diamondPatternBrush;
-    //    }
-    //    else if (this.value === 'texture') {
-    //        canvas.freeDrawingBrush = texturePatternBrush;
-    //    }
-    //    else {
-    //        canvas.freeDrawingBrush = new fabric[this.value + 'Brush'](canvas);
-    //    }
-    //
-    //    if (canvas.freeDrawingBrush) {
-    //        canvas.freeDrawingBrush.color = drawingColorEl.value;
-    //        canvas.freeDrawingBrush.width = parseInt(drawingLineWidthEl.value, 10) || 1;
-    //        canvas.freeDrawingBrush.shadowBlur = parseInt(drawingShadowWidth.value, 10) || 0;
-    //    }
-    //};
 
     function clearToolSelections() {
         $(".drawing-tool").css("background-color", "#66512c")
@@ -106,6 +80,14 @@ $(document).ready(function(){
         else if($("#fonts option:selected").val() == 2){
             fontVar = 'sans-serif';
         }
+    });
+
+    var colorVar = "red";
+    $('#color-button').change(function(){
+        console.log(this.value);
+        colorVar = this.value;
+        canvas.freeDrawingBrush.color = this.value;
+
     });
 
 
