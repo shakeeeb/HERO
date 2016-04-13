@@ -87,16 +87,18 @@ $(document).ready(function(){
         console.log(this.value);
         colorVar = this.value;
         canvas.freeDrawingBrush.color = this.value;
+        textColorVar = this.value;
         
     });
 
-
+    var textColorVar = "red";
     /*When the text tool is clicked*/
     $("#text-tool").click(function(){
         canvas.add(new fabric.IText('Double click me and type!', {
             fontFamily: fontVar,
             left: 10,
             top: 10 ,
+            fill: textColorVar,
         }));
     });
 
