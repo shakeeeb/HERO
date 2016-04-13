@@ -54,7 +54,6 @@ $(document).ready(function(){
     //    canvas.freeDrawingBrush.width = parseInt(this.value, 10) || 1;
     //    //this.previousSibling.innerHTML = this.value;
     //});
-    
 
     $("#brush-width").change(function(){
         //alert(this);
