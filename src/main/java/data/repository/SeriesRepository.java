@@ -19,6 +19,10 @@ public class SeriesRepository {
        return ofy().load().type(Series.class);
     }
 
+    public Query<Series> getSeriesByAuthor(String name){
+        return ofy().load().type(Series.class).filter("authorName", name);
+    }
+
     //getById(Id)
     public Series getById(String Id){
         return ofy().load().type(Series.class).id(Id).now();
@@ -54,7 +58,13 @@ public class SeriesRepository {
         return ofy().load().type(Series.class).filter("mainGenre", Genre);
     }
 
-    public Query<Series> refineQueryBySeries(Query<Series> toRefine, String Genre){
+    public Query<Series> grabQueryByName(String Name){
+        Query<Series> q = ofy().load().type(Series.class);
+        q = q.filter("nameCopy >=", Name);
+        return q.filter("nameCopy <", Name + "\ufffd");
+    }
+
+    public Query<Series> refineQueryByMainGenre(Query<Series> toRefine, String Genre){
         return toRefine.filter("mainGenre", Genre);
     }
 
@@ -66,12 +76,24 @@ public class SeriesRepository {
         return toRefine.filter("tags", Genre);
     }
 
+    public Query<Series> refineQueryByAuthorName(Query<Series> toRefine, String authorName){
+        return toRefine.filter("authorName", authorName);
+    }
+
     public Query<Series> grabQueryByLatestUpdate(){
         return ofy().load().type(Series.class).order("-updateTime");
     }
 
     public Query<Series> refineQueryByLatestUpdate(Query<Series> toRefine){
         return toRefine.order("-updateTime");
+    }
+
+    public Query<Series> grabQueryByLeastUpdate() {
+        return ofy().load().type(Series.class).order("+updateTime");
+    }
+
+    public Query<Series> refineQueryByLeastUpdate(Query<Series> toRefine){
+        return toRefine.order("+updateTime");
     }
 
     public Query<Series> grabQueryByStarCount(double starCount){

@@ -183,9 +183,7 @@ public class Chapter {
             this.orphans.add(Ref.create(p));
         }
 
-        // it's ready for deletion
-        // getparentsof
-        // getchildrenof
+        //ready fro deletion
 
     }
 
@@ -212,6 +210,11 @@ public class Chapter {
             return false;
         }
         return false;
+    }
+
+    @Override
+    public String toString(){
+        return this.chapterId;
     }
 
     public ArrayList<Page> getAllPages(){
