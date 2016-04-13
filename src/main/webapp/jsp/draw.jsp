@@ -16,7 +16,7 @@
     <!-- Get version 1.1.0 of Fabric.js from CDN -->
     <script src="/resources/scripts/fabric/fabric.js"></script>
 
-    <script src="/resources/scripts/widgets/upload.js"></script>
+    <script src="/resources/scripts/widgets/drawing.js"></script>
 
 </head>
 <body>
@@ -25,8 +25,6 @@
     <br><br><br>
     <div>
         <!--Drawing Application here-->
-        <div id="drawing-container">
-            <!-- Drawing -->
             <div id="drawing-top-toolbar">
 
                 <div id="undo-redo-buttons" class="toolbar-item">
@@ -34,19 +32,28 @@
                     <button id="redo-button">REDO</button>
                 </div>
 
-                <div id="top-tools-container" class="toolbar-item">
-
-
-                    <div id="brush-width-slider">
-                        <input type="range" name="width-slider" min="1" max="150">
+                <form>
+                    <div id="top-tools-container" class="toolbar-item">
+                        <div id="brush-width-slider">
+                            <input type="range" title="" id="brush-width" name="width-slider" min="1" max="150">
+                        </div>
                     </div>
 
-                </div>
+                    <div id="font-dropdown" class="dropdown toolbar-item">
+                        <select title="" id="fonts">
+                            <option value="1">Serif</option>
+                            <option value="2">San-serif</option>
+                        </select>
+                        <input id="font-button" type="button" value="Change!"/>
+                    </div>
 
 
-
+                </form>
+                
             </div>
             <!-- /.drawing-top-toolbar -->
+        <div id="drawing-container">
+            <!-- Drawing -->
 
             <!-- Drawing side toolbar -->
             <div id="drawing-side-toolbar">
@@ -62,7 +69,7 @@
                     {BRUSH}
                 </div>
 
-                <div class="drawing-tool">
+                <div id="eraser-tool" class="drawing-tool">
                     {ERASER*}
                 </div>
 
@@ -81,7 +88,6 @@
                 <div class="color-wheel">
                     {COLOR SELECTOR}
                 </div>
-
 
 
             </div>

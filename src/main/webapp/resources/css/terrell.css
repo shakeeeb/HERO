@@ -14,6 +14,7 @@
     width: 20%;
 
 }
+
 #page-flow {
     background-color: #e0e0e0;
     border: solid 1px;
@@ -21,11 +22,12 @@
     height: 630px;
     margin: 0 auto;
 }
+
 #chapter-page-flow {
     padding-left: 10px;
     height: 100%;
     width: 80%;
-    float:left;
+    float: left;
 }
 
 #summary-input {
@@ -39,16 +41,17 @@
 }
 
 #save-chapter-button {
-    width:80%;
+    width: 80%;
 
 }
+
 #cancel-chapter-button {
-    width:60%;
+    width: 60%;
 }
 
-#chapter-form{
-    justify-content:center;
-    align-items:center;
+#chapter-form {
+    justify-content: center;
+    align-items: center;
 
 }
 
@@ -63,7 +66,6 @@
     height: 690px;
     background-color: #fff;
 }
-
 
 #refine-menu {
     background-color: gainsboro;
@@ -94,6 +96,7 @@
     background-color: gainsboro;
 
 }
+
 #result-page-menu {
     width: 100px;
     height: 40px;
@@ -118,6 +121,7 @@
     height: 125px;
     width: 125px;
 }
+
 .left-result-container {
     float: left;
     width: 320px;
@@ -125,12 +129,12 @@
 }
 
 .result-description-container {
-    float:left;
+    float: left;
     width: 450px;
 }
 
 .result-description {
-    padding:20px;
+    padding: 20px;
     height: 120px;
     width: 400px;
 }
@@ -146,7 +150,7 @@
 .search-radio p {
     font-style: normal;
     font-weight: normal;
-    margin-bottom:  2px;
+    margin-bottom: 2px;
 }
 
 #save-chapter-button {
@@ -186,6 +190,7 @@
     border-bottom: solid 1px;
 
 }
+
 .genre-list {
     margin-top: 5px;
     margin-bottom: 10px;
@@ -200,14 +205,12 @@
     padding-top: 13px;
     padding-bottom: 13px;
 
-
 }
 
 .genre-list li:hover {
     background-color: darkorange;
     color: white;
 }
-
 
 .series-banner {
     height: 300px;
@@ -280,7 +283,7 @@
     width: 150px;
 }
 
-.start-beginning-button{
+.start-beginning-button {
     width: 165px;
 }
 
@@ -314,7 +317,7 @@
     /*height: 1307px;*/
     /*width: 800px;*/
     background-color: white;
-    float:left;
+    float: left;
     border: solid black 2px;
     border-top: 0px;
     border-left: 0px;
@@ -335,7 +338,8 @@
 }
 
 #undo-redo-buttons {
-    margin-left: 20px;}
+    margin-left: 20px;
+}
 
 .toolbar-item {
     float: left;
@@ -345,3 +349,6 @@
     background-color: grey;
 }
 
+#brush-width{
+
+}
