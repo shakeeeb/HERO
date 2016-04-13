@@ -16,7 +16,7 @@
     <!-- Get version 1.1.0 of Fabric.js from CDN -->
     <script src="/resources/scripts/fabric/fabric.js"></script>
 
-    <script src="/resources/scripts/widgets/drawing.js"></script>
+    <script src="/resources/scripts/widgets/upload.js"></script>
 
 </head>
 <body>
@@ -25,33 +25,37 @@
     <br><br><br>
     <div>
         <!--Drawing Application here-->
-            <div id="drawing-top-toolbar">
+        <div id="drawing-top-toolbar">
 
-                <div id="undo-redo-buttons" class="toolbar-item">
-                    <button id="undo-button">UNDO</button>
-                    <button id="redo-button">REDO</button>
+            <%--<div id="undo-redo-buttons" class="toolbar-item">--%>
+            <%--<button id="undo-button">UNDO</button>--%>
+            <%--<button id="redo-button">REDO</button>--%>
+            <%--</div>--%>
+
+            <form>
+                <div id="top-tools-container" class="toolbar-item">
+                    <div id="brush-width-slider">
+                        <input type="range" title="" id="brush-width" name="width-slider" min="1" max="150">
+                    </div>
                 </div>
 
-                <form>
-                    <div id="top-tools-container" class="toolbar-item">
-                        <div id="brush-width-slider">
-                            <input type="range" title="" id="brush-width" name="width-slider" min="1" max="150">
-                        </div>
-                    </div>
+                <div id="font-dropdown" class="dropdown toolbar-item">
+                    <select title="" id="fonts">
+                        <option value="1">Serif</option>
+                        <option value="2">San-serif</option>
+                    </select>
+                    <input id="font-button" type="button" value="Change!"/>
+                </div>
 
-                    <div id="font-dropdown" class="dropdown toolbar-item">
-                        <select title="" id="fonts">
-                            <option value="1">Serif</option>
-                            <option value="2">San-serif</option>
-                        </select>
-                        <input id="font-button" type="button" value="Change!"/>
-                    </div>
+                <div id="color-picker" class="dropdown toolbar-item">
+                    Color Selection:
+                    <input id="color-button" type="color" name="favcolor" value="#ff0000">
+                </div>
 
+            </form>
 
-                </form>
-
-            </div>
-            <!-- /.drawing-top-toolbar -->
+        </div>
+        <!-- /.drawing-top-toolbar -->
         <div id="drawing-container">
             <!-- Drawing -->
 
