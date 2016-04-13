@@ -52,7 +52,7 @@ public class Series {
         this.author = Ref.create(theAuthor);
         this.authorName = theAuthor.getNickname();
         this.description = description;
-        this.mainGenre = genre;
+        this.mainGenre = genre.toLowerCase();
         this.subscribers = new ArrayList<Ref<UserData>>();
         this.chapters = new ArrayList<Ref<Chapter>>();
         this.comments = new ArrayList<Ref<Comment>>();

@@ -26,38 +26,39 @@
     <div id="refine-menu-container">
         <div id="refine-menu" class="center-block-">
             <p id="refine-search-label" class="text-center">Refine Search</p>
-            <form action="/search/refine">
+
+            <form id= "refine">
 
 
             <div class="refine-search-item">
               <label>Genre</label>
                 <div class="search-radio">
                     <p>
-                        <input type="radio" name="genre-radio" id="all-genre-button" value="all-genre" checked>
+                        <input type="radio" name="genre-radio" id="all-genre-button" value="all" checked>
                         All
                     </p>
                 </div>
                 <div class="search-radio">
                     <p>
-                        <input type="radio" name="genre-radio" id="adventure-genre-button" value="adventure-genre">
+                        <input type="radio" name="genre-radio" id="adventure-genre-button" value="adventure">
                         Adventure
                     </p>
                 </div>
                 <div class="search-radio">
                     <p>
-                        <input type="radio" name="genre-radio" id="comedy-genre-button" value="commedy-genre">
+                        <input type="radio" name="genre-radio" id="comedy-genre-button" value="comedy">
                         Comedy
                     </p>
                 </div>
                 <div class="search-radio">
                     <p>
-                        <input type="radio" name="genre-radio" id="action-genre-button" value="action-genre">
+                        <input type="radio" name="genre-radio" id="action-genre-button" value="action">
                         Action
                     </p>
                 </div>
                 <div class="search-radio">
                     <p>
-                        <input type="radio" name="genre-radio" id="thriller-genre-button" value="thriller-genre">
+                        <input type="radio" name="genre-radio" id="thriller-genre-button" value="thriller">
                         Thriller
                     </p>
                 </div>
@@ -119,7 +120,7 @@
                     </p>
                 </div>
     </div>
-                <button type="submit" class="btn btn-default">Okay</button>
+                <button id="submit-button" type="button" class="btn btn-default">Okay</button>
 
 
             </form>
@@ -139,7 +140,7 @@
             <!-- use JSTL to go through the model-->
             <!-- however, this means that we aren't returning JSON -->
             <!-- if we did return JSON we can parse through it in the jquery-->
-            <!-- it oculd be built in the jquery, and then injected-->
+            <!-- it could be built in the jquery, and then injected-->
             <div id="result-list" >
                 <!-- the first search result -->
                 <div class="search-result center-block-" id="result-1">
