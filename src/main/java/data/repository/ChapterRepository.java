@@ -52,11 +52,18 @@ public class ChapterRepository {
 
     //update(Id, stuff to update...)
     public void update(Chapter c){
+        // save each page in the chapter
+        ArrayList<Page> pages = c.getAllPages();
+        for(Page p: pages){
+            ofy().save().entity(p).now();
+        }
         ofy().save().entity(c).now();
     }
 
     //delete(Id)
     public void delete(Chapter c){
+        // gotta manage relations to the series
+        // gotta manage relations to the pages too
         ofy().delete().entity(c).now();
     }
 }

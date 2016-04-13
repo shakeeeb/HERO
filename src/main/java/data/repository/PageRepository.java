@@ -37,8 +37,9 @@ public class PageRepository {
 
     public Page create(Series theSeries, Chapter theChapter, int PageNumber){
         Page p = new Page(theSeries, theChapter, PageNumber);
-        // DONT SAVE ON CREATION TO DATASTORE
-        // only save to datastore later...
+        // ACtually, for all the Ref.blehh.get() to work,
+        //you've gotta save to datastore, unfortunately....
+        ofy().save().entity(p).now();
         return p;
     }
 
@@ -49,11 +50,22 @@ public class PageRepository {
         ofy().save().entity(p);
     }
 
+    public void save(Page p){
+        ofy().save().entity(p);
+    }
+
+    public void saveMulitple(ArrayList<Page> pages){
+        for(Page p: pages){
+            save(p);
+        }
+    }
+
     //delete(Id)
     public void delete(Chapter c, Page p){
         // for any page which links to this page
         // make a find child/ haschild
         // its a big deal to edit up the chapter
+        c.deletePage(p); // removes any links to the page that is to be deleted
         ofy().delete().entity(p);
         // delete all links to the object
     }

@@ -175,9 +175,15 @@ public class Chapter {
         // and any pages that that page links to
         ArrayList<Page> parents = getParentsOf(toDelete);
         ArrayList<Page> orphans = getChildrenOf(toDelete);
+        for (Page parent : parents){
+            parent.removeOption(toDelete);
+        }
 
-        // getparentsof
-        // getchildrenof
+        for(Page p: orphans){
+            this.orphans.add(Ref.create(p));
+        }
+
+        //ready fro deletion
 
     }
 
@@ -190,6 +196,30 @@ public class Chapter {
     public ArrayList<Page> getChildrenOf(Page p){
         ArrayList<Page> returner = new ArrayList<Page>();
         this.root.get().getChildrenOf(p, returner);
+        return returner;
+    }
+
+    @Override
+    public boolean equals(Object o){
+        if(o instanceof Chapter){
+            Chapter c = (Chapter)o;
+            if (c.getChapterId().equals(this.chapterId)){
+                return true;
+            }
+        } else {
+            return false;
+        }
+        return false;
+    }
+
+    @Override
+    public String toString(){
+        return this.chapterId;
+    }
+
+    public ArrayList<Page> getAllPages(){
+        ArrayList<Page> returner = new ArrayList<Page>();
+        root.get().getAllPages(returner);
         return returner;
     }
 

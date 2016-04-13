@@ -144,7 +144,7 @@ public class Page {
             this.Next = Ref.create(newNext);
         } else if (numOptions == 1){ // theres a next but no other options
             // these both become options
-            Page oldNext = this.Next.get();
+            Page oldNext = this.Next.get(); //FUCK this hasnt been stored in the datastore yet!
             this.Next = null;
             options.add(Ref.create(oldNext));
             options.add(Ref.create(newNext));
@@ -440,7 +440,7 @@ public class Page {
                 return true;
             }
         } else {
-            return true;
+            return false;
         }
         return false;
     }
@@ -523,7 +523,33 @@ public class Page {
         return;
     }
 
-
-
+    public void getAllPages(ArrayList<Page> returner){
+        //gets all pages in the whatever
+        if(this.options.isEmpty()){
+            if(!returner.contains(this)){
+                returner.add(this);
+            }
+            return;
+        } else if(returner.contains(this)){
+            // this has already been visited, meaning the children were also already visited
+            return;
+        } else {
+            // options are not empty, call this on options after placing itself in
+            // THIS SHIT AGAIN
+            ArrayList<Page> searcher = new ArrayList<Page>();
+            for(Ref<Page> ref : options){
+                searcher.add(ref.get());
+            }
+            for(Page p : searcher){
+                p.getAllPages(returner);
+            }
+            return;
+        }
+    }
 
 }
+
+
+
+
+
