@@ -49,14 +49,16 @@ $(document).ready(function(){
 
     // when the brush width slider is changed
 
+
     //$("#brush-width-slider").change(function() {
     //    alert(this.value);
     //    canvas.freeDrawingBrush.width = parseInt(this.value, 10) || 1;
     //    //this.previousSibling.innerHTML = this.value;
     //});
 
+
     $("#brush-width").change(function(){
-        //alert(this);
+        alert(this);
         console.log("Width: "+ this.value)
         brushWidthVar = this.value;
         canvas.freeDrawingBrush.width = brushWidthVar;
@@ -85,16 +87,18 @@ $(document).ready(function(){
         console.log(this.value);
         colorVar = this.value;
         canvas.freeDrawingBrush.color = this.value;
+        textColorVar = this.value;
 
     });
 
-
+    var textColorVar = "red";
     /*When the text tool is clicked*/
     $("#text-tool").click(function(){
         canvas.add(new fabric.IText('Double click me and type!', {
             fontFamily: fontVar,
             left: 10,
             top: 10 ,
+            fill: textColorVar,
         }));
     });
 
