@@ -20,15 +20,20 @@ $(document).ready(function(){
     }
 
     // testing if canvas works by adding a rectengular
-    var rect = new fabric.Rect({
-        left: 100,
-        top: 100,
-        fill: 'orange',
-        width: 200,
-        height: 200
-    });
-    canvas.add(rect);
 
+
+    // when the shape tool is clicked
+    $("#shape-tool").click(function() {
+        var rect = new fabric.Rect({
+            left: 100,
+            top: 100,
+            fill: 'orange',
+            width: 200,
+            height: 200
+        });
+        canvas.add(rect);
+
+    });
 
     // when the selection tool is clicked
     $("#selection-tool").click(function() {
@@ -58,7 +63,7 @@ $(document).ready(function(){
 
 
     $("#brush-width").change(function(){
-        alert(this);
+      //  alert(this);
         console.log("Width: "+ this.value)
         brushWidthVar = this.value;
         canvas.freeDrawingBrush.width = brushWidthVar;
@@ -70,6 +75,9 @@ $(document).ready(function(){
 
     }
 
+    $("#eraser-tool").click(function(){
+        canvas.remove(canvas.getActiveObject());
+    });
 
     var fontVar = 'sans-serif';
     /* Change fonts */

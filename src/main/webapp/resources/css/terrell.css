@@ -346,9 +346,35 @@
     margin-right: 30px;
     padding-left: 10px;
     padding-right: 10px;
-    background-color: grey;
 }
 
 #brush-width{
 
+}
+
+#brush-width-slider {
+    display: inline-block;
+
+}
+
+.brush-width-item {
+    float: left;
+    padding-right: 2px;
+}
+#shape-modal {
+    width: 500px;
+    height: 500px;
+    background-color: pink;
+    position: absolute;
+    margin-top: 700px;
+}
+
+.label-item-combo {
+    display: inline-block;
+}
+
+.label-item {
+    float: left;
+    padding-right: 4px;
+    font-size: small;
 }
