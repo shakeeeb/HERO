@@ -1,7 +1,8 @@
 package data.repository;
 
+import com.googlecode.objectify.Key;
 import data.model.*;
-import static com.googlecode.objectify.ObjectifyService.ofy;;
+import static com.googlecode.objectify.ObjectifyService.ofy;
 
 import java.util.ArrayList;
 
@@ -20,6 +21,11 @@ public class ChapterRepository {
         return ofy().load().type(Chapter.class).id(Id).now();
     }
 
+    public Chapter getByKey(Series theSeries, String Id){
+        Key<Chapter> key = Key.create(Key.create(theSeries), Chapter.class, Id);
+        return ofy().load().key(key).now();
+    }
+
     //getByOtherThingsIfNeedBe
 
     //exists(Id)
@@ -36,15 +42,24 @@ public class ChapterRepository {
     public Chapter create(String theName, UserData theAuthor, Series theSeries, int chapterNo){
         //public Chapter(String theName, UserData theAuthor, Series theSeries, int chapterNo, Page theRoot)
         //Page p = new Page();
-        Chapter c = new Chapter(theName, theAuthor, theSeries, chapterNo);
-        ofy().save().entity(c).now();
-        Page p = new Page(theSeries, c, 0);
-        //p.generateId();
-        c.setRoot(p);
 
-        // update the series so it knows its got a new chapter, and increment the number of chapters
-        theSeries.addChapter(c);
-        return c;
+        //check i series exists
+        if(ofy().load().entity(theSeries).now() != null){
+            Chapter c = new Chapter(theName, theAuthor, theSeries, chapterNo);
+            // make chapter
+            Page p = new Page(theSeries, c, 0);
+            // make page
+            theSeries.addChapter(c);
+            // add chapter to series
+            ofy().save().entity(theSeries).now();
+            ofy().save().entity(p).now();
+            ofy().save().entity(c).now();
+            c.setRoot(p);
+            return c;
+        } else {
+            return null;
+        }
+        // if not return null
         // the root should know the chapter it's involved in
     }
 

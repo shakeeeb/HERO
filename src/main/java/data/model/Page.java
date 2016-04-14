@@ -77,6 +77,18 @@ public class Page {
         this.chapterNameSeriesName = theChapter.getChapterId();
     }
 
+    public Page(Series mySeries, Chapter theChapter, int pgNo, ArrayList<Page> predecessors){
+        optionDescriptors = new ArrayList<String>();
+        options = new ArrayList<Ref<Page>>();
+        priors = new ArrayList<Ref<Page>>();
+        this.pageId = mySeries.getName() + theChapter.getName() + pgNo;
+        this.series = Ref.create(mySeries);
+        this.chapter = Ref.create(theChapter);
+        this.chapterNameSeriesName = theChapter.getChapterId();
+        setPriors(predecessors);
+
+    }
+
     //GETTER SETTER
     public String getPageId() {
         return pageId;
@@ -528,6 +540,10 @@ public class Page {
         if(this.options.isEmpty()){
             if(!returner.contains(this)){
                 returner.add(this);
+            }
+            if(this.Next != null){
+                Page p2 = Next.get();
+                p2.getAllPages(returner);
             }
             return;
         } else if(returner.contains(this)){

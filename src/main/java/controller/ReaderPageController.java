@@ -31,12 +31,12 @@ public class ReaderPageController {
         db.userRepo.create(u.getNickname());
         UserData Oda = db.userRepo.getUserById(u.getNickname());
 
-        Series newSeries = db.seriesRepo.create("One Piece", "Fiction", Oda, "Best MangaEver");
-        Chapter newChapter = db.chapterRepo.create("Luffy meets Boa", Oda, newSeries, 1);
-        Page pageOne = db.pageRepo.create(newSeries, newChapter, 1);
-        Page pageTwo = db.pageRepo.create(newSeries, newChapter, 2);
-        Page pageThree = db.pageRepo.create(newSeries, newChapter, 3);
-        Page wowWhataShortChapter = db.pageRepo.create(newSeries, newChapter, 4);
+//        Series newSeries = db.seriesRepo.create("One Piece", "Fiction", Oda, "Best MangaEver");
+//        Chapter newChapter = db.chapterRepo.create("Luffy meets Boa", Oda, newSeries, 1);
+//        Page pageOne = db.pageRepo.create(newSeries, newChapter, 1);
+//        Page pageTwo = db.pageRepo.create(newSeries, newChapter, 2);
+//        Page pageThree = db.pageRepo.create(newSeries, newChapter, 3);
+//        Page wowWhataShortChapter = db.pageRepo.create(newSeries, newChapter, 4);
 
 
         return "read";

@@ -33,20 +33,27 @@ public class demoData {
         Series JamezSeries = db.seriesRepo.create("Green Ham & Cheese", "Food", james, "He goes around, making sandwiches for the hungry.");
         // Chapters
         Chapter c1 = db.chapterRepo.create("Day One: The Dream of Gleb", T, Tseries, 1);
+        System.out.println(c1);
         Chapter c2 = db.chapterRepo.create("Day Two: Gleb's Revenge", T, Tseries, 2);
+        System.out.println(c2);
         Chapter c3 = db.chapterRepo.create("Romance Dawn: The Trip to Moes!", Ben, BenSeries, 1);
+        System.out.println(c3);
         Chapter c4 = db.chapterRepo.create("The Great Guacamole Riot", Ben, BenSeries, 2);
+        System.out.println(c4);
         Chapter c5 = db.chapterRepo.create("The Streets of New York", Miuki, MKSeries, 1);
+        System.out.println(c5);
         Chapter c6 = db.chapterRepo.create("It Feels Good To Be A Gangsta", Miuki, MKSeries, 2);
+        System.out.println(c6);
         // Pages per chapter
-        Page p1 = db.pageRepo.create(Tseries, c1, 1);
-        Page p2 = db.pageRepo.create(Tseries, c1, 2);
-        Page p3 = db.pageRepo.create(Tseries, c1, 3);
-        Page p4 = db.pageRepo.create(Tseries, c1, 4);
-        p1.setNext(p2);
-        p1.setNext(p3);
-        p2.setNext(p4);
-        p3.setNext(p4);
+        //changed the repo create-- it takes priors.
+//        Page p1 = db.pageRepo.create(Tseries, c1, 1);
+//        Page p2 = db.pageRepo.create(Tseries, c1, 2);
+//        Page p3 = db.pageRepo.create(Tseries, c1, 3);
+//        Page p4 = db.pageRepo.create(Tseries, c1, 4);
+//        p1.setNext(p2);
+//        p1.setNext(p3);
+//        p2.setNext(p4);
+//        p3.setNext(p4);
         // what if all the stuff's already in the datastore though? that wouldn't be good.
         // i gotta protect against that somehow
     }
