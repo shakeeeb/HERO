@@ -81,12 +81,11 @@ public class SearchResultController {
         for(Series s3:s){
             System.out.println(s3.toString());
         }
-        System.out.println(s.toString());
+        System.out.println("Test" + s.toString());
         // return things as JSON
         model.addAttribute("seriesList", s.toString());
         // if i can figure out a way to actually refine queries
         return s.toString();
-
     }
 
     public Query<Series> refineSearch(Query<Series> q, String genre, String tag, String author, int rating, int date){

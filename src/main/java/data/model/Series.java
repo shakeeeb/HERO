@@ -22,7 +22,7 @@ public class Series {
     private int totalPossibleStars = 0;
     @Load private ArrayList<Ref<UserData>> subscribers;
     private int numChapters = 0;
-    @Load private ArrayList<Ref<Chapter>> chapters;
+    @Load private ArrayList<Ref<Chapter>> chapters = null;
     private String description = null;
     @Load private ArrayList<Ref<Comment>> comments;
     @Index private Boolean isApproved = false;
@@ -142,7 +142,8 @@ public class Series {
     public ArrayList<Chapter> getChapters() {
         ArrayList<Chapter> returner = new ArrayList<Chapter>();
         for(Ref<Chapter> ref: chapters){
-            returner.add(ref.get());
+            Chapter c = ref.get();
+            returner.add(c);
         }
         return returner;
     }

@@ -44,6 +44,8 @@ public class ChapterRepository {
 
         // update the series so it knows its got a new chapter, and increment the number of chapters
         theSeries.addChapter(c);
+        ofy().save().entity(theSeries).now();
+        ofy().save().entity(p).now();
         return c;
         // the root should know the chapter it's involved in
     }

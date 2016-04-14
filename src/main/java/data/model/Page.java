@@ -220,6 +220,7 @@ public class Page {
             setOpts.add(Ref.create(p));
         }
         this.options = setOpts;
+
     }
 
     public ArrayList<String> getOptionDescriptors() {

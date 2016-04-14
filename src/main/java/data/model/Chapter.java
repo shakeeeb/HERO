@@ -8,12 +8,14 @@ import com.googlecode.objectify.condition.IfFalse;
 import java.util.ArrayList;
 import java.util.Date;
 
+import static com.googlecode.objectify.ObjectifyService.ofy;
+
 @Entity
 @Cache
 public class Chapter {
     @Id private String chapterId;
     private boolean published = false;
-    @Load private Ref<Page> root;
+    @Load private Ref<Page> root = null;
     private String name;
     @Load private Ref<UserData> author;
     @Parent @Load private Ref<Series> series;
@@ -24,8 +26,9 @@ public class Chapter {
 
     public Chapter(){
         // each chapter must have a single page
-        Page p = new Page(); // should be ID in there
-        root = Ref.create(p);
+        //Page p = new Page(); // should be ID in there
+        //root = Ref.create(p);
+        this.chapterId = new String("bekfavbjshvbjahsbvjashbvjashd");
         dateCreated = new Date();
     }
 
@@ -95,6 +98,7 @@ public class Chapter {
 
     public void setRoot(Page root) {
         this.root = Ref.create(root);
+        ofy().save().entity(root.getChapter()).now();
     }
 
     public String getName() {

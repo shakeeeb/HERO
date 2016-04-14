@@ -31,6 +31,7 @@ public class demoData {
         Series JasonSeries = db.seriesRepo.create("Jesus Will Find You", "Thriller", Jason, "Jesus Will save you. no matter what.");
         Series TaraSeries = db.seriesRepo.create("We Must Find Joe", "Mystery", TayTay, "Where is Joe? only Tara can find him.");
         Series JamezSeries = db.seriesRepo.create("Green Ham & Cheese", "Food", james, "He goes around, making sandwiches for the hungry.");
+
         // Chapters
         Chapter c1 = db.chapterRepo.create("Day One: The Dream of Gleb", T, Tseries, 1);
         Chapter c2 = db.chapterRepo.create("Day Two: Gleb's Revenge", T, Tseries, 2);

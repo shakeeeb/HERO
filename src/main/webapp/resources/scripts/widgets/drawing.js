@@ -2,7 +2,6 @@
  * Drawing application for HERO
  * Created by Terrell Mack on 3/30/16.
  */
-
 $(document).ready(function () {
 
     var imageLoader = document.getElementById('drawing-upload-input');

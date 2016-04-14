@@ -269,3 +269,8 @@ h3 {
     border-style: solid;
     border-color: #F9A825;
 }
+
+#page-image {
+    width: 800px;
+    height: 1307px;
+}
