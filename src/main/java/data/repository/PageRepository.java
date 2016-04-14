@@ -1,6 +1,8 @@
 package data.repository;
 
 import static com.googlecode.objectify.ObjectifyService.ofy;
+
+import com.googlecode.objectify.Key;
 import data.model.*;
 
 import java.util.ArrayList;
@@ -20,6 +22,12 @@ public class PageRepository {
         return ofy().load().type(Page.class).id(Id).now();
     }
 
+    //getByKey()
+    public Page getByKey(Chapter chap, String Id){
+        Key<Page> key = Key.create(Key.create(chap), Page.class, Id);
+        return ofy().load().key(key).now();
+    }
+
     //getByOtherThingsIfNeedBe
 
     //exists(Id)
@@ -35,11 +43,37 @@ public class PageRepository {
 
     //create(Id, stuff)
 
-    public Page create(Series theSeries, Chapter theChapter, int PageNumber){
-        Page p = new Page(theSeries, theChapter, PageNumber);
-        // ACtually, for all the Ref.blehh.get() to work,
-        //you've gotta save to datastore, unfortunately....
+    // creating a new page
+    public Page create(Series theSeries, Chapter theChapter, ArrayList<Page> priors){
+
+        // get chapters last max
+        int n = theChapter.getMax();
+            // increment
+            // set the new page number
+        Page p = new Page(theSeries, theChapter, n, priors);
+
+        // create new page isomg series and chapter info
+
+
+        // go through list of prior pages
+            // add link to new page for each prior
+        if(priors != null){
+            for(Page p2 : priors){
+                p2.setNext(p);
+            }
+        }
+        // save everything
+            // save each prior
+        if(priors != null){
+            for(Page p2 : priors){
+                ofy().save().entity(p2).now();
+            }
+        }
+            // save current page
         ofy().save().entity(p).now();
+            // save chapter
+        ofy().save().entity(theChapter).now();
+        // return new page
         return p;
     }
 
