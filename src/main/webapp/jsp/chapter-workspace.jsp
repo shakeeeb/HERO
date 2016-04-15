@@ -39,9 +39,16 @@
         <div id="chapter-page-flow">
             <h3>Chapter Workspace</h3>
             <div id="page-flow">
-
+                <table class="center-block-">
+                    <tr class="chapter-level">
+                        <td><button class="chapter-page" type="button">Page 1</button></td>
+                        <td><button class="chapter-page" type="button">Page 2</button></td>
+                        <td><button class="chapter-page" type="button">Page 3</button></td>
+                        <td><button class="chapter-page" type="button">Page 4</button></td>
+                        <td><button class="chapter-page" type="button">Page 5</button></td>
+                    </tr>
+                </table>
             </div>
-
         </div>
     </div>
 </body>

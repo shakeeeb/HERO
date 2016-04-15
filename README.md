@@ -4,10 +4,7 @@ Comics are a classic way for authors and artists to express and readers to enjoy
 
 Version: 2
 ## TODO
-* Add colors to Draw page
 * Add tool icons to draw page
-* Add font size to draw page?
-* Search page functionality
 * Read page functionality
 
 ## Configurations
