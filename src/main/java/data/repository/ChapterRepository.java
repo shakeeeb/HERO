@@ -25,6 +25,11 @@ public class ChapterRepository {
     }
 
     public Chapter getByKey(Series theSeries, String Id){
+        String sid = theSeries.getName();
+        if(!Id.contains(sid)){
+            System.out.println("wrong Series for chapterId");
+            return null;
+        }
         Key<Chapter> key = Key.create(Key.create(theSeries), Chapter.class, Id);
         return ofy().load().key(key).now();
     }

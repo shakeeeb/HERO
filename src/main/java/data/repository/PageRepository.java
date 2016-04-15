@@ -35,6 +35,11 @@ public class PageRepository {
 
     //getByKey()
     public Page getByKey(Chapter chap, String Id){
+        String cid = chap.getChapterId();
+        if(!Id.contains(cid)){
+            System.out.println("no the right series for chapter");
+            return null;
+        }
         Key<Page> key = Key.create(Key.create(chap), Page.class, Id);
         return ofy().load().key(key).now();
     }
