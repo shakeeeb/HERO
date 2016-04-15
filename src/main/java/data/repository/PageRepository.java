@@ -19,7 +19,18 @@ public class PageRepository {
 
     //getById(Id)
     public Page getById(String Id){
-        return ofy().load().type(Page.class).id(Id).now();
+        System.out.println(Id);
+        String[] cparts = Id.split("\\^");
+        String[] sparts = Id.split("~");
+        String chapterId = cparts[0];
+        String seriesId = sparts[0];
+        System.out.println("chapter- <" + chapterId + ">");
+        System.out.println("series- <" + seriesId + ">");
+        Series s = ofy().load().type(Series.class).id(seriesId).now();
+        Key<Chapter> key = Key.create(Key.create(s), Chapter.class, chapterId);
+        Chapter c = ofy().load().key(key).now();
+        Key<Page> pkey = Key.create(Key.create(c), Page.class, Id);
+        return ofy().load().key(pkey).now();
     }
 
     //getByKey()
@@ -50,7 +61,13 @@ public class PageRepository {
         int n = theChapter.getMax();
             // increment
             // set the new page number
-        Page p = new Page(theSeries, theChapter, n, priors);
+        Page p = null;
+        if(priors != null){
+            p = new Page(theSeries, theChapter, n, priors);
+        } else {
+            p = new Page(theSeries, theChapter, n);
+        }
+        // p = new Page(theSeries, theChapter, n, priors);
 
         // create new page isomg series and chapter info
 

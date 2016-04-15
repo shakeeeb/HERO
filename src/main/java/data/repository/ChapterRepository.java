@@ -18,7 +18,10 @@ public class ChapterRepository {
 
     //getById(Id)
     public Chapter getById(String Id){
-        return ofy().load().type(Chapter.class).id(Id).now();
+        String seriesID = Id.split("~")[0];
+        Series s = ofy().load().type(Series.class).id(seriesID).now();
+        Key<Chapter> key = Key.create(Key.create(s), Chapter.class, Id);
+        return ofy().load().key(key).now();
     }
 
     public Chapter getByKey(Series theSeries, String Id){

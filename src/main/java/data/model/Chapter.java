@@ -18,6 +18,7 @@ public class Chapter {
     private String name;
     @Load private Ref<UserData> author;
     @Parent @Load private Ref<Series> series;
+    private String seriesId;
     private Date dateCreated; // generate
     @Index private int chapterNumber;
     @Index(IfFalse.class) private Boolean approved = false;
@@ -45,6 +46,7 @@ public class Chapter {
         this.name = theName;
         this.author = Ref.create(theAuthor);
         this.series = Ref.create(theSeries);
+        this.seriesId = theSeries.getName();
         this.chapterNumber = chapterNo;
         this.dateCreated = new Date();
         //Page p = new Page();
@@ -56,9 +58,10 @@ public class Chapter {
         this.name = theName;
         this.author = Ref.create(theAuthor);
         this.series = Ref.create(theSeries);
+        this.seriesId = theSeries.getName();
         this.chapterNumber = chapterNo;
         this.dateCreated = new Date();
-        this.chapterId = theName + theSeries.getName();
+        this.chapterId = theSeries.getName() +"~"+ theName;
         //Page p = new Page();
         //root = Ref.create(p);
     }
@@ -68,10 +71,12 @@ public class Chapter {
         this.name = theName;
         this.author = Ref.create(theAuthor);
         this.series = Ref.create(theSeries);
+        this.seriesId = theSeries.getName();
         this.chapterNumber = chapterNo;
         this.dateCreated = new Date();
         //this.root = Ref.create(theRoot);
-        this.chapterId = theName + theSeries.getName();
+        this.chapterId = theSeries.getName() + "~" +  theName;
+
     }
 
     //  GETTER SETTER
@@ -230,6 +235,7 @@ public class Chapter {
     public int getMax(){
         return max++;
     }
+
 
 
 

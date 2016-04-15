@@ -3,6 +3,8 @@ package data;
 import data.model.*;
 import data.repository.*;
 
+import java.util.ArrayList;
+
 /**
  * Created by shakeeb on 4/8/16.
  */
@@ -46,14 +48,16 @@ public class demoData {
         System.out.println(c6);
         // Pages per chapter
         //changed the repo create-- it takes priors.
-//        Page p1 = db.pageRepo.create(Tseries, c1, 1);
-//        Page p2 = db.pageRepo.create(Tseries, c1, 2);
-//        Page p3 = db.pageRepo.create(Tseries, c1, 3);
-//        Page p4 = db.pageRepo.create(Tseries, c1, 4);
-//        p1.setNext(p2);
-//        p1.setNext(p3);
-//        p2.setNext(p4);
-//        p3.setNext(p4);
+        // db.pageRepo.create(series, chapter, priors)
+        ArrayList<Page> priorHolder = new ArrayList<Page>();
+        Page p1 = db.pageRepo.create(Tseries, c1, null);
+        priorHolder.add(p1);
+        Page p2 = db.pageRepo.create(Tseries, c1, priorHolder);
+        Page p3 = db.pageRepo.create(Tseries, c1, priorHolder);
+        priorHolder.remove(p1);
+        priorHolder.add(p2);
+        priorHolder.add(p3);
+        Page p4 = db.pageRepo.create(Tseries, c1, priorHolder);
         // what if all the stuff's already in the datastore though? that wouldn't be good.
         // i gotta protect against that somehow
     }

@@ -5,6 +5,7 @@ import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import data.DbContext;
 import data.model.Chapter;
+import data.model.Page;
 import data.model.Series;
 import data.model.UserData;
 import org.springframework.stereotype.Controller;
@@ -26,10 +27,22 @@ public class TestingController {
         UserService service = UserServiceFactory.getUserService();
         User u = service.getCurrentUser();
         DbContext db = new DbContext();
-        Series s = db.seriesRepo.getById("One Piece: Two");
+        Series s = db.seriesRepo.getById("My Best Friend Gleb");
+        if(s == null){
+            System.out.println("JESUS FUCK");
+        } else {
+            System.out.println("series name: "+  s.getName());
+        }
         ArrayList<Chapter> opchaps = s.getChapters();
-        Chapter c = db.chapterRepo.getById("Romance Dawn: The Trip to Moes!One Piece: Two");
-        Chapter c2 = db.chapterRepo.getByKey(s, "Romance Dawn: The Trip to Moes!One Piece: Two");
+        Page p = db.pageRepo.getById("My Best Friend Gleb~Day One: The Dream of Gleb^2");
+        if(p == null){
+            System.out.println("page load failed");
+        }else{
+            System.out.println("ayyyy");
+        }
+        Chapter c = db.chapterRepo.getById("My Best Friend Gleb~Day One: The Dream of Gleb");
+        Chapter c2 = db.chapterRepo.getByKey(s, "My Best Friend Gleb~Day One: The Dream of Gleb");
+        Page p2 = db.pageRepo.getByKey(c2, "Day One: The Dream of Gleb~My Best Friend Gleb^0");
         if(c == null){
             System.out.println("oh no!");
         } else {
