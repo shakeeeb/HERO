@@ -378,3 +378,26 @@
     padding-right: 4px;
     font-size: small;
 }
+
+.chapter-page {
+    background-color: white;
+    border: solid 1px black;
+    height: 185px;
+    width: 150px;
+    margin: 15px;
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+
+.chapter-level {
+    border-bottom: solid 1px black;
+
+}
+
+#page-flow {
+    background-color: #dddddd;
+}
+
+.hidden-page {
+    display: none;
+}
