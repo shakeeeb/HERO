@@ -1,6 +1,8 @@
 package data.repository;
 
 import static com.googlecode.objectify.ObjectifyService.ofy;
+
+import com.googlecode.objectify.Key;
 import data.model.*;
 
 import java.util.ArrayList;
@@ -17,7 +19,29 @@ public class PageRepository {
 
     //getById(Id)
     public Page getById(String Id){
-        return ofy().load().type(Page.class).id(Id).now();
+        System.out.println(Id);
+        String[] cparts = Id.split("\\^");
+        String[] sparts = Id.split("~");
+        String chapterId = cparts[0];
+        String seriesId = sparts[0];
+        System.out.println("chapter- <" + chapterId + ">");
+        System.out.println("series- <" + seriesId + ">");
+        Series s = ofy().load().type(Series.class).id(seriesId).now();
+        Key<Chapter> key = Key.create(Key.create(s), Chapter.class, chapterId);
+        Chapter c = ofy().load().key(key).now();
+        Key<Page> pkey = Key.create(Key.create(c), Page.class, Id);
+        return ofy().load().key(pkey).now();
+    }
+
+    //getByKey()
+    public Page getByKey(Chapter chap, String Id){
+        String cid = chap.getChapterId();
+        if(!Id.contains(cid)){
+            System.out.println("no the right series for chapter");
+            return null;
+        }
+        Key<Page> key = Key.create(Key.create(chap), Page.class, Id);
+        return ofy().load().key(key).now();
     }
 
     //getByOtherThingsIfNeedBe
@@ -35,11 +59,43 @@ public class PageRepository {
 
     //create(Id, stuff)
 
-    public Page create(Series theSeries, Chapter theChapter, int PageNumber){
-        Page p = new Page(theSeries, theChapter, PageNumber);
-        // ACtually, for all the Ref.blehh.get() to work,
-        //you've gotta save to datastore, unfortunately....
+    // creating a new page
+    public Page create(Series theSeries, Chapter theChapter, ArrayList<Page> priors){
+
+        // get chapters last max
+        int n = theChapter.getMax();
+            // increment
+            // set the new page number
+        Page p = null;
+        if(priors != null){
+            p = new Page(theSeries, theChapter, n, priors);
+        } else {
+            p = new Page(theSeries, theChapter, n);
+        }
+        // p = new Page(theSeries, theChapter, n, priors);
+
+        // create new page isomg series and chapter info
+
+
+        // go through list of prior pages
+            // add link to new page for each prior
+        if(priors != null){
+            for(Page p2 : priors){
+                p2.setNext(p);
+            }
+        }
+        // save everything
+            // save each prior
+        if(priors != null){
+            for(Page p2 : priors){
+                ofy().save().entity(p2).now();
+            }
+        }
+            // save current page
         ofy().save().entity(p).now();
+            // save chapter
+        ofy().save().entity(theChapter).now();
+        // return new page
         return p;
     }
 

@@ -2,6 +2,7 @@ package data.model;
 
 import com.googlecode.objectify.Ref;
 import com.googlecode.objectify.annotation.*;
+import static com.googlecode.objectify.ObjectifyService.ofy;
 
 import java.util.ArrayList;
 
@@ -16,6 +17,8 @@ public class Page {
     @Load private Ref<Series> series;
     @Parent @Load private Ref<Chapter> chapter;
     @Index private String chapterNameSeriesName;
+    private String chapterId;
+    private String seriesId;
     private int pageNumber;
     private int pageLevel;
     private int numOptions = 0;
@@ -55,6 +58,8 @@ public class Page {
         options = new ArrayList<Ref<Page>>();
         priors = new ArrayList<Ref<Page>>();
         this.pageId = mySeries.getName() + theChapter.getName() + pgNo; // id
+        this.chapterId = theChapter.getChapterId();
+        this.seriesId = mySeries.getName();
         this.series = Ref.create(mySeries);
         this.chapter = Ref.create(theChapter);
         this.chapterNameSeriesName = theChapter.getChapterId();
@@ -71,10 +76,25 @@ public class Page {
         optionDescriptors = new ArrayList<String>();
         options = new ArrayList<Ref<Page>>();
         priors = new ArrayList<Ref<Page>>();
-        this.pageId = mySeries.getName() + theChapter.getName() + pgNo;
+        this.pageId = theChapter.getChapterId() +"^"+ pgNo;
         this.series = Ref.create(mySeries);
         this.chapter = Ref.create(theChapter);
+        this.chapterId = theChapter.getChapterId();
+        this.seriesId = mySeries.getName();
         this.chapterNameSeriesName = theChapter.getChapterId();
+    }
+
+    public Page(Series mySeries, Chapter theChapter, int pgNo, ArrayList<Page> predecessors){
+        optionDescriptors = new ArrayList<String>();
+        options = new ArrayList<Ref<Page>>();
+        priors = new ArrayList<Ref<Page>>();
+        this.pageId = theChapter.getChapterId() +"^"+  pgNo;
+        this.series = Ref.create(mySeries);
+        this.chapter = Ref.create(theChapter);
+        this.chapterId = theChapter.getChapterId();
+        this.seriesId = mySeries.getName();
+        this.chapterNameSeriesName = theChapter.getChapterId();
+        setPriors(predecessors);
     }
 
     //GETTER SETTER
@@ -173,8 +193,9 @@ public class Page {
      */
     public void setPriors(ArrayList<Page> newPriors){
         ArrayList<Ref<Page>> setOpts = new ArrayList<Ref<Page>>();
-        for(Page p :newPriors){
+        for(Page p : newPriors){
             setOpts.add(Ref.create(p));
+            ofy().load().entity(p);
         }
         this.priors = setOpts;
     }
@@ -528,6 +549,10 @@ public class Page {
         if(this.options.isEmpty()){
             if(!returner.contains(this)){
                 returner.add(this);
+            }
+            if(this.Next != null){
+                Page p2 = Next.get();
+                p2.getAllPages(returner);
             }
             return;
         } else if(returner.contains(this)){

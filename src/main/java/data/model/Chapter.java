@@ -4,6 +4,7 @@ import com.google.appengine.repackaged.com.google.protos.gdata.proto2api.Core;
 import com.googlecode.objectify.Ref;
 import com.googlecode.objectify.annotation.*;
 import com.googlecode.objectify.condition.IfFalse;
+import static com.googlecode.objectify.ObjectifyService.ofy;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,15 +18,17 @@ public class Chapter {
     private String name;
     @Load private Ref<UserData> author;
     @Parent @Load private Ref<Series> series;
+    private String seriesId;
     private Date dateCreated; // generate
     @Index private int chapterNumber;
     @Index(IfFalse.class) private Boolean approved = false;
     private ArrayList<Ref<Page>> orphans;
+    private int max = 0;
 
     public Chapter(){
         // each chapter must have a single page
-        Page p = new Page(); // should be ID in there
-        root = Ref.create(p);
+        //Page p = new Page(); // should be ID in there
+        //root = Ref.create(p);
         dateCreated = new Date();
     }
 
@@ -43,6 +46,7 @@ public class Chapter {
         this.name = theName;
         this.author = Ref.create(theAuthor);
         this.series = Ref.create(theSeries);
+        this.seriesId = theSeries.getName();
         this.chapterNumber = chapterNo;
         this.dateCreated = new Date();
         //Page p = new Page();
@@ -54,9 +58,10 @@ public class Chapter {
         this.name = theName;
         this.author = Ref.create(theAuthor);
         this.series = Ref.create(theSeries);
+        this.seriesId = theSeries.getName();
         this.chapterNumber = chapterNo;
         this.dateCreated = new Date();
-        this.chapterId = theName + theSeries.getName();
+        this.chapterId = theSeries.getName() +"~"+ theName;
         //Page p = new Page();
         //root = Ref.create(p);
     }
@@ -66,10 +71,12 @@ public class Chapter {
         this.name = theName;
         this.author = Ref.create(theAuthor);
         this.series = Ref.create(theSeries);
+        this.seriesId = theSeries.getName();
         this.chapterNumber = chapterNo;
         this.dateCreated = new Date();
         //this.root = Ref.create(theRoot);
-        this.chapterId = theName + theSeries.getName();
+        this.chapterId = theSeries.getName() + "~" +  theName;
+
     }
 
     //  GETTER SETTER
@@ -94,7 +101,9 @@ public class Chapter {
     }
 
     public void setRoot(Page root) {
+
         this.root = Ref.create(root);
+        ofy().load().entity(root);
     }
 
     public String getName() {
@@ -222,6 +231,12 @@ public class Chapter {
         root.get().getAllPages(returner);
         return returner;
     }
+
+    public int getMax(){
+        return max++;
+    }
+
+
 
 
 
