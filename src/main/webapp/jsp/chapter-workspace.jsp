@@ -13,6 +13,8 @@
     <%@ include file="/resources/layouts/styles.jsp" %>
     <%@ include file="/resources/layouts/scripts.jsp" %>
     <link rel="stylesheet" href="/resources/css/terrell.css">
+    <script src="/resources/scripts/widgets/workspace.js"></script>
+
 </head>
 <body>
     <div id="chapter-workspace-container">
