@@ -43,9 +43,9 @@
             <div id="page-flow">
                 <table class="center-block-">
                     <tr class="chapter-level">
-                        <td><button class="chapter-page" type="button">Page 1</button></td>
-                        <td><button class="chapter-page" type="button">Page 2</button></td>
-                        <td><button class="chapter-page" type="button">Page 3</button></td>
+                        <td><button id="page-1" class="chapter-page" type="button">Page 1</button></td>
+                        <td><button id="page-2" class="chapter-page" type="button">Page 2</button></td>
+                        <td><button id="page-3" class="chapter-page" type="button">Page 3</button></td>
                         <td><button class="chapter-page" type="button">Page 4</button></td>
                         <td><button class="chapter-page" type="button">Page 5</button></td>
                     </tr>

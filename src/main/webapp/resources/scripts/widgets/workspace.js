@@ -7,30 +7,35 @@
 
 $(document).ready(function() {
     var MAX_DEPTH = 5;
+    var chapter = null;
+    var pages = null;
 
-    // create new?
-        // create root page
+    loadChapter("My Best Friend Gleb~Day One: The Dream of Gleb");
 
-
-    loadChapter("Chapter NameSeries Name");
     // loads a chapter from the datastore
     function loadChapter(chapterID) {
 
-        // query controller for chapter
-        $.get("/workspace/chapter/" + chapterID)
-            .done(function(data) {
-                console.log("Success: " + data);
-            })
-            .fail( function(){
-                console.log("Error: unable to call controller")
-            });
+        $.getJSON("/workspace/load/" + chapterID , function(data) {
+        }).done(function (data) {
+          chapter = data.Chapter;
+          pages = data.Pages;
+
+            $("#title-input").val(chapter.name);
+            console.log(pages);
 
 
-        // get all pages
-        // load root
-        // recursivly get pages for a level
-        // load level into table row
-        // validate tree
+            // load root
+            $("#page-1").text(pages[0].pageId);
+            $("#page-2").text(pages[1].pageId);
+            $("#page-3").text(pages[2].pageId);
+
+            // recursivly get pages for a level
+            // load level into table row
+            // validate tree
+        });
+
+
+
     }
 
     // save

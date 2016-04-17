@@ -13,8 +13,6 @@ import java.util.List;
 public class ChapterRepository {
     //getAll()
     public List<Chapter> getAll() {
-        // ofy().load().type(Chapter.class).list();
-        System.out.println("Chapters: " + ofy().load().type(Chapter.class).toString());
         List<Chapter> chapters = ofy().load().type(Chapter.class).list();
 
         return chapters;
