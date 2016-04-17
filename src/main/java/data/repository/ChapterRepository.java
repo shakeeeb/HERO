@@ -4,15 +4,19 @@ import data.model.*;
 import static com.googlecode.objectify.ObjectifyService.ofy;;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by shakeeb on 3/31/16.
  */
 public class ChapterRepository {
     //getAll()
-    public ArrayList<Chapter> getAll(){
-        ArrayList<Chapter> returner = (ArrayList)ofy().load().type(Chapter.class).list();
-        return returner;
+    public List<Chapter> getAll() {
+        // ofy().load().type(Chapter.class).list();
+        System.out.println("Chapters: " + ofy().load().type(Chapter.class).toString());
+        List<Chapter> chapters = ofy().load().type(Chapter.class).list();
+
+        return chapters;
     }
 
     //getById(Id)
