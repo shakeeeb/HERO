@@ -20,6 +20,7 @@ $(document).ready(function() {
           chapter = data.Chapter;
           pages = data.Pages;
 
+          console.log(chapter);
             $("#title-input").val(chapter.name);
             console.log(pages);
 
