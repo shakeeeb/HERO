@@ -396,8 +396,17 @@
 
 #page-flow {
     background-color: #dddddd;
+    overflow-y: scroll;
 }
 
 .hidden-page {
-    display: none;
+    visibility:hidden;
+}
+
+.add-page {
+    border: dashed 1px dimgray;
+    background-color: rgba(228, 228, 228, 0.69);
+}
+.chapter-level-bottom {
+    border: none;
 }

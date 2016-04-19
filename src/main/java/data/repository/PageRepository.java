@@ -71,6 +71,7 @@ public class PageRepository {
             p = new Page(theSeries, theChapter, n, priors);
         } else {
             p = new Page(theSeries, theChapter, n);
+            //theChapter.addOrphan(p);
         }
         // p = new Page(theSeries, theChapter, n, priors);
 
@@ -83,6 +84,8 @@ public class PageRepository {
             for(Page p2 : priors){
                 p2.setNext(p);
             }
+        } else {
+            theChapter.addOrphan(p);
         }
         // save everything
             // save each prior

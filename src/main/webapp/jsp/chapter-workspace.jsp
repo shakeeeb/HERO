@@ -13,6 +13,8 @@
     <%@ include file="/resources/layouts/styles.jsp" %>
     <%@ include file="/resources/layouts/scripts.jsp" %>
     <link rel="stylesheet" href="/resources/css/terrell.css">
+    <script src="/resources/scripts/widgets/workspace.js"></script>
+
 </head>
 <body>
     <div id="chapter-workspace-container">
@@ -41,12 +43,29 @@
             <div id="page-flow">
                 <table class="center-block-">
                     <tr class="chapter-level">
-                        <td><button class="chapter-page" type="button">Page 1</button></td>
-                        <td><button class="chapter-page" type="button">Page 2</button></td>
-                        <td><button class="chapter-page" type="button">Page 3</button></td>
-                        <td><button class="chapter-page" type="button">Page 4</button></td>
-                        <td><button class="chapter-page" type="button">Page 5</button></td>
+                        <td><button class="chapter-page hidden-page" type="button"></button></td>
+                        <td><button class="chapter-page hidden-page" type="button"></button></td>
+                        <td><button id="page-1" class="chapter-page" type="button"></button></td>
+                        <td><button class="chapter-page hidden-page" type="button"></button></td>
+                        <td><button class="chapter-page hidden-page" type="button"></button></td>
                     </tr>
+
+                    <tr class="chapter-level">
+                        <td><button class="chapter-page hidden-page" type="button"></button></td>
+                        <td><button id="page-3" class="chapter-page" type="button"></button></td>
+                        <td><button id="page-2" class="chapter-page" type="button"></button></td>
+                        <td><button class="chapter-page hidden-page" type="button"></button></td>
+                        <td><button class="chapter-page add-page" type="button">new</button></td>
+                    </tr>
+
+                    <tr class="chapter-level chapter-level-bottom">
+                        <td><button class="chapter-page hidden-page" type="button"></button></td>
+                        <td><button class="chapter-page hidden-page" type="button"></button></td>
+                        <td><button class="chapter-page hidden-page" type="button"></button></td>
+                        <td><button class="chapter-page hidden-page" type="button"></button></td>
+                        <td><button class="chapter-page add-page" type="button">new</button></td>
+                    </tr>
+
                 </table>
             </div>
         </div>

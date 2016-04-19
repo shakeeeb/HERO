@@ -58,6 +58,46 @@ public class demoData {
         priorHolder.add(p2);
         priorHolder.add(p3);
         Page p4 = db.pageRepo.create(Tseries, c1, priorHolder);
+
+        Series newSeries = db.seriesRepo.create("One_Piece", "Fiction", Ben, "Best MangaEver");
+        Chapter newChapter = db.chapterRepo.create("Luffy_meets_Boa", Ben, newSeries, 1);
+        //newSeries.addChapter(newChapter);
+        Page pageOne = db.pageRepo.create(newSeries, newChapter, null); // the root page
+        ArrayList<Page> priorHolder2 = new ArrayList<Page>();
+        priorHolder2.add(pageOne);
+        Page pageTwo = db.pageRepo.create(newSeries, newChapter, priorHolder2);
+        priorHolder2.remove(pageOne);
+        priorHolder2.add(pageTwo);
+        Page pageThree = db.pageRepo.create(newSeries, newChapter, priorHolder); // page three comes from page two
+        Page wowWhataShortChapter = db.pageRepo.create(newSeries, newChapter, priorHolder2);
+        pageOne.setImagePath("/resources/images/test/test1.png");
+        pageTwo.setImagePath("/resources/images/test/test2.png");
+        pageThree.setImagePath("/resources/images/test-images/test3.png");
+        wowWhataShortChapter.setImagePath("/resources/images/test-images/test4.png");
+
+        newChapter.setRoot(pageOne);
+        pageOne.addOption(pageTwo, "Go to Page 2");
+        //pageOne.setOptionDescriptors(pageOne.getOptionDescriptors());
+
+        pageTwo.addOption(pageThree, "Go to Page 3");
+        //pageTwo.setOptionDescriptors(pageTwo.getOptionDescriptors());
+
+        pageTwo.addOption(wowWhataShortChapter, "Go to Page 4");
+        //pageTwo.setOptionDescriptors(pageThree.getOptionDescriptors());
+
+//        pageOne.setPageNumber(1);
+//        pageTwo.setPageNumber(2);
+//        pageThree.setPageNumber(3);
+//        wowWhataShortChapter.setPageNumber(4);
+
+
+        db.chapterRepo.update(newChapter);
+//        System.out.println("Page One's options are: " + pageOne.getOptions().get(0));
+
+        System.out.println("Page One next goes to: " + pageOne.getNext().toString());
+
+        //at this point you wanna update
+        System.out.println("Ayyy");
         // what if all the stuff's already in the datastore though? that wouldn't be good.
         // i gotta protect against that somehow
     }

@@ -39,6 +39,7 @@ public class Chapter {
         //Page p = new Page();
         //root = Ref.create(p);
         this.chapterId = Id;
+        this.orphans = new ArrayList<Ref<Page>>();
     }
 
     public Chapter(String Id, String theName, UserData theAuthor, Series theSeries, int chapterNo){
@@ -49,6 +50,7 @@ public class Chapter {
         this.seriesId = theSeries.getName();
         this.chapterNumber = chapterNo;
         this.dateCreated = new Date();
+        this.orphans = new ArrayList<Ref<Page>>();
         //Page p = new Page();
         //root = Ref.create(p);
     }
@@ -62,6 +64,7 @@ public class Chapter {
         this.chapterNumber = chapterNo;
         this.dateCreated = new Date();
         this.chapterId = theSeries.getName() +"~"+ theName;
+        this.orphans = new ArrayList<Ref<Page>>();
         //Page p = new Page();
         //root = Ref.create(p);
     }
@@ -76,6 +79,7 @@ public class Chapter {
         this.dateCreated = new Date();
         //this.root = Ref.create(theRoot);
         this.chapterId = theSeries.getName() + "~" +  theName;
+        this.orphans = new ArrayList<Ref<Page>>();
 
     }
 
@@ -229,6 +233,10 @@ public class Chapter {
     public ArrayList<Page> getAllPages(){
         ArrayList<Page> returner = new ArrayList<Page>();
         root.get().getAllPages(returner);
+        for(Ref<Page> r: orphans){
+            Page p = r.get();
+            returner.add(p);
+        }
         return returner;
     }
 

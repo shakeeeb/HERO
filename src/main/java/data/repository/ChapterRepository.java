@@ -5,15 +5,17 @@ import data.model.*;
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by shakeeb on 3/31/16.
  */
 public class ChapterRepository {
     //getAll()
-    public ArrayList<Chapter> getAll(){
-        ArrayList<Chapter> returner = (ArrayList)ofy().load().type(Chapter.class).list();
-        return returner;
+    public List<Chapter> getAll() {
+        List<Chapter> chapters = ofy().load().type(Chapter.class).list();
+
+        return chapters;
     }
 
     //getById(Id)
@@ -78,6 +80,7 @@ public class ChapterRepository {
         // save each page in the chapter
         ArrayList<Page> pages = c.getAllPages();
         for(Page p: pages){
+            System.out.println("Chapter Repo -saving page:" + p.getPageId());
             ofy().save().entity(p).now();
         }
         ofy().save().entity(c).now();

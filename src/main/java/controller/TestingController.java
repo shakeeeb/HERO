@@ -53,7 +53,7 @@ public class TestingController {
         } else {
             System.out.println("the get by key :" + c2.getChapterId());
         }
-        if(opchaps != null){
+        if(opchaps != null) {
             System.out.println("the arraylist" + opchaps.toString());
         }
 
