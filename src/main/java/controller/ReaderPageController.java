@@ -89,7 +89,6 @@ public class ReaderPageController {
         model.addAttribute("seriesID", seriesID);
 
         Gson gson = new GsonBuilder().create();
-
         json.add("Chapter", gson.toJsonTree(c));
 
         System.out.println("Chapter: " + json.toString());
