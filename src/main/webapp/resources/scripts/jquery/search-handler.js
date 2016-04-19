@@ -15,6 +15,8 @@ $(document).ready(function () {
             $(".search-result").click(function() {
                 console.log("hello there");
                 this.getAttribute("id");
+                console.log(this.getAttribute("id"));
+                $(location).attr('href', "/series-overview/"+this.getAttribute("id"));
 
             });
         })
