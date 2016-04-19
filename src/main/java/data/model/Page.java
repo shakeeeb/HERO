@@ -64,6 +64,7 @@ public class Page {
         this.chapter = Ref.create(theChapter);
         this.chapterNameSeriesName = theChapter.getChapterId();
         this.pageLevel = pgLvl;
+        this.pageNumber = pgNo;
     }
 
     /**
@@ -82,6 +83,7 @@ public class Page {
         this.chapterId = theChapter.getChapterId();
         this.seriesId = mySeries.getName();
         this.chapterNameSeriesName = theChapter.getChapterId();
+        this.pageNumber = pgNo;
     }
 
     public Page(Series mySeries, Chapter theChapter, int pgNo, ArrayList<Page> predecessors){
@@ -94,6 +96,7 @@ public class Page {
         this.chapterId = theChapter.getChapterId();
         this.seriesId = mySeries.getName();
         this.chapterNameSeriesName = theChapter.getChapterId();
+        this.pageNumber = pgNo;
         setPriors(predecessors);
     }
 
@@ -152,6 +155,7 @@ public class Page {
 
     public void setImagePath(String imagePath) {
         this.imagePath = imagePath;
+        System.out.println("The Image path for this image is: " + this.imagePath);
     }
 
     public Page getNext() {
@@ -546,7 +550,7 @@ public class Page {
 
     public void getAllPages(ArrayList<Page> returner){
         //gets all pages in the whatever
-        if(this.options.isEmpty()){
+        if(this.options.isEmpty()){ // either options or next
             if(!returner.contains(this)){
                 returner.add(this);
             }
@@ -560,6 +564,7 @@ public class Page {
             return;
         } else {
             // options are not empty, call this on options after placing itself in
+            returner.add(this);
             // THIS SHIT AGAIN
             ArrayList<Page> searcher = new ArrayList<Page>();
             for(Ref<Page> ref : options){

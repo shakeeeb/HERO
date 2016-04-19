@@ -35,6 +35,9 @@ $(document).ready(function() {
             // validate tree
         });
 
+        alert(chapter);
+        alert(pages);
+
 
 
     }
