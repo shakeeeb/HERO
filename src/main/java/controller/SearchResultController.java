@@ -197,7 +197,8 @@ public class SearchResultController {
         try {
             PrintWriter p = response.getWriter();
             for (Series s : seriesList) {
-                p.print("<div class=\"search-result center-block-\" id=" + s.getName() + ">");
+                p.print("<div class=\"search-result center-block-\" id=\"" + s.getName().replaceAll(" ", "%20") + "\">");
+
                 p.print("<div class=\"result-image-container\">\n" +
                         "                        <img class=\"result-image\" src=\"https://placehold.it/125/ffa500/ffffff\">\n" +
                         "                    </div>");

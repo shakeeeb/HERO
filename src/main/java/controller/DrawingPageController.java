@@ -42,20 +42,8 @@ public class DrawingPageController {
     @RequestMapping(value="get-json", method = RequestMethod.POST)
     protected void getJson(HttpServletRequest request, HttpServletResponse response){
 
-            String jsonImage = request.getParameter("data");
-            System.out.println(jsonImage);
-
-        // load the page
-        Page pageToLoad = db.pageRepo.getById("My Best Friend Gleb~Day One: The Dream of Gleb^0");
-        if(pageToLoad == null) {
-            System.out.println("Error in getting the page to save a test json");
-        }
-        else
-        {
-            pageToLoad.setJsonString(jsonImage);
-            System.out.println(pageToLoad.getJsonString());
-            ofy().save().entity(pageToLoad).now();
-        }
+            String buttonText = request.getParameter("data");
+            System.out.println(buttonText);
 
     }
 
