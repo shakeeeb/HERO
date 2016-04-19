@@ -42,6 +42,20 @@ $(document).ready(function() {
 
     }
 
+    //when clicked, get the text and send it back to the controller
+    $(".chapter-page").click(function() {
+        var pageID = this.getTextContent;
+
+        $.post( "/get-chapter-page", {"data":pageID})
+            .done(function() {
+                console.log("Sending the data back to the servlet");
+            })
+            .fail(function() {
+                console.log("Cannot send the data back to the servlet");
+            });
+
+    });
+
     // save
 
     // add page

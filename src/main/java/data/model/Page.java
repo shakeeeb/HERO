@@ -29,6 +29,7 @@ public class Page {
     @Load private ArrayList<Ref<Page>> options = null;
     @Load private ArrayList<Ref<Page>> priors = null;
     private ArrayList<String> optionDescriptors;
+    private String jsonString = null;
 
     //NOTE - DO NOT USE PRIORS OR PREV -> SINGLE LINK
     // IT SHOULD BE REMOVED AT SOME POINT
@@ -143,6 +144,14 @@ public class Page {
 
     public int getNumOptions() {
         return numOptions;
+    }
+
+    public String getJsonString() {
+        return jsonString;
+    }
+
+    public void setJsonString(String jsonString) {
+        this.jsonString = jsonString;
     }
 
     public void setNumOptions(int numOptions) {

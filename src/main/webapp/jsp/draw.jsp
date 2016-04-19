@@ -67,7 +67,14 @@
                         <%--</form>--%>
                     </div>
                 </div>
+
+                <div class="toolbar-item">
+                    <input id="save-button" type="button" value="Save my drawing!"/>
+                </div>
+
             </form>
+
+
 
         </div>
         <!-- /.drawing-top-toolbar -->
