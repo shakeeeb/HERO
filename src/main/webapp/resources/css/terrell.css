@@ -19,7 +19,6 @@
     background-color: #e0e0e0;
     border: solid 1px;
     width: 97%;
-    height: 630px;
     margin: 0 auto;
 }
 
@@ -396,7 +395,6 @@
 
 #page-flow {
     background-color: #dddddd;
-    overflow-y: scroll;
 }
 
 .hidden-page {
@@ -404,9 +402,14 @@
 }
 
 .add-page {
+    height: 185px;
+    width: 150px;
+    margin: 15px;
+    margin-top: 12px;
+    margin-bottom: 12px;
     border: dashed 1px dimgray;
     background-color: rgba(228, 228, 228, 0.69);
 }
 .chapter-level-bottom {
-    border: none;
+    /*border: none;*/
 }

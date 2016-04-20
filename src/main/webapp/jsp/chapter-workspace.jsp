@@ -41,30 +41,31 @@
         <div id="chapter-page-flow">
             <h3>Chapter Workspace</h3>
             <div id="page-flow">
-                <table class="center-block-">
-                    <tr class="chapter-level">
+                <table id="page-table" class="center-block-">
+                    <tr id="chapter-row-1" class="chapter-level">
                         <td><button class="chapter-page hidden-page" type="button"></button></td>
                         <td><button class="chapter-page hidden-page" type="button"></button></td>
-                        <td><button id="page-1" class="chapter-page" type="button"></button></td>
+                        <td><button class="chapter-page hidden-page" type="button"></button></td>
                         <td><button class="chapter-page hidden-page" type="button"></button></td>
                         <td><button class="chapter-page hidden-page" type="button"></button></td>
                     </tr>
 
-                    <tr class="chapter-level">
+                    <tr id="chapter-row-2" class="chapter-level">
                         <td><button class="chapter-page hidden-page" type="button"></button></td>
-                        <td><button id="page-3" class="chapter-page" type="button"></button></td>
-                        <td><button id="page-2" class="chapter-page" type="button"></button></td>
                         <td><button class="chapter-page hidden-page" type="button"></button></td>
-                        <td><button class="chapter-page add-page" type="button">new</button></td>
+                        <td><button class="chapter-page hidden-page" type="button"></button></td>
+                        <td><button class="chapter-page hidden-page" type="button"></button></td>
+                        <td><button class="add-page" type="button">new</button></td>
                     </tr>
 
-                    <tr class="chapter-level chapter-level-bottom">
+                    <tr id="chapter-row-3" class="chapter-level chapter-level-bottom">
                         <td><button class="chapter-page hidden-page" type="button"></button></td>
                         <td><button class="chapter-page hidden-page" type="button"></button></td>
                         <td><button class="chapter-page hidden-page" type="button"></button></td>
                         <td><button class="chapter-page hidden-page" type="button"></button></td>
-                        <td><button class="chapter-page add-page" type="button">new</button></td>
+                        <td><button class="add-page" type="button">new</button></td>
                     </tr>
+
 
                 </table>
             </div>
