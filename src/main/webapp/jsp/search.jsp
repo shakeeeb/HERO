@@ -142,36 +142,6 @@
             <!-- if we did return JSON we can parse through it in the jquery-->
             <!-- it could be built in the jquery, and then injected-->
             <div id="result-list" >
-                <!-- the first search result -->
-                <div class="search-result center-block-" id="result-1">
-                    <div class="result-image-container">
-                        <img class="result-image" src="https://placehold.it/125/ffa500/ffffff">
-                    </div>
-                    <div class="left-result-container">
-                        <div class="result-title">Title: Epic Hero</div>
-                        <div class="result-author"> Author: Shakeeb</div>
-                        <div class="result-rating"> </div>
-                    </div>
-                    <div class="result-description-container">
-                        <p class="result-description"> An epic hero goes on adventures</p>
-                    </div>
-                </div>
-
-                <!-- the second search result -->
-                <div class="search-result center-block-" id="result-2">
-                    <div class="result-image-container">
-                        <img class="result-image" src="https://placehold.it/125/ffa500/ffffff/text=Secret+Scientist">
-                    </div>
-                    <div class="left-result-container">
-                        <div class="result-title">Title: Science Shorts</div>
-                        <div class="result-author"> Author: Miuki</div>
-                        <div class="result-rating"> </div>
-                    </div>
-                    <div class="result-description-container">
-                        <p class="result-description">A secret scientist agent goes into the witness protection program as a college student</p>
-                    </div>
-                </div>
-
 
 
             </div>

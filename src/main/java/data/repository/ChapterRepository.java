@@ -80,6 +80,7 @@ public class ChapterRepository {
         // save each page in the chapter
         ArrayList<Page> pages = c.getAllPages();
         for(Page p: pages){
+            System.out.println("Chapter Repo -saving page:" + p.getPageId());
             ofy().save().entity(p).now();
         }
         ofy().save().entity(c).now();

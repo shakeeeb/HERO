@@ -1,5 +1,7 @@
 $(document).ready(function(){
 
+
+
     var brushWidthVar = 3;
 
     var imageLoader = document.getElementById('drawing-upload-input');
@@ -110,6 +112,21 @@ $(document).ready(function(){
         }));
     });
 
+    /* when the save button is pressed */
+    $("#save-button").click(function(){
+        var json = JSON.stringify( canvas.toJSON() );
+       // console.log(json);
+
+        $.post( "/get-json", {"data":json})
+        .done(function() {
+            console.log("Jason is cool");
+        })
+        .fail(function() {
+            console.log("Miuki is not cool");
+        });
+
+    });
+
 
     // this is just a testing function
     $(".drawing-tool").click(function() {
@@ -117,4 +134,18 @@ $(document).ready(function(){
         clearToolSelections();
         $(this).css("background-color", "white");
     });
+
+    loadPage("My Best Friend Gleb~Day One: The Dream of Gleb^0");
+    function loadPage(pageID) {
+
+        $.getJSON("/load-page/" + pageID , function(data) {
+        }).done(function(data) {
+            console.log("loading");
+            console.log(data.gottenJsonImage.jsonString);
+            canvas.loadFromJSON(data.gottenJsonImage.jsonString, canvas.renderAll.bind(canvas));
+        });
+
+    }
+
+
 });

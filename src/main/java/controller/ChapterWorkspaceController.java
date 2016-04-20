@@ -17,6 +17,8 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 
 
@@ -135,4 +137,24 @@ public class ChapterWorkspaceController {
         json.add("Pages", gson.toJsonTree(allPages));
         return json;
     }
+
+
+    @RequestMapping(value="get-chapter-page", method = RequestMethod.POST)
+    protected void getChapterPage(HttpServletRequest request, HttpServletResponse response){
+
+        String boxText = request.getParameter("data");
+        System.out.println(boxText);
+
+        // load the page
+        Page pageToLoad = db.pageRepo.getById("My Best Friend Gleb~Day One: The Dream of Gleb^0");
+        if(pageToLoad == null) {
+            System.out.println("Error in getting the page to save a test json");
+        }
+        else
+        {
+
+        }
+
+    }
+
 }

@@ -6,6 +6,7 @@ import com.google.appengine.api.users.UserServiceFactory;
 import com.google.appengine.repackaged.com.google.gson.Gson;
 import com.google.appengine.repackaged.com.google.gson.GsonBuilder;
 import com.google.appengine.repackaged.com.google.gson.JsonArray;
+import com.google.appengine.repackaged.com.google.gson.JsonObject;
 import com.googlecode.objectify.cmd.Query;
 import data.DbContext;
 import data.model.Chapter;
@@ -38,8 +39,8 @@ public class ReaderPageController {
 //    public @ResponseBody String searchResultController(@PathVariable(value="query") String query, ModelMap model, HttpSession session, HttpServletRequest req) {
 //        System.out.println("refining the search");
 
-    @RequestMapping(value = "read/{chapter-ID}", method = RequestMethod.GET)
-    public String readController(@PathVariable(value = "chapter-ID") String chapterID, ModelMap model, HttpSession session, HttpServletRequest req) {
+    @RequestMapping(value = "/read", method = RequestMethod.GET)
+    public String readController(String chapterID, ModelMap model, HttpSession session, HttpServletRequest req) {
         System.out.println("Going to reader-page");
 //        // get the chapter ID
 //
@@ -60,22 +61,38 @@ public class ReaderPageController {
         return "read";
     }
 
-    @RequestMapping(value = "/read/get/{chapter-ID}", method = RequestMethod.GET)
-    public String getChapter(@PathVariable(value = "chapter-ID") String chapterID, ModelMap model, HttpSession session, HttpServletRequest req) {
+    @RequestMapping(value = "/read/{chapter-ID}/{page-Number}", method = RequestMethod.GET)
+    public @ResponseBody JsonObject getPage(@PathVariable(value = "chapter-ID") String chapterID, @PathVariable(value = "page-Number") int pageNumber, ModelMap model, HttpSession session, HttpServletRequest req) {
+        JsonObject json = new JsonObject();
         System.out.println("fetching chapter...");
         System.out.println("The Chapter ID from the URL is: " + chapterID);
         Chapter c = db.chapterRepo.getById(chapterID);
         System.out.println("grabbed chapter ID: " + c.getChapterId());
+        Page currentPage = c.getRoot();
+        System.out.println("Image URL: " + currentPage.getImagePath());
 
-        Page currentPage = db.seriesRepo.getById("One_Piece").getChapters().get(0).getRoot();
-        System.out.println(currentPage.toString());
+        System.out.println("The number of optinos this page has is: " + currentPage.getNumOptions());
+        int numOptions = currentPage.getNumOptions();
 
-        System.out.println(" The chapter ID of this chapter object is " + db.seriesRepo.getById("One_Piece").getChapters().get(0).getChapterId());
+        String chapterTitle = c.getName();
 
-        System.out.println("The image associated with this chapter object is: " + db.seriesRepo.getById("One_Piece").getChapters().get(0).getRoot().getImagePath());
+        String seriesID = c.getSeries().getName();
+        System.out.println("The chapter name is: " + c.getName());
+        String chapterName = c.getName();
 
-        model.addAttribute("imagePath", db.seriesRepo.getById("One_Piece").getChapters().get(0).getRoot().getImagePath());
-        model.addAttribute("chapterID", chapterID);
+
+        model.addAttribute("imagePath", currentPage.getImagePath());
+        model.addAttribute("chapterName", chapterName);
+        model.addAttribute("numOptions", numOptions);
+        model.addAttribute("chapterTitle", chapterTitle);
+        model.addAttribute("pageNumber", pageNumber);
+        model.addAttribute("seriesID", seriesID);
+
+        Gson gson = new GsonBuilder().create();
+        json.add("Chapter", gson.toJsonTree(c));
+
+        System.out.println("Chapter: " + json.toString());
+        System.out.println("Returned the json string");
 
 //        System.out.println("The object chapter ID is: " +db.chapterRepo.getById(chapterID).toString());
 //        System.out.println("The root Page is: " + db.chapterRepo.getById(chapterID).getRoot().toString());
@@ -114,15 +131,40 @@ public class ReaderPageController {
 //        model.addAttribute("seriesList", s.toString());
 
 
-        // transform the series into a JSON
-
-        Gson gson = new GsonBuilder().create();
+//         transform the series into a JSON
 //       gson.toJson(newChapter, System.out);
 
         // return the JSON string to wherever calls this controller
 //        String jsonString = gson.toJson(currentChapter);
 //        System.out.println(jsonString);
         //return jsonString; //the json String
-        return "read";
+
+
+        return json;
     }
+
+//    @RequestMapping(value = "/read/{chapter-ID}/{page-Number}", method = RequestMethod.GET)
+//    public String getPage(@PathVariable(value = "chapter-ID") String chapterID, @PathVariable(value = "page-Number") int pageNumber, ModelMap model, HttpSession session, HttpServletRequest req) {
+//        System.out.println("fetching chapter...");
+//        System.out.println("The Chapter ID from the URL is: " + chapterID);
+//        Chapter c = db.chapterRepo.getById(chapterID);
+//        System.out.println("grabbed chapter ID: " + c.getChapterId());
+//        Page currentPage = c.getAllPages().get(pageNumber);
+//        System.out.println("Image URL: " + currentPage.getImagePath());
+//
+//        System.out.println("The number of optinos this page has is: " + currentPage.getNumOptions());
+//        int numOptions = currentPage.getNumOptions();
+//
+//        String chapterName = c.getName();
+//        String seriesID = c.getSeries().getName();
+//
+//
+//        model.addAttribute("imagePath", currentPage.getImagePath());
+//        model.addAttribute("chapterID", chapterID);
+//        model.addAttribute("numOptions", numOptions);
+//        model.addAttribute("pageNumber", pageNumber);
+//        model.addAttribute("seriesID", seriesID);
+//        model.addAttribute("chapterName", chapterName);
+//        return "read";
+//    }
 }

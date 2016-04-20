@@ -6,7 +6,6 @@
  */
 
 $(document).ready(function() {
-
     var MAX_DEPTH = 5;
     var chapter = null;
     var pages = null;
@@ -25,13 +24,16 @@ $(document).ready(function() {
             $("#title-input").val(chapter.name);
             console.log(pages);
 
+
+            // load root
+            //$("#page-1").text(pages[0].pageId);
+            //$("#page-2").text(pages[1].pageId);
+            //$("#page-3").text(pages[2].pageId);
+
             // recursivly get pages for a level
             // load level into table row
             // validate tree
 
-            //addPage(pages[0].pageId, 1);
-            //addPage(pages[1].pageId, 2);
-            //addPage(pages[2].pageId, 2);
 
             // swapping because root gets added to the end
 
@@ -39,6 +41,20 @@ $(document).ready(function() {
 
         });
     }
+
+    //when clicked, get the text and send it back to the controller
+    $(".chapter-page").click(function() {
+        var pageID = this.getTextContent;
+
+        $.post( "/get-chapter-page", {"data":pageID})
+            .done(function() {
+                console.log("Sending the data back to the servlet");
+            })
+            .fail(function() {
+                console.log("Cannot send the data back to the servlet");
+            });
+
+    });
 
 
     // save
