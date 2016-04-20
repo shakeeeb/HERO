@@ -57,7 +57,7 @@ public class ChapterRepository {
         if(ofy().load().entity(theSeries).now() != null){
             Chapter c = new Chapter(theName, theAuthor, theSeries, chapterNo);
             // make chapter
-            Page p = new Page(theSeries, c, 0);
+            Page p = new Page(theSeries, c, c.getMax());
             // make page
             theSeries.addChapter(c);
             // add chapter to series

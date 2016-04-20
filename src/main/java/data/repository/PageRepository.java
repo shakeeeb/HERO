@@ -85,6 +85,7 @@ public class PageRepository {
                 p2.setNext(p);
             }
         } else {
+            // it's either the root, or an orphan
             theChapter.addOrphan(p);
         }
         // save everything

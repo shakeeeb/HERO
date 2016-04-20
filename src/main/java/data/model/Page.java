@@ -177,13 +177,16 @@ public class Page {
             this.Next = Ref.create(newNext);
         } else if (numOptions == 1){ // theres a next but no other options
             // these both become options
-            Page oldNext = this.Next.get(); //FUCK this hasnt been stored in the datastore yet!
+            Page oldNext = this.Next.get();
             this.Next = null;
             options.add(Ref.create(oldNext));
             options.add(Ref.create(newNext));
+            optionDescriptors.add("go to Page " + oldNext.getPageNumber());
+            optionDescriptors.add("go to Page " + newNext.getPageNumber());
             numOptions = options.size();
         } else { // there are options, and we're just adding on another option
             options.add(Ref.create(newNext));
+            optionDescriptors.add("go to Page " + newNext.getPageNumber());
             numOptions = options.size();
         }
     }
@@ -582,6 +585,31 @@ public class Page {
             for(Page p : searcher){
                 p.getAllPages(returner);
             }
+            return;
+        }
+    }
+
+    public void editDescriptor(Page option, String newDescriptor){
+        Ref<Page> toFind = Ref.create(option);
+        int index = this.options.indexOf(toFind);
+        this.optionDescriptors.set(index, newDescriptor);
+    }
+
+    public void printTraversal(int level){
+        System.out.println("Level =" +level + " "+ this.pageId);
+        if(this.Next != null){
+            Page nxt = Next.get();
+            nxt.printTraversal(level+1);
+        } else if (this.options != null){
+            ArrayList<Page> searcher = new ArrayList<Page>();
+            for(Ref<Page> r: this.options){
+                searcher.add(r.get());
+            }
+            for(Page p: searcher){
+                p.printTraversal(level+1);
+            }
+        } else { //
+            System.out.println("leaf!");
             return;
         }
     }

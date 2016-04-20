@@ -50,7 +50,7 @@ public class demoData {
         //changed the repo create-- it takes priors.
         // db.pageRepo.create(series, chapter, priors)
         ArrayList<Page> priorHolder = new ArrayList<Page>();
-        Page p1 = db.pageRepo.create(Tseries, c1, null);
+        Page p1 = c1.getRoot();
         priorHolder.add(p1);
         Page p2 = db.pageRepo.create(Tseries, c1, priorHolder);
         Page p3 = db.pageRepo.create(Tseries, c1, priorHolder);
@@ -62,33 +62,35 @@ public class demoData {
         Series newSeries = db.seriesRepo.create("One_Piece", "Fiction", Ben, "Best MangaEver");
         Chapter newChapter = db.chapterRepo.create("Luffy_meets_Boa", Ben, newSeries, 1);
         //newSeries.addChapter(newChapter);
-        Page pageOne = db.pageRepo.create(newSeries, newChapter, null); // the root page
+        Page pageOne = newChapter.getRoot();//db.pageRepo.create(newSeries, newChapter, null); // the root page
+        // this is placed as an orphan
         ArrayList<Page> priorHolder2 = new ArrayList<Page>();
         priorHolder2.add(pageOne);
-        Page pageTwo = db.pageRepo.create(newSeries, newChapter, priorHolder2);
+        Page pageTwo = db.pageRepo.create(newSeries, newChapter, priorHolder2);// pagetwo links from page1
         priorHolder2.remove(pageOne);
         priorHolder2.add(pageTwo);
-        Page pageThree = db.pageRepo.create(newSeries, newChapter, priorHolder); // page three comes from page two
-        Page wowWhataShortChapter = db.pageRepo.create(newSeries, newChapter, priorHolder2);
-        pageOne.setImagePath("/resources/images/test/test1.png");
-        pageTwo.setImagePath("/resources/images/test/test2.png");
-        pageThree.setImagePath("/resources/images/test-images/test3.png");
-        wowWhataShortChapter.setImagePath("/resources/images/test-images/test4.png");
+        Page pageThree = db.pageRepo.create(newSeries, newChapter, priorHolder2); // page three links from page 2
+        Page wowWhataShortChapter = db.pageRepo.create(newSeries, newChapter, priorHolder2); // age four links from page 2
+        pageOne.setImagePath("/resources/images/test/test1.png"); // root 0
+        pageTwo.setImagePath("/resources/images/test/test2.png"); // second page 1
+        pageThree.setImagePath("/resources/images/test-images/test3.png"); // 2
+        wowWhataShortChapter.setImagePath("/resources/images/test-images/test4.png"); // 3
 
-        newChapter.setRoot(pageOne);
-        pageOne.addOption(pageTwo, "Go to Page 2");
+        //newChapter.setRoot(pageOne);
+        //pageOne.setNext(pageTwo);
         //pageOne.setOptionDescriptors(pageOne.getOptionDescriptors());
 
-        pageTwo.addOption(pageThree, "Go to Page 3");
+        //pageTwo.addOption(pageThree, "Go to Page 3");
         //pageTwo.setOptionDescriptors(pageTwo.getOptionDescriptors());
 
-        pageTwo.addOption(wowWhataShortChapter, "Go to Page 4");
+        //pageTwo.addOption(wowWhataShortChapter, "Go to Page 4");
         //pageTwo.setOptionDescriptors(pageThree.getOptionDescriptors());
 
 //        pageOne.setPageNumber(1);
 //        pageTwo.setPageNumber(2);
 //        pageThree.setPageNumber(3);
 //        wowWhataShortChapter.setPageNumber(4);
+        pageOne.printTraversal(0);
 
 
         db.chapterRepo.update(newChapter);
