@@ -51,13 +51,26 @@ public class demoData {
         // db.pageRepo.create(series, chapter, priors)
         ArrayList<Page> priorHolder = new ArrayList<Page>();
         Page p1 = db.pageRepo.create(Tseries, c1, null);
+
+        p1.setPageNumber(0);
         priorHolder.add(p1);
         Page p2 = db.pageRepo.create(Tseries, c1, priorHolder);
+        p2.setPageNumber(1);
         Page p3 = db.pageRepo.create(Tseries, c1, priorHolder);
+        p3.setPageNumber(2);
         priorHolder.remove(p1);
         priorHolder.add(p2);
         priorHolder.add(p3);
         Page p4 = db.pageRepo.create(Tseries, c1, priorHolder);
+        p4.setPageNumber(3);
+        ArrayList<Page> options = new ArrayList<Page>();
+        options.add(p2);
+        options.add(p3);
+        p1.setOptions(options);
+        options = new ArrayList<Page>();
+        options.add(p4);
+        p2.setOptions(options);
+
 
         Series newSeries = db.seriesRepo.create("One_Piece", "Fiction", Ben, "Best MangaEver");
         Chapter newChapter = db.chapterRepo.create("Luffy_meets_Boa", Ben, newSeries, 1);

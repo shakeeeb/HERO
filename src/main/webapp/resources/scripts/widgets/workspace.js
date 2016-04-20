@@ -106,6 +106,7 @@ $(document).ready(function() {
     function addPage(pageID, row) {
         var rowToEdit = getRow(row);
         var pageToEdit = null;
+        console.log("adding page to Row: "+ rowToEdit);
         if(rowToEdit == null) {
          console.log("Row doesn't exist");
         } else {
@@ -129,10 +130,41 @@ $(document).ready(function() {
         }
 
         if(pageToEdit == null ) {
-
+            console.log("pageToEdit is null");
         } else
             setPage(pageToEdit.getElementsByClassName("chapter-page")[0], pageID)
 
+        }
+    }
+
+    function getPageCount(rowNumber) {
+        var pageCount = 0;
+        var rowToCount = getRow(rowNumber);
+        if(rowToCount == null) {
+            console.log("Row doesn't exist");
+            return -1;
+        } else {
+            // check if center page taken
+            if(isUnused(rowToCount[2]) == false) {
+                pageCount++;
+                // check if second page is taken
+            }
+            if(isUnused(rowToCount[1]) == false) {
+                pageCount++;
+                // check if fourth page is taken
+            }
+            if(isUnused(rowToCount[3]) == false) {
+                pageCount++;
+                // check if first page is taken
+            }
+            if(isUnused(rowToCount[0]) == false) {
+                pageCount++;
+                // check if fifth page is taken
+            }
+            if(isUnused(rowToCount[4]) == false) {
+                pageCount++;
+            }
+            return pageCount;
         }
     }
 
@@ -174,12 +206,56 @@ $(document).ready(function() {
         // get level (row)
         // create page in Datastore (ajax request)
         $(".add-page").click(function(){
-            alert(console.log($(this)));
-        });
-        // add page to chapter in Datstore (ajax request)
-        // add new page element to level
-        // validate tree
+            var chapterRow = $(this).parent().parent()[0].getAttribute("id");
+            var rowID =chapterRow.split('-')[2];
+            console.log(getPageCount(rowID));
 
+            if(getPageCount(rowID) > 5) {
+
+            }
+            else if(getPageCount(rowID) == 5) {
+                $(this).removeClass('add-page').addClass('chapter-page').addClass('hidden-page').text('');
+                addPage('PAGE-ID', rowID);
+            } else {
+                addPage('PAGE-ID', rowID);
+            }
+            addRow();
+
+
+
+            // add page to chapter in Datstore (ajax request)
+
+
+            // add new page element to level
+            //addPage('PAGEID', rowNumber);
+
+            // validate tree
+
+
+        });
+    validateBottomRow();
+    function validateBottomRow() {
+        var levelCount = $(".chapter-level").length;
+        var pageCountForBottomLevel = getPageCount($(".chapter-level").length);
+        if(pageCountForBottomLevel > 0) {
+
+        }
+
+    }
+
+    function addRow() {
+        $('#page-table > tbody:last-child').append('<tr id=\"chapter-row-'+ ($(".chapter-level").length+1) + '\" class=\"chapter-level\">' +
+            '<td><button class=\"chapter-page hidden-page\" type=\"button\"></button></td>' +
+            '<td><button class=\"chapter-page hidden-page\" type=\"button\"></button></td>' +
+            '<td><button class=\"chapter-page hidden-page\" type=\"button\"></button></td>' +
+            '<td><button class=\"chapter-page hidden-page\" type=\"button\"></button></td>' +
+            '<td><button class=\"add-page\" type=\"button\">new</button></td>' +
+            '</tr>');
+
+        //$('#page-table > tbody:last-child').append('<tr>test</tr>');
+ //  $('#page-table tr:last').after
+
+    }
     // delete page
         // get page ID
         // remove page from Datastore (ajax request)
