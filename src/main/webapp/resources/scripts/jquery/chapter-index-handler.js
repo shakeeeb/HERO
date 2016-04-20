@@ -1,25 +1,96 @@
 $(document).ready(function () {
-    var chapterID = "One_Piece~Luffy_meets_Boa"
-    var hardCodedPageID = "One_Piece~Luffy_meets_Boa^0";
-    var chapter = null;
-    var currentPage = null;
-    var pageOptions = null;
-    console.log("testing before call");
-    loadPage(chapterID, hardCodedPageID);
-    var numOptions = null;
-    var optionArraySize = null;
-    var buttonTextIncrementor;
-    var nextPageID = null;
-    var pageList = null;
-    var nextPage = null;
-    var nextPageSrc = null;
-    var nextPageNumOptions = null;
-    var nextNextPageID = null;
-    var nextPageOptions = null;
+    var seriesID = "One_Piece";
+    var chapterList = null;
+    var numChapters = null;
+    var seriesName = null;
+    var author = null;
+    var seriesDescription = null;
 
-    $("#pageImage").click(function() { // Use this handler for button 1 as well.
-       $("#nextPage").submit();
-    });
+
+    getChapters(seriesID);
+
+    function getChapters(seriesID) { // Change this to /read/ + /chapterID + /pageNumber
+        $.getJSON("/chapter-index/" + seriesID, function(data) {
+        }).done(function (data) {
+            chapterList = data.members.chapterList.elements;
+            console.log(chapterList);
+            series = data.members.series.members;
+            console.log(series);
+
+            numChapters = chapterList.length;
+            seriesName = series.name.value;
+            author = series.authorName.value;
+            seriesDescription = series.description.value;
+
+            $("#chapter-index-series-name").text(seriesName);
+            $("#chapter-index-author").text(author);
+            $("#chapter-index-series-description").text(seriesDescription);
+
+
+            //Instantiate loop
+
+            var chapterTitle = null;
+            var chapterDescription = null;
+            var dateCreated = null;
+            var seriesImgSrc = null;
+            var currentChapter = null;
+
+            for (var o = 1; o < numChapters + 1; o++)
+            {
+                currentChapter = chapterList[o - 1]
+                var itemHTML = "<div class=\"chapter-list-item center-block-\" id=\"" + currentChapter.members.chapterId.value + "\">" +
+                        "<div class=\"inline\">" +
+                        "<img src=\"https://placehold.it/125/ffa500/ffffff\">" +
+                        "</div>" +
+                        "<div class=\"inline\">" +
+                        "<div id=\"" + currentChapter.members.chapterId.value + currentChapter.members.chapterNumber.value + "\">Chapter #: " + currentChapter.members.chapterNumber.value + "</div>" +
+                        "<div id=\"" + currentChapter.members.name.value + "\" class=\"inline\">" + currentChapter.members.name.value + "</div>" +
+                        "<div>" +
+                        "<p id=\"" + "" + "\"></p>" + // Put chapter description here.
+                        "</div>" +
+                        "<div id=\"" + currentChapter.members.dateCreated.value +"\" class=\"pull-right chapter-date\">" +
+                        "</div>" +
+                        "</div>";
+
+                $("#chapter-index-chapter-list").append(itemHTML);
+            }
+
+            $(".chapter-list-item").click(function() {
+                var currentChapterID = this.id;
+                var currentPageID = null;
+
+                for(var p = 0; p < chapterList.length; p++)
+                {
+                    if(currentChapterID == chapterList[p].members.chapterId.value)
+                    {
+                        currentPageID = chapterList[p].members.root.members.key.members.raw.members.name.value;
+                    }
+                }
+                loadPage(currentChapterID, currentPageID);
+                window.location.replace("/read/");
+            });
+
+            $("#chapter-index-start-from-beginning").click(function() {
+                window.location.replace("/read/");
+            });
+
+
+
+
+
+
+
+        })
+    }
+
+    function getChapters(seriesID) { // Change this to /read/ + /chapterID + /pageNumber
+        $.getJSON("/chapter-index/subscribe" + seriesID, function(data) {
+        }).done(function (data) {
+
+        });
+    }
+
+
 
     function loadPage(chapterID, pageID) { // Change this to /read/ + /chapterID + /pageNumber
         $.getJSON("/read/" + chapterID + "/" + pageID, function(data) {
@@ -50,7 +121,7 @@ $(document).ready(function () {
             { // 1 based loop so we can use i as our incrememtor and Id setter.
                 // Create the number of buttons and set the text.
                 var buttonHTML = "<div class=\"row pageOptions\">" +
-                                    "<button id=\"" + pageOptions.elements[i-1].members.pageId.value + "\" type=\"button\" class =\"optionButtons\">" +
+                    "<button id=\"" + pageOptions.elements[i-1].members.pageId.value + "\" type=\"button\" class =\"optionButtons\">" +
                     optionText[i - 1].value + "</button> </div>";
                 $("#option-container").append(buttonHTML);
             }
@@ -65,7 +136,7 @@ $(document).ready(function () {
                 //Put back the elements
                 // - Add specific buttons.
                 // - Add back the image pertaining to the new page source.
-                nextPageID = this.id;
+                var nextPageID = this.id;
                 //alert(nextPageID);
 
                 loadPage(chapterID, nextPageID);
@@ -160,12 +231,4 @@ $(document).ready(function () {
 
         });
     }
-
-
-
-
-
-    //$("#nextPage").submit(function(event) { // Just a function declaration.
-    //    console.log("#Next Page clicked.");
-    //});
 });

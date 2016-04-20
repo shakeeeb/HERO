@@ -72,8 +72,8 @@ public class demoData {
         Page wowWhataShortChapter = db.pageRepo.create(newSeries, newChapter, priorHolder2);
         pageOne.setImagePath("/resources/images/test/test1.png");
         pageTwo.setImagePath("/resources/images/test/test2.png");
-        pageThree.setImagePath("/resources/images/test-images/test3.png");
-        wowWhataShortChapter.setImagePath("/resources/images/test-images/test4.png");
+        pageThree.setImagePath("/resources/images/test/test3.png");
+        wowWhataShortChapter.setImagePath("/resources/images/test/test4.png");
 
         newChapter.setRoot(pageOne);
         pageOne.addOption(pageTwo, "Go to Page 2");
@@ -85,19 +85,22 @@ public class demoData {
         pageTwo.addOption(wowWhataShortChapter, "Go to Page 4");
         //pageTwo.setOptionDescriptors(pageThree.getOptionDescriptors());
 
-//        pageOne.setPageNumber(1);
-//        pageTwo.setPageNumber(2);
-//        pageThree.setPageNumber(3);
-//        wowWhataShortChapter.setPageNumber(4);
-
 
         db.chapterRepo.update(newChapter);
+
+//        Chapter onePieceChapter2 = db.chapterRepo.create("Luffy Meets Kim Possible", Ben, newSeries, 2);
+//        Page rootOne = db.pageRepo.create(newSeries, onePieceChapter2, null);
+//        Chapter onePieceChapter3 = db.chapterRepo.create("Luffy Meets Ron Stoppable", Ben, newSeries, 3);
+//        Page rootTwo = db.pageRepo.create(newSeries, onePieceChapter3, null);
+//        Chapter onePieceChapter4 = db.chapterRepo.create("Luffy Meets Evil Luffy", Ben, newSeries, 4);
+//        Page rootThree = db.pageRepo.create(newSeries, onePieceChapter4, null);
+//        Chapter onePieceChapter5 = db.chapterRepo.create("Luffy, I love you", Ben, newSeries, 5);
+//        Page rootFour = db.pageRepo.create(newSeries, onePieceChapter5, null);
 //        System.out.println("Page One's options are: " + pageOne.getOptions().get(0));
 
         System.out.println("Page One next goes to: " + pageOne.getNext().toString());
 
         //at this point you wanna update
-        System.out.println("Ayyy");
         // what if all the stuff's already in the datastore though? that wouldn't be good.
         // i gotta protect against that somehow
     }

@@ -120,7 +120,7 @@ public class PageRepository {
     }
 
     //delete(Id)
-    public void delete(Chapter c, Page p){
+    public void delete(Chapter c, Page p) {
         // for any page which links to this page
         // make a find child/ haschild
         // its a big deal to edit up the chapter
@@ -128,4 +128,5 @@ public class PageRepository {
         ofy().delete().entity(p);
         // delete all links to the object
     }
+
 }
