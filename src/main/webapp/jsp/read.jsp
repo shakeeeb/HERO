@@ -33,13 +33,7 @@
             </div>
     </div>
 
-    <div id="option-container" class="container-fluid">
-        <%--<div class="row">--%>
-            <%--<button id="option1" type="button" class="btn">Insert Option Text Here.</button>--%>
-        <%--</div>--%>
-        <%--<div class="row">--%>
-            <%--<button id="option2" type="button" class="btn">Insert Option Text Here.</button>--%>
-        <%--</div>--%>
+    <div id="option-container" class="container-fluid col-md-6 col-md-offset-3 centered">
     </div>
 
 
