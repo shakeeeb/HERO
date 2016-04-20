@@ -18,7 +18,7 @@ public class demoData {
         // all demodata should go here
         // i intend for this class to be called by the homepage controller or something
         //UserDatas
-        UserData T = db.userRepo.create("tpmx@Essextec.WallStreet");
+        UserData T = db.userRepo.create("tangobearindustries@gmail.com");
         UserData Miuki = db.userRepo.create("MKYip@ColdSpringHarbor.lab");
         UserData Ben = db.userRepo.create("Benjamin.Strumeyer@Paws.for.a.Cause");
         UserData Me = db.userRepo.create("ShakiraShakira@QueensLibrary.book");
