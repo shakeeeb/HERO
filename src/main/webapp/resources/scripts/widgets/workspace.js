@@ -6,6 +6,7 @@
  */
 
 $(document).ready(function() {
+
     var MAX_DEPTH = 5;
     var chapter = null;
     var pages = null;
@@ -24,26 +25,141 @@ $(document).ready(function() {
             $("#title-input").val(chapter.name);
             console.log(pages);
 
-
-            // load root
-            $("#page-1").text(pages[0].pageId);
-            $("#page-2").text(pages[1].pageId);
-            $("#page-3").text(pages[2].pageId);
-
             // recursivly get pages for a level
             // load level into table row
             // validate tree
-        });
 
+            //addPage(pages[0].pageId, 1);
+            //addPage(pages[1].pageId, 2);
+            //addPage(pages[2].pageId, 2);
+
+            // swapping because root gets added to the end
+
+            insertPages(pages);
+
+        });
+    }
+
+
+    // save
+
+    function insertPages(pages) {
+        pagesToAdd = pages;
+        addPage(pagesToAdd[0].pageId,1);
+        //console.log(pagesToAdd[1].options.length);
+        insertOptions(pagesToAdd[0], pages, 2);
+        //addPage(pagesToAdd[1].pageId, 2);
+        //addPage(pagesToAdd[2].pageId, 2);
+        addPage(pagesToAdd[3].pageId, 3);
+
+    }
+
+    function insertOptions(root, pages, level) {
+        //console.log(root.options[0].key.raw.name);
+       //console.log(root.options);
+        console.log(root.options.length);
+        if(root.options.length < 1) {
+            return;
+        }
+
+        for(var i = 0; i < root.options.length; i++) {
+            //console.log(root.options[i]);
+            addPage(getPage(root.options[i].key.raw.name,pages).pageId, level);
+            //insertOptions(getPage(root.options[i].key.raw.name,pages), pages, level+1);
+             console.log(getPage(root.options[i].key.raw.name,pages).pageId);
+        }
+
+       // insertOptions(getPage(root.options[1].key.raw.name,pages), pages, level+1);
+
+        return;
 
 
     }
 
-    // save
+    function getPage(pageId, pages) {
 
-    // add page
+        for(var i = 0; i < pages.length; i++) {
+            if(pages[0].pageId = pageId) {
+                return pages[0];
+            }
+        }
+        return null;
+    }
+
+    // ADDS A PAGE TO A ROW, PLEASE THE ROW INDEX STARTS FROM 0, PLEASE EXCUSE THE MESS
+    function addPage(pageID, row) {
+        var rowToEdit = getRow(row);
+        var pageToEdit = null;
+        if(rowToEdit == null) {
+         console.log("Row doesn't exist");
+        } else {
+        // check if center page taken
+        if(isUnused(rowToEdit[2]) == true) {
+            pageToEdit = rowToEdit[2];
+        // check if second page is taken
+        } else if(isUnused(rowToEdit[1]) == true) {
+            pageToEdit =rowToEdit[1];
+        // check if fourth page is taken
+        } else if(isUnused(rowToEdit[3]) == true) {
+            pageToEdit =rowToEdit[3];
+        // check if first page is taken
+        } else if(isUnused(rowToEdit[0]) == true) {
+            pageToEdit =rowToEdit[0];
+        // check if fifth page is taken
+        } else if(isUnused(rowToEdit[4]) == true) {
+            pageToEdit =rowToEdit[4];
+        } else {
+            console.log("Row is full");
+        }
+
+        if(pageToEdit == null ) {
+
+        } else
+            setPage(pageToEdit.getElementsByClassName("chapter-page")[0], pageID)
+
+        }
+    }
+
+    function setPage(page, pageID) {
+        if(page == null) {
+            return;
+        }
+        var formatedPageID = pageID.replace(/ /g, "%20");
+
+        page.setAttribute("id", formatedPageID);
+        // TODO: do this using jquery, selector wasnt working
+        page.className = "";
+        page.className = "chapter-page";
+
+    }
+
+
+    // checks if a page in a row is currently being used
+    function isUnused(page) {
+        if(page.getElementsByClassName("hidden-page").length > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // check if a row exists
+    function getRow(row) {
+        if($("#chapter-row-"+row).length < 1) {
+            return null;
+        } else {
+            // TODO check if row size is max width
+            return $("#chapter-row-"+ row).children();
+
+        }
+
+
+    }
         // get level (row)
         // create page in Datastore (ajax request)
+        $(".add-page").click(function(){
+            alert(console.log($(this)));
+        });
         // add page to chapter in Datstore (ajax request)
         // add new page element to level
         // validate tree
