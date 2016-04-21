@@ -19,6 +19,7 @@ public class UserData {
     @Load private ArrayList<Ref<Page>> bookmarks;
     @Load private ArrayList<Ref<Rating>> ratings;
     @Load private ArrayList<Ref<Series>> viewed;
+    @Load private ArrayList<Ref<Series>> subscriptions;
     int totalSeriesViewed = 0;
     @Index(IfTrue.class) private Boolean isAdmin = false;
     private String aboutMe;
@@ -74,6 +75,33 @@ public class UserData {
 
     public void setNickname(String nickname) {
         this.nickname = nickname;
+    }
+
+    public ArrayList<Series> getSubscriptions() {
+        ArrayList<Series> returner = new ArrayList<Series>();
+        for(Ref<Series> r: this.subscriptions){
+            returner.add(r.get());
+        }
+        return returner;
+    }
+
+    public void setSubscriptions(ArrayList<Series> toSet){
+        for(Series s : toSet){
+            this.subscriptions.add(Ref.create(s));
+        }
+    }
+
+    public void addSubscription(Series s){
+        this.subscriptions.add(Ref.create(s));
+    }
+
+    public void removeSubscription(Series s){
+        if(this.subscriptions.contains(Ref.create(s))){
+            this.subscriptions.remove(Ref.create(s));
+            System.out.println("successfully removed");
+        } else {
+            System.out.println("uh oh");
+        }
     }
 
     public ArrayList<Series> getMySeries() {

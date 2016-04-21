@@ -34,7 +34,6 @@ public class ChapterIndexController {
     @RequestMapping(value="chapter-index", method = RequestMethod.GET)
     public String chapterIndexPage(ModelMap model) {
         System.out.println("Going to chapter-index ");
-
         return "chapter-index";
     }
 
@@ -51,25 +50,25 @@ public class ChapterIndexController {
         return json;
     }
 
-    @RequestMapping(value = "/chapter-index/subscribe", method = RequestMethod.GET)
-    public @ResponseBody
-    JsonObject getPageOptions(ModelMap model, HttpSession session, HttpServletRequest req) {
-        JsonObject json = new JsonObject();
-        Gson gson = new GsonBuilder().create();
-        boolean isSubscribed = false;
-
-        UserService userService = UserServiceFactory.getUserService();
-        if(userService.isUserLoggedIn() == false) {
-            return json;//"Error: User not logged in";
-        }
-
-        // load user from the datastore
-        UserData user = db.userRepo.getUserById(userService.getCurrentUser().getEmail());
-        if(user == null) {
-            return json;//"Error: Unable to load user from datastore";
-        }
-
-        json.add("isSubscribed", gson.toJsonTree(isSubscribed));
-        return json;
-    }
+//    @RequestMapping(value = "/chapter-index/subscribe", method = RequestMethod.GET)
+//    public @ResponseBody
+//    JsonObject getPageOptions(ModelMap model, HttpSession session, HttpServletRequest req) {
+//        JsonObject json = new JsonObject();
+//        Gson gson = new GsonBuilder().create();
+//        boolean isSubscribed = false;
+//
+//        UserService userService = UserServiceFactory.getUserService();
+//        if(userService.isUserLoggedIn() == false) {
+//            return json;//"Error: User not logged in";
+//        }
+//
+//        // load user from the datastore
+//        UserData user = db.userRepo.getUserById(userService.getCurrentUser().getEmail());
+//        if(user == null) {
+//            return json;//"Error: Unable to load user from datastore";
+//        }
+//
+//        json.add("isSubscribed", gson.toJsonTree(isSubscribed));
+//        return json;
+//    }
 }

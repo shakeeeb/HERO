@@ -76,7 +76,6 @@ public class ReaderPageController {
 //        currentPage.getAllPages(pageList);
 
 
-
 //        System.out.println("The Page list contains: " + pageList);
 
 //        String pageArray[]=pageList.toArray(new String[pageList.size()]);
