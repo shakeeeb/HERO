@@ -115,10 +115,12 @@ $(document).ready(function(){
     /* when the save button is pressed */
     $("#save-button").click(function(){
         var json = JSON.stringify( canvas.toJSON() );
+        var pageID = "My Best Friend Gleb~Day One: The Dream of Gleb^0";
        // console.log(json);
 
-        $.post( "/get-json", {"data":json})
+        $.post( "/get-json", {data:json, pagekey:pageID})
         .done(function() {
+            console.log(pageID);
             console.log("Jason is cool");
         })
         .fail(function() {
@@ -140,8 +142,9 @@ $(document).ready(function(){
 
         $.getJSON("/load-page/" + pageID , function(data) {
         }).done(function(data) {
-            console.log("loading");
-            console.log(data.gottenJsonImage.jsonString);
+            console.log("loading HELLO LOOK HERE");
+            console.log(data.gottenJsonImage);
+           // console.log(data.gottenJsonImage.jsonString);
             canvas.loadFromJSON(data.gottenJsonImage.jsonString, canvas.renderAll.bind(canvas));
         });
 
