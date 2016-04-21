@@ -5,11 +5,26 @@ $(document).ready(function () {
     var seriesName = null;
     var author = null;
     var seriesDescription = null;
+    var chapterID = null;
+    var rootID = null;
+
+    var tempSeriesID = $("#hidden-seriesID").html();
+
+    if (!!tempSeriesID)
+    {
+        seriesID = $("#hidden-seriesID").html();
+    }
+
+    chapterID = $("#hidden-chapterID").html();
+    rootID = $("#hidden-rootID").html();
+
+    alert(chapterID + " + " + rootID);
+
 
     getChapters(seriesID);
 
     function getChapters(seriesID) {
-        $.getJSON("/chapter-index/" + seriesID, function(data) {
+        $.getJSON("/chapter-index/" + "get/" +seriesID, function(data) {
         }).done(function (data) {
             chapterList = data.members.chapterList.elements;
             console.log(chapterList);
@@ -26,7 +41,6 @@ $(document).ready(function () {
             $("#chapter-index-series-description").text(seriesDescription);
 
             var currentChapter = null;
-
             for (var o = 1; o < numChapters + 1; o++)
             {
                 currentChapter = chapterList[o - 1]
@@ -64,9 +78,9 @@ $(document).ready(function () {
 
             });
 
-            //$("#chapter-index-start-from-beginning").click(function() {
-            //    window.location.replace("/read/");
-            //});
+            $("#chapter-index-start-from-beginning").click(function() {
+                window.location.replace("/read/" + chapterID + "/" + rootID);
+            });
         })
     }
 
