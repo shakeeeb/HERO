@@ -25,11 +25,9 @@ $(document).ready(function() {
             chapter = data.Chapter;
             pages = data.Pages;
 
-            console.log(chapter);
-            $("#title-input").val(chapter.name);
-            console.log(pages);
-
-            insertPages(pages);
+            console.log(factorial(6));
+            //loadTree(chapter.root, pages, 1);
+            //insertPages(pages);
 
         });
     }
@@ -112,15 +110,19 @@ $(document).ready(function() {
         if(root.options.length < 1) {
             return;
         }
+        //
+        //for(var i = 0; i < root.options.length; i++) {
+        //    //console.log(root.options[i]);
+        //    addPage(getPage(root.options[i].key.raw.name,pages).pageId, level);
+        //    //insertOptions(getPage(root.options[i].key.raw.name,pages), pages, level+1);
+        //    console.log(getPage(root.options[i].key.raw.name,pages).pageId);
+        //}
+        console.log(root.options[1]);
+        console.log("Root option length " + root.options.length);
 
-        for(var i = 0; i < root.options.length; i++) {
-            //console.log(root.options[i]);
-            addPage(getPage(root.options[i].key.raw.name,pages).pageId, level);
-            //insertOptions(getPage(root.options[i].key.raw.name,pages), pages, level+1);
-            console.log(getPage(root.options[i].key.raw.name,pages).pageId);
-        }
 
-        // insertOptions(getPage(root.options[1].key.raw.name,pages), pages, level+1);
+    return ;
+      //  return insertOptions(getPage(root.options[1].key.raw.name,pages), pages, level+1);
 
 
 
@@ -346,6 +348,48 @@ $(document).ready(function() {
             // TODO check if row size is max width
             return $("#chapter-row-"+ level).children();
         }
+    }
+
+
+
+    // recursively  loads story tree
+    function loadTree(rootID, allPages, level) {
+        // check if root is null
+        if(rootID == null) {
+            console.log("Root is null, Level: " + level);
+            return;
+        } else {
+
+            // add root to tree
+            var root = getPage(getPageID(rootID), allPages);
+
+            // add each option to the level before
+            for (var i = 0; i < root.options.length; i++) {
+                // console.log(i);
+                // option = getPage(getPageID(root.options[i]), allPages);
+
+                console.log(root.options[i]);
+
+                loadTree(root.options[i], allPages,level+1);
+                //
+                //    //insertOptions(getPage(root.options[i].key.raw.name,pages), pages, level+1);
+            }
+
+
+        return;
+        }
+    }
+
+    var factorial = function(number) {
+        if (number <= 0) { // terminal case
+            return 1;
+        } else { // block to execute
+            return (number * factorial(number - 1));
+        }
+    };
+
+    function getPageID(page) {
+       return page.key.raw.name;
     }
 
 });
