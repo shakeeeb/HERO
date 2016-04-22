@@ -80,17 +80,12 @@ public class ChapterWorkspaceController {
         }
 
         ArrayList<Page> allPages = new ArrayList<Page>();
-
         rootPage.getAllPages(allPages);
         if (allPages == null) {
             return json; // unable to load pages
         }
-        //allPages.add(rootPage);
-        // TODO: because all pages doesn't return root
-        ArrayList<Page> returnedPages = new ArrayList<Page>();
-        returnedPages.add(rootPage);
-        returnedPages.addAll(allPages);
-        json.add("Pages", gson.toJsonTree(returnedPages));
+
+        json.add("Pages", gson.toJsonTree(allPages));
         System.out.println("Chapter, Pages: " + json.toString());
 
         return json;

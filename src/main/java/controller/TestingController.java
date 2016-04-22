@@ -42,7 +42,7 @@ public class TestingController {
         }
         Chapter c = db.chapterRepo.getById("My Best Friend Gleb~Day One: The Dream of Gleb");
         Chapter c2 = db.chapterRepo.getByKey(s, "My Best Friend Gleb~Day One: The Dream of Gleb");
-        //Page p2 = db.pageRepo.getByKey(c2, "Day One: The Dream of Gleb~My Best Friend Gleb^0");
+        Page p2 = db.pageRepo.getByKey(c2, "Day One: The Dream of Gleb~My Best Friend Gleb^0");
         if(c == null){
             System.out.println("oh no!");
         } else {

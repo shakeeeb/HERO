@@ -7,6 +7,7 @@ import com.google.appengine.repackaged.com.google.gson.Gson;
 import com.google.appengine.repackaged.com.google.gson.GsonBuilder;
 import com.google.appengine.repackaged.com.google.gson.JsonArray;
 import com.google.appengine.repackaged.com.google.gson.JsonObject;
+import com.google.common.reflect.TypeToken;
 import com.googlecode.objectify.cmd.Query;
 import data.DbContext;
 import data.model.Chapter;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,83 +63,41 @@ public class ReaderPageController {
         return "read";
     }
 
-    @RequestMapping(value = "/read/{chapter-ID}/{page-Number}", method = RequestMethod.GET)
-    public @ResponseBody JsonObject getPage(@PathVariable(value = "chapter-ID") String chapterID, @PathVariable(value = "page-Number") int pageNumber, ModelMap model, HttpSession session, HttpServletRequest req) {
-        JsonObject json = new JsonObject();
-        System.out.println("fetching chapter...");
-        System.out.println("The Chapter ID from the URL is: " + chapterID);
+    @RequestMapping(value = "/read/{chapter-ID}/{page-ID}", method = RequestMethod.GET)
+    public @ResponseBody JsonObject getPage(@PathVariable(value = "chapter-ID") String chapterID, @PathVariable(value = "page-ID") String pageID, ModelMap model, HttpSession session, HttpServletRequest req) {
+
         Chapter c = db.chapterRepo.getById(chapterID);
-        System.out.println("grabbed chapter ID: " + c.getChapterId());
-        Page currentPage = c.getRoot();
-        System.out.println("Image URL: " + currentPage.getImagePath());
-
-        System.out.println("The number of optinos this page has is: " + currentPage.getNumOptions());
-        int numOptions = currentPage.getNumOptions();
-
-        String chapterTitle = c.getName();
-
-        String seriesID = c.getSeries().getName();
-        System.out.println("The chapter name is: " + c.getName());
-        String chapterName = c.getName();
+//        Page currentPage = c.getRoot();
+        Page currentPage = db.pageRepo.getById(pageID);
+        ArrayList<Page> pageList = new ArrayList<Page>();
+        ArrayList<Page> currentPageOptions = currentPage.getOptions();
+        pageList = c.getAllPages();
+//
+//        currentPage.getAllPages(pageList);
 
 
-        model.addAttribute("imagePath", currentPage.getImagePath());
-        model.addAttribute("chapterName", chapterName);
-        model.addAttribute("numOptions", numOptions);
-        model.addAttribute("chapterTitle", chapterTitle);
-        model.addAttribute("pageNumber", pageNumber);
-        model.addAttribute("seriesID", seriesID);
+//        System.out.println("The Page list contains: " + pageList);
 
+//        String pageArray[]=pageList.toArray(new String[pageList.size()]);
+
+//        JSONArray jsonAraay = new JSONArray(your_array_list);
+
+        JsonObject json = new JsonObject();
         Gson gson = new GsonBuilder().create();
         json.add("Chapter", gson.toJsonTree(c));
+//      json.add("pageArray", gson.toJsonTree(pageArray));
+        json.add("page", gson.toJsonTree(currentPage));
+        json.add("pageOptions", gson.toJsonTree(currentPageOptions));
+        json.add("pageList", gson.toJsonTree(pageList));
 
-        System.out.println("Chapter: " + json.toString());
+        System.out.println("fetching chapter...");
+        System.out.println("The Chapter ID from the URL is: " + chapterID);
+//        System.out.println("grabbed chapter ID: " + c.getChapterId());
+        System.out.println("Image URL: " + currentPage.getImagePath());
+        System.out.println("The number of options this page has is: " + currentPage.getNumOptions());
+//        System.out.println("The chapter name is: " + c.getName());
+        System.out.println("Chapter & pageList: " + json.toString());
         System.out.println("Returned the json string");
-
-//        System.out.println("The object chapter ID is: " +db.chapterRepo.getById(chapterID).toString());
-//        System.out.println("The root Page is: " + db.chapterRepo.getById(chapterID).getRoot().toString());
-//        System.out.println("The next Page is: " + db.chapterRepo.getById(chapterID).getRoot().getNext().toString());
-//
-//        System.out.println(db.seriesRepo.getById("One_Piece").getChapters().get(0).getRoot().getPageId());
-//        System.out.println("The Chapter number is: " + currentChapter.getChapterNumber());
-//        System.out.println(db.seriesRepo.getById("One_Piece").getChapters().get(0).toString());
-
-//        System.out.println(currentChapter.getChapterId());
-//        Series chap = null;
-//        Query<Series> q = null;
-//        if(chapterID == null){
-//            // new search
-//            System.out.println("Search was null");
-//            //q = newSearch(searchInput);
-//        } else {
-//            // refine a prior search
-//            // grab the query... if it's null, just grab everything
-//            // okay so i can't store queries in the session object
-//            // ughhhhhhhh
-//            //q = (Query<Series>)session.getAttribute("priorQuery");
-//            System.out.println("aahhh "+ db.seriesRepo.getById("One_Piece").getChapters().size());
-//
-//            //chap = db.chapterRepo.getById("the secret weddingCatbug");
-//            //q = refineSearch(q, genre, tag, author, rating, date);
-//
-//        }
-//        System.out.println("query returned: "+ chap.toString() );
-//        List<> s = q.list();
-//        for(Series s3:s){
-//            System.out.println(s3.toString());
-//        }
-//        System.out.println("Test" + s.toString());
-//        // return things as JSON
-//        model.addAttribute("seriesList", s.toString());
-
-
-//         transform the series into a JSON
-//       gson.toJson(newChapter, System.out);
-
-        // return the JSON string to wherever calls this controller
-//        String jsonString = gson.toJson(currentChapter);
-//        System.out.println(jsonString);
-        //return jsonString; //the json String
 
 
         return json;

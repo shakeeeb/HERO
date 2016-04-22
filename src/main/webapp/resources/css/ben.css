@@ -270,3 +270,26 @@ h3 {
     border-style: solid;
     border-color: #F9A825;
 }
+
+#option-container {
+    margin-top: 10px;
+    padding-top: 10px;
+    padding-bottom: 15px;
+    padding-left: 30px;
+    padding-right: 30px;
+    border-color: #F9A825;
+    color: black;
+    border: 2px solid #F9A825;
+}
+
+.pageOptions {
+    /*padding: 3px;*/
+    /*border: 2px solid #F9A825;*/
+}
+
+.optionButtons {
+    border: 2px solid #F9A825;
+    background-color: white;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
