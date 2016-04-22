@@ -122,7 +122,6 @@ $(document).ready(function() {
 
         // insertOptions(getPage(root.options[1].key.raw.name,pages), pages, level+1);
 
-        return;
 
 
     }
@@ -191,14 +190,14 @@ $(document).ready(function() {
 
     /**
      * Gets the number of pages being used in a story tree level
-     * @param level: the level of the story tree being checked
+     * @param levelNumber: the level of the story tree being checked
      * @returns
      * -1: if the level doesn't exist
      * The number of pages on success
      */
-    function getPageCount(level) {
+    function getPageCount(levelNumber) {
         var pageCount = 0;
-        var level = getLevel(level);
+        var level = getLevel(levelNumber);
         if(level == null) {
             console.log("Level doesn't exist");
             return -1;
@@ -244,11 +243,7 @@ $(document).ready(function() {
      *  false: if the page is being used
      */
     function isUnused(page) {
-        if(page.getElementsByClassName("hidden-page").length > 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return page.getElementsByClassName("hidden-page").length > 0;
     }
 
     /**
@@ -258,7 +253,6 @@ $(document).ready(function() {
      */
     validateBottomRow();
     function validateBottomRow() {
-        var levelCount = $(".chapter-level").length;
         var pageCountForBottomLevel = getPageCount($(".chapter-level").length);
         if(pageCountForBottomLevel > 0) {
 
@@ -280,7 +274,7 @@ $(document).ready(function() {
             '</tr>');
 
 
-        //$('#page-table > tbody:last-child').append('<tr>test</tr>');     // this ANOTHER POSSIBLE WAY TO GRAB A ROW
+       //  $('#page-table > tbody:last-child').append('<tr>test</tr>');     // this ANOTHER POSSIBLE WAY TO GRAB A ROW
         //  $('#page-table tr:last').after
     }
 
