@@ -60,11 +60,11 @@ public class EditSettingsController {
         System.out.println(user.getAdmin());
 
         String nickname = user.getNickname();
-        String aboutMe = user.getAboutMe();
+        String about_me = user.getAboutMe();
         String userEmail = user.getEmail();
         System.out.println("userEmail: " + userEmail);
         json.add("nickname", gson.toJsonTree(nickname));
-        json.add("aboutMe", gson.toJsonTree(aboutMe));
+        json.add("about_me", gson.toJsonTree(about_me));
 
         System.out.println(json);
 
@@ -77,9 +77,9 @@ public class EditSettingsController {
     boolean userLoggedIn;
     User currentPerson;
 
-    @RequestMapping(value="settingsUserSave/{nickname}", method = RequestMethod.GET)
+    @RequestMapping(value="settingsUserSave/{nickname}/{about_me}", method = RequestMethod.GET)
     public @ResponseBody
-    JsonObject saveUserInformation(@PathVariable(value="nickname") String nickname , ModelMap model, HttpSession session, HttpServletRequest req, HttpServletResponse res) {
+    JsonObject saveUserInformation(@PathVariable(value="nickname") String nickname, @PathVariable(value="about_me") String about_me , ModelMap model, HttpSession session, HttpServletRequest req, HttpServletResponse res) {
         System.out.println("I'm in the saveUserInformation function.");
         JsonObject json = new JsonObject();
         Gson gson = new GsonBuilder().create();
@@ -91,8 +91,12 @@ public class EditSettingsController {
             currentPerson = userService.getCurrentUser();
             UserData user = db.userRepo.getUserById(currentPerson.getEmail());
             user.setNickname(nickname);
-            System.out.println("This is what the nickname was set to: "+ user.getNickname());
+            user.setAboutMe(about_me);
+            System.out.println("This is what the nickname was set to: "+ user.getAboutMe());
             //TODO: SAVE THE USER INTO THE DATASTORE, BRUH.
+            db.userRepo.update(user);
+
+
         }
 
         return json;
