@@ -39,6 +39,7 @@ public class DrawingPageController {
         return "draw";
     }
 
+    //save the json value into the datastore
     @RequestMapping(value="get-json", method = RequestMethod.POST)
     protected void getJson(HttpServletRequest request, HttpServletResponse response){
 
@@ -64,10 +65,11 @@ public class DrawingPageController {
             return;
         }
             pageSaving.setJsonString(imageJson);
-        ofy().save().entity(pageSaving).now();
-    return;
+            ofy().save().entity(pageSaving).now();
+            return;
     }
 
+    //load the page of with the json object.
     @RequestMapping(value="load-page/{pageID}", method = RequestMethod.GET, produces="application/json")
     public @ResponseBody JsonObject loadPage(@PathVariable(value="pageID") String pageID) {
         System.out.println("Loading Image");
