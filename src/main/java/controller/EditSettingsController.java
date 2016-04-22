@@ -42,6 +42,8 @@ public class EditSettingsController {
         return "settings";
     }
 
+    
+
     @RequestMapping(value="settingsUser/get/{userQuery}", method = RequestMethod.GET)
     public @ResponseBody
     JsonObject getUser(@PathVariable(value="userQuery") String userQuery, ModelMap model, HttpSession session, HttpServletRequest req, HttpServletResponse res) {
