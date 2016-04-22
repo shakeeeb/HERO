@@ -19,12 +19,19 @@ public class demoData {
         // i intend for this class to be called by the homepage controller or something
         //UserDatas
         UserData T = db.userRepo.create("tpmx@Essextec.WallStreet");
+        T.setAboutMe("Hey fam.");
         UserData Miuki = db.userRepo.create("MKYip@ColdSpringHarbor.lab");
+        Miuki.setAboutMe(":)");
         UserData Ben = db.userRepo.create("Benjamin.Strumeyer@Paws.for.a.Cause");
+        Ben.setAboutMe("Lets go to Moes");
         UserData Me = db.userRepo.create("ShakiraShakira@QueensLibrary.book");
+        Me.setAboutMe("Let me make you food.");
         UserData TayTay = db.userRepo.create("TayTay@Math.calculus");
+        TayTay.setAboutMe("D:<");
         UserData Jason = db.userRepo.create("Pineapple.Jason@InterVarsity.jesus");
-        UserData james = db.userRepo.create("Jamez@citi.sandwich.sleep.nap");
+        Jason.setAboutMe("Hey, how's it going? Do you want some tea?");
+        UserData James = db.userRepo.create("Jamez@citi.sandwich.sleep.nap");
+        James.setAboutMe("Zzzzzz");
         //Add Series to UserData
         Series Tseries = db.seriesRepo.create("My Best Friend Gleb", "Comedy", T, "Daily life with my co-worker, Gleb");
         Series MKSeries = db.seriesRepo.create("Puppycat Savage", "Slice-of-Life", Miuki, "shitting on people since '94");
@@ -32,7 +39,7 @@ public class demoData {
         Series MySeries = db.seriesRepo.create("Devon! I'm Sorry!", "Mystery", Me, "I am my own man!");
         Series JasonSeries = db.seriesRepo.create("Jesus Will Find You", "Thriller", Jason, "Jesus Will save you. no matter what.");
         Series TaraSeries = db.seriesRepo.create("We Must Find Joe", "Mystery", TayTay, "Where is Joe? only Tara can find him.");
-        Series JamezSeries = db.seriesRepo.create("Green Ham & Cheese", "Food", james, "He goes around, making sandwiches for the hungry.");
+        Series JamezSeries = db.seriesRepo.create("Green Ham & Cheese", "Food", James, "He goes around, making sandwiches for the hungry.");
         // Chapters
         Chapter c1 = db.chapterRepo.create("Day One: The Dream of Gleb", T, Tseries, 1);
         System.out.println(c1);

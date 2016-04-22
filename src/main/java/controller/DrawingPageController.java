@@ -39,15 +39,38 @@ public class DrawingPageController {
         return "draw";
     }
 
+    //save the json value into the datastore
     @RequestMapping(value="get-json", method = RequestMethod.POST)
     protected void getJson(HttpServletRequest request, HttpServletResponse response){
 
-            String buttonText = request.getParameter("data");
-            System.out.println(buttonText);
+            String imageJson = request.getParameter("data");
+            String pageID = request.getParameter("pagekey");
+            //System.out.println(buttonText);
+            // GRAB A PAGE FROM THE DATASTORE BY ID
+            System.out.println("The page ID is: "+ pageID);
 
+            // SET THE PAGE JSON VALUE
+
+            Page pageSaving = new Page();
+            pageSaving = db.pageRepo.getById(pageID);
+            if(pageSaving == null){
+                System.out.println("Cannot save");
+                return;
+            }
+        System.out.println("page saving: "+ pageSaving.getPageId());
+
+            // SAVE IT
+        if(imageJson == null){
+            System.out.println("Image was null");
+            return;
+        }
+            pageSaving.setJsonString(imageJson);
+            ofy().save().entity(pageSaving).now();
+            return;
     }
 
-    @RequestMapping(value="load-page/{pageID}", method = RequestMethod.GET)
+    //load the page of with the json object.
+    @RequestMapping(value="load-page/{pageID}", method = RequestMethod.GET, produces="application/json")
     public @ResponseBody JsonObject loadPage(@PathVariable(value="pageID") String pageID) {
         System.out.println("Loading Image");
 
@@ -77,7 +100,7 @@ public class DrawingPageController {
         pageJson.add("gottenJsonImage", gson.toJsonTree(pageToLoad));
         System.out.println("before return");
         System.out.println(pageJson.toString());
-        System.out.println("hello");
+
         return pageJson;
 
     }

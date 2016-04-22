@@ -15,6 +15,7 @@
 </head>
 <body>
 <%@ include file="/resources/layouts/navbar.jsp" %>
+<script src="/resources/scripts/jquery/setting-handler.js"></script>
 <br><br><br>
 
 <div class="row">
@@ -49,6 +50,12 @@
 
         </div>
     </div>
+</div>
+
+<div style="display:none;">
+    <p id="userEmail">${userEmail}</p>
+</div>
+
 </div>
 
 </body>
