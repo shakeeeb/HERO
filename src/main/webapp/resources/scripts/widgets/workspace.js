@@ -12,7 +12,7 @@ $(document).ready(function() {
     var pages = null;
 
     // test chapter being used for development, will be replaced with grabbing the id from the backend
-    loadChapter("My Best Friend Gleb~Day One: The Dream of Gleb");
+    loadChapter("One_Piece~Luffy_meets_Boa");
 
     /**
      * Loads a chaoter from the datastore into the story tree
@@ -25,8 +25,11 @@ $(document).ready(function() {
             chapter = data.Chapter;
             pages = data.Pages;
 
-            console.log(factorial(6));
-            //loadTree(chapter.root, pages, 1);
+            console.log(chapter);
+            console.log(pages);
+
+           // console.log(factorial(6));
+            loadTree(chapter.root, pages, 1);
             //insertPages(pages);
 
         });
@@ -160,7 +163,7 @@ $(document).ready(function() {
             } else if(isUnused(levelToEdit[4]) == true) {
                 pageToEdit =levelToEdit[4];
             } else {
-                console.log("Row is full");
+                console.log("Level is full");
             }
 
             if(pageToEdit == null ) {
@@ -326,8 +329,9 @@ $(document).ready(function() {
     function getPage(pageId, pages) {
 
         for(var i = 0; i < pages.length; i++) {
-            if(pages[0].pageId = pageId) {
-                return pages[0];
+            if(pages[i].pageId === pageId) {
+
+                return pages[i];
             }
         }
         return null;
@@ -356,23 +360,24 @@ $(document).ready(function() {
     function loadTree(rootID, allPages, level) {
         // check if root is null
         if(rootID == null) {
-            console.log("Root is null, Level: " + level);
+            //console.log("Root is null, Level: " + level);
             return;
         } else {
 
             // add root to tree
             var root = getPage(getPageID(rootID), allPages);
-
+            addPage(root.pageId, level);
             // add each option to the level before
             for (var i = 0; i < root.options.length; i++) {
-                // console.log(i);
+                 //console.log(i);
                 // option = getPage(getPageID(root.options[i]), allPages);
 
-                console.log(root.options[i]);
+                //console.log("The options are: " + root.options[i]);
+                //console.log(root.options[i]);
 
+
+                    //insertOptions(getPage(root.options[i].key.raw.name,pages), pages, level+1);
                 loadTree(root.options[i], allPages,level+1);
-                //
-                //    //insertOptions(getPage(root.options[i].key.raw.name,pages), pages, level+1);
             }
 
 

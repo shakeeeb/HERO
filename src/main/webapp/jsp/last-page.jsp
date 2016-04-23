@@ -13,23 +13,32 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <%@ include file="/resources/layouts/styles.jsp" %>
     <%@ include file="/resources/layouts/scripts.jsp" %>
+
+    <script src="/resources/scripts/jquery/last-page-handler.js"></script>
 <body id="admin-page-body">
     <div class="container">
         <%@ include file="/resources/layouts/navbar.jsp" %>
     </div>
         </br></br></br>
-    <h1 class="greeting text-left">{Chapter Name}</h1>
+    <h1 class="greeting text-left">${chapterName}</h1>
     <div class="row text-center">
         <div id="page-reader-button-container">
-            <a id="last-read-page-chapter-index" href="link"> <i class="fa fa-list fa-th-large"></i></a>
-            <a id="last-read-page-replay"href="link"> <i class="fa fa-rotate-left fa-th-large"></i></a>
-            <a id="last-read-page-next-chapter"href="link"> <i class="fa fa-arrow-circle-o-right fa-th-large"></i></a>
+            <i id="last-read-page-chapter-index"class="fa fa-list fa-th-large"></i>
+            <i id="last-read-page-replay" class="fa fa-rotate-left fa-th-large"></i>
+            <i id="last-read-page-next-chapter" class="fa fa-arrow-circle-o-right fa-th-large"></i>
         </div>
     </div>
     <div id="last-read-page-main"class="row">
         <div>
                 <%--Comments Go here--%>
         </div>
+    </div>
+    <div style="display: none;">
+        <p id="hidden-nextChapterID">${nextChapterID}</p>
+        <p id="hidden-nextPageID">${nextPageID}</p>
+        <p id="hidden-rootID">${rootID}</p>
+        <p id="hidden-seriesID">${seriesID}</p>
+        <p id="hidden-chapterID">${chapterID}</p>
     </div>
 
 </body>

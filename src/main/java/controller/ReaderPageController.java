@@ -41,29 +41,13 @@ public class ReaderPageController {
 //    public @ResponseBody String searchResultController(@PathVariable(value="query") String query, ModelMap model, HttpSession session, HttpServletRequest req) {
 //        System.out.println("refining the search");
 
-    @RequestMapping(value = "/read", method = RequestMethod.GET)
+    @RequestMapping(value = "read", method = RequestMethod.GET)
     public String readController(String chapterID, ModelMap model, HttpSession session, HttpServletRequest req) {
         System.out.println("Going to reader-page");
-//        // get the chapter ID
-//
-//        System.out.println("Chapter ID: " + chapterID);
-//
-//        // load the chapter using the chapter ID
-//
-//        // load the model with the chapter ID
-//        model.addAttribute("chapterID", chapterID);
-
-//        String currentComic = req.getParameter("read-form");//.toLowerCase(); // CHANGE SEARCH INPUT
-//        System.out.println(currentComic);
-
-        // grabbing the series we need to read from url
-//        System.out.println("Series Requested: " + name);
-
-        // grab the actual series from the DB
         return "read";
     }
 
-    @RequestMapping(value = "/read/{chapter-ID}/{page-ID}", method = RequestMethod.GET)
+    @RequestMapping(value = "read/get/{chapter-ID}/{page-ID}", method = RequestMethod.GET)
     public @ResponseBody JsonObject getPage(@PathVariable(value = "chapter-ID") String chapterID, @PathVariable(value = "page-ID") String pageID, ModelMap model, HttpSession session, HttpServletRequest req) {
 
         Chapter c = db.chapterRepo.getById(chapterID);
@@ -103,28 +87,27 @@ public class ReaderPageController {
         return json;
     }
 
-//    @RequestMapping(value = "/read/{chapter-ID}/{page-Number}", method = RequestMethod.GET)
-//    public String getPage(@PathVariable(value = "chapter-ID") String chapterID, @PathVariable(value = "page-Number") int pageNumber, ModelMap model, HttpSession session, HttpServletRequest req) {
-//        System.out.println("fetching chapter...");
-//        System.out.println("The Chapter ID from the URL is: " + chapterID);
-//        Chapter c = db.chapterRepo.getById(chapterID);
-//        System.out.println("grabbed chapter ID: " + c.getChapterId());
-//        Page currentPage = c.getAllPages().get(pageNumber);
+    @RequestMapping(value = "/read/{chapter-ID}/{page-ID}", method = RequestMethod.GET)
+    public String readRoute(@PathVariable(value = "chapter-ID") String chapterID, @PathVariable(value = "page-ID") String pageID, ModelMap model, HttpSession session, HttpServletRequest req) {
+        System.out.println("fetching chapter...");
+        System.out.println("The Chapter ID from the URL is: " + chapterID);
+        Chapter c = db.chapterRepo.getById(chapterID);
+        System.out.println("grabbed chapter ID: " + c.getChapterId());
 //        System.out.println("Image URL: " + currentPage.getImagePath());
-//
-//        System.out.println("The number of optinos this page has is: " + currentPage.getNumOptions());
+
+//        System.out.println("The number of options this page has is: " + currentPage.getNumOptions());
 //        int numOptions = currentPage.getNumOptions();
-//
+
 //        String chapterName = c.getName();
-//        String seriesID = c.getSeries().getName();
-//
-//
+        String seriesID = c.getSeries().getName();
+
 //        model.addAttribute("imagePath", currentPage.getImagePath());
-//        model.addAttribute("chapterID", chapterID);
+        model.addAttribute("chapterID", chapterID);
 //        model.addAttribute("numOptions", numOptions);
 //        model.addAttribute("pageNumber", pageNumber);
-//        model.addAttribute("seriesID", seriesID);
+        model.addAttribute("pageID", pageID);
 //        model.addAttribute("chapterName", chapterName);
-//        return "read";
-//    }
+
+        return "read";
+    }
 }

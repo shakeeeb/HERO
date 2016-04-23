@@ -35,6 +35,10 @@
 
     <div id="option-container" class="container-fluid col-md-6 col-md-offset-3 centered">
     </div>
+    <div style="display: none;">
+        <p id="hidden-chapterID">${chapterID}</p>
+        <p id="hidden-pageID">${pageID}</p>
+    </div>
 
 
 

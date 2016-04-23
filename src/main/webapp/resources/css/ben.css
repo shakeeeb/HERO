@@ -251,11 +251,12 @@ h3 {
     margin-left: 130px;
     font-size: 100px;
     color: #F9A825;
+    color: #F9A825;
 }
 
 #page-reader-button-container {
     width: 800px;
-    margin-left: 350px;
+    margin-left: 265px;
     border-style: solid;
     border-color: #F9A825;
     padding-top: 14px;
@@ -265,7 +266,7 @@ h3 {
 
 #last-read-page-main {
     width: 800px;
-    margin-left: 335px;
+    margin-left: 250px;
     height: 800px;
     border-style: solid;
     border-color: #F9A825;
@@ -282,14 +283,13 @@ h3 {
     border: 2px solid #F9A825;
 }
 
-.pageOptions {
-    /*padding: 3px;*/
-    /*border: 2px solid #F9A825;*/
-}
-
 .optionButtons {
     border: 2px solid #F9A825;
     background-color: white;
     margin-top: 5px;
     margin-bottom: 5px;
+}
+
+#last-read-page-chapter-index{
+    /*cursor: pointer;*/
 }

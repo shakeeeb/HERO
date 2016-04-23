@@ -45,25 +45,29 @@ public class ChapterWorkspaceController {
         // check if user is logged in
         UserService userService = UserServiceFactory.getUserService();
         if(userService.isUserLoggedIn() == false) {
-            return json;//"Error: User not logged in";
+            System.out.println("Error: User not logged in");
+            return json;
         }
 
         // load user from the datastore
         UserData user = db.userRepo.getUserById(userService.getCurrentUser().getEmail());
         if(user == null) {
-            return json;//"Error: Unable to load user from datastore";
+            System.out.println("Error: Unable to load user from datastore");
+            return json;
         }
 
         // load the chapter
         Chapter chapterToLoad = db.chapterRepo.getById(chapterID);
         if(chapterToLoad == null) {
-            return json;//"Error: Unable to load chapter from datastore";
+            System.out.println("Error: Unable to load chapter from datastore");
+            return json;
         }
 
         // check if user owns chapter being requested
-        if(chapterToLoad.getAuthor().getEmail() != user.getEmail()) {
-            return json;//"Error: User does not have access to chapter";
-        }
+//        if(chapterToLoad.getAuthor().getEmail() != user.getEmail()) {
+//            System.out.println("Error: User does not have access to chapter");
+//            return json;
+//        }
 
         // TODO check if the chapter being requested is editable (still in draft mode)
 //        if(chapterToLoad.isPublished() == false) {
@@ -76,13 +80,15 @@ public class ChapterWorkspaceController {
 
         Page rootPage = chapterToLoad.getRoot();
         if(rootPage == null) {
-            return json; // Unable to load root
+            System.out.println("Unable to load root");
+            return json;
         }
 
         ArrayList<Page> allPages = new ArrayList<Page>();
         rootPage.getAllPages(allPages);
         if (allPages == null) {
-            return json; // unable to load pages
+            System.out.println("unable to load pages");
+            return json;
         }
 
         json.add("Pages", gson.toJsonTree(allPages));
