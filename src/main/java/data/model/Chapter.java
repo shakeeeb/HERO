@@ -23,7 +23,7 @@ public class Chapter {
     @Index private int chapterNumber;
     @Index(IfFalse.class) private Boolean approved = false;
     private ArrayList<Ref<Page>> orphans;
-    private int max = 0;
+    private int max = 1;
 
     public Chapter(){
         // each chapter must have a single page
@@ -177,7 +177,7 @@ public class Chapter {
     }
 
     public void removeOrphan(Page orphan){
-        orphans.remove(orphan);
+        orphans.remove(Ref.create(orphan));
     }
 
     // extended methods
@@ -233,15 +233,25 @@ public class Chapter {
     public ArrayList<Page> getAllPages(){
         ArrayList<Page> returner = new ArrayList<Page>();
         root.get().getAllPages(returner);
+        System.out.println("before adding on the orphans" + returner);
         for(Ref<Page> r: orphans){
             Page p = r.get();
             returner.add(p);
         }
+        System.out.println(returner);
         return returner;
     }
 
     public int getMax(){
-        return max++;
+        return this.max++;
+    }
+
+    public boolean isOrphan(Page p){
+        if(this.orphans.contains(Ref.create(p))){
+            return true;
+        } else {
+            return false;
+        }
     }
 
 

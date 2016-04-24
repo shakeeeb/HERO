@@ -19,7 +19,7 @@ $(document).ready(function() {
      * @param chapterID: the ID of the chapter from the datastore
      */
     function loadChapter(chapterID) {
-
+        console.log("in load page");
         $.getJSON("/workspace/load/" + chapterID , function(data) {
         }).done(function (data) {
             chapter = data.Chapter;
@@ -29,9 +29,13 @@ $(document).ready(function() {
             $("#title-input").val(chapter.name);
             console.log(pages);
 
-            insertPages(pages);
+            //insertPages(pages);
+            insertOptions(pages[0], pages, 1);
 
-        });
+        })
+            .fail(function (data) {
+                console.log("oh no load chapter failed");
+            });
     }
 
 /***********************************************************************************************************************
@@ -108,18 +112,28 @@ $(document).ready(function() {
     function insertOptions(root, pages, level) {
         //console.log(root.options[0].key.raw.name);
         //console.log(root.options);
-        console.log(root.options.length);
-        if(root.options.length < 1) {
-            return;
+        if(level == 1){
+            addPage(root.pageId, level);
         }
-
-        for(var i = 0; i < root.options.length; i++) {
-            //console.log(root.options[i]);
-            addPage(getPage(root.options[i].key.raw.name,pages).pageId, level);
-            //insertOptions(getPage(root.options[i].key.raw.name,pages), pages, level+1);
-            console.log(getPage(root.options[i].key.raw.name,pages).pageId);
+        else{
+            addPage(root.key.raw.name, level);
         }
+        //if(root.options.length < 1) {
+        //    return;
+        //}
+        if(root.options != null) {
+            console.log("right before for in insertoptions");
+            for (var i = 0; i < root.options.length; i++) {
+                //console.log(root.options[i]);
+                //addPage(getPage(root.options[i].key.raw.name,pages).pageId, level);
+                //insertOptions(getPage(root.options[i].key.raw.name,pages), pages, level+1);
+                insertOptions(root.options[i], pages, level + 1);
 
+                console.log(getPage(root.options[i].key.raw.name, pages).pageId);
+            }
+            console.log("after for in insertOptions");
+        }
+        return;
         // insertOptions(getPage(root.options[1].key.raw.name,pages), pages, level+1);
 
 

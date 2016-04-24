@@ -58,6 +58,14 @@ public class PageRepository {
     }
 
     //create(Id, stuff)
+    public Page create(Series theSeries, Chapter theChapter){
+        int n = theChapter.getMax();
+        Page p = new Page(theSeries, theChapter, n);
+        theChapter.addOrphan(p);
+        ofy().save().entity(p).now();
+        // set it as an orphan for now
+        return p;
+    }
 
     // creating a new page
     public Page create(Series theSeries, Chapter theChapter, ArrayList<Page> priors){
@@ -73,11 +81,7 @@ public class PageRepository {
             p = new Page(theSeries, theChapter, n);
             //theChapter.addOrphan(p);
         }
-        // p = new Page(theSeries, theChapter, n, priors);
-
         // create new page isomg series and chapter info
-
-
         // go through list of prior pages
             // add link to new page for each prior
         if(priors != null){

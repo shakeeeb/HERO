@@ -47,17 +47,32 @@ public class demoData {
         Chapter c6 = db.chapterRepo.create("It Feels Good To Be A Gangsta", Miuki, MKSeries, 2);
         System.out.println(c6);
         // Pages per chapter
+        Page pp0 = c6.getRoot(); // root
+        System.out.println(pp0.getPageId());
+        Page pp1 = db.pageRepo.create(MKSeries, c6);
+        System.out.println(pp1.getPageId());
+        Page pp2 = db.pageRepo.create(MKSeries, c6);
+        System.out.println(pp2.getPageId());
+        Page pp3 = db.pageRepo.create(MKSeries, c6);
+        System.out.println(pp3.getPageId());
+        System.out.println("current orphans: " + c6.getOrphans().toString());
+        pp0.setNext(pp1, c6);
+        pp1.setNext(pp2, c6);
+        pp1.setNext(pp2, c6);
+        System.out.println("orphans after the setnext" + c6.getOrphans().toString());
+        db.chapterRepo.update(c6);
+        // Pages per chapter
         //changed the repo create-- it takes priors.
         // db.pageRepo.create(series, chapter, priors)
         ArrayList<Page> priorHolder = new ArrayList<Page>();
-        Page p1 = db.pageRepo.create(Tseries, c1, null);
+        Page p1 = db.pageRepo.create(Tseries, c1, null); // root level 0
         priorHolder.add(p1);
-        Page p2 = db.pageRepo.create(Tseries, c1, priorHolder);
-        Page p3 = db.pageRepo.create(Tseries, c1, priorHolder);
+        Page p2 = db.pageRepo.create(Tseries, c1, priorHolder); // level 1
+        Page p3 = db.pageRepo.create(Tseries, c1, priorHolder); // level 1
         priorHolder.remove(p1);
         priorHolder.add(p2);
         priorHolder.add(p3);
-        Page p4 = db.pageRepo.create(Tseries, c1, priorHolder);
+        Page p4 = db.pageRepo.create(Tseries, c1, priorHolder); // level 3
 
         Series newSeries = db.seriesRepo.create("One_Piece", "Fiction", Ben, "Best MangaEver");
         Chapter newChapter = db.chapterRepo.create("Luffy_meets_Boa", Ben, newSeries, 1);
@@ -68,7 +83,7 @@ public class demoData {
         Page pageTwo = db.pageRepo.create(newSeries, newChapter, priorHolder2);
         priorHolder2.remove(pageOne);
         priorHolder2.add(pageTwo);
-        Page pageThree = db.pageRepo.create(newSeries, newChapter, priorHolder); // page three comes from page two
+        Page pageThree = db.pageRepo.create(newSeries, newChapter, priorHolder2); // page three comes from page two
         Page wowWhataShortChapter = db.pageRepo.create(newSeries, newChapter, priorHolder2);
         pageOne.setImagePath("/resources/images/test/test1.png");
         pageTwo.setImagePath("/resources/images/test/test2.png");
@@ -87,6 +102,7 @@ public class demoData {
 
 
         db.chapterRepo.update(newChapter);
+
 
 //        Chapter onePieceChapter2 = db.chapterRepo.create("Luffy Meets Kim Possible", Ben, newSeries, 2);
 //        Page rootOne = db.pageRepo.create(newSeries, onePieceChapter2, null);

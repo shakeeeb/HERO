@@ -45,23 +45,27 @@ public class ChapterWorkspaceController {
         // check if user is logged in
         UserService userService = UserServiceFactory.getUserService();
         if(userService.isUserLoggedIn() == false) {
+            System.out.println("user not logged in");
             return json;//"Error: User not logged in";
         }
 
         // load user from the datastore
         UserData user = db.userRepo.getUserById(userService.getCurrentUser().getEmail());
         if(user == null) {
+            System.out.println("user doesnt exist");
             return json;//"Error: Unable to load user from datastore";
         }
 
         // load the chapter
         Chapter chapterToLoad = db.chapterRepo.getById(chapterID);
         if(chapterToLoad == null) {
+            System.out.println("chapter doesn t exist");
             return json;//"Error: Unable to load chapter from datastore";
         }
 
         // check if user owns chapter being requested
         if(chapterToLoad.getAuthor().getEmail() != user.getEmail()) {
+            System.out.println("author doesnt own this chapter");
             return json;//"Error: User does not have access to chapter";
         }
 
@@ -76,12 +80,14 @@ public class ChapterWorkspaceController {
 
         Page rootPage = chapterToLoad.getRoot();
         if(rootPage == null) {
+            System.out.println("root doesnt exist");
             return json; // Unable to load root
         }
 
         ArrayList<Page> allPages = new ArrayList<Page>();
         rootPage.getAllPages(allPages);
         if (allPages == null) {
+            System.out.println("unable to load pages");
             return json; // unable to load pages
         }
 
@@ -101,34 +107,40 @@ public class ChapterWorkspaceController {
         // check if user is logged in
         UserService userService = UserServiceFactory.getUserService();
         if(userService.isUserLoggedIn() == false) {
+            System.out.println("user is not logged in");
             return json;//"Error: User not logged in";
         }
 
         // load user from the datastore
         UserData user = db.userRepo.getUserById(userService.getCurrentUser().getEmail());
         if(user == null) {
+            System.out.println("user does not exist");
             return json;//"Error: Unable to load user from datastore";
         }
 
         // load the chapter
         Chapter chapterToLoad = db.chapterRepo.getById(chapterID);
         if(chapterToLoad == null) {
+            System.out.println("chapter does not exist");
             return json;//"Error: Unable to load chapter from datastore";
         }
 
         // check if user owns chapter being requested
         if(chapterToLoad.getAuthor().getEmail() != user.getEmail()) {
+            System.out.println("the author does not match the chapter's author");
             return json;//"Error: User does not have access to chapter";
         }
 
         Page rootPage = chapterToLoad.getRoot();
         if(rootPage == null) {
+            System.out.println("the root is null");
             return json; // Unable to load root
         }
 
         ArrayList<Page> allPages = new ArrayList<Page>();
         rootPage.getAllPages(allPages);
         if (allPages == null) {
+            System.out.println("the pages are null");
             return json; // unable to load pages
         }
 

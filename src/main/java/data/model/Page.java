@@ -24,8 +24,8 @@ public class Page {
     private int numOptions = 0;
     private int numPriors = 0;
     private String imagePath;
-    @Load private Ref<Page> Next = null;
-    @Load private Ref<Page> Prev = null;
+    //@Load private Ref<Page> Next = null;
+    //@Load private Ref<Page> Prev = null;
     @Load private ArrayList<Ref<Page>> options = null;
     @Load private ArrayList<Ref<Page>> priors = null;
     private ArrayList<String> optionDescriptors;
@@ -168,24 +168,43 @@ public class Page {
     }
 
     public Page getNext() {
-        return Next.get();
+        return options.get(0).get();
     }
 
     public void setNext(Page newNext) {
-        if(numOptions == 0){
-            numOptions = 1;
-            this.Next = Ref.create(newNext);
-        } else if (numOptions == 1){ // theres a next but no other options
-            // these both become options
-            Page oldNext = this.Next.get(); //FUCK this hasnt been stored in the datastore yet!
-            this.Next = null;
-            options.add(Ref.create(oldNext));
-            options.add(Ref.create(newNext));
-            numOptions = options.size();
-        } else { // there are options, and we're just adding on another option
-            options.add(Ref.create(newNext));
-            numOptions = options.size();
+        options.add(Ref.create(newNext));
+        optionDescriptors.add("go to Page:" + newNext.getPageId());
+        newNext.setPrev(this);
+        numOptions = options.size();
+        Chapter c = this.chapter.get();
+        if(c.getOrphans().contains(this)){
+            c.removeOrphan(this);
+            ofy().save().entity(c).now();
         }
+        // also add the prior reference
+        ofy().save().entity(this).now();
+        ofy().save().entity(newNext).now();
+    }
+
+    /**
+     *
+     * @param newNext
+     * @param myChapter
+     */
+    public void setNext(Page newNext, Chapter myChapter){
+            options.add(Ref.create(newNext));
+            optionDescriptors.add("go to Page:" + newNext.getPageId());
+            newNext.setPrev(this);
+            numOptions = options.size();
+            Chapter c = this.chapter.get();
+            if(myChapter.getOrphans().contains(this)){
+                System.out.println("removing " + this.getPageId() + " from orphans");
+                ofy().save().entity(myChapter).now();
+            }
+            System.out.println("not an orphan");
+            // also add the prior reference
+            ofy().save().entity(this).now();
+            ofy().save().entity(newNext).now();
     }
 
     /**
@@ -210,12 +229,17 @@ public class Page {
             setOpts.add(Ref.create(p));
             ofy().load().entity(p);
         }
+        Chapter c = this.chapter.get();
+        if(c.isOrphan(this)){
+            // remove it as an orphan
+            c.removeOrphan(this);
+            ofy().save().entity(c).now();
+        }
         this.priors = setOpts;
     }
 
     public Page getPrev() {
-        Page previous = Prev.get();
-        return previous;
+        return this.priors.get(0).get();
     }
 
     /**
@@ -223,21 +247,19 @@ public class Page {
      * @param newPrev
      */
     public void setPrev(Page newPrev) {
-        //this.Prev = Ref.create(previous);
-        if(numPriors == 0){
-            numPriors = 1;
-            this.Prev = Ref.create(newPrev);
-        } else if (numPriors == 1){ // theres a prev but no other priors
-            // these both become priors
-            Page oldPrev = this.Prev.get();
-            this.Prev = null;
-            priors.add(Ref.create(oldPrev));
-            priors.add(Ref.create(newPrev));
-            numPriors = priors.size();
-        } else { // there are options, and we're just adding on another option
-            priors.add(Ref.create(newPrev));
-            numOptions = priors.size();
+        // change the reference to the chapter
+        //grab it as an orphan,
+        //remove it from the list of orphans, because there's a parent now
+        Chapter c = chapter.get();
+        if(c.isOrphan(this)){
+            // remove it as an orphan
+            c.removeOrphan(this);
+            ofy().save().entity(c).now();
         }
+        this.priors.add(Ref.create(newPrev));
+        numPriors = priors.size();
+        // set the next
+        ofy().save().entity(c).now();
     }
 
     public ArrayList<Page> getOptions() {
@@ -269,14 +291,9 @@ public class Page {
      */
     public void addOption(Page option, String optionDescriptor){
         // gotta check all cases of next
-        if(numOptions == 0){ // totally new, no next. shouldnt be used this way, but... gotta be exhaustive
-            Next = Ref.create(option);
-            numOptions = 1;
-        } else {
             options.add(Ref.create(option));
             optionDescriptors.add(optionDescriptor);
             numOptions = options.size();
-        }
     }
 
     public boolean removeOption(int optionIndex){
@@ -284,19 +301,6 @@ public class Page {
         if(numOptions == 0){
             // there are no options to remove
             return false;
-        } else if (numOptions == 2){
-            // two options, just turn one into next
-            options.remove(optionIndex);
-            optionDescriptors.remove(optionIndex);
-            this.Next = options.get(0);
-            options = null;
-            numOptions = 1;
-            return true;
-        } else if (numOptions == 1){
-            // a single option, meaning it's a next. delete the next
-            this.Next = null;
-            numOptions = 0;
-            return true;
         } else {
             // many options
             options.remove(optionIndex);
@@ -311,24 +315,6 @@ public class Page {
         if(numOptions == 0){
             // no pages to remove
             return false;
-        } else if(numOptions == 2){
-            int index = options.indexOf(toRemove);
-            if(options.remove(toRemove)){
-                options.remove(toRemove);
-                optionDescriptors.remove(index);
-                this.Next = options.get(0);
-                options = null;
-                numOptions = 1;
-                return true;
-            } else {
-                //failure to remove
-                return false;
-            }
-        } else if(numOptions == 1){
-            // a single option, meaning it's next
-            this.Next = null;
-            numOptions = 0;
-            return true;
         } else {
             // many options
             int index = options.indexOf(toRemove);
@@ -348,13 +334,15 @@ public class Page {
      */
     public void addPrior(Page prior){
         // gotta check all cases of next
-        if(numPriors == 0){ // totally new, no prev. shouldnt be used this way, but... gotta be exhaustive
-            Prev = Ref.create(prior);
-            numPriors = 1;
-        } else {
+        Chapter c = chapter.get();
+        if(c.isOrphan(this)){
+            // remove it as an orphan
+            c.removeOrphan(this);
+            ofy().save().entity(c).now();
+        }
             priors.add(Ref.create(prior));
             numPriors = priors.size();
-        }
+        ofy().save().entity(this).now();
     }
 
     /**
@@ -367,22 +355,15 @@ public class Page {
         if(numPriors == 0){
             // there are no options to remove
             return false;
-        } else if (numPriors == 2){
-            // two options, just turn one into next
-            priors.remove(priorIndex);
-            this.Prev = priors.get(0);
-            priors = null;
-            numPriors = 1;
-            return true;
-        } else if (numPriors == 1){
-            // a single option, meaning it's a next. delete the next
-            this.Prev = null;
-            numPriors = 0;
-            return true;
         } else {
             // many priors
             priors.remove(priorIndex);
             numPriors = priors.size();
+            if(numPriors == 0){ //orphaned
+                Chapter c = chapter.get();
+                c.addOrphan(this);
+                ofy().save().entity(c).now();
+            }
             return true;
         }
     }
@@ -397,29 +378,15 @@ public class Page {
         Ref<Page> toRemove = Ref.create(RemoveMe);
         if(numPriors == 0){
             return false;
-        } else if(numPriors == 2){
-            if(priors.remove(toRemove)){
-                this.Prev = priors.get(0);
-                priors = null;
-                numPriors = 1;
-                return true;
-            } else {
-                return false;
-            }
-        } else if(numPriors == 1){
-            if(priors.remove(toRemove)){
-                // a single option, meaning it's a next. delete the next
-                this.Prev = null;
-                numPriors = 0;
-                return true;
-            } else {
-                //failure to remove
-                return false;
-            }
         } else {
             // many priors
             priors.remove(toRemove);
             numPriors = priors.size();
+            if(numPriors == 0){
+                Chapter c = chapter.get();
+                c.removeOrphan(this);
+                ofy().save().entity(c).now();
+            }
             return true;
         }
     }
@@ -560,12 +527,8 @@ public class Page {
     public void getAllPages(ArrayList<Page> returner){
         //gets all pages in the whatever
         if(this.options.isEmpty()){ // either options or next
-            if(!returner.contains(this)){
+            if(!returner.contains(this)) {
                 returner.add(this);
-            }
-            if(this.Next != null){
-                Page p2 = Next.get();
-                p2.getAllPages(returner);
             }
             return;
         } else if(returner.contains(this)){
