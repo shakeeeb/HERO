@@ -266,6 +266,7 @@ public class Chapter {
     }
 
     public void setSummary(String newSummary){
+        System.out.print("");
         this.summary = newSummary;
     }
 
