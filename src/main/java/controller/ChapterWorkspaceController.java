@@ -168,15 +168,15 @@ public class ChapterWorkspaceController {
 
     }
 
-    @RequestMapping(value="make-chapter-page", method = RequestMethod.POST)
-    protected @ResponseBody JsonObject makeChapterPage(HttpServletRequest request, HttpServletResponse response){
+    @RequestMapping(value="make-chapter-page/{chapterID}", method = RequestMethod.POST)
+    protected @ResponseBody JsonObject makeChapterPage(@PathVariable(value="chapterID") String chapterID, HttpServletRequest request, HttpServletResponse response){
         // i need the chapter ID and the series, which i can get from the chapter
         // so really, just chapter id-- also level, if possible
-        String chapterID = request.getParameter("chapterID");
+        System.out.println("arrived at the setPage controller");
         int level = Integer.parseInt(request.getParameter("level"));
         Chapter chapter = db.chapterRepo.getById(chapterID);
         Series series = chapter.getSeries();
-        Page newBaby = db.pageRepo.create(series,  chapter,  level);
+        Page newBaby = db.pageRepo.create(series,  chapter, level);
 
         // now return the series as a JSON object, using Gson
         JsonObject json = new JsonObject();

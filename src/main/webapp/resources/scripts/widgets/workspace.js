@@ -10,6 +10,7 @@ $(document).ready(function() {
     var MAX_WIDTH = 5;
     var chapter = null;
     var pages = null;
+    var cID = null;
 
     // test chapter being used for development, will be replaced with grabbing the id from the backend
     loadChapter("Puppycat Savage~It Feels Good To Be A Gangsta");
@@ -22,6 +23,7 @@ $(document).ready(function() {
 
         $.getJSON("/workspace/load/" + chapterID , function(data) {
         }).done(function (data) {
+            cID = chapterID;
             chapter = data.Chapter;
             pages = data.Pages;
             $("#title-input").val(chapter.name);
@@ -174,7 +176,7 @@ $(document).ready(function() {
             if(pageToEdit == null) {
                 console.log("pageToEdit is null");
             } else
-                setPage(pageToEdit.getElementsByClassName("chapter-page")[0], pageID)
+                setPage(pageToEdit.getElementsByClassName("chapter-page")[0], pageID, level)
 
 
         }
@@ -186,15 +188,21 @@ $(document).ready(function() {
      * @param page: the page on the story tree being set
      * @param pageID: the id of the datastore page
      */
-    function setPage(page, pageID) {
+    function setPage(page, pageID, level) {
         if(page == null) {
             return;
         }
         //var formatedPageID = pageID.replace(/ /g, "%20");
         var formatedPageID = encodeURI(pageID);
         page.setAttribute("id", formatedPageID);
-        var datastorePage = getPage(pageID, pages);/*$.getJSON("make-chapter-page" + chapterID , function(data) {
-        }).done();*//*getPage(pageID,pages)*/
+        var datastorePage = $.getJSON("make-chapter-page/" + cID ,{level: level} ,function(data) {
+        })
+            .done(function(data){
+                console.log("success");
+            }).fail(function(data){
+                console.log("failure");
+            });
+        /*getPage(pageID,pages)*/
         //console.log(datastorePage);
 
         // TODO: do this using jquery, selector wasnt working
