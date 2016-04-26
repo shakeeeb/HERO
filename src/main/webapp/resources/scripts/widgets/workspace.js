@@ -195,7 +195,7 @@ $(document).ready(function() {
         //var formatedPageID = pageID.replace(/ /g, "%20");
         var formatedPageID = encodeURI(pageID);
         page.setAttribute("id", formatedPageID);
-        var datastorePage = $.getJSON("make-chapter-page/" + cID ,{level: level} ,function(data) {
+        var datastorePage = $.getJSON("make-chapter-page/" + cID ,{"level": level} ,function(data) {
         })
             .done(function(data){
                 console.log("success");

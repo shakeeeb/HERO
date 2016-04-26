@@ -244,7 +244,7 @@ public class Chapter {
         }
         System.out.println(returner);
         return returner;
-        
+
     }
 
     public int getMax(){
