@@ -14,6 +14,7 @@
 </head>
 <body>
 <%@ include file="/resources/layouts/navbar.jsp" %>
+<script src="/resources/scripts/jquery/user-handler.js"></script>
 <br><br><br><br>
 <div class="container">
     <span class="orange-span col-lg-offset-1 col-lg-4">
@@ -35,42 +36,18 @@
 
     </span>
 
-    <span class="orange-span col-lg-offset-1 col-lg-6">
+    <span class="orange-span col-lg-offset-1 col-lg-6" id="all_the_series">
     <br>
-        <span id="authored-story-1" class="orange-span one-story">
-            <span id="authored-story-1-image" class="author-story-wrap">
-                <img src="/resources/images/logo.png" height="100px" width="100px">
-            </span>
-            <span id="authored-story-1-information" class="author-story-wrap">
-                <span id="authored-story-1-title" class="orange-span user-story-title">
-                    Comic Title
-                </span>
 
-                <span id="authored-story-1-tags" class="orange-span user-story-tags">
-                    HELLO THERE HOW ARE YOU DOING
-                </span>
-            </span>
-        </span>
-
-        <br>
-                <span id="authored-story-2" class="orange-span one-story">
-            <span id="authored-story-2-image" class="author-story-wrap">
-                <img src="/resources/images/logo.png" height="100px" width="100px">
-            </span>
-            <span id="authored-story-2-information" class="author-story-wrap">
-                <span id="authored-story-2-title" class="orange-span user-story-title">
-                    Comic Title
-                </span>
-
-                <span id="authored-story-2-tags" class="orange-span user-story-tags">
-                    HELLO THERE HOW ARE YOU DOING
-                </span>
-            </span>
-        </span>
 
 
         <br>
         </span>
 </div>
+
+<div style="display:none;">
+    <p id="userEmail">${userEmail}</p>
+</div>
+
 </body>
 </html>

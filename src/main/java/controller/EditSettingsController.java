@@ -45,8 +45,7 @@ public class EditSettingsController {
     
 
     @RequestMapping(value="settingsUser/get/{userQuery}", method = RequestMethod.GET)
-    public @ResponseBody
-    JsonObject getUser(@PathVariable(value="userQuery") String userQuery, ModelMap model, HttpSession session, HttpServletRequest req, HttpServletResponse res) {
+    public @ResponseBody JsonObject getUser(@PathVariable(value="userQuery") String userQuery, ModelMap model, HttpSession session, HttpServletRequest req, HttpServletResponse res) {
         JsonObject json = new JsonObject();
         Gson gson = new GsonBuilder().create();
         System.out.println("Got here");

@@ -21,7 +21,7 @@ $(document).ready(function() {
             $("#nickname").attr("placeholder", nickname);
             $("#about-me").attr("placeholder", about_me);
 
-                alert("aboutMe: " + about_me);
+                //alert("aboutMe: " + about_me);
 
             $("#edit-settings-save").click(function(){
                 var nickname = $('#nickname').val();
@@ -44,21 +44,12 @@ $(document).ready(function() {
     function saveSettingsPage(nickname, about_me) {
         $.getJSON("/settingsUserSave/" + nickname +"/"+about_me, function(data) {
         }).done(function(data) {
-
                 console.log(data);
-
-
-                //$("#nickname").attr("placeholder", nickname);
-                //var aboutMe = data.members.aboutMe;
-                alert("Nickname: " + nickname);
-                //    alert("aboutMe: " + aboutMe);
-
             })
             .fail(function() {
                 console.log("Could not get data");
             });
     }
-
 
 });
 
