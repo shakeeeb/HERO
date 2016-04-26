@@ -199,6 +199,7 @@ public class Page {
             Chapter c = this.chapter.get();
             if(myChapter.getOrphans().contains(this)){
                 System.out.println("removing " + this.getPageId() + " from orphans");
+                myChapter.removeOrphan(this);
                 ofy().save().entity(myChapter).now();
             }
             System.out.println("not an orphan");
@@ -294,6 +295,18 @@ public class Page {
             options.add(Ref.create(option));
             optionDescriptors.add(optionDescriptor);
             numOptions = options.size();
+    }
+
+    /**
+     * adds an option and a descriptor in the proper way
+     * @param option
+     * @param myChapter
+     * @param optionDescriptor
+     */
+    public void addOption(Page option, Chapter myChapter, String optionDescriptor){
+        this.setNext(option, myChapter);
+        optionDescriptors.add(optionDescriptor);
+        numOptions = options.size();
     }
 
     public boolean removeOption(int optionIndex){
