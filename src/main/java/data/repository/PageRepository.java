@@ -57,12 +57,23 @@ public class PageRepository {
         }
     }
 
+    public Page create(Series series, Chapter theChapter, int pgLvl){
+        int n = theChapter.getMax();
+        Page p = new Page(series, theChapter, n, pgLvl);
+        theChapter.addOrphan(p);
+        ofy().save().entity(p).now();
+        ofy().save().entity(theChapter).now();
+        // set it as an orphan for now
+        return p;
+    }
+
     //create(Id, stuff)
     public Page create(Series theSeries, Chapter theChapter){
         int n = theChapter.getMax();
         Page p = new Page(theSeries, theChapter, n);
         theChapter.addOrphan(p);
         ofy().save().entity(p).now();
+        ofy().save().entity(theChapter).now();
         // set it as an orphan for now
         return p;
     }

@@ -4,6 +4,8 @@ import com.google.appengine.repackaged.com.google.protos.gdata.proto2api.Core;
 import com.googlecode.objectify.Ref;
 import com.googlecode.objectify.annotation.*;
 import com.googlecode.objectify.condition.IfFalse;
+import com.googlecode.objectify.condition.IfTrue;
+
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
 import java.util.ArrayList;
@@ -22,8 +24,10 @@ public class Chapter {
     private Date dateCreated; // generate
     @Index private int chapterNumber;
     @Index(IfFalse.class) private Boolean approved = false;
+    @Index(IfTrue.class)private boolean pendingApproval = false;
     private ArrayList<Ref<Page>> orphans;
     private int max = 1;
+    private String summary = null;
 
     public Chapter(){
         // each chapter must have a single page
@@ -252,6 +256,22 @@ public class Chapter {
         } else {
             return false;
         }
+    }
+
+    public void setSummary(String newSummary){
+        this.summary = newSummary;
+    }
+
+    public String getSummary(){
+        return this.summary;
+    }
+
+    public void submitForApproval(){
+        this.pendingApproval = true;
+    }
+
+    public void rejectSubmission(){
+        this.pendingApproval = false;
     }
 
 

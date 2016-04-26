@@ -5,6 +5,7 @@ import com.google.appengine.api.users.UserServiceFactory;
 import data.DbContext;
 import data.model.Chapter;
 import data.model.Page;
+import data.model.Series;
 import data.model.UserData;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -144,7 +145,11 @@ public class ChapterWorkspaceController {
         return json;
     }
 
-
+    /**
+     *
+     * @param request
+     * @param response
+     */
     @RequestMapping(value="get-chapter-page", method = RequestMethod.POST)
     protected void getChapterPage(HttpServletRequest request, HttpServletResponse response){
 
@@ -160,6 +165,24 @@ public class ChapterWorkspaceController {
         {
 
         }
+
+    }
+
+    @RequestMapping(value="make-chapter-page", method = RequestMethod.POST)
+    protected @ResponseBody JsonObject makeChapterPage(HttpServletRequest request, HttpServletResponse response){
+        // i need the chapter ID and the series, which i can get from the chapter
+        // so really, just chapter id-- also level, if possible
+        String chapterID = request.getParameter("chapterID");
+        int level = Integer.parseInt(request.getParameter("level"));
+        Chapter chapter = db.chapterRepo.getById(chapterID);
+        Series series = chapter.getSeries();
+        Page newBaby = db.pageRepo.create(series,  chapter,  level);
+
+        // now return the series as a JSON object, using Gson
+        JsonObject json = new JsonObject();
+        Gson gson = new GsonBuilder().create();
+        json.add("Page", gson.toJsonTree(newBaby));
+        return json;
 
     }
 

@@ -12,7 +12,7 @@ $(document).ready(function() {
     var pages = null;
 
     // test chapter being used for development, will be replaced with grabbing the id from the backend
-    loadChapter("One_Piece~Luffy_meets_Boa");
+    loadChapter("Puppycat Savage~It Feels Good To Be A Gangsta");
 
     /**
      * Loads a chaoter from the datastore into the story tree
@@ -165,7 +165,7 @@ $(document).ready(function() {
             } else if(isUnused(levelToEdit[0]) == true) {
                 pageToEdit = levelToEdit[0];
                 // check if fifth page is taken
-            } else if(isUnused(levelToEdit[4]) == true) {
+            } else if((isUnused(levelToEdit[4]) == true)||(isAddPage(levelToEdit[4]) == true)) {
                 pageToEdit = levelToEdit[4];
             } else {
                 console.log("Level is full");
@@ -193,7 +193,8 @@ $(document).ready(function() {
         //var formatedPageID = pageID.replace(/ /g, "%20");
         var formatedPageID = encodeURI(pageID);
         page.setAttribute("id", formatedPageID);
-        var datastorePage = getPage(pageID,pages);
+        var datastorePage = getPage(pageID, pages);/*$.getJSON("make-chapter-page" + chapterID , function(data) {
+        }).done();*//*getPage(pageID,pages)*/
         //console.log(datastorePage);
 
         // TODO: do this using jquery, selector wasnt working
@@ -217,7 +218,7 @@ $(document).ready(function() {
      */
     function getPageCount(levelNumber) {
         var pageCount = 0;
-        var level = getLevel(levelNumber-1);
+        var level = getLevel(levelNumber);
         //if(level == null) {
         //    console.log("Level doesn't exist");
         //    return -1;
@@ -267,6 +268,11 @@ $(document).ready(function() {
      */
     function isUnused(page) {
         return page.getElementsByClassName("hidden-page").length > 0;
+
+    }
+    function isAddPage(page) {
+        return page.getElementsByClassName("add-page").length > 0;
+
     }
 
     /**
@@ -276,7 +282,7 @@ $(document).ready(function() {
      */
     validateBottomRow();
     function validateBottomRow() {
-        var pageCountForBottomLevel = getPageCount($(".chapter-level").length);
+        var pageCountForBottomLevel = getPageCount($(".chapter-level").length -1 );
         if(pageCountForBottomLevel > 1) {
             addRow();
 
@@ -294,7 +300,7 @@ $(document).ready(function() {
             '<td><button class=\"chapter-page hidden-page\" type=\"button\"></button></td>' +
             '<td><button class=\"chapter-page hidden-page\" type=\"button\"></button></td>' +
             '<td><button class=\"chapter-page hidden-page\" type=\"button\"></button></td>' +
-            '<td><button class=\"add-page\" type=\"button\">new</button></td>' +
+            '<td><button class=\"chapter-page add-page\" type=\"button\">new</button></td>' +
             '</tr>');
 
 
