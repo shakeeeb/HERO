@@ -61,10 +61,10 @@ public class ChapterRepository {
             // make page
             theSeries.addChapter(c);
             // add chapter to series
+            c.setRoot(p);
             ofy().save().entity(theSeries).now();
             ofy().save().entity(p).now();
             ofy().save().entity(c).now();
-            c.setRoot(p);
             return c;
         } else {
             return null;

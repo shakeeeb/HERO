@@ -54,6 +54,15 @@ public class demoData {
         Chapter c6 = db.chapterRepo.create("It Feels Good To Be A Gangsta", Miuki, MKSeries, 2);
         System.out.println(c6);
         // Pages per chapter
+        //goddamn it. my demodata got erased
+        Page pp1 = c6.getRoot();
+        Page pp2 = db.pageRepo.create(MKSeries, c6);
+        Page pp3 = db.pageRepo.create(MKSeries, c6);
+        Page pp4 = db.pageRepo.create(MKSeries, c6);
+        pp1.setNext(pp2, c6);
+        pp2.setNext(pp3, c6);
+        pp2.setNext(pp4, c6);
+        db.chapterRepo.update(c6);
         //changed the repo create-- it takes priors.
         // db.pageRepo.create(series, chapter, priors)
         ArrayList<Page> priorHolder = new ArrayList<Page>();

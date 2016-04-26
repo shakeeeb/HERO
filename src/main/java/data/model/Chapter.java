@@ -106,7 +106,12 @@ public class Chapter {
     }
 
     public Page getRoot() {
-        return root.get();
+        if(root == null){
+            System.out.println("root is null!");
+            return null;
+        } else {
+            return root.get();
+        }
     }
 
     public void setRoot(Page root) {
