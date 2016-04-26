@@ -42,31 +42,13 @@
             <h3>Chapter Workspace</h3>
             <div id="page-flow">
                 <table id="page-table" class="center-block-">
-                    <tr id="chapter-row-1" class="chapter-level">
+                    <tr id="chapter-level-0" class="chapter-level">
                         <td><button class="chapter-page hidden-page" type="button"></button></td>
                         <td><button class="chapter-page hidden-page" type="button"></button></td>
                         <td><button class="chapter-page hidden-page" type="button"></button></td>
                         <td><button class="chapter-page hidden-page" type="button"></button></td>
                         <td><button class="chapter-page hidden-page" type="button"></button></td>
                     </tr>
-
-                    <tr id="chapter-row-2" class="chapter-level">
-                        <td><button class="chapter-page hidden-page" type="button"></button></td>
-                        <td><button class="chapter-page hidden-page" type="button"></button></td>
-                        <td><button class="chapter-page hidden-page" type="button"></button></td>
-                        <td><button class="chapter-page hidden-page" type="button"></button></td>
-                        <td><button class="add-page" type="button">new</button></td>
-                    </tr>
-
-                    <tr id="chapter-row-3" class="chapter-level chapter-level-bottom">
-                        <td><button class="chapter-page hidden-page" type="button"></button></td>
-                        <td><button class="chapter-page hidden-page" type="button"></button></td>
-                        <td><button class="chapter-page hidden-page" type="button"></button></td>
-                        <td><button class="chapter-page hidden-page" type="button"></button></td>
-                        <td><button class="add-page" type="button">new</button></td>
-                    </tr>
-
-
                 </table>
             </div>
         </div>

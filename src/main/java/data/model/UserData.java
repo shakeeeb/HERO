@@ -7,6 +7,7 @@ import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
 import com.googlecode.objectify.annotation.Load;
 import com.googlecode.objectify.condition.IfTrue;
+import static com.googlecode.objectify.ObjectifyService.ofy;
 
 import java.util.ArrayList;
 
@@ -31,6 +32,7 @@ public class UserData {
         this.bookmarks = new ArrayList<Ref<Page>>();
         this.ratings = new ArrayList<Ref<Rating>>();
         this.viewed = new ArrayList<Ref<Series>>();
+        this.subscriptions = new ArrayList<Ref<Series>>();
     }
 
     public UserData(String email){
@@ -40,6 +42,7 @@ public class UserData {
         this.bookmarks = new ArrayList<Ref<Page>>();
         this.ratings = new ArrayList<Ref<Rating>>();
         this.viewed = new ArrayList<Ref<Series>>();
+        this.subscriptions = new ArrayList<Ref<Series>>();
     }
 
     public UserData(String email, String name, String about){
@@ -50,6 +53,7 @@ public class UserData {
         this.bookmarks = new ArrayList<Ref<Page>>();
         this.ratings = new ArrayList<Ref<Rating>>();
         this.viewed = new ArrayList<Ref<Series>>();
+        this.subscriptions = new ArrayList<Ref<Series>>();
     }
 
     public UserData(String email, String name, String about, String pic){
@@ -61,6 +65,7 @@ public class UserData {
         this.bookmarks = new ArrayList<Ref<Page>>();
         this.ratings = new ArrayList<Ref<Rating>>();
         this.viewed = new ArrayList<Ref<Series>>();
+        this.subscriptions = new ArrayList<Ref<Series>>();
     }
 
 
@@ -93,6 +98,17 @@ public class UserData {
 
     public void addSubscription(Series s){
         this.subscriptions.add(Ref.create(s));
+        //add a series add subscriber.
+        ofy().save().entity(this).now();
+    }
+
+    public boolean isSubscribed(Series s) {
+//        System.out.println("I am subscribed to: " + mySeries);
+//        System.out.println("Check if the series is: " + s);
+        if (this.subscriptions.contains(Ref.create(s))) {
+            return true;
+        }
+        return false;
     }
 
     public void removeSubscription(Series s){

@@ -8,24 +8,7 @@ $(document).ready(function() {
     currentUserEmail = $("#userEmail").html();
 
     loadPage(currentUserEmail);
-    //you want to load information from the datastore
-    //function loadPage(userID) {
-    //    console.log("I'm loading the user information.");
-    //    console.log(userID);
-    //    $.get("/settingsUser/" + userID)
-    //        .done(function(data){
-    //            // assume that the data that has been returned is html
-    //            // just add it to the page using the selector
-    //            //console.log(data.nickname);
-    //            //$("#nickname").html(data.nickname);
-    //            //$("#about-me").html(data.aboutMe);
-    //            console.log(data);
-    //        })
-    //        .fail(function(){
-    //            console.log("Cannot get the user back from the datastore");
-    //        });
-    //
-    //}
+    var about_me;
     var nickname;
     function loadPage(userEmail) {
         $.getJSON("/settingsUser/get/" + userEmail, function(data) {
@@ -33,20 +16,19 @@ $(document).ready(function() {
 
             console.log(data);
             nickname = data.members.nickname.value;
-            var modifiedNickname;
+            about_me = data.members.about_me.value;
 
+            $("#nickname").attr("placeholder", nickname);
+            $("#about-me").attr("placeholder", about_me);
 
-        $("#nickname").attr("placeholder", nickname);
-
-            //var aboutMe = data.members.aboutMe;
-
-                alert("Nickname: " + nickname);
+                alert("aboutMe: " + about_me);
 
             $("#edit-settings-save").click(function(){
-                nickname = "T Mack";
-                saveSettingsPage(nickname);
+                var nickname = $('#nickname').val();
+                var about_me = $("#about-me").val();
 
-                //alert("Going to save this page");
+                saveSettingsPage(nickname, about_me);
+
             });
 
         })
@@ -59,8 +41,8 @@ $(document).ready(function() {
     //take the information
     //send it over to the datastore
 
-    function saveSettingsPage(nickname) {
-        $.getJSON("/settingsUserSave/" + nickname, function(data) {
+    function saveSettingsPage(nickname, about_me) {
+        $.getJSON("/settingsUserSave/" + nickname +"/"+about_me, function(data) {
         }).done(function(data) {
 
                 console.log(data);

@@ -97,7 +97,7 @@
             </div>
 
             <div class="text-center">
-                <span><button class="btn btn-default subscribe-button">Subscribe</button></span>
+                <span><button id="subscribe-button"class="btn btn-default"></button></span>
             </div>
             <div class="text-center">
                 <span><button id="chapter-index-start-from-beginning" class="btn btn-default start-beginning-button">Start From Beginning</button></span>
@@ -110,6 +110,12 @@
 
 
 
+</div>
+
+<div style="display: none;">
+    <p id="hidden-seriesID">${seriesID}</p>
+    <p id="hidden-rootID">${rootID}</p>
+    <p id="hidden-chapterID">${chapterID}</p>
 </div>
 <!-- /.container -->
 

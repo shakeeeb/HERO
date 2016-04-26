@@ -5,28 +5,53 @@ $(document).ready(function () {
     var seriesName = null;
     var author = null;
     var seriesDescription = null;
+    var chapterID = null;
+    var rootID = null;
 
-    getChapters(seriesID);
+    var tempSeriesID = $("#hidden-seriesID").html();
 
-    function getChapters(seriesID) {
-        $.getJSON("/chapter-index/" + seriesID, function(data) {
+    if (!!tempSeriesID)
+    {
+        seriesID = $("#hidden-seriesID").html();
+    }
+
+    chapterID = $("#hidden-chapterID").html();
+    rootID = $("#hidden-rootID").html();
+
+    getChaptersAndSubscriptionInfo(seriesID);
+
+    function getChaptersAndSubscriptionInfo(seriesID) {
+        $.getJSON("/chapter-index/" + "get/" +seriesID, function(data) {
         }).done(function (data) {
             chapterList = data.members.chapterList.elements;
             console.log(chapterList);
             series = data.members.series.members;
             console.log(series);
+            var isSubscribed = data.members.isSubscribed.value;
+            console.log(isSubscribed);
 
             numChapters = chapterList.length;
             seriesName = series.name.value;
             author = series.authorName.value;
             seriesDescription = series.description.value;
 
+
+
             $("#chapter-index-series-name").text(seriesName);
             $("#chapter-index-author").text(author);
             $("#chapter-index-series-description").text(seriesDescription);
 
+            if (isSubscribed) {
+                $("#subscribe-button").html("Unsubscribe");
+            }
+            else
+            {
+                $("#subscribe-button").html("Subscribe");
+            }
+
             var currentChapter = null;
 
+            //Kill me. I just figured out what .load() does
             for (var o = 1; o < numChapters + 1; o++)
             {
                 currentChapter = chapterList[o - 1]
@@ -64,18 +89,37 @@ $(document).ready(function () {
 
             });
 
-            //$("#chapter-index-start-from-beginning").click(function() {
-            //    window.location.replace("/read/");
-            //});
+            $("#chapter-index-start-from-beginning").click(function() {
+                window.location.replace("/read/" + chapterID + "/" + rootID);
+            });
+
+            $("#subscribe-button").click(function(){
+                alert("clicked subscribe button");
+                toggleSubscription(seriesID);
+            });
+
+
+            // Let's add the subscribe feature here.
+            // Make a function that does the get request for
+            // /chapter-index/subscribe/{chapter-ID}
+            //// Should change the text to subscribed if the user is already subscribed.
         })
     }
 
-    //function getChapters(seriesID) { // Change this to /read/ + /chapterID + /pageNumber
-    //    $.getJSON("/chapter-index/subscribe" + seriesID, function(data) {
-    //    }).done(function (data) {
-    //
-    //    });
-    //}
+    function toggleSubscription(seriesID) { // Change this to /read/ + /chapterID + /pageNumber
+        $.getJSON("/chapter-index/subscribe/" + seriesID).done(function (data) {
+            var isSubscribed = data.members.subscriptionToggled.value;
+            console.log(isSubscribed);
+
+            if (isSubscribed) {
+                $("#subscribe-button").text("Unsubscribe");
+            }
+            else
+            {
+                $("#subscribe-button").text("Subscribe");
+            }
+        });
+    }
 
     //function loadPage(chapterID, pageID) { // Change this to /read/ + /chapterID + /pageNumber
     //    $.getJSON("/read/" + chapterID + "/" + pageID, function(data) {

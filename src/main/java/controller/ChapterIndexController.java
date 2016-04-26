@@ -37,38 +37,102 @@ public class ChapterIndexController {
         return "chapter-index";
     }
 
-    @RequestMapping(value = "/chapter-index/{series-ID}", method = RequestMethod.GET)
+    @RequestMapping(value = "/chapter-index/get/{series-ID}", method = RequestMethod.GET)
     public @ResponseBody
     JsonObject getPageOptions(@PathVariable(value = "series-ID") String seriesID, ModelMap model, HttpSession session, HttpServletRequest req) {
+        JsonObject json = new JsonObject();
+        Gson gson = new GsonBuilder().create();
+        boolean isSubscribed = false;
+        boolean userLoggedIn;
+        ArrayList<Chapter> chapterList = new ArrayList<Chapter>();
+        Series s = db.seriesRepo.getById(seriesID);
+        chapterList = s.getChapters();
+        json.add("chapterList", gson.toJsonTree(chapterList));
+        json.add("series", gson.toJsonTree(s));
+
+        UserService userService = UserServiceFactory.getUserService();
+        userLoggedIn = userService.isUserLoggedIn();
+
+        if(userLoggedIn == false) {
+            return json;//"Error: User not logged in";
+        }
+        //If the user is not logged in, don't display the subscribe button.
+
+        // load user from the datastore
+        UserData user = db.userRepo.getUserById(userService.getCurrentUser().getEmail());
+        if(user == null) {
+            return json;//"Error: Unable to load user from datastore";
+        }
+        if (user.isSubscribed(s)) {
+            isSubscribed = true;
+        }
+
+        json.add("isSubscribed", gson.toJsonTree(isSubscribed));
+        json.add("isUserLoggedIn", gson.toJsonTree(userLoggedIn));
+        return json;
+    }
+
+    @RequestMapping(value = "/chapter-index/{series-ID}", method = RequestMethod.GET)
+    public String loadChapterIndex(@PathVariable(value = "series-ID") String seriesID, ModelMap model, HttpSession session, HttpServletRequest req) {
         JsonObject json = new JsonObject();
         ArrayList<Chapter> chapterList = new ArrayList<Chapter>();
         Series s = db.seriesRepo.getById(seriesID);
         chapterList = s.getChapters();
+        String chapterID = s.getChapters().get(0).getChapterId();
+        String rootID = chapterList.get(0).getRoot().getPageId();
+        System.out.println("The root ID is: " + rootID);
+        System.out.println("The chapterID is: " + chapterID);
         Gson gson = new GsonBuilder().create();
         json.add("chapterList", gson.toJsonTree(chapterList));
         json.add("series", gson.toJsonTree(s));
-        return json;
+        model.addAttribute("rootID", rootID);
+        model.addAttribute("seriesID", seriesID);
+        model.addAttribute("chapterID", chapterID);
+        return "chapter-index";
     }
 
-//    @RequestMapping(value = "/chapter-index/subscribe", method = RequestMethod.GET)
-//    public @ResponseBody
-//    JsonObject getPageOptions(ModelMap model, HttpSession session, HttpServletRequest req) {
-//        JsonObject json = new JsonObject();
-//        Gson gson = new GsonBuilder().create();
-//        boolean isSubscribed = false;
-//
-//        UserService userService = UserServiceFactory.getUserService();
-//        if(userService.isUserLoggedIn() == false) {
-//            return json;//"Error: User not logged in";
-//        }
-//
-//        // load user from the datastore
-//        UserData user = db.userRepo.getUserById(userService.getCurrentUser().getEmail());
-//        if(user == null) {
-//            return json;//"Error: Unable to load user from datastore";
-//        }
-//
-//        json.add("isSubscribed", gson.toJsonTree(isSubscribed));
-//        return json;
-//    }
+    @RequestMapping(value = "/chapter-index/subscribe/{series-ID}", method = RequestMethod.GET)
+    public @ResponseBody
+    JsonObject subscribe(@PathVariable(value = "series-ID") String seriesID, ModelMap model, HttpSession session, HttpServletRequest req) {
+        System.out.println("In Subscription Mapping");
+
+
+        JsonObject json = new JsonObject();
+        Gson gson = new GsonBuilder().create();
+        boolean isSubscribed = false;
+        boolean userLoggedIn;
+        UserService userService = UserServiceFactory.getUserService();
+        userLoggedIn = userService.isUserLoggedIn();
+
+        if(userLoggedIn == false) {
+            return json;//"Error: User not logged in";
+        }
+
+        // load user from the datastore
+        UserData user = db.userRepo.getUserById(userService.getCurrentUser().getEmail());
+        if(user == null) {
+            return json;//"Error: Unable to load user from datastore";
+        }
+
+        System.out.println("Series ID: " + seriesID);
+        Series s = db.seriesRepo.getById(seriesID);
+
+        if (!user.isSubscribed(s))
+        {
+            user.addSubscription(s);
+            System.out.println("adding Subscription to: " + s);
+            isSubscribed = true;
+            System.out.println("Subscribed: " + isSubscribed);
+        }
+        else
+        {
+            user.removeSubscription(s);
+            System.out.println("Removed subscription from: " + s);
+            isSubscribed = false;
+            System.out.println("Subscribed: " + isSubscribed);
+        }
+
+        json.add("subscriptionToggled", gson.toJsonTree(isSubscribed));
+        return json;
+    }
 }

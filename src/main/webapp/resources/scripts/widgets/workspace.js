@@ -12,30 +12,37 @@ $(document).ready(function() {
     var pages = null;
 
     // test chapter being used for development, will be replaced with grabbing the id from the backend
-    loadChapter("My Best Friend Gleb~Day One: The Dream of Gleb");
+    loadChapter("One_Piece~Luffy_meets_Boa");
 
     /**
      * Loads a chaoter from the datastore into the story tree
      * @param chapterID: the ID of the chapter from the datastore
      */
     function loadChapter(chapterID) {
-        console.log("in load page");
+
         $.getJSON("/workspace/load/" + chapterID , function(data) {
         }).done(function (data) {
             chapter = data.Chapter;
             pages = data.Pages;
+            $("#title-input").val(chapter.name);
 
             console.log(chapter);
-            $("#title-input").val(chapter.name);
             console.log(pages);
 
-            //insertPages(pages);
-            insertOptions(pages[0], pages, 1);
+            loadTree(chapter.root, pages, 0);
+            validateBottomRow();
 
-        })
-            .fail(function (data) {
-                console.log("oh no load chapter failed");
-            });
+
+        });
+    }
+
+    function addLevel() {
+        $.get("/resources/layouts/chapterlevel.html", function(data) {
+            $("#page-table").append(data);
+            console.log($("#page-table"));
+            $('#chapter-level-X').attr("id", "chapter-level-" + (getDepth()-1));
+
+        });
     }
 
 /***********************************************************************************************************************
@@ -58,10 +65,12 @@ $(document).ready(function() {
 
     /**
      * Adds a new drawing page to the level of a story
+     * Using .on instead of .click because of problem with generating levels dynamically
      */
-    $(".add-page").click(function(){
+    $(document).on("click", ".add-page", function() {
         var chapterRow = $(this).parent().parent()[0].getAttribute("id");
-        var rowID =chapterRow.split('-')[2];
+        var rowID = chapterRow.split('-')[2];
+
         console.log(getPageCount(rowID));
 
         if(getPageCount(rowID) > 5) {
@@ -73,13 +82,7 @@ $(document).ready(function() {
         } else {
             addPage('PAGE-ID', rowID);
         }
-
-        // add page to chapter in Datstore (ajax request)
-
-        // add new page element to level
-        //addPage('PAGEID', rowNumber);
-
-        // validate tree
+        validateBottomRow();
 
     });
 
@@ -112,37 +115,29 @@ $(document).ready(function() {
     function insertOptions(root, pages, level) {
         //console.log(root.options[0].key.raw.name);
         //console.log(root.options);
-        if(level == 1){
-            addPage(root.pageId, level);
+        console.log(root.options.length);
+        if(root.options.length < 1) {
+            return;
         }
-        else{
-            addPage(root.key.raw.name, level);
-        }
-        //if(root.options.length < 1) {
-        //    return;
+        //
+        //for(var i = 0; i < root.options.length; i++) {
+        //    //console.log(root.options[i]);
+        //    addPage(getPage(root.options[i].key.raw.name,pages).pageId, level);
+        //    //insertOptions(getPage(root.options[i].key.raw.name,pages), pages, level+1);
+        //    console.log(getPage(root.options[i].key.raw.name,pages).pageId);
         //}
-        if(root.options != null) {
-            console.log("right before for in insertoptions");
-            for (var i = 0; i < root.options.length; i++) {
-                //console.log(root.options[i]);
-                //addPage(getPage(root.options[i].key.raw.name,pages).pageId, level);
-                //insertOptions(getPage(root.options[i].key.raw.name,pages), pages, level+1);
-                insertOptions(root.options[i], pages, level + 1);
+        console.log(root.options[1]);
+        console.log("Root option length " + root.options.length);
 
-                console.log(getPage(root.options[i].key.raw.name, pages).pageId);
-            }
-            console.log("after for in insertOptions");
-        }
-        return;
-        // insertOptions(getPage(root.options[1].key.raw.name,pages), pages, level+1);
+
+    return ;
+      //  return insertOptions(getPage(root.options[1].key.raw.name,pages), pages, level+1);
 
 
 
     }
 
 
-
-    // ADDS A PAGE TO A ROW, PLEASE THE ROW INDEX STARTS FROM 0, PLEASE EXCUSE THE MESS
     /**
      * Adds a page to a the story tree
      * @param pageID: The page being added
@@ -152,33 +147,35 @@ $(document).ready(function() {
     function addPage(pageID, level) {
         var levelToEdit = getLevel(level);
         var pageToEdit = null;
-        console.log("adding page to Row: "+ levelToEdit);
+        console.log("adding page to Level: "+ levelToEdit);
         if(levelToEdit == null) {
-            console.log("Row doesn't exist");
+            console.log("Level doesn't exist");
         } else {
             // check if center page taken
             if(isUnused(levelToEdit[2]) == true) {
                 pageToEdit = levelToEdit[2];
                 // check if second page is taken
+
             } else if(isUnused(levelToEdit[1]) == true) {
-                pageToEdit =levelToEdit[1];
+                pageToEdit = levelToEdit[1];
                 // check if fourth page is taken
             } else if(isUnused(levelToEdit[3]) == true) {
-                pageToEdit =levelToEdit[3];
+                pageToEdit = levelToEdit[3];
                 // check if first page is taken
             } else if(isUnused(levelToEdit[0]) == true) {
-                pageToEdit =levelToEdit[0];
+                pageToEdit = levelToEdit[0];
                 // check if fifth page is taken
             } else if(isUnused(levelToEdit[4]) == true) {
-                pageToEdit =levelToEdit[4];
+                pageToEdit = levelToEdit[4];
             } else {
-                console.log("Row is full");
+                console.log("Level is full");
             }
 
-            if(pageToEdit == null ) {
+            if(pageToEdit == null) {
                 console.log("pageToEdit is null");
             } else
                 setPage(pageToEdit.getElementsByClassName("chapter-page")[0], pageID)
+
 
         }
     }
@@ -193,12 +190,21 @@ $(document).ready(function() {
         if(page == null) {
             return;
         }
-        var formatedPageID = pageID.replace(/ /g, "%20");
-
+        //var formatedPageID = pageID.replace(/ /g, "%20");
+        var formatedPageID = encodeURI(pageID);
         page.setAttribute("id", formatedPageID);
+        var datastorePage = getPage(pageID,pages);
+        //console.log(datastorePage);
+
         // TODO: do this using jquery, selector wasnt working
         page.className = "";
         page.className = "chapter-page";
+        if(datastorePage != null) {
+            page.style.backgroundImage = "url(\'" + datastorePage.imagePath +"\')";
+            page.style.backgroundSize = "cover";
+            page.style.backgroundRepeat = "no-repeat";
+
+        }
 
     }
 
@@ -211,43 +217,46 @@ $(document).ready(function() {
      */
     function getPageCount(levelNumber) {
         var pageCount = 0;
-        var level = getLevel(levelNumber);
+        var level = getLevel(levelNumber-1);
+        //if(level == null) {
+        //    console.log("Level doesn't exist");
+        //    return -1;
+        //} else {
+        //    console.log(level);
+        //    for(var i = 0; i < level.length; i++) {
+        //        if(isUnused(level[i])) {
+        //        pageCount++;
+        //            }
+        //    }
+        //    console.log("Page count: " + pageCount);
+        //
+        //    return pageCount;
+            // check if center page taken
         if(level == null) {
-            console.log("Level doesn't exist");
-            return -1;
-        } else {
-
-            for(var i = 0; i < level.length; i++) {
-                if(isUnused(level[i])) {
-                pageCount++;
-                    }
-            }
-            console.log("Page count: " + pageCount);
-
-            return pageCount;
-            //// check if center page taken
-            //if(isUnused(level[2]) == false) {
-            //    pageCount++;
-            //    // check if second page is taken
-            //}
-            //if(isUnused(level[1]) == false) {
-            //    pageCount++;
-            //    // check if fourth page is taken
-            //}
-            //if(isUnused(level[3]) == false) {
-            //    pageCount++;
-            //    // check if first page is taken
-            //}
-            //if(isUnused(level[0]) == false) {
-            //    pageCount++;
-            //    // check if fifth page is taken
-            //}
-            //if(isUnused(level[4]) == false) {
-            //    pageCount++;
-            //}
-            //return pageCount;
+         return;
         }
-    }
+            if(isUnused(level[2]) == false) {
+                pageCount++;
+                // check if second page is taken
+            }
+            if(isUnused(level[1]) == false) {
+                pageCount++;
+                // check if fourth page is taken
+            }
+            if(isUnused(level[3]) == false) {
+                pageCount++;
+                // check if first page is taken
+            }
+            if(isUnused(level[0]) == false) {
+                pageCount++;
+                // check if fifth page is taken
+            }
+            if(isUnused(level[4]) == false) {
+                pageCount++;
+            }
+            return pageCount;
+        }
+
 
     /**
      * Checks if a drawing page is currently by a level
@@ -268,7 +277,8 @@ $(document).ready(function() {
     validateBottomRow();
     function validateBottomRow() {
         var pageCountForBottomLevel = getPageCount($(".chapter-level").length);
-        if(pageCountForBottomLevel > 0) {
+        if(pageCountForBottomLevel > 1) {
+            addRow();
 
         }
 
@@ -279,7 +289,7 @@ $(document).ready(function() {
      * TODO: figure out why onpage add click doesn't work for rows added
      */
     function addRow() {
-        $('#page-table > tbody:last-child').append('<tr id=\"chapter-row-'+ ($(".chapter-level").length+1) + '\" class=\"chapter-level\">' +
+        $('#page-table > tbody:last-child').append('<tr id=\"chapter-level-'+ ($(".chapter-level").length) + '\" class=\"chapter-level\">' +
             '<td><button class=\"chapter-page hidden-page\" type=\"button\"></button></td>' +
             '<td><button class=\"chapter-page hidden-page\" type=\"button\"></button></td>' +
             '<td><button class=\"chapter-page hidden-page\" type=\"button\"></button></td>' +
@@ -338,8 +348,9 @@ $(document).ready(function() {
     function getPage(pageId, pages) {
 
         for(var i = 0; i < pages.length; i++) {
-            if(pages[0].pageId = pageId) {
-                return pages[0];
+            if(pages[i].pageId === pageId) {
+
+                return pages[i];
             }
         }
         return null;
@@ -354,12 +365,59 @@ $(document).ready(function() {
      */
     function getLevel(level) {
         // checks if the level exists
-        if($("#chapter-row-"+level).length < 1) {
+       console.log("chapter-level-"+(level-1));
+        console.log($("#chapter-level-"+(level-1)));
+        if($("#chapter-level-"+(level)).length < 1) {
             return null;
         } else {
             // TODO check if row size is max width
-            return $("#chapter-row-"+ level).children();
+            return $("#chapter-level-"+ level).children();
         }
+    }
+
+    function getDepth() {
+       return  $('#page-table tr').length;
+
+    }
+
+
+
+    // recursively  loads story tree
+    function loadTree(rootID, allPages, level) {
+        // check if root is null
+        if(rootID == null) {
+            console.log("Root is null, Level: " + level);
+            return;
+        } else {
+
+            // add root to tree
+            var root = getPage(getPageID(rootID), allPages);
+            if(getLevel(level) == null) {
+                addRow();
+            }
+            addPage(root.pageId, level);
+            // add each option to the level before
+            for (var i = 0; i < root.options.length; i++) {
+                // console.log(i);
+                // option = getPage(getPageID(root.options[i]), allPages);
+
+                console.log(root.options[i]);
+
+
+                    //insertOptions(getPage(root.options[i].key.raw.name,pages), pages, level+1);
+                loadTree(root.options[i], allPages,level+1);
+                //
+                //    //insertOptions(getPage(root.options[i].key.raw.name,pages), pages, level+1);
+            }
+
+
+        return;
+        }
+    }
+
+
+    function getPageID(page) {
+       return page.key.raw.name;
     }
 
 });
