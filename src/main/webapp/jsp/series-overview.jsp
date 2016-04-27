@@ -25,7 +25,8 @@
                         Series Overview Chapter Title
                     </span>
                     <span>
-                    <button type="submit" class="btn btn-default series-overview-edit-draft-button">Edit Draft</button>
+                        <button type="submit" class="btn btn-default series-overview-delete-chapter-button">X</button>
+                        <button type="submit" class="btn btn-default series-overview-edit-draft-button">Edit Draft</button>
                     </span>
                 </span>
             </div>

@@ -6,6 +6,7 @@ import com.google.appengine.repackaged.com.google.gson.JsonObject;
 import data.DbContext;
 import data.model.Chapter;
 import data.model.Series;
+import data.repository.ChapterRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -45,7 +46,7 @@ public class SeriesOverviewController {
         return "series-overview";
     }
 
-    @RequestMapping(value = "admin/get/{series-ID}/allChapters", method = RequestMethod.GET)
+    @RequestMapping(value = "series-overview/get/{series-ID}/allChapters", method = RequestMethod.GET)
     public @ResponseBody JsonObject getPage(@PathVariable(value = "series-ID") String seriesID, ModelMap model, HttpSession session, HttpServletRequest req) {
         JsonObject json = new JsonObject();
         Gson gson = new GsonBuilder().create();
@@ -55,6 +56,19 @@ public class SeriesOverviewController {
 
         json.add("allChapters", gson.toJsonTree(allChapters));
 
+        return json;
+    }
+
+    @RequestMapping(value = "series-overview/getChapter/{chapter-ID}", method = RequestMethod.GET)
+    public @ResponseBody JsonObject getChapters(@PathVariable(value = "chapter-ID") String chapterID, ModelMap model, HttpSession session, HttpServletRequest req) {
+        System.out.println("In series overview");
+        JsonObject json = new JsonObject();
+        Gson gson = new GsonBuilder().create();
+
+        Chapter c = db.chapterRepo.getById(chapterID);
+        Series s = c.getSeries();
+        db.chapterRepo.delete(c);
+        db.seriesRepo.update(s);
 
 
         return json;
