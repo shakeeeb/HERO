@@ -29,10 +29,10 @@ public class SeriesWorkspaceController {
     }
 
 
-    @RequestMapping(value="user/lookup/{userEmail}", method = RequestMethod.GET)
+    @RequestMapping(value="series-workspace/lookup/{userEmail}", method = RequestMethod.GET)
     public String loadSeriesName(@PathVariable(value="userEmail") String userEmail, ModelMap model) {
-        System.out.println("Going to user-page");
-        return "user";
+        System.out.println("Going to series-workspace ");
+        return "series-workspace";
     }
 
     //get the series from the previous page
