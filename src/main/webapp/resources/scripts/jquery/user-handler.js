@@ -18,6 +18,18 @@ $(document).ready(function() {
     decoded_web = decodeURI(webpage_url).replace("%40", "@").toString();
     decoded_web = decoded_web.trim();
 
+
+
+    $(document).on("click",".user-story-title", function () {
+        //seriesID
+
+        var saving_series = $(this).text();
+        console.log(saving_series);
+        window.location.replace("/chapter-index/"+saving_series);
+    });
+
+
+
     loadPage(decoded_web);
     function loadPage(userToLookUpEmail) {
         $.getJSON("/user/get/",{"userToLookUpEmail" : userToLookUpEmail}, function(data) {

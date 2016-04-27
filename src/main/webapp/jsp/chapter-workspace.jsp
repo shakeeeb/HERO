@@ -19,18 +19,18 @@
 <body>
     <div id="chapter-workspace-container">
         <div id="chapter-form">
-            <form action="#" class="chapter-form">
+            <form onsubmit="updateChapter()" class="chapter-form">
                 <div class="form-group">
                     <input id="title-input" class="center-block" type="text" name="title" placeholder="Title">
                 </div>
                 <div class="form-group">
                     <textarea id="summary-input" form="chapter-form" placeholder="Summary of Chapter" class="center-block"></textarea>
                 </div>
-                <div id="cover-upload-container" class="form-group">
-                    <label for="cover-upload-input">Cover Page Upload</label>
-                    <br>
-                    <input id="cover-upload-input" type="file" name="coverupload" value="upload">
-                </div>
+                <%--<div id="cover-upload-container" class="form-group">--%>
+                    <%--<label for="cover-upload-input">Cover Page Upload</label>--%>
+                    <%--<br>--%>
+                    <%--<input id="cover-upload-input" type="file" name="coverupload" value="upload">--%>
+                <%--</div>--%>
                 <br>
 
                 <button id="save-chapter-button" type="submit" class="center-block btn btn-default">save</button>
@@ -40,28 +40,28 @@
         </div>
 
         <div id="svgContainer" style="margin: 50px 50px;">
-            <svg id="svg1" width="0" height="0" >
-                <path id="0-1-connector"
-                        id="path1"
-                        d="M0 0"
-                        stroke="#000"
-                        fill="none"
-                        stroke-width="6px";/>
+            <%--<svg id="svg1" width="0" height="0" >--%>
+                <%--<path id="0-1-connector"--%>
+                        <%--id="path1"--%>
+                        <%--d="M0 0"--%>
+                        <%--stroke="#000"--%>
+                        <%--fill="none"--%>
+                        <%--stroke-width="6px";/>--%>
 
-                <path
-                        id="1-2-connector"
-                        d="M0 0"
-                        stroke="#000"
-                        fill="none"
-                        stroke-width="6px";/>
+                <%--<path--%>
+                        <%--id="1-2-connector"--%>
+                        <%--d="M0 0"--%>
+                        <%--stroke="#000"--%>
+                        <%--fill="none"--%>
+                        <%--stroke-width="6px";/>--%>
 
-                <path
-                        id="1-3-connector"
-                        d="M0 0"
-                        stroke="#000"
-                        fill="none"
-                        stroke-width="6px";/>
-            </svg>
+                <%--<path--%>
+                        <%--id="1-3-connector"--%>
+                        <%--d="M0 0"--%>
+                        <%--stroke="#000"--%>
+                        <%--fill="none"--%>
+                        <%--stroke-width="6px";/>--%>
+            <%--</svg>--%>
         </div>
 
         <div id="chapter-page-flow">
@@ -104,6 +104,9 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div style="display: none;">
+        <p id="hidden-chapterID">${chapterID}</p>
     </div>
 </body>
 </html>

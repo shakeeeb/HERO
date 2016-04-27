@@ -9,10 +9,7 @@ import data.model.Series;
 import data.model.UserData;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
@@ -35,6 +32,12 @@ public class ChapterWorkspaceController {
     @RequestMapping(value="chapter-workspace", method = RequestMethod.GET)
     public String chapterWorkspacePage(ModelMap model) {
         System.out.println("Going to chapter-workspace ");
+        return "chapter-workspace";
+    }
+
+    @RequestMapping(value="workspace/loadChapter/{chapterID}", method = RequestMethod.GET)
+    public String loadThisChapter(@PathVariable(value="chapterID") String chapterID, ModelMap model) {
+        model.addAttribute("chapterID", chapterID);
         return "chapter-workspace";
     }
 
@@ -96,6 +99,20 @@ public class ChapterWorkspaceController {
 
         return json;
 
+    }
+
+
+
+    @RequestMapping(value="/workspace/update", method = RequestMethod.POST)
+    public @ResponseBody String updateChapter(@RequestParam("chapterID") String chapterID, @RequestParam("summary") String summary) {
+        System.out.println("ASDASDASDASDAS");
+        System.out.println(chapterID);
+        System.out.println(summary);
+        Chapter chapterToUpdate = db.chapterRepo.getById(chapterID);
+        chapterToUpdate.setSummary(summary);
+        db.chapterRepo.update(chapterToUpdate);
+
+        return "Success";
     }
 
     // load the pages for a chapter

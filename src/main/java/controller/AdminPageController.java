@@ -102,5 +102,61 @@ public class AdminPageController {
         return json;
     }
 
+    @RequestMapping(value = "admin/get/approveComic/{chapter-ID}", method = RequestMethod.GET)
+    public @ResponseBody JsonObject approveComic(@PathVariable(value = "chapter-ID") String chapterID, ModelMap model, HttpSession session, HttpServletRequest req) {
+        JsonObject json = new JsonObject();
+        Gson gson = new GsonBuilder().create();
+        System.out.println(chapterID);
+
+        Chapter c = db.chapterRepo.getById(chapterID);
+        c.setPublished(true);
+        db.chapterRepo.update(c);
+
+        List<Chapter> allChaptersList = db.chapterRepo.getAll();
+        ArrayList<Chapter> allChapters = new ArrayList<Chapter>(allChaptersList);
+
+        ArrayList<Chapter> pendingApproval = new ArrayList<Chapter>();
+
+        for (Chapter currentChapter : allChapters)
+        {
+            if (!currentChapter.isPublished())
+            {
+                pendingApproval.add(currentChapter);
+            }
+        }
+
+        json.add("pendingApproval", gson.toJsonTree(pendingApproval));
+
+        return json;
+    }
+
+    @RequestMapping(value = "admin/get/falselyReported/{chapter-ID}", method = RequestMethod.GET)
+    public @ResponseBody JsonObject falselyReported(@PathVariable(value = "chapter-ID") String chapterID, ModelMap model, HttpSession session, HttpServletRequest req) {
+        JsonObject json = new JsonObject();
+        Gson gson = new GsonBuilder().create();
+
+        Chapter c = db.chapterRepo.getById(chapterID);
+        c.setPublished(true);
+        c.setReported(false);
+        db.chapterRepo.update(c);
+
+        List<Chapter> allChaptersList = db.chapterRepo.getAll();
+        ArrayList<Chapter> allChapters = new ArrayList<Chapter>(allChaptersList);
+
+        ArrayList<Chapter> reportedComics = new ArrayList<Chapter>();
+
+        for (Chapter chap : allChapters)
+        {
+            if (!chap.isReported())
+            {
+                reportedComics.add(chap);
+            }
+        }
+
+        json.add("reportedComics", gson.toJsonTree(reportedComics));
+
+        return json;
+    }
+
 
 }

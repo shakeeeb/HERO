@@ -138,11 +138,11 @@ h3 {
     width: 200px;
 }
 
-.approve-comic-button {
+.approve-comic-button-div {
     margin-left: 145px;
 }
 
-.delete-comic-button {
+.delete-comic-button-div {
     margin-left: 153px;
     margin-bottom: 25px;
 }
@@ -292,4 +292,8 @@ h3 {
 
 #last-read-page-chapter-index{
     /*cursor: pointer;*/
+}
+
+.greeting {
+    color: #00c6df;
 }

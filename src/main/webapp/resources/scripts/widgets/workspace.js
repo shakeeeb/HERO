@@ -533,6 +533,11 @@ $(document).ready(function() {
     }
 
 
+    $(document).on("click", "#save-chapter-button", function() {
+        $.post( "/workspace/update", {chapterID: chapter.chapterId, summary: $('#summary-input').val() } );
+    });
+
+
 /***********************************************************************************************************************
  * LINE DRAWING TOOL LIBRARY
  **********************************************************************************************************************/
