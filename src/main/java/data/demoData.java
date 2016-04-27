@@ -18,7 +18,7 @@ public class demoData {
         // all demodata should go here
         // i intend for this class to be called by the homepage controller or something
         //UserDatas
-        UserData T = db.userRepo.create("tpmx@Essextec.WallStreet");
+        UserData T = db.userRepo.create("tangobearindustries@gmail.com");
         T.setAboutMe("Hey fam.");
         UserData Miuki = db.userRepo.create("MKYip@ColdSpringHarbor.lab");
         Miuki.setAboutMe(":)");
@@ -55,10 +55,10 @@ public class demoData {
         System.out.println(c6);
         // Pages per chapter
         //goddamn it. my demodata got erased
-        Page pp1 = c6.getRoot();
-        Page pp2 = db.pageRepo.create(MKSeries, c6);
-        Page pp3 = db.pageRepo.create(MKSeries, c6);
-        Page pp4 = db.pageRepo.create(MKSeries, c6);
+        Page pp1 = c6.getRoot(); //root is level 0
+        Page pp2 = db.pageRepo.create(MKSeries, c6, 1); //hardcoded levels for now
+        Page pp3 = db.pageRepo.create(MKSeries, c6, 2);
+        Page pp4 = db.pageRepo.create(MKSeries, c6, 2);
         pp1.setNext(pp2, c6);
         pp2.setNext(pp3, c6);
         pp2.setNext(pp4, c6);
@@ -66,9 +66,9 @@ public class demoData {
         //changed the repo create-- it takes priors.
         // db.pageRepo.create(series, chapter, priors)
         Page p1 = c1.getRoot();
-        Page p2 = db.pageRepo.create(Tseries, c1);
-        Page p3 = db.pageRepo.create(Tseries, c1);
-        Page p4 = db.pageRepo.create(Tseries, c1);
+        Page p2 = db.pageRepo.create(Tseries, c1, 1);
+        Page p3 = db.pageRepo.create(Tseries, c1, 2);
+        Page p4 = db.pageRepo.create(Tseries, c1, 2);
         p1.setNext(p2, c1);
         p2.setNext(p3, c1);
         p2.setNext(p4, c1);
@@ -77,24 +77,25 @@ public class demoData {
         Series newSeries = db.seriesRepo.create("One_Piece", "Fiction", Ben, "Best MangaEver");
         Chapter newChapter = db.chapterRepo.create("Luffy_meets_Boa", Ben, newSeries, 1);
         Page pageOne = newChapter.getRoot();
-        Page pageTwo = db.pageRepo.create(newSeries, newChapter);
-        Page pageThree = db.pageRepo.create(newSeries, newChapter); // page three comes from page two
-        Page wowWhataShortChapter = db.pageRepo.create(newSeries, newChapter);
+        Page pageTwo = db.pageRepo.create(newSeries, newChapter, 1);
+        Page pageThree = db.pageRepo.create(newSeries, newChapter, 2); // page three comes from page two
+        Page wowWhataShortChapter = db.pageRepo.create(newSeries, newChapter, 3);
         pageOne.setImagePath("/resources/images/test/test1.png");
         pageTwo.setImagePath("/resources/images/test/test2.png");
         pageThree.setImagePath("/resources/images/test/test3.png");
         wowWhataShortChapter.setImagePath("/resources/images/test/test4.png");
+        Page pageFive = db.pageRepo.create(newSeries, newChapter, 3); //purposeful orphan
 
 
-        pageOne.addOption(pageTwo, "Go to Page 2");
+        pageOne.addOption(pageTwo, "Go to Page 2"); // 1->2
         //pageOne.setOptionDescriptors(pageOne.getOptionDescriptors());
 
-        pageTwo.addOption(pageThree, "Go to Page 3");
+        pageTwo.addOption(pageThree, "Go to Page 3"); //2->3
         //pageTwo.setOptionDescriptors(pageTwo.getOptionDescriptors());
 
-        pageTwo.addOption(wowWhataShortChapter, "Go to Page 4");
+        pageTwo.addOption(wowWhataShortChapter, "Go to Page 4"); //2->4
         //pageTwo.setOptionDescriptors(pageThree.getOptionDescriptors());
-        
+
         db.chapterRepo.update(newChapter);
 
         Chapter onePieceChapter2 = db.chapterRepo.create("Luffy Meets Kim Possible", Ben, newSeries, 2);

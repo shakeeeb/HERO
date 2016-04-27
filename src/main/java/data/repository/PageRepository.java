@@ -24,9 +24,20 @@ public class PageRepository {
         String[] sparts = Id.split("~");
         String chapterId = cparts[0];
         String seriesId = sparts[0];
+        //if the split failed its not a legit id
+        if(cparts.length < 2){
+            return null;
+        }
+        if(sparts.length > 2){
+            return null;
+        }
         System.out.println("chapter- <" + chapterId + ">");
         System.out.println("series- <" + seriesId + ">");
+
         Series s = ofy().load().type(Series.class).id(seriesId).now();
+        if(s == null){
+            return null;
+        }
         Key<Chapter> key = Key.create(Key.create(s), Chapter.class, chapterId);
         Chapter c = ofy().load().key(key).now();
         Key<Page> pkey = Key.create(Key.create(c), Page.class, Id);
