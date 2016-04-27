@@ -4,6 +4,8 @@ import com.google.appengine.repackaged.com.google.protos.gdata.proto2api.Core;
 import com.googlecode.objectify.Ref;
 import com.googlecode.objectify.annotation.*;
 import com.googlecode.objectify.condition.IfFalse;
+import com.googlecode.objectify.condition.IfTrue;
+
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
 import java.util.ArrayList;
@@ -22,8 +24,10 @@ public class Chapter {
     private Date dateCreated; // generate
     @Index private int chapterNumber;
     @Index(IfFalse.class) private Boolean approved = false;
+    @Index(IfTrue.class)private boolean pendingApproval = false;
     private ArrayList<Ref<Page>> orphans;
-    private int max = 0;
+    private int max = 1;
+    private String summary = null;
 
     public Chapter(){
         // each chapter must have a single page
@@ -177,7 +181,7 @@ public class Chapter {
     }
 
     public void removeOrphan(Page orphan){
-        orphans.remove(orphan);
+        orphans.remove(Ref.create(orphan));
     }
 
     // extended methods
@@ -233,15 +237,42 @@ public class Chapter {
     public ArrayList<Page> getAllPages(){
         ArrayList<Page> returner = new ArrayList<Page>();
         root.get().getAllPages(returner);
+        System.out.println("before adding on the orphans" + returner);
         for(Ref<Page> r: orphans){
             Page p = r.get();
             returner.add(p);
         }
+        System.out.println(returner);
         return returner;
+        
     }
 
     public int getMax(){
-        return max++;
+        return this.max++;
+    }
+
+    public boolean isOrphan(Page p){
+        if(this.orphans.contains(Ref.create(p))){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void setSummary(String newSummary){
+        this.summary = newSummary;
+    }
+
+    public String getSummary(){
+        return this.summary;
+    }
+
+    public void submitForApproval(){
+        this.pendingApproval = true;
+    }
+
+    public void rejectSubmission(){
+        this.pendingApproval = false;
     }
 
 

@@ -10,10 +10,10 @@ $(document).ready(function() {
     var MAX_WIDTH = 5;
     var chapter = null;
     var pages = null;
+    var cID = null;
 
     // test chapter being used for development, will be replaced with grabbing the id from the backend
-    loadChapter("One_Piece~Luffy_meets_Boa");
-
+    loadChapter("Puppycat Savage~It Feels Good To Be A Gangsta");
 
     /**
      * Loads a chaoter from the datastore into the story tree
@@ -23,13 +23,15 @@ $(document).ready(function() {
 
         $.getJSON("/workspace/load/" + chapterID , function(data) {
         }).done(function (data) {
+            cID = chapterID;
             chapter = data.Chapter;
             pages = data.Pages;
             $("#title-input").val(chapter.name);
+            $("#summary-input").val(chapter.summary);
 
             console.log(chapter);
             console.log(pages);
-            connectAll();
+
             loadTree(chapter.root, pages, 0);
             validateBottomRow();
 
@@ -55,18 +57,30 @@ $(document).ready(function() {
 
         var pageID = this.getTextContent;
 
-        $.post( "/get-chapter-page", {"data":pageID})
-            .done(function() {
-                console.log("Sending the data back to the servlet");
-            })
-            .fail(function() {
-                console.log("Cannot send the data back to the servlet");
-            });
+        //$.post( "/get-chapter-page", {"data":pageID})
+        //    .done(function() {
+        //        console.log("Sending the data back to the servlet");
+        //    })
+        //    .fail(function() {
+        //        console.log("Cannot send the data back to the servlet");
+        //    });
+    });
+
+    $(document).on("click", ".chapter-page", function() {
+       if($(this).hasClass("add-page")) {
+           return;
+       }
+        // get the page ID
+       var pageID = chapter.chapterId + '^' +  $(this).attr('id').split('-')[1];
+
+        // load drawing page
+        window.location.replace("/draw/"+pageID);
+
     });
 
 
     $(document).on("click", "#add-modal-save-button", function() {
-        $('#myModal').modal('hide')
+        $('#myModal').modal('hide');
     });
     /**
      * Adds a new drawing page to the level of a story
@@ -74,7 +88,7 @@ $(document).ready(function() {
      */
     $(document).on("click", ".add-page", function() {
 
-        $('#myModal').modal('show');
+       // $('#myModal').modal('show');
 
         var chapterRow = $(this).parent().parent()[0].getAttribute("id");
         var rowID = chapterRow.split('-')[2];
@@ -99,6 +113,20 @@ $(document).ready(function() {
 * B) ESSENTIALS: Things used by Handlers
 **********************************************************************************************************************/
 
+    /**
+     * Adds pages of a chapter to the story tree
+     * @param pages
+     */
+    function insertPages(pages) {
+        pagesToAdd = pages;
+        addPage(pagesToAdd[0].pageId,1);
+        //console.log(pagesToAdd[1].options.length);
+        insertOptions(pagesToAdd[0], pages, 2);
+        //addPage(pagesToAdd[1].pageId, 2);
+        //addPage(pagesToAdd[2].pageId, 2);
+        addPage(pagesToAdd[3].pageId, 3);
+
+    }
 
     /**
      * Recursivly adds chapter to the story tree
@@ -159,7 +187,7 @@ $(document).ready(function() {
             } else if(isUnused(levelToEdit[0]) == true) {
                 pageToEdit = levelToEdit[0];
                 // check if fifth page is taken
-            } else if(isUnused(levelToEdit[4]) == true) {
+            } else if((isUnused(levelToEdit[4]) == true)||(isAddPage(levelToEdit[4]) == true)) {
                 pageToEdit = levelToEdit[4];
             } else {
                 console.log("Level is full");
@@ -168,7 +196,7 @@ $(document).ready(function() {
             if(pageToEdit == null) {
                 console.log("pageToEdit is null");
             } else
-                setPage(pageToEdit.getElementsByClassName("chapter-page")[0], pageID)
+                setPage(pageToEdit.getElementsByClassName("chapter-page")[0], pageID, level)
 
 
         }
@@ -180,7 +208,7 @@ $(document).ready(function() {
      * @param page: the page on the story tree being set
      * @param pageID: the id of the datastore page
      */
-    function setPage(page, pageID) {
+    function setPage(page, pageID, level) {
         if(page == null) {
             return;
         }
@@ -190,6 +218,16 @@ $(document).ready(function() {
         //var idNumber = pageID.split('^')[1];
         page.setAttribute("id", 'page-' + pageIDtoNumberID(pageID));
         var datastorePage = getPage(pageID,pages);
+        var formatedPageID = encodeURI(pageID);
+        //page.setAttribute("id", formatedPageID);
+        var datastorePage = $.getJSON("make-chapter-page/" + cID ,{level: level} ,function(data) {
+        })
+            .done(function(data){
+                console.log("success");
+            }).fail(function(data){
+                console.log("failure");
+            });
+        /*getPage(pageID,pages)*/
         //console.log(datastorePage);
 
         // TODO: do this using jquery, selector wasnt working
@@ -217,7 +255,7 @@ $(document).ready(function() {
      */
     function getPageCount(levelNumber) {
         var pageCount = 0;
-        var level = getLevel(levelNumber-1);
+        var level = getLevel(levelNumber);
         //if(level == null) {
         //    console.log("Level doesn't exist");
         //    return -1;
@@ -267,6 +305,11 @@ $(document).ready(function() {
      */
     function isUnused(page) {
         return page.getElementsByClassName("hidden-page").length > 0;
+
+    }
+    function isAddPage(page) {
+        return page.getElementsByClassName("add-page").length > 0;
+
     }
 
     /**
@@ -276,7 +319,7 @@ $(document).ready(function() {
      */
     validateBottomRow();
     function validateBottomRow() {
-        var pageCountForBottomLevel = getPageCount($(".chapter-level").length);
+        var pageCountForBottomLevel = getPageCount($(".chapter-level").length -1 );
         if(pageCountForBottomLevel > 1) {
             addRow();
 
@@ -294,7 +337,7 @@ $(document).ready(function() {
             '<td><button class=\"chapter-page hidden-page\" type=\"button\"></button></td>' +
             '<td><button class=\"chapter-page hidden-page\" type=\"button\"></button></td>' +
             '<td><button class=\"chapter-page hidden-page\" type=\"button\"></button></td>' +
-            '<td><button class=\"add-page\" type=\"button\">new</button></td>' +
+            '<td><button class=\"chapter-page add-page\" type=\"button\">new</button></td>' +
             '</tr>');
 
 
@@ -520,9 +563,9 @@ $(document).ready(function() {
         // connect all the paths you want!
 
 
-        //connectElements($("#svg1"), $("#0-1-connector"), $('#page-0'),  $("#page-1"));
-        //connectElements($("#svg1"), $("#1-2-connector"), $('#page-1'),  $("#page-2"));
-        //connectElements($("#svg1"), $("#1-3-connector"), $('#page-1'),  $("#page-3"));
+    connectElements($("#svg1"), $("#0-1-connector"), $('#page-0'),  $("#page-1"));
+        connectElements($("#svg1"), $("#1-2-connector"), $('#page-1'),  $("#page-2"));
+        connectElements($("#svg1"), $("#1-3-connector"), $('#page-1'),  $("#page-3"));
         //connectElements($("#svg1"), $("#path2"), $("#red"),    $("#orange"));
         //connectElements($("#svg1"), $("#path3"), $("#teal"),   $("#aqua")  );
         //connectElements($("#svg1"), $("#path4"), $("#red"),    $("#aqua")  );
