@@ -248,7 +248,8 @@ public class Chapter {
 
     public ArrayList<Page> getAllPages(){
         ArrayList<Page> returner = new ArrayList<Page>();
-        root.get().getAllPages(returner);
+        Page p1 = root.get();
+        p1.getAllPages(returner);
         System.out.println("before adding on the orphans" + returner);
         for(Ref<Page> r: orphans){
             Page p = r.get();
