@@ -13,7 +13,7 @@ $(document).ready(function() {
     var cID = null;
 
     // test chapter being used for development, will be replaced with grabbing the id from the backend
-    loadChapter("Puppycat Savage~It Feels Good To Be A Gangsta");
+    loadChapter("One_Piece~Luffy_meets_Boa");
 
     /**
      * Loads a chaoter from the datastore into the story tree
@@ -195,7 +195,7 @@ $(document).ready(function() {
         //var formatedPageID = pageID.replace(/ /g, "%20");
         var formatedPageID = encodeURI(pageID);
         page.setAttribute("id", formatedPageID);
-        var datastorePage = $.getJSON("make-chapter-page/" + cID ,{"level": level} ,function(data) {
+        var datastorePage = $.getJSON("make-chapter-page" ,{"level": level, "chapterID": cID, "pageID" : pageID} ,function(data) {
         })
             .done(function(data){
                 console.log(data);

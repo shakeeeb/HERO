@@ -65,33 +65,27 @@ public class demoData {
         db.chapterRepo.update(c6);
         //changed the repo create-- it takes priors.
         // db.pageRepo.create(series, chapter, priors)
-        ArrayList<Page> priorHolder = new ArrayList<Page>();
-        Page p1 = db.pageRepo.create(Tseries, c1, null);
-        priorHolder.add(p1);
-        Page p2 = db.pageRepo.create(Tseries, c1, priorHolder);
-        Page p3 = db.pageRepo.create(Tseries, c1, priorHolder);
-        priorHolder.remove(p1);
-        priorHolder.add(p2);
-        priorHolder.add(p3);
-        Page p4 = db.pageRepo.create(Tseries, c1, priorHolder);
+        Page p1 = c1.getRoot();
+        Page p2 = db.pageRepo.create(Tseries, c1);
+        Page p3 = db.pageRepo.create(Tseries, c1);
+        Page p4 = db.pageRepo.create(Tseries, c1);
+        p1.setNext(p2, c1);
+        p2.setNext(p3, c1);
+        p2.setNext(p4, c1);
+
 
         Series newSeries = db.seriesRepo.create("One_Piece", "Fiction", Ben, "Best MangaEver");
         Chapter newChapter = db.chapterRepo.create("Luffy_meets_Boa", Ben, newSeries, 1);
-        //newSeries.addChapter(newChapter);
-        Page pageOne = db.pageRepo.create(newSeries, newChapter, null); // the root page
-        ArrayList<Page> priorHolder2 = new ArrayList<Page>();
-        priorHolder2.add(pageOne);
-        Page pageTwo = db.pageRepo.create(newSeries, newChapter, priorHolder2);
-        priorHolder2.remove(pageOne);
-        priorHolder2.add(pageTwo);
-        Page pageThree = db.pageRepo.create(newSeries, newChapter, priorHolder); // page three comes from page two
-        Page wowWhataShortChapter = db.pageRepo.create(newSeries, newChapter, priorHolder2);
+        Page pageOne = newChapter.getRoot();
+        Page pageTwo = db.pageRepo.create(newSeries, newChapter);
+        Page pageThree = db.pageRepo.create(newSeries, newChapter); // page three comes from page two
+        Page wowWhataShortChapter = db.pageRepo.create(newSeries, newChapter);
         pageOne.setImagePath("/resources/images/test/test1.png");
         pageTwo.setImagePath("/resources/images/test/test2.png");
         pageThree.setImagePath("/resources/images/test/test3.png");
         wowWhataShortChapter.setImagePath("/resources/images/test/test4.png");
 
-        newChapter.setRoot(pageOne);
+
         pageOne.addOption(pageTwo, "Go to Page 2");
         //pageOne.setOptionDescriptors(pageOne.getOptionDescriptors());
 
@@ -100,8 +94,7 @@ public class demoData {
 
         pageTwo.addOption(wowWhataShortChapter, "Go to Page 4");
         //pageTwo.setOptionDescriptors(pageThree.getOptionDescriptors());
-
-
+        
         db.chapterRepo.update(newChapter);
 
         Chapter onePieceChapter2 = db.chapterRepo.create("Luffy Meets Kim Possible", Ben, newSeries, 2);

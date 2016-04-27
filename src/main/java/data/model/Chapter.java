@@ -35,6 +35,7 @@ public class Chapter {
         //Page p = new Page(); // should be ID in there
         //root = Ref.create(p);
         dateCreated = new Date();
+        this.orphans = new ArrayList<Ref<Page>>();
     }
 
     /**
@@ -188,6 +189,12 @@ public class Chapter {
     }
 
     public void addOrphan(Page orphan){
+        if(orphan == null){
+            System.out.println("the orphan itself is null?");
+        } else if(orphans == null){
+            System.out.println("the arraylist 'orphans' is null");
+            this.orphans = new ArrayList<Ref<Page>>();
+        }
         orphans.add(Ref.create(orphan));
     }
 
