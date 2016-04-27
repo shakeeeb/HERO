@@ -189,6 +189,12 @@ public class Chapter {
     }
 
     public void addOrphan(Page orphan){
+        if(orphan == null){
+            System.out.println("the orphan itself is null?");
+        } else if(orphans == null){
+            System.out.println("the arraylist 'orphans' is null");
+            this.orphans = new ArrayList<Ref<Page>>();
+        }
         orphans.add(Ref.create(orphan));
     }
 
@@ -251,12 +257,16 @@ public class Chapter {
         Page p1 = root.get();
         p1.getAllPages(returner);
         System.out.println("before adding on the orphans" + returner);
+        ArrayList<Page> orphanage = new ArrayList<Page>();
         for(Ref<Page> r: orphans){
             Page p = r.get();
-            returner.add(p);
+            orphanage.add(p);
         }
-        System.out.println(returner);
-        return returner;
+        System.out.println("orphans:" + orphanage);
+        //purge orphans
+        ArrayList<Page> result = purge(orphanage, returner);
+        System.out.println(result);
+        return result;
         
     }
 
@@ -287,6 +297,20 @@ public class Chapter {
 
     public void rejectSubmission(){
         this.pendingApproval = false;
+    }
+
+    public ArrayList<Page> purge(ArrayList<Page> orphanage, ArrayList<Page> tree){
+        //gets rid of redundant elements
+        System.out.println("purging elements");
+        for(Page p: tree){
+            if(orphanage.contains(p)){
+                System.out.println("caught a redundant element");
+                this.orphans.remove(Ref.create(p));
+                orphanage.remove(p);
+            }
+        }
+        tree.addAll(orphanage);
+        return tree;
     }
 
 

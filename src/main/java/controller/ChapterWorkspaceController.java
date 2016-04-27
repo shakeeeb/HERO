@@ -88,8 +88,7 @@ public class ChapterWorkspaceController {
             return json;
         }
 
-        ArrayList<Page> allPages = new ArrayList<Page>();
-        rootPage.getAllPages(allPages);
+        ArrayList<Page> allPages = chapterToLoad.getAllPages();
         if (allPages == null) {
             System.out.println("unable to load pages");
             return json;
@@ -136,6 +135,7 @@ public class ChapterWorkspaceController {
 
         // load the chapter
         Chapter chapterToLoad = db.chapterRepo.getById(chapterID);
+        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNumber of orphans" + chapterToLoad.getOrphans().isEmpty());
         if(chapterToLoad == null) {
             return json;//"Error: Unable to load chapter from datastore";
         }
@@ -150,8 +150,7 @@ public class ChapterWorkspaceController {
             return json; // Unable to load root
         }
 
-        ArrayList<Page> allPages = new ArrayList<Page>();
-        rootPage.getAllPages(allPages);
+        ArrayList<Page> allPages = chapterToLoad.getAllPages();
         if (allPages == null) {
             return json; // unable to load pages
         }
@@ -168,7 +167,13 @@ public class ChapterWorkspaceController {
      * @param response
      */
     @RequestMapping(value="get-chapter-page", method = RequestMethod.POST)
-    protected void getChapterPage(HttpServletRequest request, HttpServletResponse response){
+    protected void getChapterPage( HttpServletRequest request, HttpServletResponse response){
+        //okay so here
+        //get  a page from the db
+        //if the page doesn't exist
+        // create it
+        System.out.println("grabbing page from the database");
+
 
         String boxText = request.getParameter("data");
         System.out.println(boxText);
@@ -185,21 +190,47 @@ public class ChapterWorkspaceController {
 
     }
 
-    @RequestMapping(value="make-chapter-page/{chapterID}", method = RequestMethod.GET)
-    protected @ResponseBody JsonObject makeChapterPage(@PathVariable(value="chapterID") String chapterID, HttpServletRequest request, HttpServletResponse response){
+    @RequestMapping(value="make-chapter-page", method = RequestMethod.GET)
+    protected @ResponseBody JsonObject makeChapterPage( HttpServletRequest request, HttpServletResponse response){
         // i need the chapter ID and the series, which i can get from the chapter
         // so really, just chapter id-- also level, if possible
+        // if the page exists, grab it
+        // elsewise, create it
+        //assume cID and pID are arguments in request
         System.out.println("arrived at the setPage controller");
+        JsonObject json = new JsonObject();
+
+        String chapterID = request.getParameter("chapterID");
+        String pageID = request.getParameter("pageID");
         int level = Integer.parseInt(request.getParameter("level"));
+
         Chapter chapter = db.chapterRepo.getById(chapterID);
+
+        if(chapter == null){
+            System.out.println("chapter is null");
+            return json;
+        }
+
         Series series = chapter.getSeries();
-        Page newBaby = db.pageRepo.create(series,  chapter, level);
-        System.out.println("created a page for the chapter" + chapterID+ " called" + newBaby.toString());
+        System.out.println(pageID);
+        Page pp1 = db.pageRepo.getById(pageID);
+        if(pp1 == null){
+            //make a new page
+            pp1 = db.pageRepo.create(series,  chapter, level);
+            System.out.println("currently: "+ chapter.getAllPages());
+            System.out.println("created a page for the chapter" + chapterID+ " called" + pp1.toString());
+        } else {
+            System.out.println("currently: "+ chapter.getAllPages());
+            System.out.println("successfully retireieved a page from the database");
+        }
+
+        Gson gson = new GsonBuilder().create();
+        json.add("Page", gson.toJsonTree(pp1));
+
 
         // now return the series as a JSON object, using Gson
-        JsonObject json = new JsonObject();
-        Gson gson = new GsonBuilder().create();
-        json.add("Page", gson.toJsonTree(newBaby));
+
+
         return json;
 
     }

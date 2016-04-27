@@ -58,7 +58,7 @@ public class Page {
         optionDescriptors = new ArrayList<String>();
         options = new ArrayList<Ref<Page>>();
         priors = new ArrayList<Ref<Page>>();
-        this.pageId = mySeries.getName() + theChapter.getName() + pgNo; // id
+        this.pageId = mySeries.getName() +"~"+ theChapter.getName() +"^"+ pgNo; // id
         this.chapterId = theChapter.getChapterId();
         this.seriesId = mySeries.getName();
         this.series = Ref.create(mySeries);
@@ -560,6 +560,10 @@ public class Page {
             }
             return;
         }
+    }
+    @Override
+    public String toString(){
+        return this.pageId;
     }
 
 }

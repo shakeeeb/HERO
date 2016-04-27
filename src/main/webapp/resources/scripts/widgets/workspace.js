@@ -11,10 +11,11 @@ $(document).ready(function() {
     var chapter = null;
     var pages = null;
     var cID = null;
-    var loadThisChapterID = $("#hidden-chapterID").html();
+    var tree = [];
+    var pageIds = [];
 
     // test chapter being used for development, will be replaced with grabbing the id from the backend
-    loadChapter(loadThisChapterID);
+    loadChapter("One_Piece~Luffy_meets_Boa");
 
     /**
      * Loads a chaoter from the datastore into the story tree
@@ -32,9 +33,20 @@ $(document).ready(function() {
 
             console.log(chapter);
             console.log(pages);
+            //var i;
+            //for(i = 0;pages.length;i++){
+            //    var newId = pages[i].pageId;
+            //    pageIds.push(newId);
+            //}
+
 
             loadTree(chapter.root, pages, 0);
+            //after this is done
+
+            console.log("printing the tree: "+tree);
+            // after loading tree from root, load orphans
             validateBottomRow();
+            placeOrphans();
 
 
         });
@@ -218,13 +230,19 @@ $(document).ready(function() {
         //var formatedPageID = pageID;
         //var idNumber = pageID.split('^')[1];
         page.setAttribute("id", 'page-' + pageIDtoNumberID(pageID));
-        var datastorePage = getPage(pageID,pages);
         var formatedPageID = encodeURI(pageID);
-        //page.setAttribute("id", formatedPageID);
-        var datastorePage = $.getJSON("make-chapter-page/" + cID ,{level: level} ,function(data) {
+        var datastorePage = $.getJSON("make-chapter-page" ,{"level": level, "chapterID":cID, "pageID":pageID} ,function(data) {
         })
             .done(function(data){
                 console.log(data);
+                page.setAttribute("id",'page-' + pageIDtoNumberID(data.Page.pageId));
+                //add newly created pages to 'pages' object
+                if(pageIds.indexOf(data.Page.pageId) >= 0){
+
+                } else {
+                    // doesnt exist, add it to pages
+                    pages.push(data.Page);
+                }
                 console.log("success");
             }).fail(function(data){
                 console.log("failure");
@@ -357,6 +375,29 @@ $(document).ready(function() {
 
     }
 
+    /**
+     * PlaceOrphans uses the global tree variable to find any nodes that are not in the tree
+     * then, it places these nodes in their cooresponding levels
+     */
+    function placeOrphans(){
+        var orphans = [];
+        var i;
+        for(i =0;i<pages.length ;i++){
+            var finder=pages[i].pageId;
+            if(tree.indexOf(finder) >= 0){
+                //its in the tree
+                console.log("not an orphan");
+            }else{
+                //its not in the tree
+                console.log("is orphan");
+                orphans.push(pages[i]);
+            }
+        }
+        for(i = 0; i<orphans.length;i++){
+            addPage(orphans[i].pageId, orphans[i].level);
+        }
+    }
+
     // delete page
     // get page ID
     // remove page from Datastore (ajax request)
@@ -449,7 +490,14 @@ $(document).ready(function() {
             if(getLevel(level) == null) {
                 addRow();
             }
-            addPage(root.pageId, level);
+            if(tree.indexOf(root.pageId) >= 0){ //already in the tree
+                //meaning, this node has already been visited
+                console.log("this node has already been visited");
+                return;
+            }
+            console.log("pushing " +root.pageId  +"into the tree");
+            tree.push(root.pageId);
+            addPage(root.pageId, level); // add to global tree var as well
             // add each option to the level before
             for (var i = 0; i < root.options.length; i++) {
                 // console.log(i);
