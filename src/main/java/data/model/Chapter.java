@@ -35,6 +35,7 @@ public class Chapter {
         //Page p = new Page(); // should be ID in there
         //root = Ref.create(p);
         dateCreated = new Date();
+        this.orphans = new ArrayList<Ref<Page>>();
     }
 
     /**
