@@ -293,3 +293,7 @@ h3 {
 #last-read-page-chapter-index{
     /*cursor: pointer;*/
 }
+
+.greeting {
+    color: #00c6df;
+}
