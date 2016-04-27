@@ -27,6 +27,7 @@ public class Chapter {
     @Index(IfTrue.class)private boolean pendingApproval = false;
     private ArrayList<Ref<Page>> orphans;
     private int max = 1;
+    private boolean reported = false;
     private String summary = null;
 
     public Chapter(){
@@ -105,7 +106,12 @@ public class Chapter {
     }
 
     public Page getRoot() {
-        return root.get();
+        if(root == null){
+            System.out.println("root is null!");
+            return null;
+        } else {
+            return root.get();
+        }
     }
 
     public void setRoot(Page root) {
@@ -156,6 +162,11 @@ public class Chapter {
 
     public Boolean getApproved() {
         return approved;
+    }
+    public Boolean isReported() {return reported;}
+
+    public void setReported(Boolean reported) {
+        this.reported = reported;
     }
 
     public void setApproved(Boolean approved) {
@@ -260,6 +271,7 @@ public class Chapter {
     }
 
     public void setSummary(String newSummary){
+        System.out.print("");
         this.summary = newSummary;
     }
 

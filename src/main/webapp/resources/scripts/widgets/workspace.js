@@ -223,6 +223,7 @@ $(document).ready(function() {
         var datastorePage = $.getJSON("make-chapter-page/" + cID ,{level: level} ,function(data) {
         })
             .done(function(data){
+                console.log(data);
                 console.log("success");
             }).fail(function(data){
                 console.log("failure");
