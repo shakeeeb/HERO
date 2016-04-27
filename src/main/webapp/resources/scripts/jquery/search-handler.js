@@ -3,6 +3,16 @@
  */
 $(document).ready(function () {
 
+    //if someone pressed the username of the person on the page
+    //go to the user page with the username in the url
+
+    $(document).on("click",".result-author", function () {
+        console.log(this);
+        var email = $("#series_author").text();
+        var url = "/user?" + encodeURIComponent(email.trim());
+        window.location.href = url;
+    });
+
    var query = $("#test2").text();
 
     $.get("/search/" + query)
@@ -12,7 +22,7 @@ $(document).ready(function () {
             $("#result-list").html(data);
 
             // this is just a testing function
-            $(".search-result").click(function() {
+            $(".result-image-container").click(function() {
                 console.log("hello there");
                 this.getAttribute("id");
                 console.log(this.getAttribute("id"));

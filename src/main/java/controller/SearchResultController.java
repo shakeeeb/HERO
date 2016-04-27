@@ -207,6 +207,9 @@ public class SearchResultController {
                 p.print("Title: "+s.getName()+ "</div>");
                 p.print("<div class=\"result-author\"> Author: " + s.getAuthorName() + "</div>");
                 p.print("<div class=\"result-rating\"> </div> </div>");
+                p.print("<div class=\"left-result-container\" id=\"series_author\" style=\"display:none\">\n" +
+                        "                        <p class=\"result-description\">"+ s.getAuthor().getEmail() +"</p>\n" +
+                        "                    </div>");
                 p.print("<div class=\"result-description-container\">\n" +
                         "                        <p class=\"result-description\">"+ s.getDescription() +"</p>\n" +
                         "                    </div>");
