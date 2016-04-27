@@ -413,3 +413,21 @@
 .chapter-level-bottom {
     /*border: none;*/
 }
+
+
+#svgContainer {
+    position:absolute;
+
+}
+
+
+#outer{
+    margin:0 auto;
+    width: 80%;
+}
+
+.page-connector {
+    stroke: #000;
+    fill: none;
+    stroke-width:6px;
+}

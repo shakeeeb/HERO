@@ -39,6 +39,14 @@ public class DrawingPageController {
         return "draw";
     }
 
+
+    @RequestMapping(value="draw/{pageID}", method = RequestMethod.GET)
+    public String loadDrawPage(@PathVariable(value="pageID") String pageID, ModelMap model) {
+        System.out.println(pageID);
+        model.addAttribute("pageID", pageID);
+        return "draw";
+    }
+
     //save the json value into the datastore
     @RequestMapping(value="get-json", method = RequestMethod.POST)
     protected void getJson(HttpServletRequest request, HttpServletResponse response){

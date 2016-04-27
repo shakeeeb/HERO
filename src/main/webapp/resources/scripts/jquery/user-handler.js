@@ -11,9 +11,14 @@ $(document).ready(function() {
     console.log("Loading the page!");
     //loadPage(currentUserEmail);
     //http://localhost:8080/user/
-    var userToLookUpEmailHardCoded = "Jamez@citi.sandwich.sleep.nap";//encodeURI("terrell.mack@stonybrook.edu");
 
-    loadPage(userToLookUpEmailHardCoded);
+    var webpage_url;
+    webpage_url = window.location.href;
+    webpage_url = webpage_url.slice(webpage_url.indexOf("?")+1, webpage_url.length);
+    decoded_web = decodeURI(webpage_url).replace("%40", "@").toString();
+    decoded_web = decoded_web.trim();
+
+    loadPage(decoded_web);
     function loadPage(userToLookUpEmail) {
         $.getJSON("/user/get/",{"userToLookUpEmail" : userToLookUpEmail}, function(data) {
         }).done(function(data) {

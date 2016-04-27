@@ -3,10 +3,22 @@ $(document).ready(function(){
 
 
     var brushWidthVar = 3;
-
     var imageLoader = document.getElementById('drawing-upload-input');
     imageLoader.addEventListener('change', handleImage, false);
     var canvas = new fabric.Canvas('imageCanvas');
+
+
+
+    var pageToLoad = $("#pageID").attr("pageID");
+    if(pageToLoad.length > 0) {
+        var pageID = pageToLoad;
+
+    } else {
+        var pageID = "My Best Friend Gleb~Day One: The Dream of Gleb^0";
+
+    }
+    loadPage(pageID);
+
 
     function handleImage(e){
         var reader = new FileReader();
@@ -115,13 +127,14 @@ $(document).ready(function(){
     /* when the save button is pressed */
     $("#save-button").click(function(){
         var json = JSON.stringify( canvas.toJSON() );
-        var pageID = "My Best Friend Gleb~Day One: The Dream of Gleb^0";
+
        // console.log(json);
 
         $.post( "/get-json", {data:json, pagekey:pageID})
         .done(function() {
             console.log(pageID);
             console.log("Jason is cool");
+            window.location.replace("/chapter-workspace");
         })
         .fail(function() {
             console.log("Miuki is not cool");
@@ -137,7 +150,8 @@ $(document).ready(function(){
         $(this).css("background-color", "white");
     });
 
-    loadPage("My Best Friend Gleb~Day One: The Dream of Gleb^0");
+
+
     function loadPage(pageID) {
 
         $.getJSON("/load-page/" + pageID , function(data) {
