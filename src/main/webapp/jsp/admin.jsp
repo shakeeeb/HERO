@@ -15,7 +15,7 @@
     <script src="/resources/scripts/jquery/admin-handler.js"></script>
 
     <script id="hidden-template" type="text/x-custom-template">
-        <div class="row">
+        <div class="row item-approval">
             <div class="col-md-11 col-md-push-1 row orange-span submitted-comics comic-span">
                 <div class="col-md-1">
                 <span class="pull-left comic_authorization_image">
@@ -30,13 +30,18 @@
                         <h4 id="author"></h4>
                     </div>
                     <div class="row">
-                        <div class="col-md-6 approve-comic-button">
+                        <div class="col-md-6 approve-comic-button-div">
                             <div class="approve-comic">
-                                <button type="button" class="btn btn-md button-ok pull-right">Approve Comic</button>
+                                <button type="button" class="btn btn-md button-ok pull-right approve-comic-button">
+                                    Approve Comic
+                                </button>
                             </div>
                         </div>
-                        <div class="col-md-6 delete-comic-button">
-                            <button type="button" class="btn btn-md button-negative pull-right delete-comic">Delete Comic</button>
+                        <div class="col-md-6 delete-comic-button-div">
+                            <button type="button"
+                                    class="btn btn-md button-negative pull-right delete-comic delete-comic-button">
+                                Delete Comic
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -47,33 +52,35 @@
     </script>
 
     <script id="hidden-template2" type="text/x-custom-template">
-        <div class="row">
-                <div class="col-md-11 col-md-push-1 row orange-span submitted-comics">
+        <div class="row reported-approval">
+            <div class="col-md-11 col-md-push-1 row orange-span submitted-comics">
                 <div class="col-md-1">
                 <span class="pull-left comic_authorization_image">
                 <img src="https://placehold.it/170x170?text=Latest+2">
                 </span>
                 </div>
                 <div class="col-md-2 col-md-offset-4">
-                <div class="row submitted-comic-info">
-                <h4 id="title2"class="submitted-comics-title"></h4>
-        </div>
-        <div class="submitted-comics-author" class="row">
-                <h4 id="author2"></h4>
-        </div>
-        <div class="row">
-                <div class="col-md-6 approve-comic-button">
-                <div class="approve-comic">
-                <button type="button" class="btn btn-md button-ok pull-right">Approve Comic</button>
-        </div>
-        </div>
-        <div class="col-md-6 delete-comic-button">
-                <button type="button" class="btn btn-md button-negative pull-right delete-comic">Delete Comic</button>
-        </div>
-        </div>
-        </div>
+                    <div class="row submitted-comic-info">
+                        <h4 id="title2" class="submitted-comics-title"></h4>
+                    </div>
+                    <div class="submitted-comics-author" class="row">
+                        <h4 id="author2"></h4>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 approve-comic-button-div">
+                            <div class="approve-comic">
+                                <button type="button" class="btn btn-md button-ok pull-right approve-comic-button">Approve Comic</button>
+                            </div>
+                        </div>
+                        <div class="col-md-6 delete-comic-button-div">
+                            <button type="button" class="btn btn-md button-negative pull-right delete-comic delete-comic-button">Delete
+                                Comic
+                            </button>
+                        </div>
+                    </div>
+                </div>
 
-        </div>
+            </div>
         </div>
         <br>
     </script>
@@ -102,70 +109,66 @@
 
 
     <%--<div class="row">--%>
-        <%--<div class="col-md-11 col-md-push-1 row orange-span submitted-comics comic-span">--%>
-            <%--<div class="col-md-1">--%>
-                <%--<span class="pull-left comic_authorization_image">--%>
-                <%--<img id="img" src="https://placehold.it/170x170?text=Latest+2">--%>
-                <%--</span>--%>
-            <%--</div>--%>
-            <%--<div class="col-md-2 col-md-offset-4">--%>
-                <%--<div class="row submitted-comic-info">--%>
-                    <%--<h4 id="title" class="submitted-comics-title"></h4>--%>
-                <%--</div>--%>
-                <%--<div class="submitted-comics-author" class="row">--%>
-                    <%--<h4 id="author"></h4>--%>
-                <%--</div>--%>
-                <%--<div class="row">--%>
-                    <%--<div class="col-md-6 approve-comic-button">--%>
-                        <%--<div class="approve-comic">--%>
-                            <%--<button type="button" class="btn btn-md button-ok pull-right">Approve Comic</button>--%>
-                        <%--</div>--%>
-                    <%--</div>--%>
-                    <%--<div class="col-md-6 delete-comic-button">--%>
-                        <%--<button type="button" class="btn btn-md button-negative pull-right delete-comic">Delete Comic</button>--%>
-                    <%--</div>--%>
-                <%--</div>--%>
-            <%--</div>--%>
+    <%--<div class="col-md-11 col-md-push-1 row orange-span submitted-comics comic-span">--%>
+    <%--<div class="col-md-1">--%>
+    <%--<span class="pull-left comic_authorization_image">--%>
+    <%--<img id="img" src="https://placehold.it/170x170?text=Latest+2">--%>
+    <%--</span>--%>
+    <%--</div>--%>
+    <%--<div class="col-md-2 col-md-offset-4">--%>
+    <%--<div class="row submitted-comic-info">--%>
+    <%--<h4 id="title" class="submitted-comics-title"></h4>--%>
+    <%--</div>--%>
+    <%--<div class="submitted-comics-author" class="row">--%>
+    <%--<h4 id="author"></h4>--%>
+    <%--</div>--%>
+    <%--<div class="row">--%>
+    <%--<div class="col-md-6 approve-comic-button">--%>
+    <%--<div class="approve-comic">--%>
+    <%--<button type="button" class="btn btn-md button-ok pull-right">Approve Comic</button>--%>
+    <%--</div>--%>
+    <%--</div>--%>
+    <%--<div class="col-md-6 delete-comic-button">--%>
+    <%--<button type="button" class="btn btn-md button-negative pull-right delete-comic">Delete Comic</button>--%>
+    <%--</div>--%>
+    <%--</div>--%>
+    <%--</div>--%>
 
-        <%--</div>--%>
+    <%--</div>--%>
     <%--</div>--%>
     <%--<br>--%>
-
-
-
-
 
 
 </div>
 
 <div class="col-md-5 col-md-offset-1 orange-span" id="right">
     <%--<div class="row">--%>
-        <%--<div class="col-md-11 col-md-push-1 row orange-span submitted-comics">--%>
-            <%--<div class="col-md-1">--%>
-                <%--<span class="pull-left comic_authorization_image">--%>
-                <%--<img src="https://placehold.it/170x170?text=Latest+2">--%>
-                <%--</span>--%>
-            <%--</div>--%>
-            <%--<div class="col-md-2 col-md-offset-4">--%>
-                <%--<div class="row submitted-comic-info">--%>
-                    <%--<h4 class="submitted-comics-title">Title: {Name}</h4>--%>
-                <%--</div>--%>
-                <%--<div class="submitted-comics-author" class="row">--%>
-                    <%--<h4>Author: {Name}</h4>--%>
-                <%--</div>--%>
-                <%--<div class="row">--%>
-                    <%--<div class="col-md-6 approve-comic-button">--%>
-                        <%--<div class="approve-comic">--%>
-                            <%--<button type="button" class="btn btn-md button-ok pull-right">Approve Comic</button>--%>
-                        <%--</div>--%>
-                    <%--</div>--%>
-                    <%--<div class="col-md-6 delete-comic-button">--%>
-                        <%--<button type="button" class="btn btn-md button-negative pull-right delete-comic">Delete Comic</button>--%>
-                    <%--</div>--%>
-                <%--</div>--%>
-            <%--</div>--%>
+    <%--<div class="col-md-11 col-md-push-1 row orange-span submitted-comics">--%>
+    <%--<div class="col-md-1">--%>
+    <%--<span class="pull-left comic_authorization_image">--%>
+    <%--<img src="https://placehold.it/170x170?text=Latest+2">--%>
+    <%--</span>--%>
+    <%--</div>--%>
+    <%--<div class="col-md-2 col-md-offset-4">--%>
+    <%--<div class="row submitted-comic-info">--%>
+    <%--<h4 class="submitted-comics-title">Title: {Name}</h4>--%>
+    <%--</div>--%>
+    <%--<div class="submitted-comics-author" class="row">--%>
+    <%--<h4>Author: {Name}</h4>--%>
+    <%--</div>--%>
+    <%--<div class="row">--%>
+    <%--<div class="col-md-6 approve-comic-button">--%>
+    <%--<div class="approve-comic">--%>
+    <%--<button type="button" class="btn btn-md button-ok pull-right">Approve Comic</button>--%>
+    <%--</div>--%>
+    <%--</div>--%>
+    <%--<div class="col-md-6 delete-comic-button">--%>
+    <%--<button type="button" class="btn btn-md button-negative pull-right delete-comic">Delete Comic</button>--%>
+    <%--</div>--%>
+    <%--</div>--%>
+    <%--</div>--%>
 
-        <%--</div>--%>
+    <%--</div>--%>
     <%--</div>--%>
     <%--<br>--%>
 
@@ -174,9 +177,6 @@
         <p id="username">${username}</p>
     </div>
 </div>
-
-
-
 
 
 <%--<div>--%>
@@ -235,8 +235,6 @@
 <%--</div>--%>
 <%--</div>--%>
 <%--</div>--%>
-
-
 
 
 </body>
