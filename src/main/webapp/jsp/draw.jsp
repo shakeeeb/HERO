@@ -24,6 +24,11 @@
     <%@ include file="/resources/layouts/navbar.jsp" %>
     <br><br><br>
     <div>
+
+        <%--- This stores the ID of the page being drawn so that it can be used by javascript --%>
+        <div id="pageID" pageID="${pageID}"></div>
+
+
         <!--Drawing Application here-->
         <div id="drawing-top-toolbar">
 

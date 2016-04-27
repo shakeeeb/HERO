@@ -54,6 +54,15 @@ public class demoData {
         Chapter c6 = db.chapterRepo.create("It Feels Good To Be A Gangsta", Miuki, MKSeries, 2);
         System.out.println(c6);
         // Pages per chapter
+        //goddamn it. my demodata got erased
+        Page pp1 = c6.getRoot();
+        Page pp2 = db.pageRepo.create(MKSeries, c6);
+        Page pp3 = db.pageRepo.create(MKSeries, c6);
+        Page pp4 = db.pageRepo.create(MKSeries, c6);
+        pp1.setNext(pp2, c6);
+        pp2.setNext(pp3, c6);
+        pp2.setNext(pp4, c6);
+        db.chapterRepo.update(c6);
         //changed the repo create-- it takes priors.
         // db.pageRepo.create(series, chapter, priors)
         ArrayList<Page> priorHolder = new ArrayList<Page>();
@@ -95,17 +104,22 @@ public class demoData {
 
         db.chapterRepo.update(newChapter);
 
-//        Chapter onePieceChapter2 = db.chapterRepo.create("Luffy Meets Kim Possible", Ben, newSeries, 2);
-//        Page rootOne = db.pageRepo.create(newSeries, onePieceChapter2, null);
-//        Chapter onePieceChapter3 = db.chapterRepo.create("Luffy Meets Ron Stoppable", Ben, newSeries, 3);
-//        Page rootTwo = db.pageRepo.create(newSeries, onePieceChapter3, null);
-//        Chapter onePieceChapter4 = db.chapterRepo.create("Luffy Meets Evil Luffy", Ben, newSeries, 4);
-//        Page rootThree = db.pageRepo.create(newSeries, onePieceChapter4, null);
-//        Chapter onePieceChapter5 = db.chapterRepo.create("Luffy, I love you", Ben, newSeries, 5);
-//        Page rootFour = db.pageRepo.create(newSeries, onePieceChapter5, null);
-//        System.out.println("Page One's options are: " + pageOne.getOptions().get(0));
+        Chapter onePieceChapter2 = db.chapterRepo.create("Luffy Meets Kim Possible", Ben, newSeries, 2);
+        Page rootOne = db.pageRepo.create(newSeries, onePieceChapter2, null);
+        Chapter onePieceChapter3 = db.chapterRepo.create("Luffy Meets Ron Stoppable", Ben, newSeries, 3);
+        Page rootTwo = db.pageRepo.create(newSeries, onePieceChapter3, null);
+        Chapter onePieceChapter4 = db.chapterRepo.create("Luffy Meets Evil Luffy", Ben, newSeries, 4);
+        Page rootThree = db.pageRepo.create(newSeries, onePieceChapter4, null);
+        Chapter onePieceChapter5 = db.chapterRepo.create("Luffy, I love you", Ben, newSeries, 5);
+        Page rootFour = db.pageRepo.create(newSeries, onePieceChapter5, null);
 
-        System.out.println("Page One next goes to: " + pageOne.getNext().toString());
+        onePieceChapter5.setReported(true);
+        db.chapterRepo.update(onePieceChapter5);
+
+
+//        System.out.println("Page One's options are: " + pageOne.getOptions().get(0));
+//
+//        System.out.println("Page One next goes to: " + pageOne.getNext().toString());
 
         //at this point you wanna update
         // what if all the stuff's already in the datastore though? that wouldn't be good.

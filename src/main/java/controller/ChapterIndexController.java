@@ -123,6 +123,7 @@ public class ChapterIndexController {
             System.out.println("adding Subscription to: " + s);
             isSubscribed = true;
             System.out.println("Subscribed: " + isSubscribed);
+            db.userRepo.update(user);
         }
         else
         {
@@ -130,6 +131,7 @@ public class ChapterIndexController {
             System.out.println("Removed subscription from: " + s);
             isSubscribed = false;
             System.out.println("Subscribed: " + isSubscribed);
+            db.userRepo.update(user);
         }
 
         json.add("subscriptionToggled", gson.toJsonTree(isSubscribed));
