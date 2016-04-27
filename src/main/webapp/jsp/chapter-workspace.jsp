@@ -105,5 +105,8 @@
             </div>
         </div>
     </div>
+    <div style="display: none;">
+        <p id="hidden-chapterID">${chapterID}</p>
+    </div>
 </body>
 </html>

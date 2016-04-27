@@ -38,6 +38,12 @@ public class ChapterWorkspaceController {
         return "chapter-workspace";
     }
 
+    @RequestMapping(value="workspace/loadChapter/{chapterID}", method = RequestMethod.GET)
+    public String loadThisChapter(@PathVariable(value="chapterID") String chapterID, ModelMap model) {
+        model.addAttribute("chapterID", chapterID);
+        return "chapter-workspace";
+    }
+
     @RequestMapping(value="workspace/load/{chapterID}", method = RequestMethod.GET)
     public @ResponseBody JsonObject loadChapter(@PathVariable(value="chapterID") String chapterID) {
         JsonObject json = new JsonObject();

@@ -350,7 +350,7 @@ body {
     color:orange;
 }
 
-#edit-draft-button{
+.series-overview-edit-draft-button{
     margin-left: 900px;
     margin-top: -80px;
 

@@ -11,9 +11,10 @@ $(document).ready(function() {
     var chapter = null;
     var pages = null;
     var cID = null;
+    var loadThisChapterID = $("#hidden-chapterID").html();
 
     // test chapter being used for development, will be replaced with grabbing the id from the backend
-    loadChapter("Puppycat Savage~It Feels Good To Be A Gangsta");
+    loadChapter(loadThisChapterID);
 
     /**
      * Loads a chaoter from the datastore into the story tree
