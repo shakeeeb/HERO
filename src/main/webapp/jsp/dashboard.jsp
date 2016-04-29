@@ -26,7 +26,16 @@
             <div id="close-subscription" class="dashboard-close">X</div>
             <br>
         </div>
-    <br><br><br><br><br><br><br><br><br><br>
+        <div class="dashboard-holders">
+
+            <div class="new-dash-picture">Picture1</div>
+            <div class="new-dash-picture">Picture2</div>
+            <div class="new-dash-picture">Picture1</div>
+            <div class="new-dash-picture">Picture2</div>
+            <div class="new-dash-picture">Picture2</div>
+
+        </div>
+
     </div>
     <br><br>
     <div id="dashboard-recent" class="orange-span">
@@ -35,7 +44,15 @@
             <div id="close-recent" class="dashboard-close">X</div>
             <br>
         </div>
-    <br><br><br><br><br><br><br><br><br><br>
+        <div class="dashboard-holders">
+
+            <div class="new-dash-picture">Picture1</div>
+            <div class="new-dash-picture">Picture2</div>
+            <div class="new-dash-picture">Picture1</div>
+            <div class="new-dash-picture">Picture2</div>
+            <div class="new-dash-picture">Picture2</div>
+
+        </div>
     </div>
     <br><br>
     <div id="dashboard-suggestion" class="orange-span">
@@ -44,7 +61,15 @@
             <div id="close-suggestion" class="dashboard-close">X</div>
             <br>
         </div>
-    <br><br><br><br><br><br><br><br><br><br>
+        <div class="dashboard-holders">
+
+            <div class="new-dash-picture">Picture1</div>
+            <div class="new-dash-picture">Picture2</div>
+            <div class="new-dash-picture">Picture1</div>
+            <div class="new-dash-picture">Picture2</div>
+            <div class="new-dash-picture">Picture2</div>
+
+        </div>
     </div>
 </div>
 </body>
