@@ -33,11 +33,11 @@ $(document).ready(function() {
 
             console.log(chapter);
             console.log(pages);
-            //var i;
-            //for(i = 0;pages.length;i++){
-            //    var newId = pages[i].pageId;
-            //    pageIds.push(newId);
-            //}
+            var i;
+            for(i = 0;pages.length;i++){
+                var newId = pages[i].pageId;
+                pageIds.push(newId);
+            }
 
 
             loadTree(chapter.root, pages, 0);

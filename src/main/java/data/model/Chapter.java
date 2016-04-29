@@ -205,9 +205,12 @@ public class Chapter {
     // extended methods
 
     public void deletePage(Page toDelete){
+        // the page for deletion is either in the tree, or an orphan.
+        // in either case
         // find the page in the tree
         // find any pages that link to that page
         // and any pages that that page links to
+
         ArrayList<Page> parents = getParentsOf(toDelete);
         ArrayList<Page> orphans = getChildrenOf(toDelete);
         for (Page parent : parents){
