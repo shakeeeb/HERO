@@ -352,8 +352,8 @@ body {
 }
 
 .series-overview-edit-draft-button{
-    margin-left: 950px;
-    margin-top: -90px;
+    margin-left: 900px;
+    margin-top: -80px;
 
 }
 
@@ -405,4 +405,17 @@ body {
 
 .series-overview-delete-chapter-button {
     margin-right: -500px;
+}
+
+.dashboard-holders{
+    height:210px;
+}
+
+.new-dash-picture{
+    margin-left:20px;
+    margin-top:5px;
+    height:200px;
+    width: 200px;
+    float:left;
+
 }
