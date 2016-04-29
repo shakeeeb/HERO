@@ -32,6 +32,10 @@ public class Series {
 
     public Series(){
         this.updateTime = new Date();
+        this.subscribers = new ArrayList<Ref<UserData>>();
+        this.chapters = new ArrayList<Ref<Chapter>>();
+        this.comments = new ArrayList<Ref<Comment>>();
+        this.tags = new ArrayList<String>();
     }
 
     public Series(String theName, UserData theAuthor){
@@ -43,6 +47,7 @@ public class Series {
         this.subscribers = new ArrayList<Ref<UserData>>();
         this.chapters = new ArrayList<Ref<Chapter>>();
         this.comments = new ArrayList<Ref<Comment>>();
+        this.tags = new ArrayList<String>();
     }
 
     public Series(String theName, UserData theAuthor, String description, String genre){
@@ -56,6 +61,7 @@ public class Series {
         this.subscribers = new ArrayList<Ref<UserData>>();
         this.chapters = new ArrayList<Ref<Chapter>>();
         this.comments = new ArrayList<Ref<Comment>>();
+        this.tags = new ArrayList<String>();
     }
 
     //GETTER SETTER
@@ -141,6 +147,9 @@ public class Series {
 
     public ArrayList<Chapter> getChapters() {
         ArrayList<Chapter> returner = new ArrayList<Chapter>();
+        if(this.chapters.isEmpty()){
+            return returner;
+        }
         for(Ref<Chapter> ref: chapters){
             returner.add(ref.get());
         }

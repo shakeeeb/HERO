@@ -52,7 +52,8 @@ public class SeriesOverviewController {
         Gson gson = new GsonBuilder().create();
 
         Series s = db.seriesRepo.getById(seriesID);
-        ArrayList<Chapter> allChapters = s.getChapters();
+        ArrayList<Chapter> allChapters = null;
+        allChapters = s.getChapters();
 
         json.add("allChapters", gson.toJsonTree(allChapters));
 
@@ -67,7 +68,7 @@ public class SeriesOverviewController {
 
         Chapter c = db.chapterRepo.getById(chapterID);
         Series s = c.getSeries();
-        db.chapterRepo.delete(c);
+        db.chapterRepo.delete(c,s);
         db.seriesRepo.update(s);
 
 
