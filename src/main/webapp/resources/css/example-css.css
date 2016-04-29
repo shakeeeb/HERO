@@ -397,3 +397,16 @@ body {
     margin-right:10px;
     font-size:20px;
 }
+
+.dashboard-holders{
+    height:210px;
+}
+
+.new-dash-picture{
+    margin-left:20px;
+    margin-top:5px;
+    height:200px;
+    width: 200px;
+    float:left;
+
+}
