@@ -62,7 +62,6 @@
             <br>
         </div>
         <div class="dashboard-holders">
-
             <div class="new-dash-picture">Picture1</div>
             <div class="new-dash-picture">Picture2</div>
             <div class="new-dash-picture">Picture1</div>
