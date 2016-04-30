@@ -379,6 +379,7 @@
 }
 
 .chapter-page {
+    position:relative;
     background-color: white;
     border: solid 1px black;
     height: 185px;
@@ -386,6 +387,8 @@
     margin: 15px;
     margin-top: 12px;
     margin-bottom: 12px;
+    padding-left: 0px;
+    padding-right: 0px;
 }
 
 .chapter-level {
@@ -431,4 +434,14 @@
     stroke: #000;
     fill: none;
     stroke-width:6px;
+    margin-left: 0px;
+}
+
+.page-options {
+    position: absolute;
+    width:100%;
+    background-color: rgba(0, 0, 0, 0.75);
+    bottom: 0;
+    height: 50px;
+    display: none;
 }
