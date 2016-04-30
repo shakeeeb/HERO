@@ -92,7 +92,7 @@ $(document).ready(function() {
 
     function loadOrphans() {
 
-        addLevels(getMaxOrphanLevel());
+        addLevels(getMaxOrphanLevel()+1);
 
         for(var i = 0; i < chapter.orphans.length; i++) {
             var pageID = chapter.orphans[i].key.raw.name;
@@ -130,6 +130,27 @@ $(document).ready(function() {
 
     });
 
+
+    $(document).on("mouseover", ".chapter-page", function() {
+
+        if($(this).hasClass("add-page")) {
+            return;
+        }
+        // get the page ID
+      //  $(this).css("background", "black");
+        var pagediv = $(this);
+    $(this).context.firstElementChild.style.display = 'block';
+  //          .getElementById('page-options').css('display', 'block');
+    });
+ 
+    $(document).on("mouseleave", ".chapter-page", function() {
+
+        if($(this).hasClass("add-page")) {
+            return;
+        }
+        // get the page ID
+        $(this).context.firstElementChild.style.display = 'none';
+    });
 
     $(document).on("click", "#add-modal-save-button", function() {
         $('#myModal').modal('hide');
@@ -284,6 +305,7 @@ $(document).ready(function() {
 
         }
 
+
     }
 
     function pageIDtoNumberID(pageID) {
@@ -377,10 +399,10 @@ $(document).ready(function() {
      */
     function addRow() {
         $('#page-table > tbody:last-child').append('<tr id=\"chapter-level-'+ ($(".chapter-level").length) + '\" class=\"chapter-level\">' +
-            '<td><button class=\"chapter-page hidden-page\" type=\"button\"></button></td>' +
-            '<td><button class=\"chapter-page hidden-page\" type=\"button\"></button></td>' +
-            '<td><button class=\"chapter-page hidden-page\" type=\"button\"></button></td>' +
-            '<td><button class=\"chapter-page hidden-page\" type=\"button\"></button></td>' +
+            '<td><button class=\"chapter-page hidden-page\" type=\"button\"> <div class=\"page-options\">link</div></button></td>' +
+            '<td><button class=\"chapter-page hidden-page\" type=\"button\"> <div class=\"page-options\">link</button></td>' +
+            '<td><button class=\"chapter-page hidden-page\" type=\"button\"> <div class=\"page-options\">link</button></td>' +
+            '<td><button class=\"chapter-page hidden-page\" type=\"button\"> <div class=\"page-options\">link</button></td>' +
             '<td><button class=\"chapter-page add-page\" type=\"button\">new</button></td>' +
             '</tr>');
 
@@ -428,15 +450,6 @@ $(document).ready(function() {
     // remove page from chapter (ajax request)
     // remove page element from level
     // validate tree
-
-    // validate tree
-    // validate each level
-    // loop -> vaildateLevel
-    // validate bottom
-
-    // validate bottom
-    // if bottom level has an element
-    // add new row to bottom (this allows users to always create a longer story)
 
     // check if add button is valid
     //validateLevel(level l)
