@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by mk on 3/31/16.
@@ -74,5 +75,22 @@ public class SeriesOverviewController {
 
         return json;
     }
+
+    @RequestMapping(value = "series-overview/createChapter/{series-ID}/{chapterName}/{chapterDescription}", method = RequestMethod.GET)
+    public @ResponseBody JsonObject createNewChapter(@PathVariable(value = "series-ID") String seriesID, @PathVariable(value = "chapterName") String chapterName, @PathVariable(value = "chapterDescription") String chapterDescription, ModelMap model, HttpSession session, HttpServletRequest req) {
+        System.out.println("add chatper");
+        JsonObject json = new JsonObject();
+        Gson gson = new GsonBuilder().create();
+
+        Series s = db.seriesRepo.getById(seriesID);
+        ArrayList<Chapter> chapterList = s.getChapters();
+        int nextChapterNumber = chapterList.size() + 1;
+
+
+
+        return json;
+    }
+
+
 
 }

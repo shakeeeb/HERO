@@ -68,6 +68,15 @@ h3 {
     margin-top: 5px;
 }
 
+.modal-dialog{
+    position: absolute;
+    left: 50%;
+    margin-left: -312px;
+    height: 500px;
+    top: 50%;
+    margin-top: -250px;
+}
+
 .submitted-comic-info {
     margin-top: 35px;
 }
@@ -296,4 +305,9 @@ h3 {
 
 .greeting {
     color: #00c6df;
+}
+
+#series-overview-add-chapter-button {
+    position: absolute;
+    margin-top: 50px;
 }

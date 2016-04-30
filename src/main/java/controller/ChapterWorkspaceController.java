@@ -109,7 +109,7 @@ public class ChapterWorkspaceController {
         System.out.println(chapterID);
         System.out.println(summary);
         Chapter chapterToUpdate = db.chapterRepo.getById(chapterID);
-        chapterToUpdate.setSummary(summary);
+        chapterToUpdate.setDescription(summary);
         db.chapterRepo.update(chapterToUpdate);
 
         return "Success";
