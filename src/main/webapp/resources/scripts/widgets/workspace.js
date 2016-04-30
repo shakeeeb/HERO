@@ -142,7 +142,7 @@ $(document).ready(function() {
     $(this).context.firstElementChild.style.display = 'block';
   //          .getElementById('page-options').css('display', 'block');
     });
- 
+
     $(document).on("mouseleave", ".chapter-page", function() {
 
         if($(this).hasClass("add-page")) {
