@@ -104,11 +104,9 @@ public class ChapterWorkspaceController {
 
 
 
-    @RequestMapping(value="/workspace/update", method = RequestMethod.POST)
+    @RequestMapping(value="workspace/update", method=RequestMethod.POST)
     public @ResponseBody String updateChapter(@RequestParam("chapterID") String chapterID, @RequestParam("summary") String summary) {
-        System.out.println("ASDASDASDASDAS");
-        System.out.println(chapterID);
-        System.out.println(summary);
+        System.out.println("\n\n\n\n\n\n\n\n\nASDASDASDASDAS");
         Chapter chapterToUpdate = db.chapterRepo.getById(chapterID);
         chapterToUpdate.setDescription(summary);
         db.chapterRepo.update(chapterToUpdate);

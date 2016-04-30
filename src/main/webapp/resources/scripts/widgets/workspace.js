@@ -14,9 +14,10 @@ $(document).ready(function() {
     var tree = [];
     var pageIds = [];
     var orphans = [];
-    var chapterID = $("#hidden-chapterID").html();
+    //var chapterID = $("#hidden-chapterID").html();
     // test chapter being used for development, will be replaced with grabbing the id from the backend
-    loadChapter(chapterID);
+    //loadChapter(chapterID);
+    loadChapter("One_Piece~Luffy_meets_Boa");
 
     /**
      * Loads a chaoter from the datastore into the story tree
@@ -30,7 +31,7 @@ $(document).ready(function() {
             chapter = data.Chapter;
             pages = data.Pages;
             $("#title-input").val(chapter.name);
-            $("#summary-input").val(chapter.summary);
+            $("#summary-input").val(chapter.description);
 
             console.log(chapter);
             console.log(pages);
