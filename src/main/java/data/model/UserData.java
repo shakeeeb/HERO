@@ -102,10 +102,10 @@ public class UserData {
         }
     }
 
-    public ArrayList<Series> getRecentlyViewed() {
-        ArrayList<Series> returner = new ArrayList<Series>();
-        for(Ref<Series> r: this.subscriptions){
-            returner.add(r.get());
+    public ArrayList<Chapter> getRecentlyViewed() {
+        ArrayList<Chapter> returner = new ArrayList<Chapter>();
+        for(Ref<Chapter> c: this.recentlyViewed){
+            returner.add(c.get());
         }
         return returner;
     }
