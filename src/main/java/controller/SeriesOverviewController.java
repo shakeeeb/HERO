@@ -6,6 +6,7 @@ import com.google.appengine.repackaged.com.google.gson.JsonObject;
 import data.DbContext;
 import data.model.Chapter;
 import data.model.Series;
+import data.model.UserData;
 import data.repository.ChapterRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -78,13 +79,19 @@ public class SeriesOverviewController {
 
     @RequestMapping(value = "series-overview/createChapter/{series-ID}/{chapterName}/{chapterDescription}", method = RequestMethod.GET)
     public @ResponseBody JsonObject createNewChapter(@PathVariable(value = "series-ID") String seriesID, @PathVariable(value = "chapterName") String chapterName, @PathVariable(value = "chapterDescription") String chapterDescription, ModelMap model, HttpSession session, HttpServletRequest req) {
-        System.out.println("add chatper");
         JsonObject json = new JsonObject();
         Gson gson = new GsonBuilder().create();
 
         Series s = db.seriesRepo.getById(seriesID);
         ArrayList<Chapter> chapterList = s.getChapters();
         int nextChapterNumber = chapterList.size() + 1;
+        UserData author = s.getAuthor();
+
+        Chapter newChapter = db.chapterRepo.create(chapterName, author, s, nextChapterNumber);
+
+        newChapter.setDescription(chapterDescription);
+
+        System.out.println(newChapter.getDescription());
 
 
 
