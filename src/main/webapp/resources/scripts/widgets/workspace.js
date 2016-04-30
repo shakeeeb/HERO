@@ -13,6 +13,7 @@ $(document).ready(function() {
     var cID = null;
     var tree = [];
     var pageIds = [];
+    var orphans = [];
 
     // test chapter being used for development, will be replaced with grabbing the id from the backend
     loadChapter("One_Piece~Luffy_meets_Boa");
@@ -33,20 +34,26 @@ $(document).ready(function() {
 
             console.log(chapter);
             console.log(pages);
-            var i;
-            for(i = 0;pages.length;i++){
-                var newId = pages[i].pageId;
-                pageIds.push(newId);
-            }
+
+
+
+
+            //var i;
+            //for(i = 0;pages.length;i++){
+            //    var newId = pages[i].pageId;
+            //    pageIds.push(newId);
+            //}
 
 
             loadTree(chapter.root, pages, 0);
-            //after this is done
+            loadOrphans();
 
-            console.log("printing the tree: "+tree);
+
+            //after this is done
+            //>>console.log("printing the tree: " + tree);
             // after loading tree from root, load orphans
             validateBottomRow();
-            placeOrphans();
+            //>>placeOrphans();
 
 
         });
@@ -55,12 +62,44 @@ $(document).ready(function() {
     function addLevel() {
         $.get("/resources/layouts/chapterlevel.html", function(data) {
             $("#page-table").append(data);
-            console.log($("#page-table"));
+            //>>console.log($("#page-table"));
             $('#chapter-level-X').attr("id", "chapter-level-" + (getDepth()-1));
 
         });
     }
 
+
+    function getMaxOrphanLevel() {
+        var maxLevel = 0;
+        for(var i = 0; i < chapter.orphans.length; i++) {
+            var pageLevel = getPage(chapter.orphans[i].key.raw.name, pages).pageLevel;
+            if(pageLevel > maxLevel) {
+                maxLevel = pageLevel;
+            }
+
+        }
+        return maxLevel;
+
+    }
+
+    function addLevels(level) {
+        for(var i = 0; i < level; i++) {
+            if(getLevel(i) == null) {
+                addRow();
+            }
+        }
+    }
+
+    function loadOrphans() {
+
+        addLevels(getMaxOrphanLevel());
+
+        for(var i = 0; i < chapter.orphans.length; i++) {
+            var pageID = chapter.orphans[i].key.raw.name;
+            var pageLevel = getPage(chapter.orphans[i].key.raw.name, pages).pageLevel;
+            addPage(pageID, pageLevel);
+        }
+    }
 /***********************************************************************************************************************
  * A) HANDLERS: Things that handle user interaction
  **********************************************************************************************************************/
@@ -127,21 +166,6 @@ $(document).ready(function() {
 **********************************************************************************************************************/
 
     /**
-     * Adds pages of a chapter to the story tree
-     * @param pages
-     */
-    function insertPages(pages) {
-        pagesToAdd = pages;
-        addPage(pagesToAdd[0].pageId,1);
-        //console.log(pagesToAdd[1].options.length);
-        insertOptions(pagesToAdd[0], pages, 2);
-        //addPage(pagesToAdd[1].pageId, 2);
-        //addPage(pagesToAdd[2].pageId, 2);
-        addPage(pagesToAdd[3].pageId, 3);
-
-    }
-
-    /**
      * Recursivly adds chapter to the story tree
      * @param root: the root of the story tree
      * @param pages: all pages of the chapter
@@ -150,7 +174,7 @@ $(document).ready(function() {
     function insertOptions(root, pages, level) {
         //console.log(root.options[0].key.raw.name);
         //console.log(root.options);
-        console.log(root.options.length);
+        //>>console.log(root.options.length);
         if(root.options.length < 1) {
             return;
         }
@@ -161,8 +185,8 @@ $(document).ready(function() {
         //    //insertOptions(getPage(root.options[i].key.raw.name,pages), pages, level+1);
         //    console.log(getPage(root.options[i].key.raw.name,pages).pageId);
         //}
-        console.log(root.options[1]);
-        console.log("Root option length " + root.options.length);
+        //>>console.log(root.options[1]);
+        //>>console.log("Root option length " + root.options.length);
 
 
     return ;
@@ -182,7 +206,7 @@ $(document).ready(function() {
     function addPage(pageID, level) {
         var levelToEdit = getLevel(level);
         var pageToEdit = null;
-        console.log("adding page to Level: "+ levelToEdit);
+        //>>console.log("adding page to Level: "+ levelToEdit);
         if(levelToEdit == null) {
             console.log("Level doesn't exist");
         } else {
@@ -460,8 +484,8 @@ $(document).ready(function() {
      */
     function getLevel(level) {
         // checks if the level exists
-       console.log("chapter-level-"+(level-1));
-        console.log($("#chapter-level-"+(level-1)));
+       //>>console.log("chapter-level-"+(level-1));
+        //>>console.log($("#chapter-level-"+(level-1)));
         if($("#chapter-level-"+(level)).length < 1) {
             return null;
         } else {
@@ -477,11 +501,11 @@ $(document).ready(function() {
 
 
 
-    // recursively  loads story tree
+    // recursively loads story tree
     function loadTree(rootID, allPages, level) {
         // check if root is null
         if(rootID == null) {
-            console.log("Root is null, Level: " + level);
+            //>>console.log("Root is null, Level: " + level);
             return;
         } else {
 
@@ -492,7 +516,7 @@ $(document).ready(function() {
             }
             if(tree.indexOf(root.pageId) >= 0){ //already in the tree
                 //meaning, this node has already been visited
-                console.log("this node has already been visited");
+                //>>console.log("this node has already been visited");
                 return;
             }
             console.log("pushing " +root.pageId  +"into the tree");
