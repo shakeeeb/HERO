@@ -12,12 +12,16 @@
     <title>Hero - Dashboard</title>
     <%@ include file="/resources/layouts/styles.jsp" %>
     <%@ include file="/resources/layouts/scripts.jsp" %>
+    <script src="/resources/scripts/jquery/dashboard.js"></script>
+    <script id="hidden-template" type="text/x-custom-template">
+        <div class="new-dash-picture">Picture1</div>
+    </script>
 </head>
 <body>
 <div class="container">
     <%@ include file="/resources/layouts/navbar.jsp" %>
     <br><br><br><br><br><br>
-    <div id="dashboard-greeting">Hello Ben10!</div>
+    <div id="dashboard-greeting">Hello, ${nickname}!</div>
     <button type="button" id="dashboard-my-series" class="btn">My Series!</button>
 
     <div id="dashboard-subscription" class="orange-span">
@@ -26,14 +30,7 @@
             <div id="close-subscription" class="dashboard-close">X</div>
             <br>
         </div>
-        <div class="dashboard-holders">
-
-            <div class="new-dash-picture">Picture1</div>
-            <div class="new-dash-picture">Picture2</div>
-            <div class="new-dash-picture">Picture1</div>
-            <div class="new-dash-picture">Picture2</div>
-            <div class="new-dash-picture">Picture2</div>
-
+        <div id="subscription-container" class="dashboard-holders">
         </div>
 
     </div>
@@ -44,7 +41,7 @@
             <div id="close-recent" class="dashboard-close">X</div>
             <br>
         </div>
-        <div class="dashboard-holders">
+        <div id="recent-container" class="dashboard-holders">
 
             <div class="new-dash-picture">Picture1</div>
             <div class="new-dash-picture">Picture2</div>
@@ -61,7 +58,7 @@
             <div id="close-suggestion" class="dashboard-close">X</div>
             <br>
         </div>
-        <div class="dashboard-holders">
+        <div id="suggestion-container"class="dashboard-holders">
             <div class="new-dash-picture">Picture1</div>
             <div class="new-dash-picture">Picture2</div>
             <div class="new-dash-picture">Picture1</div>
@@ -70,6 +67,10 @@
 
         </div>
     </div>
+</div>
+
+<div style="display: none;">
+    <p id="hidden-user-email">${user-email}</p>
 </div>
 </body>
 </html>

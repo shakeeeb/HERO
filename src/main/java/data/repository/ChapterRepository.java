@@ -92,4 +92,12 @@ public class ChapterRepository {
         // gotta manage relations to the pages too
         ofy().delete().entity(c).now();
     }
+
+    public void delete(Chapter c, Series s){
+        //
+        s.removeChapter(c);
+        ofy().delete().entity(c).now();
+        ofy().save().entity(s).now();
+
+    }
 }

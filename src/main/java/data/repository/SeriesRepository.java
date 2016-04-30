@@ -142,4 +142,10 @@ public class SeriesRepository {
         a.removeSeries(s);
         ofy().delete().type(Series.class).id(Id).now();
     }
+
+    public void delete(Series s, UserData author){
+        author.removeSeries(s);
+        ofy().delete().entity(s).now();
+        ofy().delete().entity(author).now();
+    }
 }

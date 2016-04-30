@@ -14,9 +14,9 @@ $(document).ready(function() {
     var tree = [];
     var pageIds = [];
     var orphans = [];
-
+    var chapterID = $("#hidden-chapterID").html();
     // test chapter being used for development, will be replaced with grabbing the id from the backend
-    loadChapter("One_Piece~Luffy_meets_Boa");
+    loadChapter(chapterID);
 
     /**
      * Loads a chaoter from the datastore into the story tree

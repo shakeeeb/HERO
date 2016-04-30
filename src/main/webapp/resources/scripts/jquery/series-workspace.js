@@ -3,24 +3,18 @@
  */
 
 $(document).ready(function() {
-    console.log("I'm the JS of the series workspace page!");
-    var currentUserEmail;
-    currentUserEmail = $("#userEmail").html();
-    console.log("User email that I'm grabbing from the page: " + currentUserEmail);
-    var hardcoded_series_name = "My Best Friend Gleb";
+    var currentUserEmail = $("#hidden-author-email").html();
+    currentUserEmail = "Benjamin.Strumeyer@Paws.for.a.Cause"; // For testing purposes.
+    loadAllSeries(currentUserEmail);
 
-    loadPage(hardcoded_series_name, currentUserEmail);
-    function loadPage(series_to_load, userEmail) {
-        $.getJSON("/series-workspace/",{"series_to_load" : series_to_load, "userEmail": userEmail}, function(data) {
+    function loadAllSeries(currentUserEmail) {
+        $.getJSON("/series-workspace/lookup/get/" + currentUserEmail, function(data) {
         }).done(function(data) {
+            console.log(data);
 
-                console.log(data);
-
-            })
-            .fail(function() {
-                console.log(series_to_load);
+        }).fail(function() {
                 console.log("Could not get data");
-            });
+        });
     }
 
 });

@@ -52,7 +52,7 @@ public class demoData {
         Chapter c5 = db.chapterRepo.create("The Streets of New York", Miuki, MKSeries, 1);
         System.out.println(c5);
         Chapter c6 = db.chapterRepo.create("It Feels Good To Be A Gangsta", Miuki, MKSeries, 2);
-        c6.setSummary("It feels good to be a gangsta summary");
+        c6.setDescription("It feels good to be a gangsta summary");
         System.out.println(c6);
         // Pages per chapter
         //goddamn it. my demodata got erased

@@ -51,6 +51,11 @@
         <br>
         <button type="button" class="btn">+ New Series</button>
     </div>
+
+
+</div>
+<div style="display: none;">
+    <p id="hidden-author-email">${authorEmail}</p>
 </div>
 </body>
 </html>

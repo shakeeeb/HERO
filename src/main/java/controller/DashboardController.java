@@ -31,37 +31,56 @@ public class DashboardController {
 
     @RequestMapping(value="dashboard", method = RequestMethod.GET)
     public String dashboardController(ModelMap model) {
+        UserService userService = UserServiceFactory.getUserService();
+        UserData user = db.userRepo.getUserById(userService.getCurrentUser().getEmail());
+        String nickname = user.getNickname();
+        model.addAttribute("nickname", nickname);
         return "dashboard";
     }
 
-    @RequestMapping(value="dashboard/", method = RequestMethod.GET)
-    public @ResponseBody
-    JsonObject getDashboard(@RequestParam(value="userToLookUpEmail") String userToLookUpEmail, ModelMap model, HttpSession session, HttpServletRequest req, HttpServletResponse res) {
-        System.out.println("Got here");
+    @RequestMapping(value="dashboard/get/", method = RequestMethod.GET)
+    public @ResponseBody JsonObject getSubscriptionsRecentSuggestions(ModelMap model) {
+        System.out.println("In dashboard");
         JsonObject json = new JsonObject();
         Gson gson = new GsonBuilder().create();
+        UserService userService = UserServiceFactory.getUserService();
+        UserData user = db.userRepo.getUserById(userService.getCurrentUser().getEmail());
 
-        System.out.println(userToLookUpEmail);
+        ArrayList<Series> subscriptions = user.getSubscriptions();
 
-        // load user from the datastore
-        UserData user = db.userRepo.getUserById(userToLookUpEmail);
-        System.out.println(user);
-
-        String nickname = user.getNickname();
-        String userEmail = user.getEmail();
-        ArrayList series_list = new ArrayList();
-
-        System.out.println("userEmail: " + userEmail);
-
-        json.add("nickname", gson.toJsonTree(nickname));
-        series_list = user.getMySeries();
-        json.add("series_list", gson.toJsonTree(series_list));
-
-        System.out.println(json);
-
-        //Load this users settings
+        json.add("subscriptions", gson.toJsonTree(subscriptions));
 
         return json;
     }
+
+//    @RequestMapping(value="dashboard/", method = RequestMethod.GET)
+//    public @ResponseBody
+//    JsonObject getDashboard(@RequestParam(value="userToLookUpEmail") String userToLookUpEmail, ModelMap model, HttpSession session, HttpServletRequest req, HttpServletResponse res) {
+//        System.out.println("Got here");
+//        JsonObject json = new JsonObject();
+//        Gson gson = new GsonBuilder().create();
+//
+//        System.out.println(userToLookUpEmail);
+//
+//        // load user from the datastore
+//        UserData user = db.userRepo.getUserById(userToLookUpEmail);
+//        System.out.println(user);
+//
+//        String nickname = user.getNickname();
+//        String userEmail = user.getEmail();
+//        ArrayList series_list = new ArrayList();
+//
+//        System.out.println("userEmail: " + userEmail);
+//
+//        json.add("nickname", gson.toJsonTree(nickname));
+//        series_list = user.getMySeries();
+//        json.add("series_list", gson.toJsonTree(series_list));
+//
+//        System.out.println(json);
+//
+//        //Load this users settings
+//
+//        return json;
+//    }
 
 }
