@@ -37,6 +37,7 @@ public class ChapterWorkspaceController {
 
     @RequestMapping(value="workspace/loadChapter/{chapterID}", method = RequestMethod.GET)
     public String loadThisChapter(@PathVariable(value="chapterID") String chapterID, ModelMap model) {
+        System.out.println("Chapter ID: " + chapterID);
         model.addAttribute("chapterID", chapterID);
         return "chapter-workspace";
     }

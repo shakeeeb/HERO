@@ -91,9 +91,8 @@ public class SeriesOverviewController {
 
         newChapter.setDescription(chapterDescription);
 
-        System.out.println(newChapter.getDescription());
-
-
+        db.chapterRepo.update(newChapter);
+        db.seriesRepo.update(s);
 
         return json;
     }
