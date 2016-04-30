@@ -206,22 +206,27 @@ public class Chapter {
 
     public void deletePage(Page toDelete){
         // the page for deletion is either in the tree, or an orphan.
-        // in either case
+        // in either case, find it and get rid of connections
         // find the page in the tree
         // find any pages that link to that page
         // and any pages that that page links to
 
-        ArrayList<Page> parents = getParentsOf(toDelete);
-        ArrayList<Page> orphans = getChildrenOf(toDelete);
-        for (Page parent : parents){
-            parent.removeOption(toDelete);
-        }
+        if(this.orphans.contains(Ref.create(toDelete))){
+            // its an orphan
+            this.orphans.remove(Ref.create(toDelete));
+        } else {
+            // its in the tree
+            ArrayList<Page> parents = getParentsOf(toDelete);
+            ArrayList<Page> orphans = getChildrenOf(toDelete);
+            for (Page parent : parents){
+                parent.removeOption(toDelete);
+            }
 
-        for(Page p: orphans){
-            this.orphans.add(Ref.create(p));
+            for(Page p: orphans){
+                this.orphans.add(Ref.create(p));
+            }
         }
-
-        //ready fro deletion
+        //ready for deletion
 
     }
 

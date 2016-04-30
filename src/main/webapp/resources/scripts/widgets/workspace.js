@@ -35,7 +35,7 @@ $(document).ready(function() {
             console.log(chapter);
             console.log(pages);
 
-
+            initPageIds(pages);
 
 
             //var i;
@@ -160,6 +160,34 @@ $(document).ready(function() {
 
     });
 
+    /**
+     * assuming that we'll have little x's in the corners of each page
+     */
+    $(document).on("click", ".delete-page", function(){
+        var chapterRow = $(this).parent().parent().parent()[0].getAttribute("id");
+        var rowID = chapterRow.split('-')[2];
+        removePage(chapterRow, rowID);
+        console.log(getPageCount(rowID))
+        if(getPageCount(rowID) == 0){
+            // call a special handler
+            $.post("delete-row" ,{"level": rowID, "chapterID":cID}, function(){
+            })
+                .done(function(data){
+                    console.log(data); // a post will refresh automatically
+                    //window.reload();
+            })
+                .fail(function(data){
+                    console.log(data);
+                });
+            //refresh the page
+        } else {
+            // don't refresh the page
+        }
+        // check afterwards to see if we should remove this row or not
+        // what if a row in the middle is deleted? what happens to levels?
+        // the answer is we refresh the page
+    })
+
 
 /***********************************************************************************************************************
 * B) ESSENTIALS: Things used by Handlers
@@ -249,12 +277,7 @@ $(document).ready(function() {
         if(page == null) {
             return;
         }
-        //var formatedPageID = pageID.replace(/ /g, "%20");
-        //var formatedPageID = encodeURI(pageID);
-        //var formatedPageID = pageID;
-        //var idNumber = pageID.split('^')[1];
         page.setAttribute("id", 'page-' + pageIDtoNumberID(pageID));
-        var formatedPageID = encodeURI(pageID);
         var datastorePage = $.getJSON("make-chapter-page" ,{"level": level, "chapterID":cID, "pageID":pageID} ,function(data) {
         })
             .done(function(data){
@@ -356,6 +379,14 @@ $(document).ready(function() {
 
     }
 
+    function initPageIds(pages){
+        var i;
+        for(i = 0;i<pages.length ;i++){
+            var newId = pages[i].pageId;
+            pageIds.push(newId);
+        }
+    }
+
     /**
      * Validates the bottom of the story tree
      * note: If the bottom level has pages, this appends a new empty level allowing the user to
@@ -420,6 +451,86 @@ $(document).ready(function() {
         for(i = 0; i<orphans.length;i++){
             addPage(orphans[i].pageId, orphans[i].level);
         }
+    }
+
+    /**
+     * remove page-- finds the page due for removal,
+     * then calls deletePage on that page
+     * @param PageID
+     * @param level
+     */
+    function removePage(pageID, level){
+        // remove page element from level
+        var levelToEdit = getLevel(level);
+        var pageToDelete = null;
+        var isAddPage = 0;
+        if(levelToEdit == null) {
+            console.log("Level doesn't exist");
+        } else {
+            // check if center page taken
+            if(isUnused(levelToEdit[2]) == false) {
+                pageToDelete = levelToEdit[2];
+                // check if second page is taken
+            } else if(isUnused(levelToEdit[1]) == false) {
+                pageToDelete = levelToEdit[1];
+                // check if fourth page is taken
+            } else if(isUnused(levelToEdit[3]) == false) {
+                pageToDelete = levelToEdit[3];
+                // check if first page is taken
+            } else if(isUnused(levelToEdit[0]) == false) {
+                pageToDelete = levelToEdit[0];
+                // check if fifth page is taken
+            } else if(isUnused(levelToEdit[4]) == false) {
+                pageToDelete = levelToEdit[4]; // must change this page to add-page
+                isAddPage = 1;
+            } else {
+                console.log("Level is full");
+            }
+
+            if(pageToDelete == null) {
+                console.log("pageToDelete is null");
+            } else {
+                //delete page
+                deletePage(pageToDelete.getElementsByClassName("chapter-page")[0], pageID, level, isAddPage)
+            }
+        }
+
+        }
+
+    /**
+     * deletes a page from the datastore
+     */
+    function deletePage(page, pageID, level, isAddPage){
+        if(page == null) {
+            return;
+        }
+        $.post("delete-chapter-page" ,{"chapterID":cID, "pageID":pageID} , function(data) {
+            })
+            .done(function(data){
+                console.log(data);
+                //unlink the page here
+                if(pageIds.indexOf(pageId) >= 0){
+
+                } else {
+                    // doesnt exist, add it to pages
+                    pageIds.remove(pageId);
+                }
+                console.log("success");
+            }).fail(function(data){
+                console.log("failure");
+            });
+
+        // TODO: do this using jquery, selector wasnt working
+        if(isAddPage == 1){
+            //it's the add page
+            page.className = "";
+            page.className = "chapter-page add-page";
+        } else {
+            page.className = "";
+            page.className = "chapter-page hidden-page";
+        }
+        // return up
+
     }
 
     // delete page

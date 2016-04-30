@@ -26,6 +26,7 @@ public class demoData {
             System.out.println("made UserData T!");
         } else {
             System.out.println("userData T exists.");
+            T = db.userRepo.getUserById("tangobearindustries@gmail.com");
         }
         UserData Miuki = null;
         if(!db.userRepo.exists("MKYip@ColdSpringHarbor.lab")){
@@ -34,6 +35,7 @@ public class demoData {
             System.out.println("made UserData Miu Ki!");
         } else {
             System.out.println("userData Miu Ki exists.");
+            Miuki = db.userRepo.getUserById("MKYip@ColdSpringHarbor.lab");
         }
         UserData Ben = null;
         if(!db.userRepo.exists("Benjamin.Strumeyer@Paws.for.a.Cause")){
@@ -42,6 +44,7 @@ public class demoData {
             System.out.println("made UserData Ben!");
         } else {
             System.out.println("userData Ben exists.");
+            Ben = db.userRepo.getUserById("Benjamin.Strumeyer@Paws.for.a.Cause");
         }
         UserData Me = null;
         if(!db.userRepo.exists("ShakiraShakira@QueensLibrary.book")){
@@ -50,6 +53,7 @@ public class demoData {
             System.out.println("made UserData Shakeeb!");
         } else {
             System.out.println("userData Shakeeb exists.");
+            Me = db.userRepo.getUserById("ShakiraShakira@QueensLibrary.book");
         }
         UserData TayTay = null;
         if(!db.userRepo.exists("TayTay@Math.calculus")){
@@ -58,6 +62,7 @@ public class demoData {
             System.out.println("made UserData Tara!");
         } else {
             System.out.println("userData Tara exists.");
+            TayTay = db.userRepo.getUserById("TayTay@Math.calculus");
         }
         UserData Jason = null;
         if(!db.userRepo.exists("Pineapple.Jason@InterVarsity.jesus")){
@@ -66,6 +71,7 @@ public class demoData {
             System.out.println("made UserData Jason!");
         } else {
             System.out.println("userData Jason exists.");
+            Jason = db.userRepo.getUserById("Pineapple.Jason@InterVarsity.jesus");
         }
         UserData James = null;
         if(!db.userRepo.exists("Jamez@citi.sandwich.sleep.nap")){
@@ -74,6 +80,7 @@ public class demoData {
             System.out.println("made UserData James!");
         } else {
             System.out.println("userData James exists.");
+            James = db.userRepo.getUserById("Jamez@citi.sandwich.sleep.nap");
         }
 
         //Add Series to UserData
@@ -83,6 +90,7 @@ public class demoData {
             System.out.println("created Series My Best Friend Gleb!");
         } else {
             System.out.println(" My Best Friend Gleb exists.");
+            Tseries = db.seriesRepo.getById("My Best Friend Gleb");
         }
         Series MKSeries = null;
         if(!db.chapterRepo.exists("Puppycat Savage")){
@@ -90,6 +98,7 @@ public class demoData {
             System.out.println("created Series Puppycat Savage!");
         } else {
             System.out.println("series Puppycat Savage exists.");
+            MKSeries = db.seriesRepo.getById("Puppycat Savage");
         }
         Series BenSeries = null;
         if(!db.seriesRepo.exists("One Piece: Two")){
@@ -97,6 +106,7 @@ public class demoData {
             System.out.println("created Series One Piece: Two!");
         } else {
             System.out.println("series One Piece: Two exists.");
+            BenSeries = db.seriesRepo.getById("One Piece: Two");
         }
         Series MySeries = null;
         if(!db.seriesRepo.exists("Devon! I'm Sorry!")){
@@ -104,6 +114,7 @@ public class demoData {
             System.out.println("created Series Devon! I'm Sorry!");
         } else {
             System.out.println("series Devon! I'm Sorry! exists.");
+            MySeries = db.seriesRepo.getById("Devon! I'm Sorry!");
         }
         Series JasonSeries = null;
         if(!db.seriesRepo.exists("Jesus Will Find You")){
@@ -111,6 +122,7 @@ public class demoData {
             System.out.println("created Series Puppycat Savage!");
         } else {
             System.out.println("series Puppycat Savage exists.");
+            JasonSeries = db.seriesRepo.getById("Jesus Will Find You");
         }
         Series TaraSeries = null;
         if(!db.seriesRepo.exists("We Must Find Joe")){
@@ -118,6 +130,7 @@ public class demoData {
             System.out.println("created Series We Must Find Joe!");
         } else {
             System.out.println("series We Must Find Joe exists.");
+            TaraSeries = db.seriesRepo.getById("We Must Find Joe");
         }
         Series JamezSeries = null;
         if(!db.seriesRepo.exists("Green Ham & Cheese")){
@@ -125,6 +138,7 @@ public class demoData {
             System.out.println("created Series Green Ham & Cheese!");
         } else {
             System.out.println("series Green Ham & Cheese exists.");
+            JamezSeries = db.seriesRepo.getById("We Must Find Joe");
         }
         Series onePiece = null;
         if(!db.seriesRepo.exists("One_Piece")){
@@ -132,6 +146,7 @@ public class demoData {
             System.out.println("created Series One_Piece!");
         } else {
             System.out.println("series One_Piece exists.");
+            onePiece = db.seriesRepo.getById("One_Piece");
         }
 
         //Adding chapters to series
@@ -142,6 +157,7 @@ public class demoData {
             System.out.println("created Day One: The Dream of Gleb!");
         } else {
             System.out.println("chapter Day One: The Dream of Gleb exists.");
+            c1 = db.chapterRepo.getById("Day One: The Dream of Gleb");
         }
         Chapter c2 = null;
         if(!db.chapterRepo.exists("Day Two: Gleb's Revenge")){
@@ -149,6 +165,7 @@ public class demoData {
             System.out.println("created Day Two: Gleb's Revenge!");
         } else {
             System.out.println("chapter Day Two: Gleb's Revenge exists.");
+            c2 = db.chapterRepo.getById("Day Two: Gleb's Revenge");
         }
         Chapter c3 = null;
         if(!db.chapterRepo.exists("Romance Dawn: The Trip to Moes!")){
@@ -156,6 +173,7 @@ public class demoData {
             System.out.println("created Romance Dawn: The Trip to Moes!");
         } else {
             System.out.println("chapter Romance Dawn: The Trip to Moes! exists.");
+            c3 = db.chapterRepo.getById("Romance Dawn: The Trip to Moes!");
         }
         Chapter c4 = null;
         if(!db.chapterRepo.exists("The Great Guacamole Riot")){
@@ -163,6 +181,7 @@ public class demoData {
             System.out.println("created The Great Guacamole Riot!");
         } else {
             System.out.println("chapter The Great Guacamole Riot exists.");
+            c4 = db.chapterRepo.getById("The Great Guacamole Riot");
         }
         Chapter c5 = null;
         if(!db.chapterRepo.exists("The Streets of New York")){
@@ -170,6 +189,7 @@ public class demoData {
             System.out.println("created The Streets of New York!");
         } else {
             System.out.println("chapter The Streets of New York exists.");
+            c5 = db.chapterRepo.getById("The Streets of New York");
         }
         Chapter c6 = null;
         if(!db.chapterRepo.exists("It Feels Good To Be A Gangsta")){
@@ -178,6 +198,7 @@ public class demoData {
             System.out.println("created It feels good to be a gangsta");
         } else {
             System.out.println("chapter It Feels Good To be a Gangsta exists.");
+            c6 = db.chapterRepo.getById("It Feels Good To Be A Gangsta");
         }
         Chapter c7 = null;
         if(!db.chapterRepo.exists("Luffy_meets_Boa")){
@@ -185,6 +206,7 @@ public class demoData {
             System.out.println("created Luffy_meets_Boa");
         } else {
             System.out.println("chapter Luffy_meets_Boa exists.");
+            c7 = db.chapterRepo.getById("It Feels Good To Be A Gangsta");
         }
         System.out.println(c1);
         System.out.println(c2);
