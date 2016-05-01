@@ -18,6 +18,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+@Controller
 public class SearchResultController {
     protected DbContext db = new DbContext();
 
