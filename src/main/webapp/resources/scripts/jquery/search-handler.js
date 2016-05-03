@@ -24,9 +24,10 @@ $(document).ready(function () {
             // this is just a testing function
             $(".result-image-container").click(function() {
                 console.log("hello there");
-                this.getAttribute("id");
-                console.log(this.getAttribute("id"));
-                $(location).attr('href', "/series-overview/"+this.getAttribute("id"));
+                console.log($(this).parent());
+                $(this).parent().attr("id");
+                console.log($(this).parent().attr("id"));
+                $(location).attr('href', "/series-overview/"+$(this).parent().attr("id"));
 
             });
         })
