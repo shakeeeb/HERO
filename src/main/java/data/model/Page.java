@@ -171,20 +171,38 @@ public class Page {
         return options.get(0).get();
     }
 
-    public void setNext(Page newNext) {
+    public void setNext(Page newNext, String optionDescriptor, Chapter myChapter){
         options.add(Ref.create(newNext));
-        optionDescriptors.add("go to Page:" + newNext.getPageId());
-        newNext.setPrev(this);
+        optionDescriptors.add(optionDescriptor);
+        newNext.addPrior(this);
         numOptions = options.size();
-        Chapter c = this.chapter.get();
-        if(c.getOrphans().contains(this)){
-            c.removeOrphan(this);
-            ofy().save().entity(c).now();
+        if(myChapter.getOrphans().contains(newNext)){
+            System.out.println("removing " + newNext.getPageId() + " from orphans");
+            myChapter.removeOrphan(newNext);
+            ofy().save().entity(myChapter).now();
+            // if it's in an oprhan subtree, it should be okay
         }
+        System.out.println("not an orphan");
         // also add the prior reference
         ofy().save().entity(this).now();
         ofy().save().entity(newNext).now();
+        ofy().save().entity(myChapter).now();
     }
+
+//    public void setNext(Page newNext) {
+//        options.add(Ref.create(newNext));
+//        optionDescriptors.add("go to Page:" + newNext.getPageId());
+//        newNext.addPrior(this);
+//        numOptions = options.size();
+//        Chapter c = this.chapter.get();
+//        if(c.getOrphans().contains(this)){
+//            c.removeOrphan(this);
+//            ofy().save().entity(c).now();
+//        }
+//        // also add the prior reference
+//        ofy().save().entity(this).now();
+//        ofy().save().entity(newNext).now();
+//    }
 
     /**
      *
@@ -194,18 +212,19 @@ public class Page {
     public void setNext(Page newNext, Chapter myChapter){
             options.add(Ref.create(newNext));
             optionDescriptors.add("go to Page:" + newNext.getPageId());
-            newNext.setPrev(this);
+            newNext.addPrior(this);
             numOptions = options.size();
-            Chapter c = this.chapter.get();
-            if(myChapter.getOrphans().contains(this)){
-                System.out.println("removing " + this.getPageId() + " from orphans");
-                myChapter.removeOrphan(this);
+            if(myChapter.getOrphans().contains(newNext)){
+                System.out.println("removing " + newNext.getPageId() + " from orphans");
+                myChapter.removeOrphan(newNext);
                 ofy().save().entity(myChapter).now();
+                // if it's in an oprhan subtree, it should be okay
             }
             System.out.println("not an orphan");
             // also add the prior reference
             ofy().save().entity(this).now();
             ofy().save().entity(newNext).now();
+            ofy().save().entity(myChapter).now();
     }
 
     /**
@@ -247,11 +266,10 @@ public class Page {
      * DEPRECATED DONT USE
      * @param newPrev
      */
-    public void setPrev(Page newPrev) {
+    public void setPrev(Page newPrev, Chapter c) {
         // change the reference to the chapter
         //grab it as an orphan,
         //remove it from the list of orphans, because there's a parent now
-        Chapter c = chapter.get();
         if(c.isOrphan(this)){
             // remove it as an orphan
             c.removeOrphan(this);
@@ -261,6 +279,8 @@ public class Page {
         numPriors = priors.size();
         // set the next
         ofy().save().entity(c).now();
+        ofy().save().entity(newPrev).now();
+        ofy().save().entity(this).now();
     }
 
     public ArrayList<Page> getOptions() {
@@ -564,6 +584,36 @@ public class Page {
     @Override
     public String toString(){
         return this.pageId;
+    }
+
+    public boolean hasChildren(){
+        if(this.options.isEmpty()){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public Page find(Page findMe){
+        //find is a generic tree search
+        if(this.equals(findMe)){
+            //this is the node we're looking for!
+            return this;
+        } else if(this.hasChildren()){
+            // the node we're lookign for may be in the children of this node
+            // search each subtree
+            ArrayList<Page> searcher = this.getOptions();
+            for(Page p: searcher){
+                Page p2 = p.find(findMe);
+                if(p2 != null){
+                    return p2;
+                }
+            }
+            return null;
+        } else {
+            //not found
+            return null;
+        }
     }
 
 }

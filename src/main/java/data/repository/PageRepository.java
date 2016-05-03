@@ -108,7 +108,7 @@ public class PageRepository {
             // add link to new page for each prior
         if(priors != null){
             for(Page p2 : priors){
-                p2.setNext(p);
+                p2.setNext(p, theChapter);
             }
         } else {
             theChapter.addOrphan(p);
@@ -152,6 +152,7 @@ public class PageRepository {
         // its a big deal to edit up the chapter
         c.deletePage(p); // removes any links to the page that is to be deleted
         ofy().delete().entity(p);
+        ofy().save().entity(c);
         // delete all links to the object
     }
 

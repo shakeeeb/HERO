@@ -445,3 +445,13 @@
     height: 50px;
     display: none;
 }
+
+.delete-option {
+    position:absolute; top:0; right:0;
+    margin: 3px;
+}
+
+.edit-option {
+    position:absolute; top:0; left:0;
+    margin: 3px;
+}

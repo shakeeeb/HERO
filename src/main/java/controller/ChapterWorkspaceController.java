@@ -234,4 +234,70 @@ public class ChapterWorkspaceController {
 
     }
 
+    @RequestMapping(value="delete-chapter-page", method = RequestMethod.POST)
+    protected @ResponseBody String deleteChapterPage( HttpServletRequest request, HttpServletResponse response){
+        // i need the chapter ID and the Id of the page i want to delete
+        // and then, i just delete it
+        System.out.println("arrived at the delete page controller");
+        String chapterID  = request.getParameter("chapterID");
+        String pageID = request.getParameter("pageID");
+
+        System.out.println("Chapter ID:"+ chapterID);
+        System.out.println("Page ID:"+pageID);
+
+        Chapter c = db.chapterRepo.getById(chapterID);
+        if(c == null){
+            System.out.println("the chapter does not exist");
+            return "failure";
+        }
+        Page p = db.pageRepo.getById(pageID);
+        if(p == null){
+            System.out.println("the page does not exist");
+            return "failure";
+        }
+        db.pageRepo.delete(c, p);
+        db.chapterRepo.update(c);
+        return "success";
+    }
+
+    @RequestMapping(value="delete-row", method = RequestMethod.POST)
+    protected @ResponseBody String refactorChapterPage( HttpServletRequest request, HttpServletResponse response){
+        int level = Integer.parseInt(request.getParameter("level"));
+        String chapterID = request.getParameter("chapterID");
+        String pageID = request.getParameter("pageID");
+        Chapter chapter = db.chapterRepo.getById(chapterID);
+        System.out.println("deleting a page, then deleting a row");
+
+        System.out.println("deleting a row");
+        if(chapter == null){
+            System.out.println("chapter does not exist");
+            return "failure";
+        }
+        Page pg = db.pageRepo.getById(pageID);
+
+        if(pg == null){
+            System.out.println("page does not exist");
+            return "failure";
+        }
+        db.pageRepo.delete(chapter, pg);
+        // take this chapter, change all the levels of the selected level to selected level-1
+        // the page will be reloaded after this
+
+        ArrayList<Page> pages = chapter.getAllPages();
+        if(pages == null){
+            System.out.println("could not retrieve pages");
+            return "failure";
+        }
+
+        for(Page p : pages){
+            if(p.getPageLevel() >= level){
+                int cLevel = p.getPageLevel() -1;
+                p.setPageLevel(cLevel);
+            }
+        }
+        db.pageRepo.saveMulitple(pages);
+        return "success";
+        // refresh page
+    }
+
 }

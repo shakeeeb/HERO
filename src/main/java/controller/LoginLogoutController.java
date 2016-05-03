@@ -2,6 +2,7 @@ package controller;
 
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
+import data.DbContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,7 @@ import java.io.IOException;
  */
 @Controller
 public class LoginLogoutController {
+    DbContext db = new DbContext();
 
     @RequestMapping(value="login", method = RequestMethod.GET)
     protected void login(HttpServletResponse response) throws ServletException, IOException {

@@ -32,7 +32,18 @@ public class DashboardController {
     @RequestMapping(value="dashboard", method = RequestMethod.GET)
     public String dashboardController(ModelMap model) {
         UserService userService = UserServiceFactory.getUserService();
-        UserData user = db.userRepo.getUserById(userService.getCurrentUser().getEmail());
+        //UserData user = db.userRepo.getUserById(userService.getCurrentUser().getEmail());
+        //String email = user.getNickname();
+        UserData user = null;
+        String email = userService.getCurrentUser().getNickname();
+        if(!db.userRepo.exists(email)){
+            //DNE
+            user = db.userRepo.create(email);
+        } else {
+            // exists
+            System.out.println("user exists");
+            user = db.userRepo.getUserById(email);
+        }
         String nickname = user.getNickname();
         model.addAttribute("nickname", nickname);
         return "dashboard";

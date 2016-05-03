@@ -56,7 +56,7 @@
                             <div class="form-group">
                                 <label for="chapterTitle">Chapter Title </label>
                                 <input type="text" class="form-control input-lg" id="chapterTitle">
-                            </div
+                            </div>
                             <div class="form-group">
                                 <label for="chapterDescription">Chapter Description</label>
                                 <textarea class="form-control" rows="7" id="chapterDescription"></textarea>
