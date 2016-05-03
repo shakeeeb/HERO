@@ -84,12 +84,14 @@ $(document).ready(function () {
                     }
                 }
                 //loadPage(currentChapterID, currentPageID);
-                window.location.replace("/read/" + currentChapterID + "/" + currentPageID);
+                updateRecentlyViewed(currentChapterID, "/read/" + currentChapterID + "/" + currentPageID);
+
                 //Don't load the page. Switch to the page and use the controller to get the information we need.
 
             });
 
             $("#chapter-index-start-from-beginning").click(function() {
+                updateRecentlyViewed(chapterID, "/read/" + chapterID + "/" + rootID);
                 window.location.replace("/read/" + chapterID + "/" + rootID);
             });
 
@@ -118,6 +120,14 @@ $(document).ready(function () {
             {
                 $("#subscribe-button").text("Subscribe");
             }
+        });
+    }
+
+    function updateRecentlyViewed(chapterID, urlMapping) {
+        $.getJSON("/chapter-index/updateRecentlyViewed/" + chapterID)
+            .done(function (data) {
+                //window.location.replace(urlMapping);
+                console.log(data);
         });
     }
 

@@ -37,6 +37,7 @@ public class ChapterWorkspaceController {
 
     @RequestMapping(value="workspace/loadChapter/{chapterID}", method = RequestMethod.GET)
     public String loadThisChapter(@PathVariable(value="chapterID") String chapterID, ModelMap model) {
+        System.out.println("Chapter ID: " + chapterID);
         model.addAttribute("chapterID", chapterID);
         return "chapter-workspace";
     }
@@ -103,13 +104,11 @@ public class ChapterWorkspaceController {
 
 
 
-    @RequestMapping(value="/workspace/update", method = RequestMethod.POST)
+    @RequestMapping(value="workspace/update", method=RequestMethod.POST)
     public @ResponseBody String updateChapter(@RequestParam("chapterID") String chapterID, @RequestParam("summary") String summary) {
-        System.out.println("ASDASDASDASDAS");
-        System.out.println(chapterID);
-        System.out.println(summary);
+        System.out.println("\n\n\n\n\n\n\n\n\nASDASDASDASDAS");
         Chapter chapterToUpdate = db.chapterRepo.getById(chapterID);
-        chapterToUpdate.setSummary(summary);
+        chapterToUpdate.setDescription(summary);
         db.chapterRepo.update(chapterToUpdate);
 
         return "Success";

@@ -28,7 +28,7 @@ public class Chapter {
     private ArrayList<Ref<Page>> orphans;
     private int max = 1;
     private boolean reported = false;
-    private String summary = null;
+    private String description = null;
 
     public Chapter(){
         // each chapter must have a single page
@@ -321,13 +321,13 @@ public class Chapter {
         }
     }
 
-    public void setSummary(String newSummary){
+    public void setDescription(String newDescription){
         System.out.print("");
-        this.summary = newSummary;
+        this.description = newDescription;
     }
 
-    public String getSummary(){
-        return this.summary;
+    public String getDescription(){
+        return this.description;
     }
 
     public void submitForApproval(){

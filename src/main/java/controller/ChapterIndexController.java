@@ -137,4 +137,34 @@ public class ChapterIndexController {
         json.add("subscriptionToggled", gson.toJsonTree(isSubscribed));
         return json;
     }
+
+    @RequestMapping(value = "/chapter-index/updateRecentlyViewed/{chapter-ID}", method = RequestMethod.GET)
+    public @ResponseBody
+    JsonObject updateRecentlyViewed(@PathVariable(value = "chapter-ID") String chapterID, ModelMap model, HttpSession session, HttpServletRequest req) {
+
+        System.out.println("In Subscription Mapping");
+        JsonObject json = new JsonObject();
+        Gson gson = new GsonBuilder().create();
+
+        boolean userLoggedIn;
+        UserService userService = UserServiceFactory.getUserService();
+        UserData user = db.userRepo.getUserById(userService.getCurrentUser().getEmail());
+        userLoggedIn = userService.isUserLoggedIn();
+
+        Chapter c = db.chapterRepo.getById(chapterID);
+
+        if (userLoggedIn)
+        {
+            ArrayList<Chapter> recentlyViewed = user.getRecentlyViewed();
+            if (recentlyViewed.size() >= 5)
+            {
+                recentlyViewed.remove(4);
+            }
+            recentlyViewed.add(0, c);
+            db.userRepo.update(user);
+        }
+
+
+        return json;
+    }
 }

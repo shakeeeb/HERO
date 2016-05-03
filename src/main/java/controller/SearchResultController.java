@@ -18,10 +18,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by mk on 3/31/16.
- */
-
 @Controller
 public class SearchResultController {
     protected DbContext db = new DbContext();

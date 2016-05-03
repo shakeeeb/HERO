@@ -357,12 +357,9 @@ body {
 
 }
 
-#series-overview-author{
-    margin-left: 800px;
-}
-
 #series-overview-name{
-    margin-bottom:-20px;
+    margin-bottom:5px;
+    display: inline-block;
 }
 
 #drawing-upload-input{
@@ -396,6 +393,15 @@ body {
     margin-top:-30px;
     margin-right:10px;
     font-size:20px;
+}
+
+#series-overview-chap-title {
+    margin-top: 40px;
+    margin-right: 250px;
+}
+
+.series-overview-delete-chapter-button {
+    margin-right: -500px;
 }
 
 .dashboard-holders{

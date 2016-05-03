@@ -21,6 +21,7 @@ public class UserData {
     @Load private ArrayList<Ref<Rating>> ratings;
     @Load private ArrayList<Ref<Series>> viewed;
     @Load private ArrayList<Ref<Series>> subscriptions;
+    @Load private ArrayList<Ref<Chapter>> recentlyViewed;
     int totalSeriesViewed = 0;
     @Index(IfTrue.class) private Boolean isAdmin = false;
     private String aboutMe;
@@ -33,6 +34,7 @@ public class UserData {
         this.ratings = new ArrayList<Ref<Rating>>();
         this.viewed = new ArrayList<Ref<Series>>();
         this.subscriptions = new ArrayList<Ref<Series>>();
+        this.recentlyViewed = new ArrayList<Ref<Chapter>>();
     }
 
     public UserData(String email){
@@ -43,6 +45,7 @@ public class UserData {
         this.ratings = new ArrayList<Ref<Rating>>();
         this.viewed = new ArrayList<Ref<Series>>();
         this.subscriptions = new ArrayList<Ref<Series>>();
+        this.recentlyViewed = new ArrayList<Ref<Chapter>>();
     }
 
     public UserData(String email, String name, String about){
@@ -54,6 +57,7 @@ public class UserData {
         this.ratings = new ArrayList<Ref<Rating>>();
         this.viewed = new ArrayList<Ref<Series>>();
         this.subscriptions = new ArrayList<Ref<Series>>();
+        this.recentlyViewed = new ArrayList<Ref<Chapter>>();
     }
 
     public UserData(String email, String name, String about, String pic){
@@ -66,6 +70,7 @@ public class UserData {
         this.ratings = new ArrayList<Ref<Rating>>();
         this.viewed = new ArrayList<Ref<Series>>();
         this.subscriptions = new ArrayList<Ref<Series>>();
+        this.recentlyViewed = new ArrayList<Ref<Chapter>>();
     }
 
 
@@ -90,9 +95,24 @@ public class UserData {
         return returner;
     }
 
+
     public void setSubscriptions(ArrayList<Series> toSet){
         for(Series s : toSet){
             this.subscriptions.add(Ref.create(s));
+        }
+    }
+
+    public ArrayList<Chapter> getRecentlyViewed() {
+        ArrayList<Chapter> returner = new ArrayList<Chapter>();
+        for(Ref<Chapter> c: this.recentlyViewed){
+            returner.add(c.get());
+        }
+        return returner;
+    }
+
+    public void setRecentlyViewed(ArrayList<Chapter> toSet){
+        for(Chapter c : toSet){
+            this.recentlyViewed.add(Ref.create(c));
         }
     }
 
