@@ -111,6 +111,13 @@ public class demoData {
         onePieceChapter5.setReported(true);
         db.chapterRepo.update(onePieceChapter5);
 
+//        ArrayList<UserData> allUsers = db.userRepo.getAllUsers();
+//
+//        for (int i = 0; i < allUsers.size(); i++) {
+//            allUsers.get(i).clearViewed();
+//        }
+
+
 
 //        System.out.println("Page One's options are: " + pageOne.getOptions().get(0));
 //

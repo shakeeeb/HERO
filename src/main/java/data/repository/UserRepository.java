@@ -9,7 +9,7 @@ import static com.googlecode.objectify.ObjectifyService.ofy;
 /**
  * Created by shakeeb on 3/31/16.
  */
-public class UserRepository {
+public class  UserRepository {
     //getAll()
     public ArrayList<UserData> getAllUsers(){
         // query database for all users
