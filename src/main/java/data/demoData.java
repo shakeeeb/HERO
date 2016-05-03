@@ -195,7 +195,7 @@ public class demoData {
         Chapter c6 = db.chapterRepo.getById(MKSeries.getName()+"~"+"It Feels Good To Be A Gangsta");
         if(c6 == null){
             c6 = db.chapterRepo.create("It Feels Good To Be A Gangsta", Miuki, MKSeries, 2);
-            c6.setSummary("It feels good to be a gangsta summary");
+            c6.setDescription("It feels good to be a gangsta summary");
             System.out.println("created It feels good to be a gangsta");
         } else {
             System.out.println("chapter It Feels Good To be a Gangsta exists.");

@@ -23,14 +23,6 @@ public class LoginLogoutController {
     @RequestMapping(value="login", method = RequestMethod.GET)
     protected void login(HttpServletResponse response) throws ServletException, IOException {
         UserService userService = UserServiceFactory.getUserService();
-        String email = userService.getCurrentUser().getNickname();
-        if(!db.userRepo.exists(email)){
-            //DNE
-            db.userRepo.create(email);
-        } else {
-            // exists
-            System.out.println("user exists");
-        }
         response.sendRedirect(userService.createLoginURL("/dashboard"));
     }
 

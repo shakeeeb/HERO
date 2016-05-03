@@ -34,7 +34,7 @@ public class Series {
         this.updateTime = new Date();
         this.subscribers = new ArrayList<Ref<UserData>>();
         this.chapters = new ArrayList<Ref<Chapter>>();
-        this.comments = new ArrayList<Ref<Comment>>();
+        this.comments = new ArrayList<Ref<SeriesComment>>();
         this.tags = new ArrayList<String>();
     }
 

@@ -1,10 +1,7 @@
 package data.model;
 
 import com.googlecode.objectify.Ref;
-import com.googlecode.objectify.annotation.Cache;
-import com.googlecode.objectify.annotation.Entity;
-import com.googlecode.objectify.annotation.Id;
-import com.googlecode.objectify.annotation.Load;
+import com.googlecode.objectify.annotation.*;
 
 /**
  * Comments are for Comments at the end of chapters!
@@ -15,7 +12,9 @@ public class Comment {
     @Id private Long commentId;
     private String text;
     @Load private Ref<UserData> poster;
+    @Index private String posterEmail;
     @Load private Ref<Chapter> chapter;
+    @Index private String chapterId;
     private int score;
 
     public Comment(){

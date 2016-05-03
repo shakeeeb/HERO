@@ -8,9 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-/**
- * Created by shakeeb on 3/31/16.
- */
+
 public class CommentRepository {
     // each repo fucks with Objectify
 
@@ -25,12 +23,13 @@ public class CommentRepository {
     }
 
     //getByOtherThingsIfNeedBe
+    //actually, i don't think i can do that...
     public List<Comment> getCommentsByUser(UserData user){
-        return ofy().load().type(Comment.class).filter("poster", user).list();
+        return ofy().load().type(Comment.class).filter("posterEmail", user.getEmail()).list();
     }
 
     public List<Comment> getCommentsByChapter(Chapter chapter){
-        return ofy().load().type(Comment.class).filter("chapter", chapter).list();
+        return ofy().load().type(Comment.class).filter("chapterId", chapter.getChapterId()).list();
     }
     //exists(Id)
     public boolean exists(Long Id){

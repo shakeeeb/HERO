@@ -2,6 +2,7 @@ package data.model;
 
 import com.googlecode.objectify.Ref;
 import com.googlecode.objectify.annotation.Id;
+import com.googlecode.objectify.annotation.Index;
 import com.googlecode.objectify.annotation.Load;
 
 /**
@@ -11,7 +12,9 @@ public class SeriesComment {
     @Id private Long commentId;
     private String text;
     @Load private Ref<UserData> poster;
+    @Index private String posterEmail;
     @Load private Ref<Series> series;
+    @Index private String seriesName;
     private int score;
 
     public SeriesComment(){
@@ -21,6 +24,8 @@ public class SeriesComment {
     public SeriesComment(UserData poster, Series series, String text){
         this.poster = Ref.create(poster);
         this.series = Ref.create(series);
+        this.seriesName = series.getName();
+        this.posterEmail = poster.getEmail();
         this.text = text;
     }
 
@@ -54,6 +59,14 @@ public class SeriesComment {
 
     public void setSeries(Series series) {
         this.series = Ref.create(series);
+    }
+
+    public String getPosterEmail(){
+        return this.posterEmail;
+    }
+
+    public String getSeriesName(){
+        return this.seriesName;
     }
 
     public int getScore() {
