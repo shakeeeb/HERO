@@ -129,6 +129,12 @@ public class SeriesRepository {
 
     //update(Id, stuff to update...)
     public void update(Series s){
+
+        //save all chapters in series too
+        ArrayList<Chapter> chapters = s.getChapters();
+        for(Chapter c: chapters){
+            ofy().save().entity(c).now();
+        }
         ofy().save().entity(s).now();
     }
 

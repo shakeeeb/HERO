@@ -84,129 +84,130 @@ public class demoData {
         }
 
         //Add Series to UserData
-        Series Tseries = null;
+        Series Tseries = db.seriesRepo.getById("My Best Friend Gleb");
         if(!db.seriesRepo.exists("My Best Friend Gleb")){
             Tseries = db.seriesRepo.create("My Best Friend Gleb", "Comedy", T, "Daily life with my co-worker, Gleb");
             System.out.println("created Series My Best Friend Gleb!");
         } else {
             System.out.println(" My Best Friend Gleb exists.");
-            Tseries = db.seriesRepo.getById("My Best Friend Gleb");
         }
-        Series MKSeries = null;
+        Series MKSeries = db.seriesRepo.getById("Puppycat Savage");
         if(!db.chapterRepo.exists("Puppycat Savage")){
             MKSeries = db.seriesRepo.create("Puppycat Savage", "Slice-of-Life", Miuki, "shitting on people since '94");
             System.out.println("created Series Puppycat Savage!");
         } else {
             System.out.println("series Puppycat Savage exists.");
-            MKSeries = db.seriesRepo.getById("Puppycat Savage");
+
         }
-        Series BenSeries = null;
+        Series BenSeries = db.seriesRepo.getById("One Piece: Two");
         if(!db.seriesRepo.exists("One Piece: Two")){
             BenSeries = db.seriesRepo.create("One Piece: Two", "Adventure", Ben, "Pirates! with 20% more Tex-Mex");
             System.out.println("created Series One Piece: Two!");
         } else {
             System.out.println("series One Piece: Two exists.");
-            BenSeries = db.seriesRepo.getById("One Piece: Two");
+
         }
-        Series MySeries = null;
+        Series MySeries = db.seriesRepo.getById("Devon! I'm Sorry!");
         if(!db.seriesRepo.exists("Devon! I'm Sorry!")){
             MySeries = db.seriesRepo.create("Devon! I'm Sorry!", "Mystery", Me, "I am my own man!");
             System.out.println("created Series Devon! I'm Sorry!");
         } else {
             System.out.println("series Devon! I'm Sorry! exists.");
-            MySeries = db.seriesRepo.getById("Devon! I'm Sorry!");
+
         }
-        Series JasonSeries = null;
+        Series JasonSeries = db.seriesRepo.getById("Jesus Will Find You");
         if(!db.seriesRepo.exists("Jesus Will Find You")){
             JasonSeries = db.seriesRepo.create("Jesus Will Find You", "Thriller", Jason, "Jesus Will save you. no matter what.");
             System.out.println("created Series Puppycat Savage!");
         } else {
             System.out.println("series Puppycat Savage exists.");
-            JasonSeries = db.seriesRepo.getById("Jesus Will Find You");
+
         }
-        Series TaraSeries = null;
+        Series TaraSeries = db.seriesRepo.getById("We Must Find Joe");
         if(!db.seriesRepo.exists("We Must Find Joe")){
             TaraSeries = db.seriesRepo.create("We Must Find Joe", "Mystery", TayTay, "Where is Joe? only Tara can find him.");
             System.out.println("created Series We Must Find Joe!");
         } else {
             System.out.println("series We Must Find Joe exists.");
-            TaraSeries = db.seriesRepo.getById("We Must Find Joe");
+
         }
-        Series JamezSeries = null;
+        Series JamezSeries = db.seriesRepo.getById("We Must Find Joe");
         if(!db.seriesRepo.exists("Green Ham & Cheese")){
             JamezSeries = db.seriesRepo.create("Green Ham & Cheese", "Food", James, "He goes around, making sandwiches for the hungry.");
             System.out.println("created Series Green Ham & Cheese!");
         } else {
             System.out.println("series Green Ham & Cheese exists.");
-            JamezSeries = db.seriesRepo.getById("We Must Find Joe");
+
         }
-        Series onePiece = null;
+        Series onePiece = db.seriesRepo.getById("One_Piece");
         if(!db.seriesRepo.exists("One_Piece")){
             onePiece = db.seriesRepo.create("One_Piece", "Fiction", Ben, "Best MangaEver");
             System.out.println("created Series One_Piece!");
         } else {
             System.out.println("series One_Piece exists.");
-            onePiece = db.seriesRepo.getById("One_Piece");
+
         }
 
         //Adding chapters to series
         // Chapters
-        Chapter c1 = null;
-        if(!db.chapterRepo.exists("Day One: The Dream of Gleb")){
+        //goddamn it! a chapter ID is a series + chapter name
+        System.out.println(Tseries.getName() +"~" + "Day One: The Dream of Gleb");
+        Chapter c1 = db.chapterRepo.getById(Tseries.getName() + "~" + "Day One: The Dream of Gleb");
+        if(c1 == null){
             c1 = db.chapterRepo.create("Day One: The Dream of Gleb", T, Tseries, 1);
             System.out.println("created Day One: The Dream of Gleb!");
         } else {
             System.out.println("chapter Day One: The Dream of Gleb exists.");
-            c1 = db.chapterRepo.getById("Day One: The Dream of Gleb");
+
         }
-        Chapter c2 = null;
-        if(!db.chapterRepo.exists("Day Two: Gleb's Revenge")){
+        Chapter c2 = db.chapterRepo.getById(Tseries.getName() + "~" + "Day Two: Gleb's Revenge");
+        if(c2 == null){
             c2 = db.chapterRepo.create("Day Two: Gleb's Revenge", T, Tseries, 2);
             System.out.println("created Day Two: Gleb's Revenge!");
         } else {
             System.out.println("chapter Day Two: Gleb's Revenge exists.");
-            c2 = db.chapterRepo.getById("Day Two: Gleb's Revenge");
+
         }
-        Chapter c3 = null;
-        if(!db.chapterRepo.exists("Romance Dawn: The Trip to Moes!")){
+        Chapter c3 = db.chapterRepo.getById(BenSeries.getName() +"~"+"Romance Dawn: The Trip to Moes!");
+        if(c3 == null){
             c3 = db.chapterRepo.create("Romance Dawn: The Trip to Moes!", Ben, BenSeries, 1);
             System.out.println("created Romance Dawn: The Trip to Moes!");
         } else {
             System.out.println("chapter Romance Dawn: The Trip to Moes! exists.");
-            c3 = db.chapterRepo.getById("Romance Dawn: The Trip to Moes!");
+
         }
-        Chapter c4 = null;
-        if(!db.chapterRepo.exists("The Great Guacamole Riot")){
+        Chapter c4 = db.chapterRepo.getById(BenSeries.getName() + "~" +"The Great Guacamole Riot");
+        if(c4 == null){
             c4 = db.chapterRepo.create("The Great Guacamole Riot", Ben, BenSeries, 2);
             System.out.println("created The Great Guacamole Riot!");
         } else {
             System.out.println("chapter The Great Guacamole Riot exists.");
-            c4 = db.chapterRepo.getById("The Great Guacamole Riot");
+
         }
-        Chapter c5 = null;
-        if(!db.chapterRepo.exists("The Streets of New York")){
+        Chapter c5 = db.chapterRepo.getById(MKSeries.getName() +"~"+"The Streets of New York");
+        if(c5 == null){
             c5 = db.chapterRepo.create("The Streets of New York", Miuki, MKSeries, 1);
             System.out.println("created The Streets of New York!");
         } else {
             System.out.println("chapter The Streets of New York exists.");
-            c5 = db.chapterRepo.getById("The Streets of New York");
+
         }
-        Chapter c6 = null;
-        if(!db.chapterRepo.exists("It Feels Good To Be A Gangsta")){
+        Chapter c6 = db.chapterRepo.getById(MKSeries.getName()+"~"+"It Feels Good To Be A Gangsta");
+        if(c6 == null){
             c6 = db.chapterRepo.create("It Feels Good To Be A Gangsta", Miuki, MKSeries, 2);
             c6.setSummary("It feels good to be a gangsta summary");
             System.out.println("created It feels good to be a gangsta");
         } else {
             System.out.println("chapter It Feels Good To be a Gangsta exists.");
-            c6 = db.chapterRepo.getById("It Feels Good To Be A Gangsta");
+
         }
-        Chapter c7 = null;
-        if(!db.chapterRepo.exists("Luffy_meets_Boa")){
+        Chapter c7 = db.chapterRepo.getById(onePiece.getName()+"~"+"Luffy_meets_Boa");
+        if(c7 == null){
             c7 = db.chapterRepo.create("Luffy_meets_Boa", Ben, onePiece, 1);
             System.out.println("created Luffy_meets_Boa");
         } else {
             System.out.println("chapter Luffy_meets_Boa exists.");
-            c7 = db.chapterRepo.getById("It Feels Good To Be A Gangsta");
+
         }
         System.out.println(c1);
         System.out.println(c2);
@@ -216,8 +217,10 @@ public class demoData {
         System.out.println(c6);
         System.out.println(c7);
         // Pages per chapter
-
-        if(c6 != null){
+        int spages = c6.getAllPages().size();
+        //puppycat savage it feels good to be a gangsta
+        if(spages == 1){
+            // TODO: make this safer
             Page pp1 = c6.getRoot(); //root is level 0
             Page pp2 = db.pageRepo.create(MKSeries, c6, 1); //hardcoded levels for now
             Page pp3 = db.pageRepo.create(MKSeries, c6, 2);
@@ -228,8 +231,10 @@ public class demoData {
             db.chapterRepo.update(c6);
         }
         //changed the repo create-- it takes priors.
-        // db.pageRepo.create(series, chapter, priors)
-        if(c1 != null){
+        int gpages = c1.getAllPages().size();
+        //my best friend gleb the dream of gleb
+        if(gpages == 1){
+            //TODO: make this safer
             Page p1 = c1.getRoot();
             Page p2 = db.pageRepo.create(Tseries, c1, 1);
             Page p3 = db.pageRepo.create(Tseries, c1, 2);
@@ -239,23 +244,28 @@ public class demoData {
             p2.setNext(p4, c1);
         }
 
-        if(c7 != null){
-            Page pg1 = c7.getRoot();
-            Page pg2 = db.pageRepo.create(onePiece, c7, 1);
-            Page pg3 = db.pageRepo.create(onePiece, c7, 2); // page three comes from page two
-            Page pg4 = db.pageRepo.create(onePiece, c7, 3);
-            Page pg5 = db.pageRepo.create(onePiece, c7, 3); //purposeful orphan
+        //one piece luffy meets boa
+        int lpages = c7.getAllPages().size();
+
+        if(lpages == 1){
+            //TODO: make this safer
+            Page pg1 = c7.getRoot();  // level 0
+            Page pg2 = db.pageRepo.create(onePiece, c7, 1); //level 1
+            Page pg3 = db.pageRepo.create(onePiece, c7, 2); // level 2
+            Page pg4 = db.pageRepo.create(onePiece, c7, 2); // level 3
+            Page pg5 = db.pageRepo.create(onePiece, c7, 3); //purposeful orphan level 3
             pg1.setImagePath("/resources/images/test/test1.png");
             pg2.setImagePath("/resources/images/test/test2.png");
             pg3.setImagePath("/resources/images/test/test3.png");
             pg4.setImagePath("/resources/images/test/test4.png");
-            pg1.addOption(pg2, "Go to Page 2"); // 1->2
-            pg2.addOption(pg3, "Go to Page 3"); //2->3
-            pg2.addOption(pg4, "Go to Page 4"); //2->4
+            pg1.setNext(pg2,"Go to Page 2", c7); // 1->2
+            pg2.setNext(pg3,"Go to Page 3", c7); //2->3
+            pg2.setNext(pg4,"Go to Page 4", c7); //2->4
             db.chapterRepo.update(c7);
         }
 
         if(db.seriesRepo.exists("One_Piece")){
+            //TODO: make this safer
             Chapter onePieceChapter2 = db.chapterRepo.create("Luffy Meets Kim Possible", Ben, onePiece, 2);
             // roots are auto generated
             Chapter onePieceChapter3 = db.chapterRepo.create("Luffy Meets Ron Stoppable", Ben, onePiece, 3);

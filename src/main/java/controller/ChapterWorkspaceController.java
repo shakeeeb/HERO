@@ -236,12 +236,15 @@ public class ChapterWorkspaceController {
     }
 
     @RequestMapping(value="delete-chapter-page", method = RequestMethod.POST)
-    protected String deleteChapterPage( HttpServletRequest request, HttpServletResponse response){
+    protected @ResponseBody String deleteChapterPage( HttpServletRequest request, HttpServletResponse response){
         // i need the chapter ID and the Id of the page i want to delete
         // and then, i just delete it
         System.out.println("arrived at the delete page controller");
         String chapterID  = request.getParameter("chapterID");
         String pageID = request.getParameter("pageID");
+
+        System.out.println("Chapter ID:"+ chapterID);
+        System.out.println("Page ID:"+pageID);
 
         Chapter c = db.chapterRepo.getById(chapterID);
         if(c == null){
@@ -259,14 +262,25 @@ public class ChapterWorkspaceController {
     }
 
     @RequestMapping(value="delete-row", method = RequestMethod.POST)
-    protected String refactorChapterPage( HttpServletRequest request, HttpServletResponse response){
+    protected @ResponseBody String refactorChapterPage( HttpServletRequest request, HttpServletResponse response){
         int level = Integer.parseInt(request.getParameter("level"));
-        String chapterID = request.getParameter("level");
+        String chapterID = request.getParameter("chapterID");
+        String pageID = request.getParameter("pageID");
         Chapter chapter = db.chapterRepo.getById(chapterID);
+        System.out.println("deleting a page, then deleting a row");
+
+        System.out.println("deleting a row");
         if(chapter == null){
             System.out.println("chapter does not exist");
             return "failure";
         }
+        Page pg = db.pageRepo.getById(pageID);
+
+        if(pg == null){
+            System.out.println("page does not exist");
+            return "failure";
+        }
+        db.pageRepo.delete(chapter, pg);
         // take this chapter, change all the levels of the selected level to selected level-1
         // the page will be reloaded after this
 

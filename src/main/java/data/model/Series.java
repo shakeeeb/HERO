@@ -24,7 +24,7 @@ public class Series {
     private int numChapters = 0;
     @Load private ArrayList<Ref<Chapter>> chapters;
     private String description = null;
-    @Load private ArrayList<Ref<Comment>> comments;
+    @Load private ArrayList<Ref<SeriesComment>> comments;
     @Index private Boolean isApproved = false;
     private String bannerURL = null;
     private String authorName;
@@ -32,6 +32,9 @@ public class Series {
 
     public Series(){
         this.updateTime = new Date();
+        this.subscribers = new ArrayList<Ref<UserData>>();
+        this.comments = new ArrayList<Ref<SeriesComment>>();
+        this.chapters = new ArrayList<Ref<Chapter>>();
     }
 
     public Series(String theName, UserData theAuthor){
@@ -42,7 +45,7 @@ public class Series {
         this.authorName = theAuthor.getNickname();
         this.subscribers = new ArrayList<Ref<UserData>>();
         this.chapters = new ArrayList<Ref<Chapter>>();
-        this.comments = new ArrayList<Ref<Comment>>();
+        this.comments = new ArrayList<Ref<SeriesComment>>();
     }
 
     public Series(String theName, UserData theAuthor, String description, String genre){
@@ -55,7 +58,7 @@ public class Series {
         this.mainGenre = genre.toLowerCase();
         this.subscribers = new ArrayList<Ref<UserData>>();
         this.chapters = new ArrayList<Ref<Chapter>>();
-        this.comments = new ArrayList<Ref<Comment>>();
+        this.comments = new ArrayList<Ref<SeriesComment>>();
     }
 
     //GETTER SETTER
@@ -154,14 +157,18 @@ public class Series {
         }
         this.chapters = intermediary;
     }
-    //TODO return ArrayList<comments> instead of ArrayList<Ref<comments>>
-    public ArrayList<Ref<Comment>> getComments() {
-        return comments;
+
+    public ArrayList<SeriesComment> getComments() {
+        ArrayList<SeriesComment> returner = new ArrayList<SeriesComment>();
+        for(Ref<SeriesComment> s: this.comments){
+            returner.add(s.get());
+        }
+        return returner;
     }
 
-    public void setComments(ArrayList<Comment> comments) {
-        ArrayList<Ref<Comment>> intermediary = new ArrayList<Ref<Comment>>();
-        for(Comment c :comments){
+    public void setComments(ArrayList<SeriesComment> comments) {
+        ArrayList<Ref<SeriesComment>> intermediary = new ArrayList<Ref<SeriesComment>>();
+        for(SeriesComment c :comments){
             intermediary.add(Ref.create(c));
         }
         this.comments = intermediary;
@@ -264,6 +271,14 @@ public class Series {
 
     public String getAuthorName(){
         return this.authorName;
+    }
+
+    public void addSeriesComment(SeriesComment s){
+        this.comments.add(Ref.create(s));
+    }
+
+    public void removeSeriesComment(SeriesComment s){
+        this.comments.remove(Ref.create(s));
     }
 
 

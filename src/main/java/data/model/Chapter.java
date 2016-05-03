@@ -206,6 +206,7 @@ public class Chapter {
 
     public void deletePage(Page toDelete){
         // the page for deletion is either in the tree, or an orphan.
+        // new case! it might be in an orphan subtree! wonderful.
         // in either case, find it and get rid of connections
         // find the page in the tree
         // find any pages that link to that page
@@ -214,6 +215,20 @@ public class Chapter {
         if(this.orphans.contains(Ref.create(toDelete))){
             // its an orphan
             this.orphans.remove(Ref.create(toDelete));
+        } else if(inOrphanSubtree(toDelete)){
+            // its in an orphan subtree
+            ArrayList<Page> parents = getParentsOf(toDelete);
+            ArrayList<Page> orphans = getChildrenOf(toDelete);
+            if(!parents.isEmpty()){
+                for(Page parent : parents){
+                    parent.removeOption(toDelete);
+                }
+            }
+            if(!orphans.isEmpty()){
+                for(Page child : orphans){
+                    this.orphans.add(Ref.create(child));
+                }
+            }
         } else {
             // its in the tree
             ArrayList<Page> parents = getParentsOf(toDelete);
@@ -266,9 +281,25 @@ public class Chapter {
         p1.getAllPages(returner);
         System.out.println("before adding on the orphans" + returner);
         ArrayList<Page> orphanage = new ArrayList<Page>();
+        // treat every orphan like a subtree
+        if(orphans.isEmpty()){
+            return returner;
+        }
         for(Ref<Page> r: orphans){
             Page p = r.get();
-            orphanage.add(p);
+            if(p == null){
+                return null;
+            }
+            if(p.hasChildren()){
+                // then this is a subtree.
+                ArrayList<Page> subReturner = new ArrayList<Page>();
+                p.getAllPages(subReturner);
+                orphanage.addAll(subReturner);
+            } else {
+                // then this is not a subtree
+                orphanage.add(p);
+            }
+
         }
         System.out.println("orphans:" + orphanage);
         //purge orphans
@@ -319,6 +350,33 @@ public class Chapter {
         }
         tree.addAll(orphanage);
         return tree;
+    }
+
+    public Page exhaustiveOrphanSearch(Page findMe){
+        // must search orphans before calling this.
+        // only looks for orphan subtrees
+        ArrayList<Page> orphanage = this.getOrphans();
+
+        //treat the orphanage like an array of subtrees
+        for(Page p : orphanage){
+            if(p.hasChildren()){
+                // orphan subtree!
+                Page p2 = p.find(findMe);
+                if(p2 != null){
+                    return p2;
+                }
+            }
+        }
+        return null;
+    }
+
+    public boolean inOrphanSubtree(Page findMe){
+        Page p = exhaustiveOrphanSearch(findMe);
+        if(p != null){
+            return true;
+        } else {
+            return false;
+        }
     }
 
 
