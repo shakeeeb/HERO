@@ -340,11 +340,12 @@ body {
 
 #home-more-options{
     color:orange;
-    margin-left: 350px;
+    margin-left: 425px;
 }
 
 #home-more-options-down{
     color:orange;
+    margin-top:-50px;
     margin-left: 550px;
 }
 
