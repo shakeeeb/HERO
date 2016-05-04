@@ -27,7 +27,7 @@
         <div class="row">
             <div class="col-lg-offset-1 col-lg-1">
                 <div class="navbar-header">
-                    <a href="/home"><img src="https://placehold.it/50x50?text=hero" height="50px" width="50px">  </a>
+                    <a href="/home"><img src="/resources/images/hero.png" height="50px" width="50px">  </a>
                 </div> <!-- navbar-header-->
             </div><!--col-sm-4-->
             <form action = "/search" method ="get" class="navbar-form navbar-left navbar-input-group searchForm" role="search">
@@ -38,9 +38,23 @@
                             </span>
                 </div>
             </form>
-            <div class="hamburger navbar-right">
-                <a href="/home"><img src="https://placehold.it/50x50?text=menu" height="50px" width="50px">  </a>
+
+            <div id="hamburger-menu-icon" class="dropdown hamburger navbar-right">
+                <!--<button class="dropdown-toggle" data-toggle="dropdown">
+                    <a href="/home"><i class="fa fa-bars fa-3x"></i></a></button>-->
+                    <i class="fa fa-bars fa-3x"data-toggle="dropdown"></i>
+                <ul id="nav-dropdown" class="dropdown-menu">
+                    <li><a href="/login">Sign In</a></li>
+                    <li><a href="/logout">Sign Out</a></li>
+                    <li><a href="/settings">Settings</a></li>
+                    <li><a href="/dashboard">Dashboard</a></li>
+                    <li><a href="/series-workspace">Make A Comic</a></li>
+                    <li><a href="/comic-index">Comic Index</a></li>
+                    <li><a href="/workspace-tutorial">Workspace Tutorial</a></li>
+                    <li><a href="/drawing-tutorial">Drawing Tutorial</a></li>
+                </ul>
             </div> <!-- hamburger-->
+
         </div>
     </div><!--container-->
 </nav>

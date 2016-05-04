@@ -14,8 +14,8 @@
 <div class="container">
 <%@ include file="/resources/layouts/navbar.jsp" %>
 
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-    <h1 id="logo-placeholder">LOGO HERE</h1>
+<br><br><br><br><br><br><br><br><br>
+    <h1 id="logo-placeholder"><img src="/resources/images/hero.png" height="200px"></h1>
 
     <form id="home-search" class="navbar-form navbar-left navbar-input-group searchForm" role="search">
         <div class="input-group col-xs-12">
