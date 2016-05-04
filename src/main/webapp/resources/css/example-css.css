@@ -51,6 +51,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4569b2', end
     border-top-right-radius: 0px;
     border-bottom-right-radius: 0px;
 }
+
 .navbar-input-group .btn {
     border-top-left-radius: 0px;
     border-bottom-left-radius: 0px;
@@ -339,11 +340,12 @@ body {
 
 #home-more-options{
     color:orange;
-    margin-left: 350px;
+    margin-left: 425px;
 }
 
 #home-more-options-down{
     color:orange;
+    margin-top:-50px;
     margin-left: 550px;
 }
 
@@ -414,5 +416,19 @@ body {
     height:200px;
     width: 200px;
     float:left;
+}
 
+#hamburger-menu-icon{
+    margin-top:4px;
+}
+
+#nav-dropdown{
+    width:100px;
+    border-color: orange;
+    border-width: 3px;
+}
+
+#nav-dropdown > li > a:hover {
+    background-color: lightblue;
+    background-image: none;
 }
