@@ -31,7 +31,7 @@
 
     <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
-    <h3 id="featured-comic-title">Featured Comics</h3>
+    <h3 id="featured-comic-title" class="till_font">Featured Comics</h3>
     <div id="featured-carousel" class="carousel slide" data-ride="carousel">
         <!-- Indicators -->
         <ol class="carousel-indicators">
@@ -64,7 +64,7 @@
     </div>
 
 
-<h3>Recently Updated</h3>
+<h3 class="till_font">Recently Updated</h3>
 
     <div class="text-center">
         <div class="carousel slide row" data-ride="carousel" data-type="multi" data-interval="10000" id="recentcarousel">
