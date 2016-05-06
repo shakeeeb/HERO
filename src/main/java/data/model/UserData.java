@@ -19,9 +19,8 @@ public class UserData {
     @Load private ArrayList<Ref<Series>> mySeries;
     @Load private ArrayList<Ref<Page>> bookmarks;
     @Load private ArrayList<Ref<Rating>> ratings;
-    @Load private ArrayList<Ref<Series>> viewed;
+    @Load private ArrayList<Ref<Series>> recentlyViewed;
     @Load private ArrayList<Ref<Series>> subscriptions;
-    @Load private ArrayList<Ref<Chapter>> recentlyViewed;
     int totalSeriesViewed = 0;
     @Index(IfTrue.class) private Boolean isAdmin = false;
     private String aboutMe;
@@ -32,9 +31,8 @@ public class UserData {
         this.mySeries = new ArrayList<Ref<Series>>();
         this.bookmarks = new ArrayList<Ref<Page>>();
         this.ratings = new ArrayList<Ref<Rating>>();
-        this.viewed = new ArrayList<Ref<Series>>();
+        this.recentlyViewed = new ArrayList<Ref<Series>>();
         this.subscriptions = new ArrayList<Ref<Series>>();
-        this.recentlyViewed = new ArrayList<Ref<Chapter>>();
     }
 
     public UserData(String email){
@@ -43,9 +41,8 @@ public class UserData {
         this.mySeries = new ArrayList<Ref<Series>>();
         this.bookmarks = new ArrayList<Ref<Page>>();
         this.ratings = new ArrayList<Ref<Rating>>();
-        this.viewed = new ArrayList<Ref<Series>>();
+        this.recentlyViewed = new ArrayList<Ref<Series>>();
         this.subscriptions = new ArrayList<Ref<Series>>();
-        this.recentlyViewed = new ArrayList<Ref<Chapter>>();
     }
 
     public UserData(String email, String name, String about){
@@ -55,9 +52,8 @@ public class UserData {
         this.mySeries = new ArrayList<Ref<Series>>();
         this.bookmarks = new ArrayList<Ref<Page>>();
         this.ratings = new ArrayList<Ref<Rating>>();
-        this.viewed = new ArrayList<Ref<Series>>();
+        this.recentlyViewed = new ArrayList<Ref<Series>>();
         this.subscriptions = new ArrayList<Ref<Series>>();
-        this.recentlyViewed = new ArrayList<Ref<Chapter>>();
     }
 
     public UserData(String email, String name, String about, String pic){
@@ -68,9 +64,8 @@ public class UserData {
         this.mySeries = new ArrayList<Ref<Series>>();
         this.bookmarks = new ArrayList<Ref<Page>>();
         this.ratings = new ArrayList<Ref<Rating>>();
-        this.viewed = new ArrayList<Ref<Series>>();
+        this.recentlyViewed = new ArrayList<Ref<Series>>();
         this.subscriptions = new ArrayList<Ref<Series>>();
-        this.recentlyViewed = new ArrayList<Ref<Chapter>>();
     }
 
 
@@ -99,20 +94,6 @@ public class UserData {
     public void setSubscriptions(ArrayList<Series> toSet){
         for(Series s : toSet){
             this.subscriptions.add(Ref.create(s));
-        }
-    }
-
-    public ArrayList<Chapter> getRecentlyViewed() {
-        ArrayList<Chapter> returner = new ArrayList<Chapter>();
-        for(Ref<Chapter> c: this.recentlyViewed){
-            returner.add(c.get());
-        }
-        return returner;
-    }
-
-    public void setRecentlyViewed(ArrayList<Chapter> toSet){
-        for(Chapter c : toSet){
-            this.recentlyViewed.add(Ref.create(c));
         }
     }
 
@@ -188,20 +169,20 @@ public class UserData {
         this.ratings = intermediary;
     }
 
-    public ArrayList<Series> getViewed() {
+    public ArrayList<Series> getRecentlyViewed() {
         ArrayList<Series> returner = new ArrayList<Series>();
-        for(Ref<Series> s: viewed){
+        for(Ref<Series> s: recentlyViewed){
             returner.add(s.get());
         }
         return returner;
     }
 
-    public void setViewed(ArrayList<Series> viewed) {
+    public void setRecentlyViewed(ArrayList<Series> recentlyViewed) {
         ArrayList<Ref<Series>> intermediary = new ArrayList<Ref<Series>>();
-        for(Series r: viewed){
+        for(Series r: recentlyViewed){
             intermediary.add(Ref.create(r));
         }
-        this.viewed = intermediary;
+        this.recentlyViewed = intermediary;
     }
 
     public Boolean getAdmin() {
@@ -257,6 +238,15 @@ public class UserData {
         }
     }
 
+    public boolean hasSeries(Series checkMe){
+        ArrayList<Series> mySeries = this.getMySeries();
+        if(mySeries.contains(checkMe)){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public void addRating(Rating newRating){
         ratings.add(Ref.create(newRating));
     }
@@ -270,16 +260,50 @@ public class UserData {
         }
     }
 
+//    public void addViewed(Series series){
+//        totalSeriesViewed++;
+//        if(recentlyViewed.size() >= 10){
+//            // replace a thing already in the arraylist
+//            recentlyViewed.remove(totalSeriesViewed % 10);
+//            recentlyViewed.add(Ref.create(series));
+//        } else {
+//            // just add it to an arraylist
+//            recentlyViewed.add(Ref.create(series));
+//        }
+//    }
+
     public void addViewed(Series series){
-        totalSeriesViewed++;
-        if(viewed.size() >= 10){
-            // replace a thing already in the arraylist
-            viewed.remove(totalSeriesViewed % 10);
-            viewed.add(Ref.create(series));
-        } else {
-            // just add it to an arraylist
-            viewed.add(Ref.create(series));
+        System.out.println("Adding blah");
+        if (this.recentlyViewed.contains(Ref.create(series))) {
+            System.out.println("It contains the series");
+            for (int i = 0; i < this.recentlyViewed.size(); i++) {
+                System.out.println("i: " + i);
+                if (this.recentlyViewed.get(i).equals(Ref.create(series))) {
+                    System.out.println("It equals at: " + i);
+                    System.out.println(("Removing series: " + recentlyViewed.get(i)));
+                    this.recentlyViewed.remove(i);
+                    this.recentlyViewed.add(0, Ref.create(series));
+                }
+            }
         }
+        else {
+            System.out.println("Case: Does not contain series");
+            if (this.recentlyViewed.size() >= 5){
+                System.out.println("the size is 5 or greater.");
+                this.recentlyViewed.remove(4);
+                this.recentlyViewed.add(0, Ref.create(series));
+            }
+            else {
+                System.out.println("The size is less than 5.");
+                this.recentlyViewed.add(0, Ref.create(series));
+            }
+            System.out.println("Got passed If");
+        }
+    }
+
+    public void clearViewed() {
+        System.out.println("Clearing recentlyViewed");
+        this.recentlyViewed.clear();
     }
 
     public Series getSpecificSeries(String SeriesName){

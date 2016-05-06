@@ -53,9 +53,17 @@ public class ChapterRepository {
         //public Chapter(String theName, UserData theAuthor, Series theSeries, int chapterNo, Page theRoot)
         //Page p = new Page();
 
-        //check i series exists
+        //check if series exists
         if(ofy().load().entity(theSeries).now() != null){
             Chapter c = new Chapter(theName, theAuthor, theSeries, chapterNo);
+            if(theSeries.hasChapter(c)){
+                // then we dont make it, it already exists.
+                // YOU IDIOT GET BY IDS DONT WORK must build key and get by key
+
+                Chapter d = getByKey(theSeries, c.getChapterId());
+                return d;
+            }
+
             // make chapter
             Page p = new Page(theSeries, c, c.getMax());
             // make page

@@ -66,8 +66,10 @@ public class DashboardController {
         UserData user = db.userRepo.getUserById(userService.getCurrentUser().getEmail());
 
         ArrayList<Series> subscriptions = user.getSubscriptions();
+        ArrayList<Series> recentlyViewed = user.getRecentlyViewed();
 
         json.add("subscriptions", gson.toJsonTree(subscriptions));
+        json.add("recentlyViewed", gson.toJsonTree(recentlyViewed));
 
         return json;
     }

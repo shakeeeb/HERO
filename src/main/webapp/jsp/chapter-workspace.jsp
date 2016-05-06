@@ -15,7 +15,6 @@
     <link rel="stylesheet" href="/resources/css/terrell.css">
     <script src="/resources/scripts/widgets/workspace.js"></script>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet">
-
 </head>
 <body>
     <div id="chapter-workspace-container">

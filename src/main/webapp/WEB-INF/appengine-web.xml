@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <appengine-web-app xmlns="http://appengine.google.com/ns/1.0">
-    <application>hero-hq-4</application>
-    <version>4</version>
+    <application>hero-hq-5</application>
+    <version>5</version>
     <threadsafe>true</threadsafe>
     <sessions-enabled>true</sessions-enabled>
     

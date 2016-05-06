@@ -14,7 +14,6 @@ $(document).ready(function () {
 
     //Glitch if a chapter only contains one page.
 
-
     //Find out where you're coming from.
     // Coming from the chapter index. Case when you find other routes to the chapter index here.
     chapterID = $("#hidden-chapterID").html();

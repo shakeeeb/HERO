@@ -1,5 +1,6 @@
 $(document).ready(function() {
     var subscriptions;
+    var recentlyViewed;
     var template;
     loadDashboard();
     function loadDashboard() {
@@ -7,13 +8,15 @@ $(document).ready(function() {
         $.getJSON("/dashboard/get/", function(data) {
         }).done(function(data) {
             subscriptions = data.members.subscriptions.elements;
+            recentlyViewed = data.members.recentlyViewed.elements;
+
             console.log(subscriptions);
+            console.log(recentlyViewed);
             loadEverything(subscriptions);
 
         }).fail(function() {
             console.log("Could not get data");
         });
-
     }
 
     function loadEverything(subscriptions) {
@@ -35,7 +38,6 @@ $(document).ready(function() {
             if (allSubscriptions.length > 0)
             {
                 var item = $(template).clone();
-
 
                 $("#subscription-container").append(item);
 
