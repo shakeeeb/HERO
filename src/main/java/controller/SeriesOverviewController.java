@@ -73,7 +73,6 @@ public class SeriesOverviewController {
         db.chapterRepo.delete(c,s);
         db.seriesRepo.update(s);
 
-
         return json;
     }
 

@@ -1,5 +1,7 @@
 package controller;
 
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 import com.google.appengine.repackaged.com.google.gson.Gson;
 import com.google.appengine.repackaged.com.google.gson.GsonBuilder;
 import com.google.appengine.repackaged.com.google.gson.JsonObject;
@@ -34,70 +36,41 @@ public class SeriesWorkspaceController {
     }
 
 
-    @RequestMapping(value="series-workspace/lookup/{authorEmail}", method = RequestMethod.GET)
-    public String loadSeriesName(@PathVariable(value="authorEmail") String authorEmail, ModelMap model) {
+    @RequestMapping(value="series-workspace/lookup/", method = RequestMethod.GET)
+    public String loadSeriesName(String authorEmail, ModelMap model) {
         System.out.println("Going to series-workspace ");
-        model.addAttribute("authorEmail", authorEmail);
+//        model.addAttribute("authorEmail", authorEmail);
         return "series-workspace";
     }
 
-    @RequestMapping(value="series-workspace/lookup/get/{authorEmail}", method = RequestMethod.GET)
-    public @ResponseBody JsonObject getSeries(@PathVariable(value="authorEmail") String authorEmail, ModelMap model) {
+    @RequestMapping(value="series-workspace/lookup/get/", method = RequestMethod.GET)
+    public @ResponseBody JsonObject getSeries(String authorEmail, ModelMap model) {
         JsonObject json = new JsonObject();
         Gson gson = new GsonBuilder().create();
 
-        Query<Series> allSeriesQuery = db.seriesRepo.getAllSeriesAsAQuery();
+        UserService userService = UserServiceFactory.getUserService();
+        UserData user = db.userRepo.getUserById(userService.getCurrentUser().getEmail());
 
-        allSeriesQuery = refineSearch(allSeriesQuery, null, null, authorEmail, 0, 0);
-        System.out.println("Query Series: " + allSeriesQuery);
+        String userEmail = user.getEmail();
 
-        List<Series> allSeriesList = allSeriesQuery.list();
-        System.out.println("List Series: " + allSeriesList);
+        List<Series> allSeries = db.seriesRepo.listSeriesByAuthor(userEmail);
 
-        ArrayList<Series> allSeries = new ArrayList<Series>(allSeriesList.size());
-        allSeries.addAll(allSeriesList);
+        //Query<Series> authRefinedQuery = db.seriesRepo.refineQueryByAuthorName(allSeriesQuery, /*author email*/);
 
+//        allSeriesQuery = refineSearch(allSeriesQuery, null, null, authorEmail, 0, 0);
+//        System.out.println("Query Series: " + allSeriesQuery);
+//
+//        List<Series> allSeriesList = allSeriesQuery.list();
+//        System.out.println("List Series: " + allSeriesList);
+//
+//        ArrayList<Series> allSeries = new ArrayList<Series>(allSeriesList.size());
+//        allSeries.addAll(allSeriesList);
+//
         System.out.println("allSeries: " + allSeries);
-
 
         json.add("allSeries", gson.toJsonTree(allSeries));
 
         return json;
-    }
-
-    public Query<Series> refineSearch(Query<Series> q, String genre, String tag, String author, int rating, int date){
-        System.out.println("refining shit");
-        System.out.println(q.list().toString());
-        if(genre != null){
-            if(!genre.equals("all")){
-                q = db.seriesRepo.refineQueryByMainGenre(q, genre);
-            }
-        }
-        System.out.println(q.list().toString());
-        if(tag != null){
-            q = db.seriesRepo.refineQueryByTag(q, tag);
-        }
-        System.out.println(q.list().toString());
-        if(author != null){
-            if(!author.equals("")){
-                q = db.seriesRepo.refineQueryByAuthorName(q, author);
-            }
-        }
-        System.out.println(q.list().toString());
-        if(date != 0){
-            if(date == 1){
-                // most
-                q = db.seriesRepo.refineQueryByLatestUpdate(q);
-            } else {
-                // least
-                q = db.seriesRepo.refineQueryByLeastUpdate(q);
-            }
-        }
-        System.out.println(q.list().toString());
-        if(rating != 0){
-            q = db.seriesRepo.refineByStarCount(q, rating);
-        }
-        return q;
     }
 
     //get the series from the previous page

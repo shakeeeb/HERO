@@ -238,6 +238,15 @@ public class UserData {
         }
     }
 
+    public boolean hasSeries(Series checkMe){
+        ArrayList<Series> mySeries = this.getMySeries();
+        if(mySeries.contains(checkMe)){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public void addRating(Rating newRating){
         ratings.add(Ref.create(newRating));
     }

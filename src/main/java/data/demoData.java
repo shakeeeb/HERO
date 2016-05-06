@@ -85,22 +85,21 @@ public class demoData {
 
         //Add Series to UserData
         Series Tseries = db.seriesRepo.getById("My Best Friend Gleb");
-        if(!db.seriesRepo.exists("My Best Friend Gleb")){
+        if(Tseries == null){
             Tseries = db.seriesRepo.create("My Best Friend Gleb", "Comedy", T, "Daily life with my co-worker, Gleb");
             System.out.println("created Series My Best Friend Gleb!");
         } else {
-            System.out.println(" My Best Friend Gleb exists.");
+            System.out.println("series My Best Friend Gleb exists.");
         }
         Series MKSeries = db.seriesRepo.getById("Puppycat Savage");
-        if(!db.chapterRepo.exists("Puppycat Savage")){
+        if(MKSeries == null){
             MKSeries = db.seriesRepo.create("Puppycat Savage", "Slice-of-Life", Miuki, "shitting on people since '94");
             System.out.println("created Series Puppycat Savage!");
         } else {
             System.out.println("series Puppycat Savage exists.");
-
         }
         Series BenSeries = db.seriesRepo.getById("One Piece: Two");
-        if(!db.seriesRepo.exists("One Piece: Two")){
+        if(BenSeries == null){
             BenSeries = db.seriesRepo.create("One Piece: Two", "Adventure", Ben, "Pirates! with 20% more Tex-Mex");
             System.out.println("created Series One Piece: Two!");
         } else {
@@ -108,7 +107,7 @@ public class demoData {
 
         }
         Series MySeries = db.seriesRepo.getById("Devon! I'm Sorry!");
-        if(!db.seriesRepo.exists("Devon! I'm Sorry!")){
+        if(MySeries == null){
             MySeries = db.seriesRepo.create("Devon! I'm Sorry!", "Mystery", Me, "I am my own man!");
             System.out.println("created Series Devon! I'm Sorry!");
         } else {
@@ -116,23 +115,23 @@ public class demoData {
 
         }
         Series JasonSeries = db.seriesRepo.getById("Jesus Will Find You");
-        if(!db.seriesRepo.exists("Jesus Will Find You")){
+        if(JasonSeries == null){
             JasonSeries = db.seriesRepo.create("Jesus Will Find You", "Thriller", Jason, "Jesus Will save you. no matter what.");
-            System.out.println("created Series Puppycat Savage!");
+            System.out.println("created Series Jesus Will Find You!");
         } else {
-            System.out.println("series Puppycat Savage exists.");
+            System.out.println("series Jesus Will Find You exists.");
 
         }
         Series TaraSeries = db.seriesRepo.getById("We Must Find Joe");
-        if(!db.seriesRepo.exists("We Must Find Joe")){
+        if(TaraSeries == null){
             TaraSeries = db.seriesRepo.create("We Must Find Joe", "Mystery", TayTay, "Where is Joe? only Tara can find him.");
             System.out.println("created Series We Must Find Joe!");
         } else {
             System.out.println("series We Must Find Joe exists.");
 
         }
-        Series JamezSeries = db.seriesRepo.getById("We Must Find Joe");
-        if(!db.seriesRepo.exists("Green Ham & Cheese")){
+        Series JamezSeries = db.seriesRepo.getById("Green Ham & Cheese");
+        if(JamezSeries == null){
             JamezSeries = db.seriesRepo.create("Green Ham & Cheese", "Food", James, "He goes around, making sandwiches for the hungry.");
             System.out.println("created Series Green Ham & Cheese!");
         } else {
@@ -140,7 +139,7 @@ public class demoData {
 
         }
         Series onePiece = db.seriesRepo.getById("One_Piece");
-        if(!db.seriesRepo.exists("One_Piece")){
+        if(onePiece == null){
             onePiece = db.seriesRepo.create("One_Piece", "Fiction", Ben, "Best MangaEver");
             System.out.println("created Series One_Piece!");
         } else {
@@ -283,6 +282,8 @@ public class demoData {
 //        for (int i = 0; i < allUsers.size(); i++) {
 //            allUsers.get(i).clearViewed();
 //        }
+//        Ben.getRecentlyViewed().clear();
+//        db.userRepo.update(Ben);
 
 
 
