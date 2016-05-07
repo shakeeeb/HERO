@@ -50,11 +50,6 @@ public class AdminPageController {
         String nickname = user.getEmail();
         System.out.println("The current user is: " + nickname);
 
-//        if(!user.isAdmin())
-//        {
-//            System.out.println("The user is not an admin");
-//        }
-
         model.addAttribute("nickname", nickname);
 
         return "admin";
@@ -84,7 +79,6 @@ public class AdminPageController {
         }
 
         json.add("pendingApproval", gson.toJsonTree(pendingApproval));
-
         ArrayList<Chapter> reportedComics = new ArrayList<Chapter>();
 
         for (Chapter c : allChapters)
@@ -95,9 +89,6 @@ public class AdminPageController {
         }
 
         json.add("reportedComics", gson.toJsonTree(reportedComics));
-
-
-
 
         return json;
     }

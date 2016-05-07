@@ -377,6 +377,7 @@ body {
 
 #dashboard-greeting{
     font-size:24px;
+    font-family: 'Titillium Web', sans-serif;
 }
 
 #dashboard-my-series{
@@ -431,4 +432,8 @@ body {
 #nav-dropdown > li > a:hover {
     background-color: lightblue;
     background-image: none;
+}
+
+.till_font {
+    font-family: 'Titillium Web', sans-serif;
 }

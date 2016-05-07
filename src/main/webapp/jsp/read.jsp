@@ -40,9 +40,6 @@
         <p id="hidden-pageID">${pageID}</p>
     </div>
 
-
-
-
 </div>
 
 </body>

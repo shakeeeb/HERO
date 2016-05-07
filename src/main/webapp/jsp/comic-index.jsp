@@ -20,7 +20,7 @@
     <br>
     <br>
     <br>
-    <ul class="genre-list">
+    <ul class="genre-list till_font">
         <li>All</li>
         <li>Action</li>
         <li>Comedy</li>
