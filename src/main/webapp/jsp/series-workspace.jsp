@@ -11,20 +11,9 @@
     <title>Hero - Series Workspace</title>
     <%@ include file="/resources/layouts/scripts.jsp" %>
     <%@ include file="/resources/layouts/styles.jsp" %>
-</head>
-<body>
-<%@ include file="/resources/layouts/navbar.jsp" %>
-<script src="/resources/scripts/jquery/series-workspace.js"></script>
-<br><br><br><br>
-<div class="container">
-    <div class="col-lg-offset-1 col-lg-11">
-        Series Workspace
-    </div>
-
-    <div class="orange-span series-workspace-main col-lg-offset-1 col-lg-11">
-
-        <br><br>
-            <span id="series-authored-story-1" class="orange-span one-story">
+    <script id="hidden-template" type="text/x-custom-template">
+        <br>
+        <span id="series-authored-story-1" class="orange-span one-story series-authored-story">
                 <span id="authored-story-1-image" class="author-story-wrap">
                     <img src="/resources/images/logo.png" height="100px" width="100px">
                 </span>
@@ -41,15 +30,24 @@
                     <br>
                     <button type="button" class="btn overview-button">Overview</button>
 
-            </span>
+        </span>
+    </script>
 
-        <br><br><br><br>
-
+</head>
+<body>
+<%@ include file="/resources/layouts/navbar.jsp" %>
+<script src="/resources/scripts/jquery/series-workspace.js"></script>
+<br><br><br><br>
+<div class="container series-container">
+    <div class="col-lg-offset-1 col-lg-11">
+        Series Workspace
+    </div>
+    <div class="orange-span series-workspace-main col-lg-offset-1 col-lg-11">
     </div>
 
     <div class="new-series-button">
         <br>
-        <button type="button" class="btn">+ New Series</button>
+        <button type="button" class="btn series-overview-button">+ New Series</button>
     </div>
 
 
