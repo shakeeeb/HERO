@@ -50,9 +50,7 @@ public class SeriesWorkspaceController {
 
         UserService userService = UserServiceFactory.getUserService();
         UserData user = db.userRepo.getUserById(userService.getCurrentUser().getEmail());
-
         String userEmail = user.getEmail();
-
         List<Series> allSeries = db.seriesRepo.listSeriesByAuthor(userEmail);
 
         //Query<Series> authRefinedQuery = db.seriesRepo.refineQueryByAuthorName(allSeriesQuery, /*author email*/);

@@ -21,6 +21,7 @@ $(document).ready(function() {
 
     function loadEverything(subscriptions) {
         loadSubscriptions(subscriptions);
+        loadRecentlyViewed(recentlyViewed);
     }
 
     function loadSubscriptions(allSubscriptions) {
@@ -32,19 +33,26 @@ $(document).ready(function() {
         }
 
         template = $('#hidden-template').html();
-        for (var i = 0; i < numSubscriptions; i++)
-        {
-            // Template that shit.
-            if (allSubscriptions.length > 0)
-            {
+        if (allSubscriptions.length > 0) {
+            for (var i = 0; i < numSubscriptions; i++) {
+                // Template that shit.
                 var item = $(template).clone();
-
                 $("#subscription-container").append(item);
-
             }
         }
+    }
 
-
+    function loadRecentlyViewed(recentlyViewed) {
+        // Passed in array is already loaded. Just do it.
+        var numRecentlyViewed = recentlyViewed.length;
+        if (recentlyViewed.length > 0) {
+            template = $('#hidden-template').html();
+            for (var i = 0; i < numRecentlyViewed; i++) {
+                // Template that shit
+                var item = $(template).clone();
+                $("#recent-container").append(item);
+            }
+        }
     }
 
 });

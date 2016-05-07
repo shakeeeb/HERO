@@ -27,7 +27,7 @@ public class Series {
     @Load private ArrayList<Ref<SeriesComment>> comments;
     @Index private Boolean isApproved = false;
     private String bannerURL = null;
-    private String authorName;
+    @Index private String authorName;
     @Index private Date updateTime;
 
     public Series(){
