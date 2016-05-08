@@ -71,6 +71,23 @@ public class SeriesWorkspaceController {
         return json;
     }
 
+    @RequestMapping(value="series-workspace/createSeries/{seriesTitle}/{genre}/{seriesDescription}", method = RequestMethod.GET)
+    public @ResponseBody JsonObject createSeries(@PathVariable(value = "seriesTitle") String seriesTitle, @PathVariable(value = "genre") String genre, @PathVariable(value = "seriesDescription") String seriesDescription, ModelMap model) {
+        JsonObject json = new JsonObject();
+        Gson gson = new GsonBuilder().create();
+
+        UserService userService = UserServiceFactory.getUserService();
+        UserData user = db.userRepo.getUserById(userService.getCurrentUser().getEmail());
+
+        System.out.println("About to Create a series" + seriesTitle + genre + seriesDescription);
+
+        Series s = db.seriesRepo.create(seriesTitle, genre, user, seriesDescription);
+
+        db.seriesRepo.update(s);
+
+        return json;
+    }
+
     //get the series from the previous page
 //    @RequestMapping(value="series-workspace/{series_to_load}/{userEmail}", method = RequestMethod.GET)
 //    public @ResponseBody JsonObject getSeries(@PathVariable(value="series_to_load") String series_to_load, @PathVariable(value="userEmail") String userEmail, ModelMap model) {

@@ -17,8 +17,11 @@ $(document).ready(function() {
             allSeries = data.members.allSeries.elements;
             console.log(allSeries);
 
+            $(".series-workspace-main").empty();
+
             var numDrafts = 0;
             var complete = 0;
+            var genre;
 
             for (var j = 0; j < allSeries.length; j++) {
                 if (allSeries[j].members.isApproved.value) {
@@ -43,10 +46,33 @@ $(document).ready(function() {
                     $(".series-workspace-main").append(item);
                 }
             }
+
             $(".series-authored-story").find(".overview-button").click(function() {
                 var seriesID = this.id;
                 loadSeriesOverview(seriesID);
             });
+
+            $(".series-workspace-create-chapter").click(function() {
+                var seriesTitle = $("#seriesTitle").val();
+                var seriesDescription = $("#seriesDescription").val();
+                $(".genre-dropdown .btn").click(function() {
+                    alert($(this).html());
+                    genre = $(this).html();
+                });
+
+                if (!seriesTitle || !seriesDescription)
+                {
+                    alert("Title and Description Required");
+                }
+                else
+                {
+                    alert("SeriesTitle: " + seriesTitle + "\n" +
+                            "Series Description: " + seriesDescription + "\n" +
+                            "Genre: " + genre);
+                    createSeries(genre, seriesTitle, seriesDescription);
+                }
+            });
+
 
         }).fail(function() {
                 console.log("Could not get data");
@@ -55,6 +81,17 @@ $(document).ready(function() {
 
     function loadSeriesOverview(seriesID) {
         window.location.replace("/series-overview/" + seriesID);
+    }
+
+    function createSeries(genre, seriesTitle, seriesDescription) {
+        $.getJSON("/series-workspace/createSeries/" + seriesTitle + "/" + "Horror" + "/" + seriesDescription, function(data) {
+        }).done(function(data) {
+            console.log(data);
+            loadAllSeries()
+
+        }).fail(function() {
+            console.log("Could not get data");
+        });
     }
 
 });

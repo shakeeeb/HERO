@@ -11,6 +11,7 @@
     <title>Hero - Series Workspace</title>
     <%@ include file="/resources/layouts/scripts.jsp" %>
     <%@ include file="/resources/layouts/styles.jsp" %>
+    <link rel="stylesheet" href="/resources/css/ben.css">
     <script id="hidden-template" type="text/x-custom-template">
         <br>
         <span id="series-authored-story-1" class="orange-span one-story series-authored-story">
@@ -47,7 +48,57 @@
 
     <div class="new-series-button">
         <br>
-        <button type="button" class="btn series-overview-button">+ New Series</button>
+        <button type="button" id="new-series" class="btn" data-toggle="modal" data-target="#myModal" >+ New Series</button>
+
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title text-center">Add Series</h4>
+                    </div>
+                    <div class="modal-body">
+                                <div>
+                                    <div class="form-group">
+                                        <label for="seriesTitle">Series Title </label>
+                                        <input type="text" class="form-control input-lg" id="seriesTitle">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="seriesDescription">Series Description</label>
+                                        <textarea class="form-control" rows="7" id="seriesDescription"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                Genre
+                            </button>
+                            <div class="dropdown-menu genre-dropdown">
+                                <button class="btn btn-default dropdown-item dropdown-button">Action</button>
+                                <br>
+                                <button class="btn btn-default dropdown-item dropdown-button">Comedy</button>
+                                <br>
+                                <button class="btn btn-default ropdown-item dropdown-button">Fantasy</button>
+                                <br>
+                                <button class="btn btn-default dropdown-item dropdown-button">Horror</button>
+                                <br>
+                                <button class="btn btn-default dropdown-item dropdown-button">Drama</button>
+                                <br>
+                                <button class="btn btn-default dropdown-item dropdown-button">Romance</button>
+                                <br>
+                                <button class="btn btn-default dropdown-item dropdown-button">Sci-Fi</button>
+                                <br>
+                                <button class="btn btn-default wdropdown-item dropdown-button">Adventure</button>
+                            </div>
+                        </div>
+                        <button type="button" role="menu" class="btn btn-default series-workspace-create-chapter" data-dismiss="modal">Create Series</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
 
