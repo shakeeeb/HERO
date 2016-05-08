@@ -39,9 +39,10 @@ $(document).ready(function() {
                     var seriesID = allSeries[i].members.name.value;
                     $(item).find(".overview-button").attr("id", seriesID);
                     $(item).find(".overview-button").text(seriesID);
+                    $(item).find(".delete-series-button").attr("id", seriesID);
                     var numChapters = allSeries[i].members.numChapters.value;
-                    $(item).find("#series-authored-chap-nums").text("Number of Chapters: " + allSeries.length);
-                    $(item).find("#authored-story-1-tags").text("Drafts/Completed: " + numDrafts + "/" + complete);
+                    $(item).find("#series-authored-chap-nums").text("Number of Chapters: " + numChapters);
+                    //$(item).find("#authored-story-1-tags").text("Drafts/Completed: " + numDrafts + "/" + complete);
 
                     $(".series-workspace-main").append(item);
                 }
@@ -50,6 +51,11 @@ $(document).ready(function() {
             $(".series-authored-story").find(".overview-button").click(function() {
                 var seriesID = this.id;
                 loadSeriesOverview(seriesID);
+            });
+
+            $(".series-authored-story").find(".delete-series-button").click(function() {
+                var seriesID = this.id;
+                deleteSeries(seriesID);
             });
 
             $(".series-workspace-create-chapter").click(function() {
@@ -87,7 +93,18 @@ $(document).ready(function() {
         $.getJSON("/series-workspace/createSeries/" + seriesTitle + "/" + "Horror" + "/" + seriesDescription, function(data) {
         }).done(function(data) {
             console.log(data);
-            loadAllSeries()
+            loadAllSeries();
+
+        }).fail(function() {
+            console.log("Could not get data");
+        });
+    }
+
+    function deleteSeries(seriesID) {
+        $.getJSON("/series-workspace/deleteSeries/" + seriesID, function(data) {
+        }).done(function(data) {
+            console.log(data);
+            loadAllSeries();
 
         }).fail(function() {
             console.log("Could not get data");

@@ -88,6 +88,24 @@ public class SeriesWorkspaceController {
         return json;
     }
 
+    @RequestMapping(value="series-workspace/deleteSeries/{seriesID}", method = RequestMethod.GET)
+    public @ResponseBody JsonObject deleteSeries(@PathVariable(value = "seriesID") String seriesID, ModelMap model) {
+        JsonObject json = new JsonObject();
+        Gson gson = new GsonBuilder().create();
+
+        UserService userService = UserServiceFactory.getUserService();
+        UserData user = db.userRepo.getUserById(userService.getCurrentUser().getEmail());
+
+        Series s = db.seriesRepo.getById(seriesID);
+        db.seriesRepo.delete(s, user);
+
+        db.userRepo.update(user);
+
+
+
+        return json;
+    }
+
     //get the series from the previous page
 //    @RequestMapping(value="series-workspace/{series_to_load}/{userEmail}", method = RequestMethod.GET)
 //    public @ResponseBody JsonObject getSeries(@PathVariable(value="series_to_load") String series_to_load, @PathVariable(value="userEmail") String userEmail, ModelMap model) {

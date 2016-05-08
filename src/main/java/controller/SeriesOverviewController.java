@@ -63,7 +63,7 @@ public class SeriesOverviewController {
     }
 
     @RequestMapping(value = "series-overview/getChapter/{chapter-ID}", method = RequestMethod.GET)
-    public @ResponseBody JsonObject getChapters(@PathVariable(value = "chapter-ID") String chapterID, ModelMap model, HttpSession session, HttpServletRequest req) {
+    public @ResponseBody JsonObject deleteChapter(@PathVariable(value = "chapter-ID") String chapterID, ModelMap model, HttpSession session, HttpServletRequest req) {
         System.out.println("In series overview");
         JsonObject json = new JsonObject();
         Gson gson = new GsonBuilder().create();
