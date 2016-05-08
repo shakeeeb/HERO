@@ -29,7 +29,11 @@
                 </span>
 
                     <br>
-                    <button type="button" class="btn overview-button">Overview</button>
+            <div class="container-fluid">
+                <button type="button" class="btn overview-button">Overview</button>
+                 <button type="button" class="btn delete-series-button">Delete</button>
+             </div>
+
 
         </span>
     </script>
