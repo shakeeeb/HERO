@@ -27,7 +27,7 @@ public class Series {
     @Load private ArrayList<Ref<SeriesComment>> comments;
     @Index private Boolean isApproved = false;
     private String bannerURL = null;
-    private String authorName;
+    @Index private String authorName;
     @Index private Date updateTime;
 
     public Series(){
@@ -43,7 +43,7 @@ public class Series {
         this.name = theName;
         this.nameCopy = theName.toLowerCase();
         this.author = Ref.create(theAuthor);
-        this.authorName = theAuthor.getNickname();
+        this.authorName = theAuthor.getEmail();
         this.subscribers = new ArrayList<Ref<UserData>>();
         this.chapters = new ArrayList<Ref<Chapter>>();
         this.comments = new ArrayList<Ref<SeriesComment>>();
@@ -55,7 +55,7 @@ public class Series {
         this.name = theName;
         this.nameCopy = theName.toLowerCase();
         this.author = Ref.create(theAuthor);
-        this.authorName = theAuthor.getNickname();
+        this.authorName = theAuthor.getEmail();
         this.description = description;
         this.mainGenre = genre.toLowerCase();
         this.subscribers = new ArrayList<Ref<UserData>>();
@@ -208,7 +208,7 @@ public class Series {
         this.mainGenre = genre;
     }
 
-    public String getMainGenre(String genre){
+    public String getMainGenre(){
         return this.mainGenre;
     }
 
@@ -285,6 +285,14 @@ public class Series {
 
     public void removeSeriesComment(SeriesComment s){
         this.comments.remove(Ref.create(s));
+    }
+
+    public boolean hasChapter(Chapter checkMe){
+        ArrayList<Chapter> chapters = this.getChapters();
+        if(chapters.contains(checkMe)){
+            return true;
+        }
+        return false;
     }
 
 

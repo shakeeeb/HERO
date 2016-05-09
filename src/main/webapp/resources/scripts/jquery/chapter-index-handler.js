@@ -96,7 +96,6 @@ $(document).ready(function () {
             });
 
             $("#subscribe-button").click(function(){
-                alert("clicked subscribe button");
                 toggleSubscription(seriesID);
             });
 
@@ -126,8 +125,7 @@ $(document).ready(function () {
     function updateRecentlyViewed(chapterID, urlMapping) {
         $.getJSON("/chapter-index/updateRecentlyViewed/" + chapterID)
             .done(function (data) {
-                //window.location.replace(urlMapping);
-                console.log(data);
+                window.location.replace(urlMapping);
         });
     }
 

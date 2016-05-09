@@ -51,6 +51,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4569b2', end
     border-top-right-radius: 0px;
     border-bottom-right-radius: 0px;
 }
+
 .navbar-input-group .btn {
     border-top-left-radius: 0px;
     border-bottom-left-radius: 0px;
@@ -185,9 +186,15 @@ body {
     float:right;
     color: #00ACC1;
     margin-top: -82px;
-    margin-right: 15px;
     width: 140px;
-    height: 60px;
+    height: 30px;
+}
+.delete-series-button {
+    float:right;
+    color: #00ACC1;
+    margin-top: -41px;
+    width: 140px;
+    height: 30px;
 }
 
 .series-new-chapter-button{
@@ -339,11 +346,12 @@ body {
 
 #home-more-options{
     color:orange;
-    margin-left: 350px;
+    margin-left: 425px;
 }
 
 #home-more-options-down{
     color:orange;
+    margin-top:-50px;
     margin-left: 550px;
 }
 
@@ -375,6 +383,7 @@ body {
 
 #dashboard-greeting{
     font-size:24px;
+    font-family: 'Titillium Web', sans-serif;
 }
 
 #dashboard-my-series{
@@ -414,5 +423,23 @@ body {
     height:200px;
     width: 200px;
     float:left;
+}
 
+#hamburger-menu-icon{
+    margin-top:4px;
+}
+
+#nav-dropdown{
+    width:100px;
+    border-color: orange;
+    border-width: 3px;
+}
+
+#nav-dropdown > li > a:hover {
+    background-color: lightblue;
+    background-image: none;
+}
+
+.till_font {
+    font-family: 'Titillium Web', sans-serif;
 }

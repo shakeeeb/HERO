@@ -30,69 +30,22 @@
     </div>
 </header>
 
-
 <!-- Page Content -->
 <div class="container">
 
     <div class="row">
         <div class="col-sm-8 chapter-list-container">
-            <div class="chapter-list-header">
+            <div class="chapter-list-header till_font">
                 <h3 id="chapter-index-series-name"></h3>
                 <h4 id="chapter-index-author"></h4>
             </div>
-            <div id="chapter-index-chapter-list" class="chapter-list">
+            <div id="chapter-index-chapter-list" class="chapter-list till_font">
 
-
-
-
-
-
-                    <%--<div class="chapter-list-item center-block-" id="chapter-N">--%>
-                        <%--<div class="inline">--%>
-                            <%--<img src="https://placehold.it/125/ffa500/ffffff">--%>
-                        <%--</div>--%>
-                        <%--<div class="inline">--%>
-                            <%--<div id="readChapter"class="inline">${chapter}</div>--%>
-                            <%--<div class="inline">{Title}</div>--%>
-                            <%--<div>--%>
-                                <%--<p>An epic hero goes to the mountains</p>--%>
-                            <%--</div>--%>
-                        <%--</div>--%>
-                        <%--<div class="pull-right chapter-date">--%>
-                            <%--04/05/1993--%>
-                        <%--</div>--%>
-                    <%--</div>--%>
-
-
-
-
-
-
-
-
-
-                <%--<div class="chapter-list-item center-block-" id="chapter-N-1">--%>
-                    <%--<div class="inline">--%>
-                        <%--<img src="https://placehold.it/125/ffa500/ffffff">--%>
-                    <%--</div>--%>
-                    <%--<div class="inline">--%>
-                        <%--<div class="inline">{Chapter #}</div>--%>
-                        <%--<div class="inline">{Title}</div>--%>
-
-                        <%--<div>--%>
-                            <%--<p>An epic hero goes to the beach</p>--%>
-                        <%--</div>--%>
-
-                    <%--</div>--%>
-                    <%--<div class="pull-right chapter-date">--%>
-                        <%--05/04/1994--%>
-                    <%--</div>--%>
-                <%--</div>--%>
             </div>
         </div>
 
         <div class="col-sm-4 series-info-container">
-            <div class="series-description">
+            <div class="series-description till_font">
                 <p id="chapter-index-series-description">An epic hero goes on adventures</p>
             </div>
 
@@ -107,8 +60,6 @@
     <!-- /.row -->
 
     <hr>
-
-
 
 </div>
 

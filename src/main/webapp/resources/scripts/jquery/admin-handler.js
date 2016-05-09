@@ -35,8 +35,6 @@ $(document).ready(function () {
 
                 var currentChapterID = pendingApproval[i].members.chapterId.value;
                 $(item).find(".approve-comic-button").attr("id", currentChapterID);
-                //$(item).find("#hidden-chapterID").html(currentChapterID);
-
 
                 $("#left").append(item);
             }
@@ -69,11 +67,6 @@ $(document).ready(function () {
                var chapterID = this.id;
                 falselyReported(chapterID);
             });
-
-
-
-
-
 
         })
     }

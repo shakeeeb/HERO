@@ -140,9 +140,9 @@ public class ChapterIndexController {
 
     @RequestMapping(value = "/chapter-index/updateRecentlyViewed/{chapter-ID}", method = RequestMethod.GET)
     public @ResponseBody
-    JsonObject updateRecentlyViewed(@PathVariable(value = "chapter-ID") String chapterID, ModelMap model, HttpSession session, HttpServletRequest req) {
+    JsonObject updateRecentlyRecentlyViewed(@PathVariable(value = "chapter-ID") String chapterID, ModelMap model, HttpSession session, HttpServletRequest req) {
 
-        System.out.println("In Subscription Mapping");
+        System.out.println("Updating RecentlyViewed");
         JsonObject json = new JsonObject();
         Gson gson = new GsonBuilder().create();
 
@@ -152,18 +152,13 @@ public class ChapterIndexController {
         userLoggedIn = userService.isUserLoggedIn();
 
         Chapter c = db.chapterRepo.getById(chapterID);
+        Series s = c.getSeries();
 
         if (userLoggedIn)
-        {
-            ArrayList<Chapter> recentlyViewed = user.getRecentlyViewed();
-            if (recentlyViewed.size() >= 5)
-            {
-                recentlyViewed.remove(4);
-            }
-            recentlyViewed.add(0, c);
+        {   user.addViewed(s);
+
             db.userRepo.update(user);
         }
-
 
         return json;
     }

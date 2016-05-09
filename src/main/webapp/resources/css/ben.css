@@ -311,3 +311,12 @@ h3 {
     position: absolute;
     margin-top: 50px;
 }
+
+.dropdown-menu {
+    width: 20px !important;
+    height: 210px !important;
+}
+
+.dropdown-button {
+    width: 160px;
+}

@@ -3,6 +3,8 @@ package data.repository;
 import com.googlecode.objectify.cmd.Query;
 import data.model.*;
 import java.util.ArrayList;
+import java.util.List;
+
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
 /**
@@ -21,6 +23,20 @@ public class SeriesRepository {
 
     public Query<Series> getSeriesByAuthor(String name){
         return ofy().load().type(Series.class).filter("authorName", name);
+    }
+
+    public List<Series> listSeriesByAuthor(UserData user){
+        return ofy().load().type(Series.class).filter("authorName", user.getEmail()).list();
+    }
+
+    public List<Series> listSeriesByAuthor(String email){
+        List<Series> list = ofy().load().type(Series.class).filter("authorName", email).list();
+        return list;
+    }
+
+    public List<Series> listSeriesByGenre(String mainGenre){
+        List<Series> list = ofy().load().type(Series.class).filter("mainGenre", mainGenre).list();
+        return list;
     }
 
     //getById(Id)
@@ -118,6 +134,9 @@ public class SeriesRepository {
     public Series create(String name, String mainGenre, UserData author, String desc){
         // manage the relation, ie add the series to the list of series for the user
         Series s = new Series(name, author, desc, mainGenre);
+        if(author.hasSeries(s)){
+            return ofy().load().type(Series.class).id(name).now();
+        }
         author.addSeries(s);
         ofy().save().entity(s);
         ofy().save().entity(author);

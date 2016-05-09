@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -30,11 +31,15 @@ public class DashboardController {
     protected DbContext db = new DbContext();
 
     @RequestMapping(value="dashboard", method = RequestMethod.GET)
-    public String dashboardController(ModelMap model) {
+    public String dashboardController(HttpServletResponse response, ModelMap model) throws IOException {
         UserService userService = UserServiceFactory.getUserService();
         //UserData user = db.userRepo.getUserById(userService.getCurrentUser().getEmail());
         //String email = user.getNickname();
         UserData user = null;
+
+        if(userService.getCurrentUser() != null) {
+            System.out.println("Get Current User");
+
         String email = userService.getCurrentUser().getNickname();
         if(!db.userRepo.exists(email)){
             //DNE
@@ -47,6 +52,9 @@ public class DashboardController {
         String nickname = user.getNickname();
         model.addAttribute("nickname", nickname);
         return "dashboard";
+        }
+
+        return "login";
     }
 
     @RequestMapping(value="dashboard/get/", method = RequestMethod.GET)
@@ -58,8 +66,26 @@ public class DashboardController {
         UserData user = db.userRepo.getUserById(userService.getCurrentUser().getEmail());
 
         ArrayList<Series> subscriptions = user.getSubscriptions();
+        ArrayList<Series> recentlyViewed = user.getRecentlyViewed();
+        ArrayList<Series> suggestions = null;
+
+        if (recentlyViewed.size() > 0) {
+            user.addSuggestions(recentlyViewed.get(0));
+            suggestions = user.getSuggestions();
+        }
+
+        //Make suggestions algorithm here.
+
+
 
         json.add("subscriptions", gson.toJsonTree(subscriptions));
+        json.add("recentlyViewed", gson.toJsonTree(recentlyViewed));
+        json.add("suggestions", gson.toJsonTree(suggestions));
+
+        // Check if suggestions length is 0 on the frontend.
+
+
+
 
         return json;
     }

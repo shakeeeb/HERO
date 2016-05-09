@@ -14,8 +14,8 @@
 <div class="container">
 <%@ include file="/resources/layouts/navbar.jsp" %>
 
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-    <h1 id="logo-placeholder">LOGO HERE</h1>
+<br><br><br><br><br><br><br><br><br>
+    <h1 id="logo-placeholder"><img src="/resources/images/hero.png" height="200px"></h1>
 
     <form id="home-search" class="navbar-form navbar-left navbar-input-group searchForm" role="search">
         <div class="input-group col-xs-12">
@@ -27,12 +27,11 @@
     </form>
     <br><br><br><br>
 
-    <h3 id="home-more-options"><a id="anchor-home" href="#featured-comic-title">Don't want to search? Click for more!</a></h3>
-    <h3 id="home-more-options-down"><a id="anchor-home" href="#featured-comic-title">V</a></h3>
+    <h3 id="home-more-options"><a id="anchor-home" href="#featured-comic-title"><img src="/resources/images/clickformore.png" height="200px"></a></h3>
 
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
-    <h3 id="featured-comic-title">Featured Comics</h3>
+    <h3 id="featured-comic-title" class="till_font">Featured Comics</h3>
     <div id="featured-carousel" class="carousel slide" data-ride="carousel">
         <!-- Indicators -->
         <ol class="carousel-indicators">
@@ -65,7 +64,7 @@
     </div>
 
 
-<h3>Recently Updated</h3>
+<h3 class="till_font">Recently Updated</h3>
 
     <div class="text-center">
         <div class="carousel slide row" data-ride="carousel" data-type="multi" data-interval="10000" id="recentcarousel">
