@@ -30,8 +30,12 @@ public class SeriesRepository {
     }
 
     public List<Series> listSeriesByAuthor(String email){
-
         List<Series> list = ofy().load().type(Series.class).filter("authorName", email).list();
+        return list;
+    }
+
+    public List<Series> listSeriesByGenre(String mainGenre){
+        List<Series> list = ofy().load().type(Series.class).filter("mainGenre", mainGenre).list();
         return list;
     }
 

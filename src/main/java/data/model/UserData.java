@@ -7,6 +7,8 @@ import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
 import com.googlecode.objectify.annotation.Load;
 import com.googlecode.objectify.condition.IfTrue;
+import data.DbContext;
+
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
 import java.util.ArrayList;
@@ -97,8 +99,17 @@ public class UserData {
 
     public void addSuggestions(Series s){
         // Determine suggestions here.
+        String genre = s.getMainGenre();
+
+        ArrayList<Series> allSeriesByGenre = DbContext.seriesRepo.getSeriesByMainGenre(genre);
+
+        System.out.println(allSeriesByGenre);
+
+
         this.suggestions.add(Ref.create(s));
-        //add a series add subscriber.
+
+
+
         ofy().save().entity(this).now();
     }
 

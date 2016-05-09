@@ -60,7 +60,6 @@ $(document).ready(function() {
                 var seriesTitle = $("#seriesTitle").val();
                 var seriesDescription = $("#seriesDescription").val();
                 $(".genre-dropdown .btn").click(function() {
-                    alert($(this).html());
                     genre = $(this).html();
                 });
 
@@ -88,14 +87,14 @@ $(document).ready(function() {
     }
 
     function createSeries(genre, seriesTitle, seriesDescription) {
-        $.getJSON("/series-workspace/createSeries/" + seriesTitle + "/" + "Horror" + "/" + seriesDescription, function(data) {
-        }).done(function(data) {
-            console.log(data);
-            loadAllSeries();
+            $.getJSON("/series-workspace/createSeries/" + seriesTitle + "/" + genre + "/" + seriesDescription, function(data) {
+            }).done(function(data) {
+                console.log(data);
+                loadAllSeries();
 
-        }).fail(function() {
-            console.log("Could not get data");
-        });
+            }).fail(function() {
+                console.log("Could not get data");
+            });
     }
 
     function deleteSeries(seriesID) {

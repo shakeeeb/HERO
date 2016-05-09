@@ -208,7 +208,7 @@ public class Series {
         this.mainGenre = genre;
     }
 
-    public String getMainGenre(String genre){
+    public String getMainGenre(){
         return this.mainGenre;
     }
 

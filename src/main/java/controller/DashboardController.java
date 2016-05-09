@@ -67,8 +67,12 @@ public class DashboardController {
 
         ArrayList<Series> subscriptions = user.getSubscriptions();
         ArrayList<Series> recentlyViewed = user.getRecentlyViewed();
+        ArrayList<Series> suggestions = null;
 
-        ArrayList<Series> suggestions = user.getSuggestions();
+        if (recentlyViewed.size() > 0) {
+            user.addSuggestions(recentlyViewed.get(0));
+            suggestions = user.getSuggestions();
+        }
 
         //Make suggestions algorithm here.
 
@@ -76,6 +80,12 @@ public class DashboardController {
 
         json.add("subscriptions", gson.toJsonTree(subscriptions));
         json.add("recentlyViewed", gson.toJsonTree(recentlyViewed));
+        json.add("suggestions", gson.toJsonTree(suggestions));
+
+        // Check if suggestions length is 0 on the frontend.
+
+
+
 
         return json;
     }
