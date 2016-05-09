@@ -30,6 +30,7 @@ public class Page {
     @Load private ArrayList<Ref<Page>> priors = null;
     private ArrayList<String> optionDescriptors;
     private String jsonString = null;
+    private String SVGString = null;
 
     //NOTE - DO NOT USE PRIORS OR PREV -> SINGLE LINK
     // IT SHOULD BE REMOVED AT SOME POINT
@@ -102,6 +103,13 @@ public class Page {
     }
 
     //GETTER SETTER
+    public String getSVGString(){
+      return SVGString;
+    }
+
+    public void setSVGString(String SVG){
+        this.SVGString = SVG;
+    }
     public String getPageId() {
         return pageId;
     }
@@ -291,6 +299,24 @@ public class Page {
         return returner;
     }
 
+    public void setOptions(ArrayList<Page> newOpts, ArrayList<String> descriptors, Chapter c){
+        // have to handle priors for each option
+        // have to handle descriptors
+
+        //newopts and descriptors have to be the same length
+
+        // remove  all prior options
+        //set all nexts
+        for(Ref<Page> option: options){
+            // remove all options
+            this.unlinkOption(option.get());
+        }
+
+        for(int i =0; i<newOpts.size();i++){
+            this.setNext( newOpts.get(i), descriptors.get(i), c );
+        }
+    }
+
     public void setOptions(ArrayList<Page> newOptions) {
         ArrayList<Ref<Page>> setOpts = new ArrayList<Ref<Page>>();
         for(Page p :newOptions){
@@ -343,7 +369,34 @@ public class Page {
         }
     }
 
+    public boolean unlinkOption(Page removeMe){
+        // this handles links
+        Ref<Page> toRemove = Ref.create(removeMe);
+        if(numOptions == 0){
+            // no pages to remove
+            return false;
+        } else {
+            // many options
+            int index = options.indexOf(toRemove);
+            optionDescriptors.remove(index);
+            if(options.remove(toRemove)){
+                removeMe.removePrior(this);
+                numOptions = options.size();
+                ofy().save().entity(this).now();
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
+    public boolean unlinkPrior(){
+        // this handles links
+        return false;
+    }
+
     public boolean removeOption(Page removeMe){
+        // this does not handle links
         Ref<Page> toRemove = Ref.create(removeMe);
         if(numOptions == 0){
             // no pages to remove
@@ -417,7 +470,23 @@ public class Page {
             numPriors = priors.size();
             if(numPriors == 0){
                 Chapter c = chapter.get();
-                c.removeOrphan(this);
+                c.addOrphan(this);
+                ofy().save().entity(c).now();
+            }
+            return true;
+        }
+    }
+
+    public boolean removePrior(Page RemoveMe, Chapter c){
+        Ref<Page> toRemove = Ref.create(RemoveMe);
+        if(numPriors == 0){
+            return false;
+        } else {
+            // many priors
+            priors.remove(toRemove);
+            numPriors = priors.size();
+            if(numPriors == 0){
+                c.addOrphan(this);
                 ofy().save().entity(c).now();
             }
             return true;

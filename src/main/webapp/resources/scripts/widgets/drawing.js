@@ -164,5 +164,15 @@ $(document).ready(function(){
 
     }
 
+    function loadSVG(pageID){
+
+        $.get("/load-page/" + pageID, function(data){
+        }).done(function(data){
+            console.log("loading page");
+            console.log(data.gottenJsonImage);
+            canvas.loadSVGFromString(data.gottenJsonImage.SVGString, canvas.renderAll.bind(canvas))
+        });
+    }
+
 
 });
