@@ -68,6 +68,10 @@ public class DashboardController {
         ArrayList<Series> subscriptions = user.getSubscriptions();
         ArrayList<Series> recentlyViewed = user.getRecentlyViewed();
 
+        ArrayList<Series> suggestions = user.getSuggestions();
+
+        //Make suggestions algorithm here.
+
 
 
         json.add("subscriptions", gson.toJsonTree(subscriptions));

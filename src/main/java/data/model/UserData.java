@@ -21,6 +21,7 @@ public class UserData {
     @Load private ArrayList<Ref<Rating>> ratings;
     @Load private ArrayList<Ref<Series>> recentlyViewed;
     @Load private ArrayList<Ref<Series>> subscriptions;
+    @Load private ArrayList<Ref<Series>> suggestions;
     int totalSeriesViewed = 0;
     @Index(IfTrue.class) private Boolean isAdmin = false;
     private String aboutMe;
@@ -33,6 +34,7 @@ public class UserData {
         this.ratings = new ArrayList<Ref<Rating>>();
         this.recentlyViewed = new ArrayList<Ref<Series>>();
         this.subscriptions = new ArrayList<Ref<Series>>();
+        this.suggestions = new ArrayList<Ref<Series>>();
     }
 
     public UserData(String email){
@@ -43,6 +45,7 @@ public class UserData {
         this.ratings = new ArrayList<Ref<Rating>>();
         this.recentlyViewed = new ArrayList<Ref<Series>>();
         this.subscriptions = new ArrayList<Ref<Series>>();
+        this.suggestions = new ArrayList<Ref<Series>>();
     }
 
     public UserData(String email, String name, String about){
@@ -54,6 +57,7 @@ public class UserData {
         this.ratings = new ArrayList<Ref<Rating>>();
         this.recentlyViewed = new ArrayList<Ref<Series>>();
         this.subscriptions = new ArrayList<Ref<Series>>();
+        this.suggestions = new ArrayList<Ref<Series>>();
     }
 
     public UserData(String email, String name, String about, String pic){
@@ -66,6 +70,7 @@ public class UserData {
         this.ratings = new ArrayList<Ref<Rating>>();
         this.recentlyViewed = new ArrayList<Ref<Series>>();
         this.subscriptions = new ArrayList<Ref<Series>>();
+        this.suggestions = new ArrayList<Ref<Series>>();
     }
 
 
@@ -90,13 +95,20 @@ public class UserData {
         return returner;
     }
 
-
-    public void setSubscriptions(ArrayList<Series> toSet){
-        for(Series s : toSet){
-            this.subscriptions.add(Ref.create(s));
-        }
+    public void addSuggestions(Series s){
+        // Determine suggestions here.
+        this.suggestions.add(Ref.create(s));
+        //add a series add subscriber.
+        ofy().save().entity(this).now();
     }
 
+    public ArrayList<Series> getSuggestions() {
+        ArrayList<Series> returner = new ArrayList<Series>();
+        for(Ref<Series> r: this.suggestions){
+            returner.add(r.get());
+        }
+        return returner;
+    }
     public void addSubscription(Series s){
         this.subscriptions.add(Ref.create(s));
         //add a series add subscriber.
