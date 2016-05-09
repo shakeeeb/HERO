@@ -68,6 +68,8 @@ public class DashboardController {
         ArrayList<Series> subscriptions = user.getSubscriptions();
         ArrayList<Series> recentlyViewed = user.getRecentlyViewed();
 
+
+
         json.add("subscriptions", gson.toJsonTree(subscriptions));
         json.add("recentlyViewed", gson.toJsonTree(recentlyViewed));
 

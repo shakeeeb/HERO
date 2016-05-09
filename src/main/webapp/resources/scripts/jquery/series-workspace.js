@@ -5,9 +5,7 @@
 $(document).ready(function() {
 
     var allSeries;
-    var currentUserEmail = $("#hidden-author-email").html();
     var template = null;
-    currentUserEmail = "Benjamin.Strumeyer@Paws.for.a.Cause"; // For testing purposes.
     loadAllSeries();
 
     function loadAllSeries() {
