@@ -6,6 +6,7 @@ $(document).ready(function() {
 
     var allSeries;
     var template = null;
+
     loadAllSeries();
 
     function loadAllSeries() {
@@ -19,7 +20,7 @@ $(document).ready(function() {
 
             var numDrafts = 0;
             var complete = 0;
-            var genre;
+            var newSeriesGenre;
 
             for (var j = 0; j < allSeries.length; j++) {
                 if (allSeries[j].members.isApproved.value) {
@@ -35,12 +36,14 @@ $(document).ready(function() {
                     // Template that shit
                     var item = $(template).clone();
                     var seriesID = allSeries[i].members.name.value;
+                    var currentSeriesGenre = allSeries[i].members.mainGenre.value;
+
                     $(item).find(".overview-button").attr("id", seriesID);
                     $(item).find(".overview-button").text(seriesID);
                     $(item).find(".delete-series-button").attr("id", seriesID);
                     var numChapters = allSeries[i].members.numChapters.value;
                     $(item).find("#series-authored-chap-nums").text("Number of Chapters: " + numChapters);
-                    //$(item).find("#authored-story-1-tags").text("Drafts/Completed: " + numDrafts + "/" + complete);
+                    $(item).find("#authored-story-1-tags").text("Genre: " + currentSeriesGenre);
 
                     $(".series-workspace-main").append(item);
                 }
@@ -56,12 +59,18 @@ $(document).ready(function() {
                 deleteSeries(seriesID);
             });
 
+            $(".genre-dropdown .btn").click(function() {
+                newSeriesGenre = $(this).html();
+            });
+
             $(".series-workspace-create-chapter").click(function() {
                 var seriesTitle = $("#seriesTitle").val();
                 var seriesDescription = $("#seriesDescription").val();
-                $(".genre-dropdown .btn").click(function() {
-                    genre = $(this).html();
-                });
+
+                if(newSeriesGenre == null){
+                    console.log("boo");
+                    return;
+                }
 
                 if (!seriesTitle || !seriesDescription)
                 {
@@ -69,10 +78,10 @@ $(document).ready(function() {
                 }
                 else
                 {
-                    alert("SeriesTitle: " + seriesTitle + "\n" +
-                            "Series Description: " + seriesDescription + "\n" +
-                            "Genre: " + genre);
-                    createSeries(genre, seriesTitle, seriesDescription);
+                    //alert("SeriesTitle: " + seriesTitle + "\n" +
+                    //        "Series Description: " + seriesDescription + "\n" +
+                    //        "Genre: " + newSeriesGenre);
+                    createSeries(newSeriesGenre, seriesTitle, seriesDescription);
                 }
             });
 
@@ -86,8 +95,8 @@ $(document).ready(function() {
         window.location.replace("/series-overview/" + seriesID);
     }
 
-    function createSeries(genre, seriesTitle, seriesDescription) {
-            $.getJSON("/series-workspace/createSeries/" + seriesTitle + "/" + genre + "/" + seriesDescription, function(data) {
+    function createSeries(newSeriesGenre, seriesTitle, seriesDescription) {
+            $.getJSON("/series-workspace/createSeries/" + seriesTitle + "/" + newSeriesGenre + "/" + seriesDescription, function(data) {
             }).done(function(data) {
                 console.log(data);
                 loadAllSeries();
