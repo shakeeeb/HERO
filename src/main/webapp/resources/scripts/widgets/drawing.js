@@ -127,6 +127,7 @@ $(document).ready(function(){
     /* when the save button is pressed */
     $("#save-button").click(function(){
         var json = JSON.stringify( canvas.toJSON() );
+        // var SVG = JSON.stringify(canvas.toSVG() );
 
        // console.log(json);
 

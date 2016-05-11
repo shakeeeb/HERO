@@ -4,6 +4,7 @@ import data.model.*;
 import data.repository.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by shakeeb on 4/8/16.
@@ -273,6 +274,9 @@ public class demoData {
             onePieceChapter5.setReported(true);
             db.chapterRepo.update(onePieceChapter5);
         }
+
+        List<Series> mList = db.seriesRepo.listSeriesByUpdateTime();
+        System.out.println("result of query: " + mList);
 
 
 

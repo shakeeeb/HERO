@@ -19,7 +19,7 @@ $(document).ready(function() {
 
             var numDrafts = 0;
             var complete = 0;
-            var genre;
+            var genre = null;
 
             for (var j = 0; j < allSeries.length; j++) {
                 if (allSeries[j].members.isApproved.value) {
@@ -46,6 +46,10 @@ $(document).ready(function() {
                 }
             }
 
+            $(".genre-dropdown .btn").click(function() {
+                genre = $(this).html();
+            });
+
             $(".series-authored-story").find(".overview-button").click(function() {
                 var seriesID = this.id;
                 loadSeriesOverview(seriesID);
@@ -59,9 +63,11 @@ $(document).ready(function() {
             $(".series-workspace-create-chapter").click(function() {
                 var seriesTitle = $("#seriesTitle").val();
                 var seriesDescription = $("#seriesDescription").val();
-                $(".genre-dropdown .btn").click(function() {
-                    genre = $(this).html();
-                });
+                //var cgenre = genre;
+                if(genre == null){
+                    console.log("BOOO ");
+                    return;
+                }
 
                 if (!seriesTitle || !seriesDescription)
                 {
