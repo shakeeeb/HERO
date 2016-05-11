@@ -19,11 +19,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 
-
-/**
- * Created by mk on 3/31/16.
- */
-
 @Controller
 public class ChapterWorkspaceController {
 
