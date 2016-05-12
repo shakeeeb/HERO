@@ -12,6 +12,7 @@ import data.DbContext;
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
@@ -101,7 +102,8 @@ public class UserData {
         // Determine suggestions here.
         this.suggestions.clear();
         String genre = s.getMainGenre();
-        ArrayList<Series> allSeriesInGenre = DbContext.seriesRepo.getSeriesByMainGenre(genre);
+        List<Series> allSeriesInGenreList = DbContext.seriesRepo.listSeriesByGenre(genre);
+        ArrayList<Series> allSeriesInGenre = new ArrayList<Series>(allSeriesInGenreList);
         for(Series currentSeries: allSeriesInGenre){
             this.suggestions.add(Ref.create(currentSeries));
         }

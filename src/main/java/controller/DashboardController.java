@@ -80,7 +80,7 @@ public class DashboardController {
 
         json.add("subscriptions", gson.toJsonTree(subscriptions));
         json.add("recentlyViewed", gson.toJsonTree(recentlyViewed));
-//        json.add("suggestions", gson.toJsonTree(suggestions));
+        json.add("suggestions", gson.toJsonTree(suggestions));
 
         // Check if suggestions length is 0 on the frontend.
 

@@ -11,16 +11,32 @@ $(document).ready(function() {
         }).done(function(data) {
             subscriptions = data.members.subscriptions.elements;
             recentlyViewed = data.members.recentlyViewed.elements;
-            //suggestions = data.members.suggestions.elements;
+            suggestions = data.members.suggestions.elements;
 
             console.log(subscriptions);
             console.log(recentlyViewed);
-            //console.log(suggestions);
+            console.log(suggestions);
             loadSubscriptionsAndRecentlyViewed(subscriptions, recentlyViewed);
 
             $("#dashboard-my-series").click(function() {
                 goToSeriesWorkspace();
             });
+
+            $(".subscription").click(function() {
+                var seriesID = $(this).attr('id');
+                goToChapterIndex(seriesID);
+            });
+
+            $(".recent").click(function() {
+                var seriesID = $(this).attr('id');
+                goToChapterIndex(seriesID);
+            });
+
+            $(".suggestions").click(function() {
+                var seriesID = $(this).attr('id');
+                goToChapterIndex(seriesID);
+            });
+
 
         }).fail(function() {
             console.log("Could not get data");
@@ -34,7 +50,7 @@ $(document).ready(function() {
     function loadSubscriptionsAndRecentlyViewed(subscriptions, recentlyViewed) {
         loadSubscriptions(subscriptions);
         loadRecentlyViewed(recentlyViewed);
-        //loadSuggestions(suggestions);
+        loadSuggestions(suggestions);
     }
 
     function loadSubscriptions(allSubscriptions) {
@@ -50,6 +66,8 @@ $(document).ready(function() {
             for (var i = 0; i < numSubscriptions; i++) {
                 // Template that shit.
                 var item = $(template).clone();
+                $(item).find(".dashboard-img").attr('class', "img-responsive dashboard-img subscription");
+                $(item).find(".dashboard-img").attr('id', allSubscriptions[i].members.name.value);
                 $("#subscription-container").append(item);
             }
         }
@@ -63,22 +81,57 @@ $(document).ready(function() {
             for (var i = 0; i < numRecentlyViewed; i++) {
                 // Template that shit
                 var item = $(template).clone();
+                $(item).find(".dashboard-img").attr('class', "img-responsive dashboard-img recent");
+                $(item).find(".dashboard-img").attr('id', recentlyViewed[i].members.name.value);
                 $("#recent-container").append(item);
             }
         }
     }
 
     function loadSuggestions(suggestions) {
-        var suggestions = suggestions.length;
         template = $('#hidden-template').html();
+        var arraylen = 5;
+
+        if (suggestions.length < 5) {
+            arraylen = suggestions.length;
+        }
+
         if (suggestions.length > 0) {
-            for (var i = 0; i < suggestions.length; i++) {
-                // Template that shit
+            shuffle(suggestions);
+            for (var i = 0; i < arraylen; i++) {
                 var item = $(template).clone();
+                $(item).find(".dashboard-img").attr('class', "img-responsive dashboard-img suggestions");
+                $(item).find(".dashboard-img").attr('id', suggestions[i].members.name.value);
                 $("#suggestion-container").append(item);
             }
         }
     }
 
+    function contains(viewSuggestions, obj) {
+        var flag = false;
+        for (var i = 0; i < viewSuggestions.length; i++)
+        {
+            if (viewSuggestions[i] === obj)
+            {
+                flag = true;
+            }
+        }
+        return flag;
+    }
+
+    function shuffle(suggestions) {
+        var j, x, i;
+        for (i = suggestions.length; i; i -= 1) {
+            j = Math.floor(Math.random() * i);
+            x = suggestions[i - 1];
+            suggestions[i - 1] = suggestions[j];
+            suggestions[j] = x;
+        }
+    }
+
+    function goToChapterIndex(seriesID) {
+        window.location.replace("../chapter-index/" + seriesID);
+
+    }
 });
 

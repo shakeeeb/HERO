@@ -50,12 +50,11 @@ $(document).ready(function () {
             }
 
             var currentChapter = null;
-
-            //Kill me. I just figured out what .load() does
-            for (var o = 1; o < numChapters + 1; o++)
-            {
-                currentChapter = chapterList[o - 1]
-                var itemHTML = "<div class=\"chapter-list-item center-block-\" id=\"" + currentChapter.members.chapterId.value + "\">" +
+            if (numChapters > 0) {
+                for (var o = 1; o < numChapters + 1; o++)
+                {
+                    currentChapter = chapterList[o - 1]
+                    var itemHTML = "<div class=\"chapter-list-item center-block-\" id=\"" + currentChapter.members.chapterId.value + "\">" +
                         "<div class=\"inline\">" +
                         "<img src=\"https://placehold.it/125/ffa500/ffffff\">" +
                         "</div>" +
@@ -69,7 +68,8 @@ $(document).ready(function () {
                         "</div>" +
                         "</div>";
 
-                $("#chapter-index-chapter-list").append(itemHTML);
+                    $("#chapter-index-chapter-list").append(itemHTML);
+                }
             }
 
             $(".chapter-list-item").click(function() {

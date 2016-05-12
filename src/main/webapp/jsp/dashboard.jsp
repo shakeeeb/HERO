@@ -14,7 +14,9 @@
     <%@ include file="/resources/layouts/scripts.jsp" %>
     <script src="/resources/scripts/jquery/dashboard-handler.js"></script>
     <script id="hidden-template" type="text/x-custom-template">
-        <div class="new-dash-picture">Picture1</div>
+        <div class="new-dash-picture">
+            <a href="#"><img src="https://placehold.it/190x190?text=Latest+6" class="img-responsive dashboard-img"></a>
+        </div>
     </script>
 </head>
 <body>
@@ -52,11 +54,11 @@
             <br>
         </div>
         <div id="suggestion-container"class="dashboard-holders">
-            <div class="new-dash-picture">Picture1</div>
-            <div class="new-dash-picture">Picture2</div>
-            <div class="new-dash-picture">Picture1</div>
-            <div class="new-dash-picture">Picture2</div>
-            <div class="new-dash-picture">Picture2</div>
+            <%--<div class="new-dash-picture">Picture1</div>--%>
+            <%--<div class="new-dash-picture">Picture2</div>--%>
+            <%--<div class="new-dash-picture">Picture1</div>--%>
+            <%--<div class="new-dash-picture">Picture2</div>--%>
+            <%--<div class="new-dash-picture">Picture2</div>--%>
 
         </div>
     </div>

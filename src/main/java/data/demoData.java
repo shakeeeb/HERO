@@ -141,11 +141,10 @@ public class demoData {
         }
         Series onePiece = db.seriesRepo.getById("One_Piece");
         if(onePiece == null){
-            onePiece = db.seriesRepo.create("One_Piece", "Fiction", Ben, "Best MangaEver");
+            onePiece = db.seriesRepo.create("One_Piece", "Fantasy", Ben, "Best MangaEver");
             System.out.println("created Series One_Piece!");
         } else {
             System.out.println("series One_Piece exists.");
-
         }
 
         //Adding chapters to series
