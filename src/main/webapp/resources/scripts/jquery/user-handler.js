@@ -58,14 +58,14 @@ $(document).ready(function() {
                 //create the rest of the series to show in the div with the list of series
                 for (var l = 0; l < length_of_array; l++)
                 {
-                    var seriesHTML = "<span class=\"orange-span one-story\" id=\"authored-story-"+i +"\">" +
+                    var seriesHTML = "<span class=\"one-story\" id=\"authored-story-"+i +"\">" +
                         "<span class=\"author-story-wrap\" id=\"authored-story-"+i +"-image\">" +
                         "<img src=\"IMAGEHERE.png\" height=\"100px\" width=\"100px\" > </span>" +
                         "<span class=\"author-story-wrap\" id=\"authored-story-"+i+"-information\">"    +
-                        "<span class=\"orange-span user-story-title\" id=\"authored-story-"+i+"-title\">"    +
+                        "<span class=\"black-span white-boxes user-story-title\" id=\"authored-story-"+i+"-title\">"    +
                         data.members.series_list.elements[l].members.name.value   +
                         "</span>"  +
-                        "<span class=\"orange-span user-story-tags\" id=\"authored-story-"+i+"-tags\" >"   +
+                        "<span class=\"black-span white-boxes user-story-tags\" id=\"authored-story-"+i+"-tags\" >"   +
                         data.members.series_list.elements[l].members.description.value   +
                         "</span></span></span><br>";
                     $("#all_the_series").append(seriesHTML);

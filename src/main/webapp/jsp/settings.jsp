@@ -18,7 +18,7 @@
 <script src="/resources/scripts/jquery/setting-handler.js"></script>
 <br><br><br>
 
-<div class="row">
+<div class="row till_font">
     <div class="col-md-4 fixed-settings-page-column">
         <div class="container">
             <div class="row">

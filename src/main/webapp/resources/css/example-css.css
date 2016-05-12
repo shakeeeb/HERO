@@ -63,6 +63,15 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4569b2', end
     border-width: 1px;
 }
 
+.dashboard-text{
+    background-color: #F9A825;
+    color:white;
+    font-weight:bold;
+    font-size: 20px;
+    text-align:center;
+    margin-bottom:-30px;
+}
+
 #SearchButton{
     border-color: #00ACC1;
     border-width: 1px;
@@ -78,6 +87,18 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4569b2', end
 .form-large{
     font-size: 1.75em;
     padding-bottom: .5em;
+}
+
+.light-grey-boxes{
+    background-color: #f4f4f4;
+}
+
+.center-text{
+    text-align: center;
+}
+
+.white-boxes{
+    background-color: white;
 }
 
 body {
@@ -122,6 +143,13 @@ body {
 .orange-span{
     border-style: solid;
     border-color: #F57F17;
+    border-width: 1px;
+}
+
+
+.black-span{
+    border-style: solid;
+    border-color: black;
     border-width: 1px;
 }
 
@@ -384,24 +412,25 @@ body {
 #dashboard-greeting{
     font-size:24px;
     font-family: 'Titillium Web', sans-serif;
+    color:#00ACC1;
+    font-weight:bold;
 }
 
 #dashboard-my-series{
+    width:120px;
     margin-top:-40px;
     float:right;
-}
-
-.dashboard-text{
-    font-size: 20px;
-    text-align:center;
-    margin-top:10px;
+    font-weight:bolder;
+    color:white;
+    background-color:#F9A825;
+    font-size:16px;
 }
 
 .dashboard-close{
     float:right;
-    margin-top:-30px;
     margin-right:10px;
     font-size:20px;
+    font-weight:bolder;
 }
 
 #series-overview-chap-title {
