@@ -99,17 +99,12 @@ public class UserData {
 
     public void addSuggestions(Series s){
         // Determine suggestions here.
+        this.suggestions.clear();
         String genre = s.getMainGenre();
-
-        ArrayList<Series> allSeriesByGenre = DbContext.seriesRepo.getSeriesByMainGenre(genre);
-
-        System.out.println(allSeriesByGenre);
-
-
-        this.suggestions.add(Ref.create(s));
-
-
-
+        ArrayList<Series> allSeriesInGenre = DbContext.seriesRepo.getSeriesByMainGenre(genre);
+        for(Series currentSeries: allSeriesInGenre){
+            this.suggestions.add(Ref.create(currentSeries));
+        }
         ofy().save().entity(this).now();
     }
 

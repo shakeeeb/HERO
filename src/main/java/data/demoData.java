@@ -276,20 +276,8 @@ public class demoData {
         }
 
         List<Series> mList = db.seriesRepo.listSeriesByUpdateTime();
+
         System.out.println("result of query: " + mList);
-
-
-
-
-//        ArrayList<UserData> allUsers = db.userRepo.getAllUsers();
-//
-//        for (int i = 0; i < allUsers.size(); i++) {
-//            allUsers.get(i).clearViewed();
-//        }
-//        Ben.getRecentlyViewed().clear();
-//        db.userRepo.update(Ben);
-
-
 
 //        System.out.println("Page One's options are: " + pageOne.getOptions().get(0));
 //

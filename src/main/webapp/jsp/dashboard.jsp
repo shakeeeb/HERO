@@ -12,7 +12,7 @@
     <title>Hero - Dashboard</title>
     <%@ include file="/resources/layouts/styles.jsp" %>
     <%@ include file="/resources/layouts/scripts.jsp" %>
-    <script src="/resources/scripts/jquery/dashboard.js"></script>
+    <script src="/resources/scripts/jquery/dashboard-handler.js"></script>
     <script id="hidden-template" type="text/x-custom-template">
         <div class="new-dash-picture">Picture1</div>
     </script>

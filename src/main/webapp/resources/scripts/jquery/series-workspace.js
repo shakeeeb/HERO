@@ -1,7 +1,3 @@
-/**
- * Created by mk on 4/21/16.
- */
-
 $(document).ready(function() {
 
     var allSeries;

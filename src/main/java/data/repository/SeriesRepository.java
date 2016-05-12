@@ -7,9 +7,6 @@ import java.util.List;
 
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
-/**
- * Created by shakeeb on 3/31/16.
- */
 public class SeriesRepository {
     //getAll()
     public ArrayList<Series> getAllSeries(){
