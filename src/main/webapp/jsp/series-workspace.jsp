@@ -14,16 +14,16 @@
     <link rel="stylesheet" href="/resources/css/ben.css">
     <script id="hidden-template" type="text/x-custom-template">
         <br>
-        <span id="series-authored-story-1" class="orange-span one-story series-authored-story">
+        <span id="series-authored-story-1" class="light-grey-boxes black-span one-story series-authored-story">
                 <span id="authored-story-1-image" class="author-story-wrap">
                     <img src="/resources/images/logo.png" height="100px" width="100px">
                 </span>
                 <span id="authored-story-1-information" class="author-story-wrap">
-                    <span id="series-authored-chap-nums" class="blue-box series-num-chapters">
+                    <span id="series-authored-chap-nums" class="white-boxes blue-box series-num-chapters">
                         Number of Chapters
                     </span>
 
-                    <span id="authored-story-1-tags" class="blue-box completeness">
+                    <span id="authored-story-1-tags" class="white-boxes blue-box completeness">
                         Ongoing / Complete
                     </span>
                 </span>
@@ -44,10 +44,10 @@
 <script src="/resources/scripts/jquery/series-workspace.js"></script>
 <br><br><br><br>
 <div class="container series-container">
-    <div class="col-lg-offset-1 col-lg-11">
+    <div class="col-lg-offset-1 col-lg-11 series-header">
         Series Workspace
     </div>
-    <div class="orange-span series-workspace-main col-lg-offset-1 col-lg-11">
+    <div class="black-span series-workspace-main col-lg-offset-1 col-lg-11">
     </div>
 
     <div class="new-series-button">
@@ -59,28 +59,26 @@
 
                 <!-- Modal content-->
                 <div class="modal-content">
-                    <div class="modal-header">
+                    <div class="modal-header no-line">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title text-center">Add Series</h4>
+                        <h4 class="modal-title text-center text-bolding">Add Series</h4>
                     </div>
-                    <div class="modal-body">
+                    <div class="modal-body light-grey-boxes">
                                 <div>
                                     <div class="form-group">
-                                        <label for="seriesTitle">Series Title </label>
-                                        <input type="text" class="form-control input-lg" id="seriesTitle">
+                                        <input type="text" class="blue-box form-control input-lg" id="seriesTitle" placeholder="Series Title">
                                     </div>
                                     <div class="form-group">
-                                        <label for="seriesDescription">Series Description</label>
-                                        <textarea class="form-control" rows="7" id="seriesDescription"></textarea>
+                                        <textarea class="blue-box form-control" rows="7" id="seriesDescription" placeholder="Series Description"></textarea>
                             </div>
                         </div>
                     </div>
-                    <div class="modal-footer">
+                    <div class="modal-footer light-grey-boxes no-line">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                            <button type="button" id="genre-drop" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                                 Genre
                             </button>
-                            <div class="dropdown-menu genre-dropdown">
+                            <div class="dropdown-menu genre-dropdown drop-down-modal">
                                 <button class="btn btn-default dropdown-item dropdown-button">Action</button>
                                 <br>
                                 <button class="btn btn-default dropdown-item dropdown-button">Comedy</button>
@@ -98,7 +96,7 @@
                                 <button class="btn btn-default wdropdown-item dropdown-button">Adventure</button>
                             </div>
                         </div>
-                        <button type="button" role="menu" class="btn btn-default series-workspace-create-chapter" data-dismiss="modal">Create Series</button>
+                        <button type="button" id="create-series-workspace" role="menu" class="btn btn-default series-workspace-create-chapter" data-dismiss="modal">Create Series</button>
                     </div>
                 </div>
             </div>

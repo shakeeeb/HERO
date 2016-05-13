@@ -314,9 +314,11 @@ h3 {
     margin-top: 50px;
 }
 
-.dropdown-menu {
+.drop-down-modal {
     width: 20px !important;
     height: 210px !important;
+    margin-left:-350px;
+    margin-top:-10px;
 }
 
 .dropdown-button {

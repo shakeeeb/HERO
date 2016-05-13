@@ -89,14 +89,14 @@
             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
-                        <div class="modal-header">
+                        <div class="modal-header no-line">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                             <h4 class="modal-title" id="myModalLabel">Add Page</h4>
                         </div>
-                        <div class="modal-body">
+                        <div class="modal-body light-grey-boxes">
 
                         </div>
-                        <div class="modal-footer">
+                        <div class="modal-footer light-grey-boxes">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                             <button id="add-modal-save-button" type="button" class="btn btn-primary">Save changes</button>
                         </div>

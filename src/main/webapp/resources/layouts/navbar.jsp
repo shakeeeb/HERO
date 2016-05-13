@@ -43,7 +43,7 @@
                 <!--<button class="dropdown-toggle" data-toggle="dropdown">
                     <a href="/home"><i class="fa fa-bars fa-3x"></i></a></button>-->
                     <i class="fa fa-bars fa-3x"data-toggle="dropdown"></i>
-                <ul id="nav-dropdown" class="dropdown-menu">
+                <ul id="nav-dropdown-top" class="dropdown-menu">
                     <li><a href="/login">Sign In</a></li>
                     <li><a href="/logout">Sign Out</a></li>
                     <li><a href="/settings">Settings</a></li>
