@@ -44,11 +44,9 @@ $(document).ready(function () {
             if (isSubscribed) {
                 $("#subscribe-button").html("Unsubscribe");
             }
-            else
-            {
+            else {
                 $("#subscribe-button").html("Subscribe");
             }
-
             var currentChapter = null;
             if (numChapters > 0) {
                 for (var o = 1; o < numChapters + 1; o++)
