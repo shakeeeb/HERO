@@ -164,6 +164,16 @@ public class ChapterIndexController {
             db.userRepo.update(user);
         }
 
+        ArrayList<String> emptyChapter = new ArrayList<String>();
+
+        if (c.getAllPages().size() == 1) {
+            emptyChapter.add(0, "empty");
+        }
+        else {
+            emptyChapter.add(0, "hasPages");
+        }
+
+        json.add("emptyChapter", gson.toJsonTree(emptyChapter));
         return json;
     }
 }
