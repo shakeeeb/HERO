@@ -7,9 +7,6 @@ import java.util.List;
 
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
-/**
- * Created by shakeeb on 3/31/16.
- */
 public class SeriesRepository {
     //getAll()
     public ArrayList<Series> getAllSeries(){
@@ -30,9 +27,18 @@ public class SeriesRepository {
     }
 
     public List<Series> listSeriesByAuthor(String email){
-
         List<Series> list = ofy().load().type(Series.class).filter("authorName", email).list();
         return list;
+    }
+
+    public List<Series> listSeriesByGenre(String mainGenre){
+        List<Series> list = ofy().load().type(Series.class).filter("mainGenre", mainGenre.toLowerCase()).list();
+        return list;
+    }
+
+    public List<Series> listSeriesByUpdateTime(){
+        List<Series> returner = ofy().load().type(Series.class).order("updateTime").list();
+        return returner;
     }
 
     //getById(Id)
@@ -43,7 +49,7 @@ public class SeriesRepository {
     //getByOtherThingsIfNeedBe
 
     public ArrayList<Series> getSeriesByMainGenre(String mainGenre){
-        ArrayList<Series> returner = (ArrayList)ofy().load().type(Series.class).filter("mainGenre", mainGenre);
+        ArrayList<Series> returner = (ArrayList)ofy().load().type(Series.class).filter("mainGenre", mainGenre.toLowerCase());
         return returner;
     }
 

@@ -4,6 +4,7 @@ import data.model.*;
 import data.repository.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by shakeeb on 4/8/16.
@@ -140,11 +141,10 @@ public class demoData {
         }
         Series onePiece = db.seriesRepo.getById("One_Piece");
         if(onePiece == null){
-            onePiece = db.seriesRepo.create("One_Piece", "Fiction", Ben, "Best MangaEver");
+            onePiece = db.seriesRepo.create("One_Piece", "Fantasy", Ben, "Best MangaEver");
             System.out.println("created Series One_Piece!");
         } else {
             System.out.println("series One_Piece exists.");
-
         }
 
         //Adding chapters to series
@@ -274,18 +274,9 @@ public class demoData {
             db.chapterRepo.update(onePieceChapter5);
         }
 
+        List<Series> mList = db.seriesRepo.listSeriesByUpdateTime();
 
-
-
-//        ArrayList<UserData> allUsers = db.userRepo.getAllUsers();
-//
-//        for (int i = 0; i < allUsers.size(); i++) {
-//            allUsers.get(i).clearViewed();
-//        }
-//        Ben.getRecentlyViewed().clear();
-//        db.userRepo.update(Ben);
-
-
+        System.out.println("result of query: " + mList);
 
 //        System.out.println("Page One's options are: " + pageOne.getOptions().get(0));
 //

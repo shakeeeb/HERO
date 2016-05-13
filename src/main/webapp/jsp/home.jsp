@@ -9,6 +9,7 @@
     <title>Home</title>
     <%@ include file="/resources/layouts/styles.jsp" %>
     <%@ include file="/resources/layouts/scripts.jsp" %>
+    <script src="/resources/scripts/jquery/home-handler.js"></script>
     <link rel="stylesheet" href="/resources/css/terrell.css">
 <body>
 <div class="container">
@@ -71,22 +72,28 @@
 
             <div class="carousel-inner">
                 <div class="item active">
-                    <div class="col-md-3 col-sm-4 col-xs-12"><a href="#"><img src="https://placehold.it/190x190?text=Latest+1" class="img-responsive"></a></div>
+                    <div class="col-md-3 col-sm-4 col-xs-12"><a href="#"><img src="https://placehold.it/190x190?text=Latest+1" class="img-responsive item-1"></a></div>
                 </div>
                 <div class="item">
-                    <div class="col-md-3 col-sm-4 col-xs-12"><a href="#"><img src="https://placehold.it/190x190?text=Latest+2" class="img-responsive"></a></div>
+                    <div class="col-md-3 col-sm-4 col-xs-12"><a href="#"><img src="https://placehold.it/190x190?text=Latest+2" class="img-responsive item-2"></a></div>
                 </div>
                 <div class="item">
-                    <div class="col-md-3 col-sm-4 col-xs-12"><a href="#"><img src="https://placehold.it/190x190?text=Latest+3" class="img-responsive"></a></div>
+                    <div class="col-md-3 col-sm-4 col-xs-12"><a href="#"><img src="https://placehold.it/190x190?text=Latest+3" class="img-responsive item-3"></a></div>
                 </div>
                 <div class="item">
-                    <div class="col-md-3 col-sm-4 col-xs-12"><a href="#"><img src="https://placehold.it/190x190?text=Latest+4" class="img-responsive"></a></div>
+                    <div class="col-md-3 col-sm-4 col-xs-12"><a href="#"><img src="https://placehold.it/190x190?text=Latest+4" class="img-responsive item-4"></a></div>
                 </div>
                 <div class="item">
-                    <div class="col-md-3 col-sm-4 col-xs-12"><a href="#"><img src="https://placehold.it/190x190?text=Latest+5" class="img-responsive"></a></div>
+                    <div class="col-md-3 col-sm-4 col-xs-12"><a href="#"><img src="https://placehold.it/190x190?text=Latest+5" class="img-responsive item-5"></a></div>
                 </div>
                 <div class="item">
-                    <div class="col-md-3 col-sm-4 col-xs-12"><a href="#"><img src="https://placehold.it/190x190?text=Latest+6" class="img-responsive"></a></div>
+                    <div class="col-md-3 col-sm-4 col-xs-12"><a href="#"><img src="https://placehold.it/190x190?text=Latest+6" class="img-responsive item-6"></a></div>
+                </div>
+                <div class="item">
+                    <div class="col-md-3 col-sm-4 col-xs-12"><a href="#"><img src="https://placehold.it/190x190?text=Latest+6" class="img-responsive item-7"></a></div>
+                </div>
+                <div class="item">
+                    <div class="col-md-3 col-sm-4 col-xs-12"><a href="#"><img src="https://placehold.it/190x190?text=Latest+6" class="img-responsive item-8"></a></div>
                 </div>
             </div>
 

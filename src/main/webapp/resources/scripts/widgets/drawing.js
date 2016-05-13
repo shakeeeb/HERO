@@ -127,6 +127,7 @@ $(document).ready(function(){
     /* when the save button is pressed */
     $("#save-button").click(function(){
         var json = JSON.stringify( canvas.toJSON() );
+        // var SVG = JSON.stringify(canvas.toSVG() );
 
        // console.log(json);
 
@@ -162,6 +163,16 @@ $(document).ready(function(){
             canvas.loadFromJSON(data.gottenJsonImage.jsonString, canvas.renderAll.bind(canvas));
         });
 
+    }
+
+    function loadSVG(pageID){
+
+        $.get("/load-page/" + pageID, function(data){
+        }).done(function(data){
+            console.log("loading page");
+            console.log(data.gottenJsonImage);
+            canvas.loadSVGFromString(data.gottenJsonImage.SVGString, canvas.renderAll.bind(canvas))
+        });
     }
 
 

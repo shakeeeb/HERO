@@ -75,18 +75,22 @@ public class ChapterIndexController {
     @RequestMapping(value = "/chapter-index/{series-ID}", method = RequestMethod.GET)
     public String loadChapterIndex(@PathVariable(value = "series-ID") String seriesID, ModelMap model, HttpSession session, HttpServletRequest req) {
         JsonObject json = new JsonObject();
-        ArrayList<Chapter> chapterList = new ArrayList<Chapter>();
+        Gson gson = new GsonBuilder().create();
+        ArrayList<Chapter> chapterList;
         Series s = db.seriesRepo.getById(seriesID);
         chapterList = s.getChapters();
-        String chapterID = s.getChapters().get(0).getChapterId();
-        String rootID = chapterList.get(0).getRoot().getPageId();
-        System.out.println("The root ID is: " + rootID);
-        System.out.println("The chapterID is: " + chapterID);
-        Gson gson = new GsonBuilder().create();
-        json.add("chapterList", gson.toJsonTree(chapterList));
-        json.add("series", gson.toJsonTree(s));
-        model.addAttribute("rootID", rootID);
+        String chapterID = null;
+        String rootID = null;
+        if (s.getChapters().size() > 0) {
+            chapterID = s.getChapters().get(0).getChapterId();
+            rootID = chapterList.get(0).getRoot().getPageId();
+            System.out.println("The root ID is: " + rootID);
+            System.out.println("The chapterID is: " + chapterID);
+        }
+//        json.add("chapterList", gson.toJsonTree(chapterList));
+//        json.add("series", gson.toJsonTree(s));
         model.addAttribute("seriesID", seriesID);
+        model.addAttribute("rootID", rootID);
         model.addAttribute("chapterID", chapterID);
         return "chapter-index";
     }
@@ -160,6 +164,16 @@ public class ChapterIndexController {
             db.userRepo.update(user);
         }
 
+        ArrayList<String> emptyChapter = new ArrayList<String>();
+
+        if (c.getAllPages().size() == 1) {
+            emptyChapter.add(0, "empty");
+        }
+        else {
+            emptyChapter.add(0, "hasPages");
+        }
+
+        json.add("emptyChapter", gson.toJsonTree(emptyChapter));
         return json;
     }
 }

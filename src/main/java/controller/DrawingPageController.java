@@ -77,6 +77,36 @@ public class DrawingPageController {
             return;
     }
 
+    // get SVG
+    @RequestMapping(value="get-SVG/", method = RequestMethod.POST)
+    protected void getSVG(HttpServletRequest request, HttpServletResponse response){
+
+        String SVG = request.getParameter("data");
+        String pageID = request.getParameter("pagekey");
+
+        // GRAB A PAGE FROM THE DATASTORE BY ID
+        System.out.println("The page ID is: "+ pageID);
+
+        // SET THE PAGE JSON VALUE
+
+        Page pageSaving = null;
+        pageSaving = db.pageRepo.getById(pageID);
+        if(pageSaving == null){
+            System.out.println("Cannot save");
+            return;
+        }
+        System.out.println("page saving: "+ pageSaving.getPageId());
+
+        // SAVE IT
+        if(SVG == null){
+            System.out.println("Image was null");
+            return;
+        }
+        pageSaving.setJsonString(SVG);
+        ofy().save().entity(pageSaving).now();
+        return;
+    }
+
     //load the page of with the json object.
     @RequestMapping(value="load-page/{pageID}", method = RequestMethod.GET, produces="application/json")
     public @ResponseBody JsonObject loadPage(@PathVariable(value="pageID") String pageID) {
@@ -112,6 +142,7 @@ public class DrawingPageController {
         return pageJson;
 
     }
+
 
 
 }

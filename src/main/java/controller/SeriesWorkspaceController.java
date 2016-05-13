@@ -50,9 +50,7 @@ public class SeriesWorkspaceController {
 
         UserService userService = UserServiceFactory.getUserService();
         UserData user = db.userRepo.getUserById(userService.getCurrentUser().getEmail());
-
         String userEmail = user.getEmail();
-
         List<Series> allSeries = db.seriesRepo.listSeriesByAuthor(userEmail);
 
         //Query<Series> authRefinedQuery = db.seriesRepo.refineQueryByAuthorName(allSeriesQuery, /*author email*/);
@@ -69,6 +67,41 @@ public class SeriesWorkspaceController {
         System.out.println("allSeries: " + allSeries);
 
         json.add("allSeries", gson.toJsonTree(allSeries));
+
+        return json;
+    }
+
+    @RequestMapping(value="series-workspace/createSeries/{seriesTitle}/{genre}/{seriesDescription}", method = RequestMethod.GET)
+    public @ResponseBody JsonObject createSeries(@PathVariable(value = "seriesTitle") String seriesTitle, @PathVariable(value = "genre") String genre, @PathVariable(value = "seriesDescription") String seriesDescription, ModelMap model) {
+        JsonObject json = new JsonObject();
+        Gson gson = new GsonBuilder().create();
+
+        UserService userService = UserServiceFactory.getUserService();
+        UserData user = db.userRepo.getUserById(userService.getCurrentUser().getEmail());
+
+        System.out.println("About to Create a series" + seriesTitle + genre + seriesDescription);
+
+        Series s = db.seriesRepo.create(seriesTitle, genre, user, seriesDescription);
+
+        db.seriesRepo.update(s);
+
+        return json;
+    }
+
+    @RequestMapping(value="series-workspace/deleteSeries/{seriesID}", method = RequestMethod.GET)
+    public @ResponseBody JsonObject deleteSeries(@PathVariable(value = "seriesID") String seriesID, ModelMap model) {
+        JsonObject json = new JsonObject();
+        Gson gson = new GsonBuilder().create();
+
+        UserService userService = UserServiceFactory.getUserService();
+        UserData user = db.userRepo.getUserById(userService.getCurrentUser().getEmail());
+
+        Series s = db.seriesRepo.getById(seriesID);
+        db.seriesRepo.delete(s, user);
+
+        db.userRepo.update(user);
+
+
 
         return json;
     }
