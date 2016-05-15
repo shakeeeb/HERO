@@ -40,8 +40,8 @@
         </div>
 
         <div id="svgContainer" style="margin: 50px 50px;">
-            <%--<svg id="svg1" width="0" height="0" >--%>
-                <%--<path id="0-1-connector"--%>
+            <svg id="svg1" width="0" height="0" >
+                <%--<path id="1-2-connector"--%>
                         <%--id="path1"--%>
                         <%--d="M0 0"--%>
                         <%--stroke="#000"--%>
@@ -61,7 +61,7 @@
                         <%--stroke="#000"--%>
                         <%--fill="none"--%>
                         <%--stroke-width="6px";/>--%>
-            <%--</svg>--%>
+            </svg>
         </div>
 
         <div id="chapter-page-flow">
@@ -73,7 +73,8 @@
                     <tr id="chapter-level-0" class="chapter-level">
                         <td><button class="chapter-page hidden-page" type="button"></button></td>
                         <td><button class="chapter-page hidden-page" type="button"></button></td>
-                        <td><button class="chapter-page hidden-page" type="button"></button></td>
+                        <td><div class="chapter-page hidden-page" type="button"><div class="page-options"><i class="fa fa-link" aria-hidden="true"></i> </div><div class="edit-option"><i class="fa fa-paint-brush" aria-hidden="true"></i></div></div></td>
+                        <%--<td><button class="chapter-page hidden-page" type="button"></button></td>--%>
                         <td><button class="chapter-page hidden-page" type="button"></button></td>
                         <td><button class="chapter-page hidden-page" type="button"></button></td>
                     </tr>
@@ -86,20 +87,42 @@
             </div>
 
             <!-- Modal -->
-            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal fade" id="options-modal" tabindex="-1" role="dialog" aria-labelledby="options-label">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="myModalLabel">Add Page</h4>
+                            <h4 class="modal-title" id="myModalLabel">Edit Options</h4>
                         </div>
-                        <div class="modal-body">
+
+                        <div id="options-modal-body" class="modal-body">
+                            <form id="options-form" class="modal-body">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Email address</label>
+                                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Password</label>
+                                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputFile">File input</label>
+                                    <input type="file" id="exampleInputFile">
+                                    <p class="help-block">Example block-level help text here.</p>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox"> Check me out
+                                    </label>
+                                </div>
+                            </form>
 
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button id="add-modal-save-button" type="button" class="btn btn-primary">Save changes</button>
+                            <button id="save-options-button" type="submit" class="btn btn-primary">Save changes</button>
                         </div>
+
                     </div>
                 </div>
             </div>

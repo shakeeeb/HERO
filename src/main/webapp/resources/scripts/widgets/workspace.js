@@ -64,6 +64,9 @@ $(document).ready(function() {
             //>>placeOrphans();
 
 
+            addConnector(1,2);
+            //connectAll();
+
         });
     }
 
@@ -576,12 +579,23 @@ $(document).ready(function() {
     }
 // adds path to connect two pages
     function addConnector(fromPageID, toPageID) {
-        //connectElements($("#svg1"), $("#path1"), $('#page-0'),  $("#page-1"));
+        connectElements($("#svg1"), $("#path1"), $('#page-0'),  $("#page-1"));
         $('#svg1').append('<path id=\"'+ fromPageID +'-'+ toPageID + '-connector\"' +
         'd=\"M0 0\"' +
         'stroke=\"#000\"' +
         'fill=\"none\"' +
-        'stroke-width=\"6px \" ;>' );
+        'stroke-width=\"6px\" \;\=\"\">' );
+
+        //var svgElement = document.getElementById("svg1").innerHTML;
+        //var newPath = document.createTextNode('<path id=\"'+ fromPageID +'-'+ toPageID + '-connector\"' +
+        //        'd=\"M0 0\"' +
+        //        'stroke=\"#000\"' +
+        //        'fill=\"none\"' +
+        //        'stroke-width=\"6px\" \;\=\"\">');
+        //svgElement.appendChild(newPath);
+
+        //connectElements($("#svg1"), $("#path1"), $('#page-1'),  $("#page-2"));
+        connectElements(doucment.getElementById("svg1"), doucment.getElementById("1-2-connector"), doucment.getElementById("page-1"), doucment.getElementById("page-2"));
 
     }
 
@@ -891,9 +905,9 @@ $(document).ready(function() {
         // connect all the paths you want!
 
 
-    connectElements($("#svg1"), $("#0-1-connector"), $('#page-0'),  $("#page-1"));
-        connectElements($("#svg1"), $("#1-2-connector"), $('#page-1'),  $("#page-2"));
-        connectElements($("#svg1"), $("#1-3-connector"), $('#page-1'),  $("#page-3"));
+    connectElements($("#svg1"), $("#1-2-connector"), $('#page-1'),  $("#page-2"));
+       // connectElements($("#svg1"), $("#1-2-connector"), $('#page-1'),  $("#page-2"));
+        //connectElements($("#svg1"), $("#1-3-connector"), $('#page-1'),  $("#page-3"));
         //connectElements($("#svg1"), $("#path2"), $("#red"),    $("#orange"));
         //connectElements($("#svg1"), $("#path3"), $("#teal"),   $("#aqua")  );
         //connectElements($("#svg1"), $("#path4"), $("#red"),    $("#aqua")  );

@@ -421,6 +421,7 @@
 #svgContainer {
 
     position:absolute;
+    z-axis: -2;
 
 }
 
@@ -440,7 +441,6 @@
 .page-options {
     position: absolute;
     width:100%;
-    background-color: rgba(0, 0, 0, 0.75);
     bottom: 0;
     height: 50px;
     display: none;
