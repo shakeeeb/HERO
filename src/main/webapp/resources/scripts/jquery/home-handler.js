@@ -42,43 +42,45 @@ $(document).ready(function() {
 
             function loadItem1SeriesOverview() {
                 var seriesID = $(".item-1").attr('id');
-                window.location.replace("../series-overview/" + seriesID);
+                window.location.replace("../chapter-index/" + seriesID);
             }
 
             function loadItem2SeriesOverview() {
                 var seriesID = $(".item-2").attr('id');
-                window.location.replace("../series-overview/" + seriesID);
+                window.location.replace("../chapter-index/" + seriesID);
             }
 
             function loadItem3SeriesOverview() {
                 var seriesID = $(".item-3").attr('id');
-                window.location.replace("../series-overview/" + seriesID);
+                window.location.replace("../chapter-index/" + seriesID);
             }
 
             function loadItem4SeriesOverview() {
                 var seriesID = $(".item-4").attr('id');
-                window.location.replace("../series-overview/" + seriesID);
+                window.location.replace("../chapter-index/" + seriesID);
             }
 
             function loadItem5SeriesOverview() {
                 var seriesID = $(".item-5").attr('id');
-                window.location.replace("../series-overview/" + seriesID);
+                window.location.replace("../chapter-index/" + seriesID);
             }
 
             function loadItem6SeriesOverview() {
                 var seriesID = $(".item-6").attr('id');
-                window.location.replace("../series-overview/" + seriesID);
+                window.location.replace("../chapter-index/" + seriesID);
             }
 
             function loadItem7SeriesOverview() {
                 var seriesID = $(".item-7").attr('id');
-                window.location.replace("../series-overview/" + seriesID);
+                window.location.replace("../chapter-index/" + seriesID);
             }
 
             function loadItem8SeriesOverview() {
                 var seriesID = $(".item-8").attr('id');
-                window.location.replace("../series-overview/" + seriesID);
+                window.location.replace("../chapter-index/" + seriesID);
             }
+
+
 
 
         }).fail(function() {

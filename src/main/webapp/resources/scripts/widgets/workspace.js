@@ -14,6 +14,13 @@ $(document).ready(function() {
     var tree = [];
     var pageIds = [];
     var orphans = [];
+
+    // these are used for linking pages
+    var fromPageID = null;
+    var toPageID = null;
+    var linkingMode = false;
+
+
     //var chapterID = $("#hidden-chapterID").html();
     // test chapter being used for development, will be replaced with grabbing the id from the backend
     //loadChapter(chapterID);
@@ -60,6 +67,14 @@ $(document).ready(function() {
         });
     }
 
+
+    function clearChapter() {
+
+        $('#page-table tr:not(:first)').remove();
+        tree = [];
+        $('#page-1').addClass('hidden-page');
+
+    }
     function addLevel() {
         $.get("/resources/layouts/chapterlevel.html", function(data) {
             $("#page-table").append(data);
@@ -105,19 +120,6 @@ $(document).ready(function() {
  * A) HANDLERS: Things that handle user interaction
  **********************************************************************************************************************/
 
-    //when clicked, get the page to be edited and send it to the backend
-    $(".chapter-page").click(function() {
-
-        var pageID = this.getTextContent;
-
-        //$.post( "/get-chapter-page", {"data":pageID})
-        //    .done(function() {
-        //        console.log("Sending the data back to the servlet");
-        //    })
-        //    .fail(function() {
-        //        console.log("Cannot send the data back to the servlet");
-        //    });
-    });
 
     $(document).on("click", ".edit-option", function() {
        if($(this).parent().hasClass("add-page")) {
@@ -130,6 +132,98 @@ $(document).ready(function() {
             // load drawing page
             window.location.replace("/draw/"+pageID);
         }
+    });
+
+    $(document).on("click", ".page-options", function() {
+
+        if(linkingMode == false) {
+        // set clicked page to from page
+
+            if($(this).parent().find("")){
+            // get the page ID
+            var pageID = cID + '^' +  $(this).parent().attr('id').split('-')[1];
+            fromPageID = pageID;
+
+        }
+        linkingMode = true;
+        }
+        else {
+                var pageID = cID + '^' + $(this).parent().attr('id').split('-')[1];
+                toPageID = pageID;
+            //    alert("Linking " + fromPageID + " to " + toPageID);
+            $.post("/workspace/add/page-option", {"fromPage": fromPageID, "toPage": toPageID})
+                .done(function(data){
+                    console.log(data);
+
+                    clearChapter();
+                    loadChapter(cID);
+
+
+            // get number of options for page
+        var optionCount = getPage(fromPageID, pages).options.length;
+           // alert(optionCount);
+
+            //for(var i = 0; i < optionCount; i++) {
+            //    console.log(getPage(fromPageID,pages).options[i]);
+            //}
+
+
+            // if more than one option, must provide the different options the user can choose
+            if(optionCount == 0) {
+                // add new option
+                $.post("/workspace/update/page-options", {"page": fromPageID, "options":[toPageID], "optionPrompts":[""]})
+                    .done(function(data){
+                    console.log(data);
+                });
+
+            } else if(optionCount > 1){
+
+                // load modal with options
+                $('#options-form').empty();
+
+
+                for(var i = 0; i < optionCount; i++) {
+                    $('#options-form').append('<div class="form-group">'+
+                        '<label for='+getPage(fromPageID,pages).options[i].key.raw.name+'>Option: '+ getPage(fromPageID,pages).options[i].key.raw.name +'</label>' +
+                    '<input type="text" class="form-control" id="'+getPage(fromPageID,pages).options[i].key.raw.name+'" value="">' +
+                        '</div>');
+                }
+
+                $('#options-modal').modal('show');
+            }
+
+            // add new options to chapter
+
+
+            // enable linking mode
+            linkingMode = false;
+                });
+        }
+    });
+
+
+    $("#save-options-button").click(function() {
+
+        var pageIDList = [];
+        var optionsList = [];
+
+       //console.log($("#options-form :input"));
+        var inputs = $("#options-form :input");
+        for(var i = 0; i < inputs.length; i++) {
+            pageIDList.push(inputs[i].id);
+            optionsList.push(document.getElementById(inputs[i].id).value);
+        }
+
+        //alert(pageIDList + "," + optionsList);
+
+        $.post("/workspace/update/page-options", {"page": fromPageID, "options":pageIDList, "optionPrompts":optionsList})
+            .done(function(data){
+                console.log(data);
+            });
+
+        $("#options-modal").modal('hide');
+
+
     });
 
     /**
@@ -149,11 +243,9 @@ $(document).ready(function() {
         if($(this).hasClass("add-page")) {
             return;
         }
-        // get the page ID
-      //  $(this).css("background", "black");
         var pagediv = $(this);
     $(this).context.firstElementChild.style.display = 'block';
-  //          .getElementById('page-options').css('display', 'block');
+
     });
     /**
      * UNHOVER
@@ -182,7 +274,7 @@ $(document).ready(function() {
         var chapterRow = $(this).parent().parent()[0].getAttribute("id");
         var rowID = chapterRow.split('-')[2];
 
-        console.log(getPageCount(rowID));
+        //console.log(getPageCount(rowID));
 
         if(getPageCount(rowID) > 5) {
 
@@ -214,7 +306,7 @@ $(document).ready(function() {
             // call a special handler
 
             //except when row ID is like, 2 or something
-            console.log("delete row");
+           // console.log("delete row");
             $.post("delete-row" ,{"level": rowID, "chapterID":cID, "pageID":pageID}, function(){
             })
                 .done(function(data){
@@ -226,7 +318,7 @@ $(document).ready(function() {
                 });
             //refresh the page
         } else {
-            console.log("remove page");
+            //console.log("remove page");
             removePage(target , pageID, rowID);
             //$.post("delete-chapter-page", )
         }
@@ -328,7 +420,7 @@ $(document).ready(function() {
         var datastorePage = $.getJSON("make-chapter-page" ,{"level": level, "chapterID":cID, "pageID":pageID} ,function(data) {
         })
             .done(function(data){
-                console.log(data);
+               // console.log(data);
                 page.setAttribute("id",'page-' + pageIDtoNumberID(data.Page.pageId));
                 //add newly created pages to 'pages' object
                 if(pageIds.indexOf(data.Page.pageId) >= 0){
@@ -337,9 +429,9 @@ $(document).ready(function() {
                     // doesnt exist, add it to pages
                     pages.push(data.Page);
                 }
-                console.log("success");
+              //  console.log("success");
             }).fail(function(data){
-                console.log("failure");
+              //  console.log("failure");
             });
         /*getPage(pageID,pages)*/
         //console.log(datastorePage);
@@ -472,7 +564,7 @@ $(document).ready(function() {
             '</div>' +
             '</div></td>' +
             '' +
-            '<td><div class=\"chapter-page hidden-page\" type=\"button\"><div class=\"page-options\"><i class="fa fa-link" aria-hidden="true"></i> </div><div class=\"delete-option\"><i class=\"fa fa-times\" aria-hidden=\"true\"></i></div><div class=\"edit-option\"><i class=\"fa fa-paint-brush\" aria-hidden=\"true\"></i></div></div></td>' +
+                '<td><div class=\"chapter-page hidden-page\" type=\"button\"><div class=\"page-options\"><i class="fa fa-link" aria-hidden="true"></i> </div><div class=\"delete-option\"><i class=\"fa fa-times\" aria-hidden=\"true\"></i></div><div class=\"edit-option\"><i class=\"fa fa-paint-brush\" aria-hidden=\"true\"></i></div></div></td>' +
             '<td><div class=\"chapter-page hidden-page\" type=\"button\"><div class=\"page-options\"><i class="fa fa-link" aria-hidden="true"></i> </div><div class=\"delete-option\"><i class=\"fa fa-times\" aria-hidden=\"true\"></i></div><div class=\"edit-option\"><i class=\"fa fa-paint-brush\" aria-hidden=\"true\"></i></div></div></td>' +
             '<td><div class=\"chapter-page hidden-page\" type=\"button\"><div class=\"page-options\"><i class="fa fa-link" aria-hidden="true"></i> </div><div class=\"delete-option\"><i class=\"fa fa-times\" aria-hidden=\"true\"></i></div><div class=\"edit-option\"><i class=\"fa fa-paint-brush\" aria-hidden=\"true\"></i></div></div></td>' +
             '<td><div class=\"chapter-page add-page\" type=\"button\">new</div></td>' +
@@ -504,10 +596,10 @@ $(document).ready(function() {
             var finder=pages[i].pageId;
             if(tree.indexOf(finder) >= 0){
                 //its in the tree
-                console.log("not an orphan");
+               // console.log("not an orphan");
             }else{
                 //its not in the tree
-                console.log("is orphan");
+               // console.log("is orphan");
                 orphans.push(pages[i]);
             }
         }
@@ -524,7 +616,7 @@ $(document).ready(function() {
      */
     function removePage(target, pageID, level){
         // remove page element from level
-        alert("PageID " + pageID);
+        //alert("PageID " + pageID);
         var numberID = pageIDtoNumberID(pageID);
         numberID = "page-" + numberID;
         //alert("level " + level);
@@ -562,7 +654,7 @@ $(document).ready(function() {
         $.post("delete-chapter-page" ,{"chapterID":cID, "pageID":pageID} , function(data) {
             })
             .done(function(data){
-                console.log(data);
+               // console.log(data);
                 //unlink the page here
                 if(pageIds.indexOf(pageId) >= 0){
 
@@ -570,10 +662,10 @@ $(document).ready(function() {
                     // doesnt exist, add it to pages
                     pageIds.remove(pageId);
                 }
-                console.log("success");// get the page ID
+               // console.log("success");// get the page ID
                 //window.reload();
             }).fail(function(data){
-                console.log("failure");
+               // console.log("failure");
             });
         // TODO: do this using jquery, selector wasnt working
         if(isAddPage == 1){
@@ -698,7 +790,7 @@ $(document).ready(function() {
 
 
                //ƒ addConnector(rootPageNumber, childPageNumber);
-                connectElements($("#svg1"), $('#'+ rootPageNumber+'-'+ childPageNumber + '-' + 'connector'), $('#page-'+rootPageNumber),  $("#page-"+ childPageNumber));
+                //connectElements($("#svg1"), $('#'+ rootPageNumber+'-'+ childPageNumber + '-' + 'connector'), $('#page-'+rootPageNumber),  $("#page-"+ childPageNumber));
                 //
                 //    //insertOptions(getPage(root.options[i].key.raw.name,pages), pages, level+1);
             }

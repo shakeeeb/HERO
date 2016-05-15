@@ -44,11 +44,9 @@ $(document).ready(function () {
             if (isSubscribed) {
                 $("#subscribe-button").html("Unsubscribe");
             }
-            else
-            {
+            else {
                 $("#subscribe-button").html("Subscribe");
             }
-
             var currentChapter = null;
             if (numChapters > 0) {
                 for (var o = 1; o < numChapters + 1; o++)
@@ -84,15 +82,14 @@ $(document).ready(function () {
                     }
                 }
                 //loadPage(currentChapterID, currentPageID);
-                updateRecentlyViewed(currentChapterID, "/read/" + currentChapterID + "/" + currentPageID);
+                updateRecentlyViewed(currentChapterID, "/read/" + currentChapterID + "/" + currentPageID, seriesID);
 
                 //Don't load the page. Switch to the page and use the controller to get the information we need.
 
             });
 
             $("#chapter-index-start-from-beginning").click(function() {
-                updateRecentlyViewed(chapterID, "/read/" + chapterID + "/" + rootID);
-                window.location.replace("/read/" + chapterID + "/" + rootID);
+                updateRecentlyViewed(chapterID, "/read/" + chapterID + "/" + rootID, seriesID);
             });
 
             $("#subscribe-button").click(function(){
@@ -122,50 +119,20 @@ $(document).ready(function () {
         });
     }
 
-    function updateRecentlyViewed(chapterID, urlMapping) {
+    function updateRecentlyViewed(chapterID, urlMapping, seriesID) {
         $.getJSON("/chapter-index/updateRecentlyViewed/" + chapterID)
             .done(function (data) {
-                window.location.replace(urlMapping);
+                var hasPages = data.members.emptyChapter.elements[0].value;
+                console.log(hasPages);
+
+                if (hasPages === "empty")
+                {
+                    window.location.replace("../chapter-index/" + seriesID);
+                }
+                else {
+                    window.location.replace(urlMapping);
+                }
         });
     }
 
-    //function loadPage(chapterID, pageID) { // Change this to /read/ + /chapterID + /pageNumber
-    //    $.getJSON("/read/" + chapterID + "/" + pageID, function(data) {
-    //    }).done(function (data) {
-    //        console.log(data.members.Chapter.members);
-    //        console.log(data.members.page.members);
-    //        console.log(data.members.pageOptions);
-    //        console.log(data.members.pageList);
-    //
-    //        chapter = data.members.Chapter.members;
-    //        currentPage = data.members.page.members;
-    //        pageOptions = data.members.pageOptions;
-    //        pageList = data.members.pageList;
-    //
-    //        $("#chapter-name-reader-page").text(currentPage.pageId.value);
-    //        $("#page-number-reader-page").text(currentPage.pageNumber.value);
-    //
-    //
-    //        var numOptions = currentPage.numOptions.value;
-    //        var optionText = currentPage.optionDescriptors.elements;
-    //        var pageSrc = currentPage.imagePath.value;
-    //
-    //        $("#page-reader-example-img").attr("src", pageSrc);
-    //
-    //        for (var i = 1; i < numOptions + 1; i++)
-    //        {
-    //            var buttonHTML = "<div class=\"row pageOptions\">" +
-    //                "<button id=\"" + pageOptions.elements[i-1].members.pageId.value + "\" type=\"button\" class =\"optionButtons\">" +
-    //                optionText[i - 1].value + "</button> </div>";
-    //            $("#option-container").append(buttonHTML);
-    //        }
-    //
-    //        $(".optionButtons").click(function() {
-    //            $("#option-container").empty();
-    //
-    //            var nextPageID = this.id;
-    //            loadPage(chapterID, nextPageID);
-    //        });
-    //    });
-    //}
 });

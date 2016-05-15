@@ -56,6 +56,9 @@ public class ReaderPageController {
         ArrayList<Page> pageList = new ArrayList<Page>();
         ArrayList<Page> currentPageOptions = currentPage.getOptions();
         pageList = c.getAllPages();
+
+        Series s = c.getSeries();
+        String seriesID = s.getName();
 //
 //        currentPage.getAllPages(pageList);
 
@@ -73,6 +76,8 @@ public class ReaderPageController {
         json.add("page", gson.toJsonTree(currentPage));
         json.add("pageOptions", gson.toJsonTree(currentPageOptions));
         json.add("pageList", gson.toJsonTree(pageList));
+        json.add("seriesID", gson.toJsonTree(seriesID));
+
 
         System.out.println("fetching chapter...");
         System.out.println("The Chapter ID from the URL is: " + chapterID);
