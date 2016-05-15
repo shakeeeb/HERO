@@ -64,9 +64,6 @@ $(document).ready(function() {
             //>>placeOrphans();
 
 
-            addConnector(1,2);
-            //connectAll();
-
         });
     }
 
@@ -141,8 +138,7 @@ $(document).ready(function() {
 
         if(linkingMode == false) {
         // set clicked page to from page
-
-            if($(this).parent().find("")){
+        if($(this).parent().find("")){
             // get the page ID
             var pageID = cID + '^' +  $(this).parent().attr('id').split('-')[1];
             fromPageID = pageID;
@@ -153,7 +149,7 @@ $(document).ready(function() {
         else {
                 var pageID = cID + '^' + $(this).parent().attr('id').split('-')[1];
                 toPageID = pageID;
-            //    alert("Linking " + fromPageID + " to " + toPageID);
+                alert("Linking " + fromPageID + " to " + toPageID);
             $.post("/workspace/add/page-option", {"fromPage": fromPageID, "toPage": toPageID})
                 .done(function(data){
                     console.log(data);
@@ -164,7 +160,7 @@ $(document).ready(function() {
 
             // get number of options for page
         var optionCount = getPage(fromPageID, pages).options.length;
-           // alert(optionCount);
+            alert(optionCount);
 
             //for(var i = 0; i < optionCount; i++) {
             //    console.log(getPage(fromPageID,pages).options[i]);
@@ -423,7 +419,7 @@ $(document).ready(function() {
         var datastorePage = $.getJSON("make-chapter-page" ,{"level": level, "chapterID":cID, "pageID":pageID} ,function(data) {
         })
             .done(function(data){
-               // console.log(data);
+                console.log(data);
                 page.setAttribute("id",'page-' + pageIDtoNumberID(data.Page.pageId));
                 //add newly created pages to 'pages' object
                 if(pageIds.indexOf(data.Page.pageId) >= 0){
@@ -579,23 +575,12 @@ $(document).ready(function() {
     }
 // adds path to connect two pages
     function addConnector(fromPageID, toPageID) {
-        connectElements($("#svg1"), $("#path1"), $('#page-0'),  $("#page-1"));
+        //connectElements($("#svg1"), $("#path1"), $('#page-0'),  $("#page-1"));
         $('#svg1').append('<path id=\"'+ fromPageID +'-'+ toPageID + '-connector\"' +
         'd=\"M0 0\"' +
         'stroke=\"#000\"' +
         'fill=\"none\"' +
-        'stroke-width=\"6px\" \;\=\"\">' );
-
-        //var svgElement = document.getElementById("svg1").innerHTML;
-        //var newPath = document.createTextNode('<path id=\"'+ fromPageID +'-'+ toPageID + '-connector\"' +
-        //        'd=\"M0 0\"' +
-        //        'stroke=\"#000\"' +
-        //        'fill=\"none\"' +
-        //        'stroke-width=\"6px\" \;\=\"\">');
-        //svgElement.appendChild(newPath);
-
-        //connectElements($("#svg1"), $("#path1"), $('#page-1'),  $("#page-2"));
-        connectElements(doucment.getElementById("svg1"), doucment.getElementById("1-2-connector"), doucment.getElementById("page-1"), doucment.getElementById("page-2"));
+        'stroke-width=\"6px \" ;>' );
 
     }
 
@@ -804,7 +789,7 @@ $(document).ready(function() {
 
 
                //ƒ addConnector(rootPageNumber, childPageNumber);
-                //connectElements($("#svg1"), $('#'+ rootPageNumber+'-'+ childPageNumber + '-' + 'connector'), $('#page-'+rootPageNumber),  $("#page-"+ childPageNumber));
+                connectElements($("#svg1"), $('#'+ rootPageNumber+'-'+ childPageNumber + '-' + 'connector'), $('#page-'+rootPageNumber),  $("#page-"+ childPageNumber));
                 //
                 //    //insertOptions(getPage(root.options[i].key.raw.name,pages), pages, level+1);
             }
@@ -905,9 +890,9 @@ $(document).ready(function() {
         // connect all the paths you want!
 
 
-    connectElements($("#svg1"), $("#1-2-connector"), $('#page-1'),  $("#page-2"));
-       // connectElements($("#svg1"), $("#1-2-connector"), $('#page-1'),  $("#page-2"));
-        //connectElements($("#svg1"), $("#1-3-connector"), $('#page-1'),  $("#page-3"));
+    connectElements($("#svg1"), $("#0-1-connector"), $('#page-0'),  $("#page-1"));
+        connectElements($("#svg1"), $("#1-2-connector"), $('#page-1'),  $("#page-2"));
+        connectElements($("#svg1"), $("#1-3-connector"), $('#page-1'),  $("#page-3"));
         //connectElements($("#svg1"), $("#path2"), $("#red"),    $("#orange"));
         //connectElements($("#svg1"), $("#path3"), $("#teal"),   $("#aqua")  );
         //connectElements($("#svg1"), $("#path4"), $("#red"),    $("#aqua")  );
