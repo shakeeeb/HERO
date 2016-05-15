@@ -20,6 +20,7 @@ h3 {
     padding-top: 25px;
     padding-bottom: 25px;
     padding-right: 25px;
+    margin-left: 10px;
 }
 
 .button-ok {
@@ -45,8 +46,7 @@ h3 {
 }
 
 .submitted-comics {
-    width: 200px;
-    margin-left: 50px;
+    width: 90%;
     margin-right: 50px;
     background-color: #f4f4f4;
 }
@@ -57,15 +57,16 @@ h3 {
 
 .submitted-comics-header {
     margin-top: 5px;
-    margin-left: -105px;
+    margin-left: -160px;
     width: 400px;
     table-layout: fixed;
     border-collapse: collapse;
     z-index: -1;
 }
 
-#reported-comics-header {
-    margin-top: 5px;
+.reported-comics-header {
+    margin-top: -.01em;
+    margin-left:-100px;
 }
 
 .modal-dialog{
@@ -145,14 +146,15 @@ h3 {
 
 .submitted-comics-author {
     width: 200px;
+    margin-left:-10px;
 }
 
 .approve-comic-button-div {
-    margin-left: 145px;
+    margin-left: 100px;
 }
 
 .delete-comic-button-div {
-    margin-left: 153px;
+    margin-left: 110px;
     margin-bottom: 25px;
 }
 

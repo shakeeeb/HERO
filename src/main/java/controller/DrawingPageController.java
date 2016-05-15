@@ -78,7 +78,7 @@ public class DrawingPageController {
     }
 
     // get SVG
-    @RequestMapping(value="get-SVG/", method = RequestMethod.POST)
+    @RequestMapping(value="get-SVG", method = RequestMethod.POST)
     protected void getSVG(HttpServletRequest request, HttpServletResponse response){
 
         String SVG = request.getParameter("data");
@@ -102,7 +102,39 @@ public class DrawingPageController {
             System.out.println("Image was null");
             return;
         }
-        pageSaving.setJsonString(SVG);
+        pageSaving.setSVGString(SVG);
+        ofy().save().entity(pageSaving).now();
+        return;
+    }
+
+    // get BOTH
+    @RequestMapping(value="get-image", method = RequestMethod.POST)
+    protected void getImage(HttpServletRequest request, HttpServletResponse response){
+
+        String SVG = request.getParameter("svg");
+        String Json = request.getParameter("json");
+        String pageID = request.getParameter("pagekey");
+
+        // GRAB A PAGE FROM THE DATASTORE BY ID
+        System.out.println("The page ID is: "+ pageID);
+
+        // SET THE PAGE JSON VALUE
+
+        Page pageSaving = null;
+        pageSaving = db.pageRepo.getById(pageID);
+        if(pageSaving == null){
+            System.out.println("Cannot save");
+            return;
+        }
+        System.out.println("page saving: "+ pageSaving.getPageId());
+
+        // SAVE IT
+        if(SVG == null){
+            System.out.println("Image was null");
+            return;
+        }
+        pageSaving.setSVGString(SVG);
+        pageSaving.setJsonString(Json);
         ofy().save().entity(pageSaving).now();
         return;
     }

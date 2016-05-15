@@ -17,14 +17,14 @@
 <script src="/resources/scripts/jquery/user-handler.js"></script>
 <br><br><br><br>
 <div class="container">
-    <span class="orange-span col-lg-offset-1 col-lg-4">
+    <span class="col-lg-offset-1 col-lg-4 light-grey-boxes">
         <br>
         <div id="user-image" class="orange-span">
             <img src="/resources/images/logo.png" height="346px" width="346px">
         </div>
 
         <br>
-        <div id="user-information" class="orange-span box-text-align">
+        <div id="user-information" class="center-text black-span white-boxes box-text-align">
             <br>USER INFORMATION HERE<br>
             <br>Etiam ut fringilla tortor. Fusce et odio magna. Ut pulvinar massa eu mi maximus sollicitudin. In hac
             habitasse platea dictumst. Vivamus sit amet nunc tincidunt, condimentum mauris id, cursus tellus. Fusce quam
@@ -36,7 +36,7 @@
 
     </span>
 
-    <span class="orange-span col-lg-offset-1 col-lg-6" id="all_the_series">
+    <span class="col-lg-offset-1 col-lg-6 light-grey-boxes" id="all_the_series">
     <br>
 
 

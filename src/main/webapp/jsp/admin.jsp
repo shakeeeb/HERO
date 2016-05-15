@@ -101,7 +101,7 @@
         <h2 class="submitted-comics-header till_font">Submitted Comics </h2>
     </div>
     <div class="col-md-5 text-center">
-        <h2 id="reported-comics-header till_font">Reported Comics</h2>
+        <h2 class="reported-comics-header till_font">Reported Comics</h2>
     </div>
 </div>
 

@@ -23,7 +23,7 @@
 <br>
 <div id="search-container">
     <!-- Left side menu -->
-    <div id="refine-menu-container">
+    <div id="refine-menu-container" class="till_font">
         <div id="refine-menu" class="center-block-">
             <p id="refine-search-label" class="text-center">Refine Search</p>
 
@@ -133,7 +133,7 @@
 
 
 
-        <div id="result-list-container">
+        <div id="result-list-container" class="till_font">
 
             <label id="search-label">Search Results: <div id="test2">${query}</div> </label>
             <!-- the entire search list is here-->

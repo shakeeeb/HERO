@@ -18,6 +18,7 @@ $(document).ready(function(){
 
     }
     loadPage(pageID);
+    //loadSVG(pageID);
 
 
     function handleImage(e){
@@ -126,12 +127,13 @@ $(document).ready(function(){
 
     /* when the save button is pressed */
     $("#save-button").click(function(){
+        // save as both SVG and Json
+        // edit the JSON, use the SVG as the image!
         var json = JSON.stringify( canvas.toJSON() );
-        // var SVG = JSON.stringify(canvas.toSVG() );
+        //console.log("orginal svg: " + canvas.toSVG());
+         var SVG = canvas.toSVG();
 
-       // console.log(json);
-
-        $.post( "/get-json", {data:json, pagekey:pageID})
+        $.post( "/get-image", {svg:SVG, json:json, pagekey:pageID})
         .done(function() {
             console.log(pageID);
             console.log("Jason is cool");
@@ -159,7 +161,7 @@ $(document).ready(function(){
         }).done(function(data) {
             console.log("loading HELLO LOOK HERE");
             console.log(data.gottenJsonImage);
-           // console.log(data.gottenJsonImage.jsonString);
+            console.log(data.gottenJsonImage.jsonString);
             canvas.loadFromJSON(data.gottenJsonImage.jsonString, canvas.renderAll.bind(canvas));
         });
 
@@ -167,13 +169,29 @@ $(document).ready(function(){
 
     function loadSVG(pageID){
 
-        $.get("/load-page/" + pageID, function(data){
+        $.getJSON("/load-page/" + pageID, function(data){
         }).done(function(data){
             console.log("loading page");
             console.log(data.gottenJsonImage);
-            canvas.loadSVGFromString(data.gottenJsonImage.SVGString, canvas.renderAll.bind(canvas))
+            var SVG = data.gottenJsonImage.SVGString;
+            //SVG =  SVG.substr(1,SVG.length-2);
+            console.log(SVG);
+            if(!SVG){
+                console.log("image doesnt exist just make one!");
+            } else {
+                // internal parser error
+            fabric.loadSVGFromString(SVG, function(objects, options) {
+                var obj = fabric.util.groupSVGElements(objects, options);
+                // objects are empty, options are also empty. i have no idea why
+                // this isn't working. why?
+                canvas.add(obj).renderAll();
+            });
+            }
+        }).fail(function(data){
+            console.log("NOOOOO");
         });
     }
+
 
 
 });

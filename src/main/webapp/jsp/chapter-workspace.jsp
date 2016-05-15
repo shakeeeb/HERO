@@ -17,7 +17,7 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet">
 </head>
 <body>
-    <div id="chapter-workspace-container">
+    <div id="chapter-workspace-container" class="till_font">
         <div id="chapter-form">
             <form onsubmit="updateChapter()" class="chapter-form">
                 <div class="form-group">
