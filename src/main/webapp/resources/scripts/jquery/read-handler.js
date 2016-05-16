@@ -11,6 +11,7 @@ $(document).ready(function () {
     var pageList = null;
     var nextPage = null;
     var seriesID = null;
+    var svgObject = null;
 
 
     //Glitch if a chapter only contains one page.
@@ -34,12 +35,14 @@ $(document).ready(function () {
             pageOptions = data.members.pageOptions;
             pageList = data.members.pageList;
             seriesID = data.members.seriesID.value;
+            svgObject = data.members.page.members.SVGString.value;
 
             console.log(chapter);
             console.log(currentPage);
             console.log(pageOptions);
             console.log(pageList);
             console.log(seriesID);
+            console.log(svgObject);
 
 
             if (pageList.elements.length === 1)
@@ -57,7 +60,9 @@ $(document).ready(function () {
             var optionText = currentPage.optionDescriptors.elements;
             var pageSrc = currentPage.imagePath.value;
 
-            $("#page-reader-example-img").attr("src", pageSrc);
+            //$("#page-reader-example-img").attr("src", pageSrc);
+            $("#page-reader-main").html(svgObject);
+
 
             if(numOptions == 0) // It's the last page.
             {

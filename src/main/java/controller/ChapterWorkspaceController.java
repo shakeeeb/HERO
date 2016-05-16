@@ -328,6 +328,8 @@ public class ChapterWorkspaceController {
 
         // clear previous options
         pageToEdit.setOptions(new ArrayList<Page>()); // TODO: check if this is okay
+        pageToEdit.setOptionDescriptors(new ArrayList<String>());
+
 
         // add each option to the page
         for(int i = 0; i < options.length; i++) {
