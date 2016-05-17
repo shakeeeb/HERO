@@ -284,6 +284,10 @@ $(document).ready(function() {
         if($(this).hasClass("add-page")) {
             return;
         }
+        if(linkingMode == true){
+            // if it's linking, then take off the glow
+            $(this).removeClass('page-glow');
+        }
         // get the page ID
         $(this).context.firstElementChild.style.display = 'none';
         if(!pageToLink){
@@ -305,10 +309,6 @@ $(document).ready(function() {
         if((pageToLink.attr('id') == $(this).attr('id')) && (linkingMode == true)){
             // if this is the parent, it remains glowy
             return;
-        }
-        if(linkingMode == true){
-            // if it's linking, then take off the glow
-            $(this).removeClass('page-glow');
         }
     });
 
