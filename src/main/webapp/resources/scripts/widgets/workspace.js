@@ -28,7 +28,7 @@ $(document).ready(function() {
     loadChapter("One_Piece~Luffy_meets_Boa");
 
     /**
-     * Loads a chaoter from the datastore into the story tree
+     * Loads a chapter from the datastore into the story tree
      * @param chapterID: the ID of the chapter from the datastore
      */
     function loadChapter(chapterID) {
@@ -141,6 +141,7 @@ $(document).ready(function() {
     $(document).on("click", ".page-options", function() {
 
         if(linkingMode == false) {
+        // grabbing the from page
         // set clicked page to from page
         if($(this).parent().find("")){
             // get the page ID
@@ -155,7 +156,7 @@ $(document).ready(function() {
         }
         linkingMode = true;
         }
-        else {
+        else { //grabbing the To page
                 var pageID = cID + '^' + $(this).parent().attr('id').split('-')[1];
                 toPageID = pageID;
                 //need to have a handle to the glowing object, to make it un-glow
@@ -166,45 +167,52 @@ $(document).ready(function() {
                     console.log(data);
 
                     clearChapter();
-                    loadChapter(cID);
+                    // gotta make this synchronous.
+                    $.getJSON("/workspace/load/" + cID , function(data) {
+                    }).done(function (data) {
+                        chapter = data.Chapter;
+                        pages = data.Pages;
+                        $("#title-input").val(chapter.name);
+                        $("#summary-input").val(chapter.description);
+
+                        console.log(chapter);
+                        console.log(pages);
+
+                        initPageIds(pages);
+                        loadTree(chapter.root, pages, 0);
+                        loadOrphans();
+                        validateBottomRow();
+
+                        var optionCount = getPage(fromPageID, pages).options.length;
+
+                        // if more than one option, must provide the different options the user can choose
+                        if(optionCount == 0) {
+                            // add new option
+                            $.post("/workspace/update/page-options", {"page": fromPageID, "options":[toPageID], "optionPrompts":[""]})
+                                .done(function(data){
+                                    console.log(data);
+                                });
+
+                        } else if(optionCount > 0){
+
+                            // load modal with options
+                            $('#options-form').empty();
+                            var p = getPage(fromPageID,pages);
 
 
-            // get number of options for page
-        var optionCount = getPage(fromPageID, pages).options.length;
-            alert(optionCount);
+                            for(var i = 0; i < optionCount; i++) {
+                                $('#options-form').append('<div class="form-group">'+
+                                    '<label for='+getPage(fromPageID,pages).options[i].key.raw.name+'>Option: '+ getPage(fromPageID,pages).options[i].key.raw.name +'</label>' +
+                                    '<input type="text" class="form-control" id="'+getPage(fromPageID,pages).options[i].key.raw.name+'" value="' +getPage(fromPageID, pages).optionDescriptors[i]+ '">' +
+                                    '</div>');
+                            }
 
-            //for(var i = 0; i < optionCount; i++) {
-            //    console.log(getPage(fromPageID,pages).options[i]);
-            //}
-
-
-            // if more than one option, must provide the different options the user can choose
-            if(optionCount == 0) {
-                // add new option
-                $.post("/workspace/update/page-options", {"page": fromPageID, "options":[toPageID], "optionPrompts":[""]})
-                    .done(function(data){
-                    console.log(data);
-                });
-
-            } else if(optionCount > 1){
-
-                // load modal with options
-                $('#options-form').empty();
-
-
-                for(var i = 0; i < optionCount; i++) {
-                    $('#options-form').append('<div class="form-group">'+
-                        '<label for='+getPage(fromPageID,pages).options[i].key.raw.name+'>Option: '+ getPage(fromPageID,pages).options[i].key.raw.name +'</label>' +
-                    '<input type="text" class="form-control" id="'+getPage(fromPageID,pages).options[i].key.raw.name+'" value="">' +
-                        '</div>');
-                }
-
-                $('#options-modal').modal('show');
-            }
-
-            // add new options to chapter
-
-
+                            $('#options-modal').modal('show');
+                        }
+                        linkingMode = false;
+                    });
+                    //loadChapter(cID); -- i literally just copied the code over
+                    // im gonna put everything in done so it's synchronous.
             // enable linking mode
             linkingMode = false;
                 });
