@@ -360,7 +360,7 @@ $(document).ready(function() {
 
             //except when row ID is like, 2 or something
            // console.log("delete row");
-            $.post("delete-row" ,{"level": rowID, "chapterID":cID, "pageID":pageID}, function(){
+            $.post("/delete-row" ,{"level": rowID, "chapterID":cID, "pageID":pageID}, function(){
             })
                 .done(function(data){
                     console.log(data); // a post will refresh automatically
