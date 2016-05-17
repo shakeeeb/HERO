@@ -19,6 +19,7 @@ $(document).ready(function() {
     var fromPageID = null;
     var toPageID = null;
     var linkingMode = false;
+    var pageToLink= null;
 
 
     //var chapterID = $("#hidden-chapterID").html();
@@ -54,6 +55,7 @@ $(document).ready(function() {
 
 
             loadTree(chapter.root, pages, 0);
+            alert("Loaded");
             loadOrphans();
 
 
@@ -133,7 +135,9 @@ $(document).ready(function() {
             window.location.replace("/draw/"+pageID);
         }
     });
-
+    /**
+     * if page options have been clicked on
+     */
     $(document).on("click", ".page-options", function() {
 
         if(linkingMode == false) {
@@ -141,6 +145,11 @@ $(document).ready(function() {
         if($(this).parent().find("")){
             // get the page ID
             var pageID = cID + '^' +  $(this).parent().attr('id').split('-')[1];
+            var p = $(this).parent();///.removeClass('page-glow');
+            p.removeClass('page-glow');
+            //$(this).parent.find("").addClass('page-glow');
+            p.addClass('page-glow');
+            pageToLink = p;
             fromPageID = pageID;
 
         }
@@ -149,6 +158,8 @@ $(document).ready(function() {
         else {
                 var pageID = cID + '^' + $(this).parent().attr('id').split('-')[1];
                 toPageID = pageID;
+                //need to have a handle to the glowing object, to make it un-glow
+                pageToLink = null;
                 alert("Linking " + fromPageID + " to " + toPageID);
             $.post("/workspace/add/page-option", {"fromPage": fromPageID, "toPage": toPageID})
                 .done(function(data){
@@ -225,6 +236,7 @@ $(document).ready(function() {
 
     });
 
+
     /**
      * HOVER--
      * FOR LINKING
@@ -243,8 +255,25 @@ $(document).ready(function() {
             return;
         }
         var pagediv = $(this);
-    $(this).context.firstElementChild.style.display = 'block';
+        $(this).context.firstElementChild.style.display = 'block';
+        if(linkingMode == true){
+            $(this).removeClass('page-glow');
+            $(this).addClass('page-glow');
+        } // on mouseover, if this is not in linking mode, make all the children of this node glow
+        else {
+            //alert(numberIDtoPageID($(this).attr("id"))); // turn this from a page id into a real page id
+            var node = getPage(numberIDtoPageID($(this).attr("id")) , pages);
+            $(this).addClass('page-glow');
+            for(var i = 0; i< node.options.length;i++){
+                // grab the div that cooresponds to the id
+                // turn this into a number id
+                var pid = "page-" +pageIDtoNumberID(node.options[i].key.raw.name);
+                var cnode = $('#' + pid) // woot
+                cnode.addClass('page-glow');
+            }
 
+            //var node = getPage($(this).attr("id") , );
+        }
     });
     /**
      * UNHOVER
@@ -257,6 +286,30 @@ $(document).ready(function() {
         }
         // get the page ID
         $(this).context.firstElementChild.style.display = 'none';
+        if(!pageToLink){
+            // its null
+            // this is a page that you're hovering on
+            // otherwise, its not linking, its just glowing, make it stop glowing. and it's children too.
+            $(this).removeClass('page-glow');
+            var node = getPage(numberIDtoPageID($(this).attr("id")) , pages);
+
+            for(var i = 0; i<node.options.length;i++){
+                // grab the div that cooresponds to the id
+                // turn this into a number id
+                var pid = "page-" +pageIDtoNumberID(node.options[i].key.raw.name);
+                var cnode = $('#' + pid) // woot
+                cnode.removeClass('page-glow');
+            }
+                return;
+        }
+        if((pageToLink.attr('id') == $(this).attr('id')) && (linkingMode == true)){
+            // if this is the parent, it remains glowy
+            return;
+        }
+        if(linkingMode == true){
+            // if it's linking, then take off the glow
+            $(this).removeClass('page-glow');
+        }
     });
 
     $(document).on("click", "#add-modal-save-button", function() {
@@ -415,9 +468,26 @@ $(document).ready(function() {
         if(page == null) {
             return;
         }
-        page.setAttribute("id", 'page-' + pageIDtoNumberID(pageID));
-        var datastorePage = $.getJSON("make-chapter-page" ,{"level": level, "chapterID":cID, "pageID":pageID} ,function(data) {
-        })
+        page.setAttribute("id",'page-' + pageIDtoNumberID(pageID));
+        // TODO: do this using jquery, selector wasnt working
+        page.className = "";
+        page.className = "chapter-page";
+        if(page != null) {
+            //page.style.backgroundImage = "url(\'" + datastorePage.imagePath +"\')";
+            //page.style.backgroundSize = "cover";
+            //page.style.backgroundRepeat = "no-repeat";
+
+        }
+
+
+    }
+
+    function createPage(page, pageID, level){
+        if(page == null) {
+            return;
+        }
+        $.getJSON("/make-chapter-page" ,{"level": level, "chapterID":cID, "pageID":pageID} ,function(data) {
+            })
             .done(function(data){
                 console.log(data);
                 page.setAttribute("id",'page-' + pageIDtoNumberID(data.Page.pageId));
@@ -428,23 +498,10 @@ $(document).ready(function() {
                     // doesnt exist, add it to pages
                     pages.push(data.Page);
                 }
-              //  console.log("success");
+                //  console.log("success");
             }).fail(function(data){
-              //  console.log("failure");
-            });
-        /*getPage(pageID,pages)*/
-        //console.log(datastorePage);
-
-        // TODO: do this using jquery, selector wasnt working
-        page.className = "";
-        page.className = "chapter-page";
-        if(datastorePage != null) {
-            page.style.backgroundImage = "url(\'" + datastorePage.imagePath +"\')";
-            page.style.backgroundSize = "cover";
-            page.style.backgroundRepeat = "no-repeat";
-
-        }
-
+            console.log("failure");
+        });
 
     }
 
@@ -650,7 +707,7 @@ $(document).ready(function() {
         if(page == null) {
             return;
         }
-        $.post("delete-chapter-page" ,{"chapterID":cID, "pageID":pageID} , function(data) {
+        $.post("/delete-chapter-page" ,{"chapterID":cID, "pageID":pageID} , function(data) {
             })
             .done(function(data){
                // console.log(data);
@@ -781,7 +838,7 @@ $(document).ready(function() {
                     //insertOptions(getPage(root.options[i].key.raw.name,pages), pages, level+1);
                 loadTree(root.options[i], allPages,level+1);
                 var rootPageNumber = pageIDtoNumberID(root.pageId);
-                 var childPageNumber = pageIDtoNumberID(getPage(getPageID(root.options[i]), allPages).pageId);
+                var childPageNumber = pageIDtoNumberID(getPage(getPageID(root.options[i]), allPages).pageId);
 
                 //addConnector(pageIDtoNumberID(root.pageId),pageIDtoNumberID(getPage(getPageID(root.options[i]), allPages).pageId));
                 //connectElements($("#svg1"), $(pageIDtoNumberID(root.pageId) + '-' + pageIDtoNumberID(getPage(getPageID(root.options[i]), allPages).pageId) + '-connector'),  $('#page-' + (pageIDtoNumberID(root.pageId))),  $("#page-" +  pageIDtoNumberID(getPage(getPageID(root.options[i]), allPages).pageId)));
@@ -789,7 +846,7 @@ $(document).ready(function() {
 
 
                //ƒ addConnector(rootPageNumber, childPageNumber);
-                connectElements($("#svg1"), $('#'+ rootPageNumber+'-'+ childPageNumber + '-' + 'connector'), $('#page-'+rootPageNumber),  $("#page-"+ childPageNumber));
+                //connectElements($("#svg1"), $('#'+ rootPageNumber+'-'+ childPageNumber + '-' + 'connector'), $('#page-'+rootPageNumber),  $("#page-"+ childPageNumber));
                 //
                 //    //insertOptions(getPage(root.options[i].key.raw.name,pages), pages, level+1);
             }
