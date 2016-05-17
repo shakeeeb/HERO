@@ -22,6 +22,7 @@
 <br>
 <!-- Image Background Page Header -->
 <header class="series-banner">
+    <div class="banner-text"></div>
     <div class="container">
         <div class="row">
             <div class="col-lg-12">

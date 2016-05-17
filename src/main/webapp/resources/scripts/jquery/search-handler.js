@@ -27,7 +27,7 @@ $(document).ready(function () {
                 console.log($(this).parent());
                 $(this).parent().attr("id");
                 console.log($(this).parent().attr("id"));
-                $(location).attr('href', "/series-overview/"+$(this).parent().attr("id"));
+                $(location).attr('href', "/chapter-index/"+$(this).parent().attr("id"));
 
             });
         })

@@ -22,10 +22,10 @@ $(document).ready(function() {
     var pageToLink= null;
 
 
-    //var chapterID = $("#hidden-chapterID").html();
+    var chapterID = $("#hidden-chapterID").html();
     // test chapter being used for development, will be replaced with grabbing the id from the backend
-    //loadChapter(chapterID);
-    loadChapter("One_Piece~Luffy_meets_Boa");
+    loadChapter(chapterID);
+    //loadChapter("One_Piece~Luffy_meets_Boa");
 
     /**
      * Loads a chapter from the datastore into the story tree

@@ -7,12 +7,16 @@ $(document).ready(function () {
     var seriesDescription = null;
     var chapterID = null;
     var rootID = null;
+    var genre = null;
 
-    var tempSeriesID = $("#hidden-seriesID").html();
+    //var tempSeriesID = document.getElementById("hidden-seriesID").innerText;
+
+    //var tempSeriesID = $("#hidden-seriesID").html();
+    var tempSeriesID = $("#hidden-seriesID").text();
 
     if (!!tempSeriesID)
     {
-        seriesID = $("#hidden-seriesID").html();
+        seriesID = $("#hidden-seriesID").text();
     }
 
     chapterID = $("#hidden-chapterID").html();
@@ -34,6 +38,52 @@ $(document).ready(function () {
             seriesName = series.name.value;
             author = series.authorName.value;
             seriesDescription = series.description.value;
+            // need to get genre
+            genre = series.mainGenre.value;
+            switch (genre){
+                case "adventure":
+                    $(".series-banner").css("background", "orange");
+                    break;
+                case "action":
+                    $(".series-banner").css("background", "red");
+                    break;
+                case "comedy":
+                    $(".series-banner").css("background", "yellow");
+                    break;
+                case "fantasy":
+                    $(".series-banner").css("background", "lime");
+                    break;
+                case "horror":
+                    $(".series-banner").css("background", "black");
+                    break;
+                case "drama":
+                    $(".series-banner").css("background", "purple");
+                    break;
+                case "romance":
+                    $(".series-banner").css("background", "fuchsia");
+                    break;
+                case "sci-fi":
+                    $(".series-banner").css("background", "green");
+                    break;
+                case "kids":
+                    $(".series-banner").css("background", "teal");
+                    break;
+                case "slice-of-life":
+                    $(".series-banner").css("background", "blue");
+                    break;
+                case "food":
+                    $(".series-banner").css("background", "olive");
+                    break;
+                default:
+                    $(".series-banner").css("background", "silver");
+                    break;
+            }
+
+            $(".banner-text").text(seriesName);
+            $(".banner-text").css("fontSize", "500%");
+            //$(".banner-text").css("text-align", "center");
+            $(".banner-text").css("color", "white");
+            //$(".series-banner").css("text", );
 
 
 
