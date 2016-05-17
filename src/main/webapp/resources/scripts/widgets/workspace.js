@@ -333,9 +333,10 @@ $(document).ready(function() {
         }
         else if(getPageCount(rowID) == 5) {
             $(this).removeClass('add-page').addClass('chapter-page').addClass('hidden-page').text('');
-            addPage('PAGE-ID', rowID);
+            // we have to check if we need to create a new page for this
+            addPage("", rowID);
         } else {
-            addPage('PAGE-ID', rowID);
+            addPage("", rowID);
         }
         validateBottomRow();
 
@@ -425,6 +426,7 @@ $(document).ready(function() {
     function addPage(pageID, level) {
         var levelToEdit = getLevel(level);
         var pageToEdit = null;
+        console.log("adding page of ID" + pageID);
         //>>console.log("adding page to Level: "+ levelToEdit);
         if(levelToEdit == null) {
             console.log("Level doesn't exist");
@@ -451,8 +453,17 @@ $(document).ready(function() {
 
             if(pageToEdit == null) {
                 console.log("pageToEdit is null");
-            } else
-                setPage(pageToEdit.getElementsByClassName("chapter-page")[0], pageID, level)
+            } else {
+                if(pageID == ""){
+                    // page Id doesnt exist, meaning, the page itself hasnt been made just yet
+                    createPage(pageToEdit.getElementsByClassName("chapter-page")[0], pageID, level);
+                } else {
+                    //otherwise we're setting the page for a page that exists
+                    setPage(pageToEdit.getElementsByClassName("chapter-page")[0], pageID, level);
+                }
+
+            }
+
 
 
         }
@@ -486,17 +497,21 @@ $(document).ready(function() {
         if(page == null) {
             return;
         }
+        console.log("creating a new page");
         $.getJSON("/make-chapter-page" ,{"level": level, "chapterID":cID, "pageID":pageID} ,function(data) {
             })
             .done(function(data){
                 console.log(data);
                 page.setAttribute("id",'page-' + pageIDtoNumberID(data.Page.pageId));
+                page.className = "";
+                page.className = "chapter-page";
                 //add newly created pages to 'pages' object
                 if(pageIds.indexOf(data.Page.pageId) >= 0){
 
                 } else {
                     // doesnt exist, add it to pages
                     pages.push(data.Page);
+                    pageIds.push(data.Page.pageId);
                 }
                 //  console.log("success");
             }).fail(function(data){
