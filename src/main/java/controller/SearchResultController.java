@@ -196,10 +196,10 @@ public class SearchResultController {
                 p.print("<div class=\"search-result center-block-\" id=\"" + s.getName() + "\">");//.replaceAll(" ", "%20") + "\">");
 
                 p.print("<div class=\"result-image-container\">\n" +
-                        "                        <img class=\"result-image\" src=\"https://placehold.it/125/ffa500/ffffff\">\n" +
+                        "                        <img class=\"result-image\" src=\"resources/images/test/transparent_image.png\">\n" +
                         "                    </div>");
                 p.print(" <div class=\"left-result-container\">\n" +
-                        "                        <div class=\"result-title\">");
+                        "                        <div id=\"" + s.getName() +  "\"class=\"result-title go-to-chapter-index\">");
                 p.print("Title: "+s.getName()+ "</div>");
                 p.print("<div class=\"result-author\"> Author: " + s.getAuthorName() + "</div>");
                 p.print("<div class=\"result-rating\"> </div> </div>");
