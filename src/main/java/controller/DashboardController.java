@@ -85,35 +85,4 @@ public class DashboardController {
 
         return json;
     }
-
-//    @RequestMapping(value="dashboard/", method = RequestMethod.GET)
-//    public @ResponseBody
-//    JsonObject getDashboard(@RequestParam(value="userToLookUpEmail") String userToLookUpEmail, ModelMap model, HttpSession session, HttpServletRequest req, HttpServletResponse res) {
-//        System.out.println("Got here");
-//        JsonObject json = new JsonObject();
-//        Gson gson = new GsonBuilder().create();
-//
-//        System.out.println(userToLookUpEmail);
-//
-//        // load user from the datastore
-//        UserData user = db.userRepo.getUserById(userToLookUpEmail);
-//        System.out.println(user);
-//
-//        String nickname = user.getNickname();
-//        String userEmail = user.getEmail();
-//        ArrayList series_list = new ArrayList();
-//
-//        System.out.println("userEmail: " + userEmail);
-//
-//        json.add("nickname", gson.toJsonTree(nickname));
-//        series_list = user.getMySeries();
-//        json.add("series_list", gson.toJsonTree(series_list));
-//
-//        System.out.println(json);
-//
-//        //Load this users settings
-//
-//        return json;
-//    }
-
 }

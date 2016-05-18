@@ -46,7 +46,7 @@
             <div class="modal-dialog">
 
                 <!-- Modal content-->
-                <div class="modal-content">
+                <div id="series-overview-add-modal" class="modal-content light-grey-boxes">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                         <h4 class="modal-title">Add Chapter</h4>
@@ -54,12 +54,10 @@
                     <div class="modal-body">
                         <div>
                             <div class="form-group">
-                                <label for="chapterTitle">Chapter Title </label>
-                                <input type="text" class="form-control input-lg" id="chapterTitle">
+                                <input type="text" class="form-control input-lg" id="chapterTitle" placeholder="Chapter Title">
                             </div
                             <div class="form-group">
-                                <label for="chapterDescription">Chapter Description</label>
-                                <textarea class="form-control" rows="7" id="chapterDescription"></textarea>
+                                <textarea class="form-control" rows="7" id="chapterDescription" placeholder="Chapter Description"></textarea>
                             </div>
                         </div>
                     </div>
