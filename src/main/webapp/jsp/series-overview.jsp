@@ -39,7 +39,7 @@
 <br><br><br><br>
 <div class="container">
         <div id="series-overview-name" class="greeting">${seriesName}</div>
-        <button type="button" class="btn btn-default series-overview-add-chapter-button pull-right" data-toggle="modal"
+        <button type="button" id="series-overview-chapter-button" class="btn btn-default series-overview-add-chapter-button pull-right" data-toggle="modal"
                 data-target="#myModal">Add Chapter
         </button>
         <div id="myModal" class="modal fade" role="dialog">
