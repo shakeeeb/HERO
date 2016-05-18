@@ -620,7 +620,7 @@ $(document).ready(function() {
     validateBottomRow();
     function validateBottomRow() {
         var pageCountForBottomLevel = getPageCount($(".chapter-level").length -1 );
-        if(pageCountForBottomLevel > 1) {
+        if(pageCountForBottomLevel >= 1) {
             addRow();
 
         }

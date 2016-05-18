@@ -58,9 +58,10 @@ $(document).ready(function () {
 
             var numOptions = currentPage.numOptions.value;
             var optionText = currentPage.optionDescriptors.elements;
-            var pageSrc = currentPage.imagePath.value;
+            //var pageSrc = currentPage.imagePath.value;
 
             //$("#page-reader-example-img").attr("src", pageSrc);
+            console.log("placing svg object");
             $("#page-reader-main").html(svgObject);
 
 
