@@ -80,6 +80,7 @@
     color:white;
     font-weight:bold;
     font-size: 16px;
+    height:34px;
 }
 
 .footer {
@@ -487,6 +488,10 @@ body {
     font-size:16px;
 }
 
+#series-overview-add-modal{
+    height:340px;
+}
+
 .series-overview-delete-chapter-button {
     margin-left:900px;
     margin-top:-110px;
@@ -570,6 +575,12 @@ body {
     border:none;
 }
 
+.modal-title{
+    font-size:20px;
+    font-weight:800;
+    text-align:center;
+}
+
 .modal-header{
     background-color:#F9A825;
     font-weight:bold;
@@ -623,7 +634,7 @@ body {
 }
 
 .series-container{
-    margin-left:15%;
+
 }
 
 .header-font{
@@ -637,12 +648,12 @@ body {
     background-image:linear-gradient(to bottom,#F9A825 100%,#F9A825 100%) !important;
     background-color:#F9A825 !important;
     border-color:#F9A825;
-    width:125px;
+    width:140px;
     font-weight:bold;
     font-size:16px;
     color:white !important;
     margin-left:-350px;
-    margin-top:-30px;
+    margin-top:-60px;
 }
 
 .series-overview-create-chapter:hover {
