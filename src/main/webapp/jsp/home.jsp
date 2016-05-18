@@ -43,11 +43,11 @@
         <!-- Wrapper for slides -->
         <div class="carousel-inner" role="listbox">
             <div id="item-active" class="item active">
-                <img src="https://placehold.it/1200x400?text=Featured+1" width="1200" height="380">
+               <a href="/chapter-index/Science%20Shorts"><img src="/resources/images/banner/roofusseedybanner.jpg" width="1200" height="380"> </a>
             </div>
 
             <div id="" class="item">
-                <img src="https://placehold.it/1200x400?text=Featured+2" width="1200" height="380">
+              <a href=/chapter-index/Roofus%20and%20Seedy" ><img  src="/resources/images/banner/scienceshortsbanner.jpg" width="1200" height="380"> </a>
             </div>
         </div>
 
