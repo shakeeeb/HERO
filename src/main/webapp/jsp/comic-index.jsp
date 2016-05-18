@@ -12,6 +12,15 @@
     <%@ include file="/resources/layouts/styles.jsp" %>
     <%@ include file="/resources/layouts/scripts.jsp" %>
     <link rel="stylesheet" href="/resources/css/terrell.css">
+    <script src="/resources/scripts/jquery/comic-index-handler.js"></script>
+
+    <script id="hidden-template" type="text/x-custom-template">
+        <div class="col-md-3 series-item">
+            <a href="#">
+                <img class="img-responsive series-image" src="http://placehold.it/750x450" alt="">
+            </a>
+        </div>
+    </script>
 </head>
 <body>
 
@@ -21,67 +30,28 @@
     <br>
     <br>
     <ul class="genre-list till_font">
-        <li>All</li>
-        <li>Action</li>
-        <li>Comedy</li>
-        <li>Fantasy</li>
-        <li>Horror</li>
-        <li>Drama</li>
-        <li>Romance</li>
-        <li>Sci-Fi</li>
+        <li id="all">All</li>
+        <li id="action">Action</li>
+        <li id="comedy">Comedy</li>
+        <li id="fantasy">Fantasy</li>
+        <li id="horror">Horror</li>
+        <li id="drama">Drama</li>
+        <li id="romance">Romance</li>
+        <li id="sci-fi">Sci-Fi</li>
+        <li id="kids">Kids</li>
+        <li id="adventure">Adventure</li>
     </ul>
 </div>
 <br>
   <div class="container">
-
-      <!-- Series Row -->
-      <div class="row">
-          <div class="col-md-3 series-item">
-              <a href="#">
-                  <img class="img-responsive series-image" src="http://placehold.it/750x450" alt="">
-              </a>
-          </div>
-          <div class="col-md-3 series-item">
-              <a href="#">
-                  <img class="img-responsive series-image" src="http://placehold.it/750x450" alt="">
-              </a>
-          </div>
-          <div class="col-md-3 series-item">
-              <a href="#">
-                  <img class="img-responsive  series-image" src="http://placehold.it/750x450" alt="">
-              </a>
-          </div>
-          <div class="col-md-3 series-item">
-              <a href="#">
-                  <img class="img-responsive  series-image" src="http://placehold.it/750x450" alt="">
-              </a>
-          </div>
+      <div id="comic-container" class="container-fluid">
+          <%--<div class="col-md-3 series-item">--%>
+              <%--<a href="#">--%>
+                  <%--<img class="img-responsive series-image" src="http://placehold.it/750x450" alt="">--%>
+              <%--</a>--%>
+          <%--</div>--%>
       </div>
-      <!-- /.row -->
-
-      <!-- Series Row -->
-      <div class="row">
-          <div class="col-md-3 series-item">
-              <a href="#">
-                  <img class="img-responsive series-image" src="http://placehold.it/750x450" alt="">
-              </a>
-          </div>
-          <div class="col-md-3 series-item">
-              <a href="#">
-                  <img class="img-responsive series-image" src="http://placehold.it/750x450" alt="">
-              </a>
-          </div>
-          <div class="col-md-3 series-item">
-              <a href="#">
-                  <img class="img-responsive series-image" src="http://placehold.it/750x450" alt="">
-              </a>
-          </div>
-          <div class="col-md-3 series-item">
-              <a href="#">
-                  <img class="img-responsive series-image" src="http://placehold.it/750x450" alt="">
-              </a>
-          </div>
-      </div>
+      <%--</div>--%>
       <!-- /.row -->
 
 </div>

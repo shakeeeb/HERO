@@ -9,8 +9,8 @@ import static com.googlecode.objectify.ObjectifyService.ofy;
 
 public class SeriesRepository {
     //getAll()
-    public ArrayList<Series> getAllSeries(){
-        ArrayList<Series> returner = (ArrayList)ofy().load().type(Series.class).list();
+    public List<Series> getAllSeries(){
+        List<Series> returner = ofy().load().type(Series.class).list();
         return returner;
     }
 
