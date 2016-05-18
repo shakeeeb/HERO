@@ -16,12 +16,12 @@
     <script src="/resources/scripts/jquery/series-overview-handler.js"></script>
 
     <script id="hidden-template" type="text/x-custom-template">
-        <div id="series-authored-story-1" class="light-grey-boxes orange-span one-series-story">
+        <div id="series-authored-story-1" class="orange-span one-story">
                 <span id="authored-story-1-image" class="author-story-wrap">
                     <img src="/resources/images/logo.png" height="122px" width="122px">
                 </span>
                 <span id="series-overview-story-1-information" class="author-story-wrap">
-                    <span id="series-overview-chap-title" class="white-boxes orange-span series-num-chapters">
+                    <span id="series-overview-chap-title" class="blue-box series-num-chapters">
                         Series Overview Chapter Title
                     </span>
                     <span>
@@ -37,7 +37,7 @@
 <body>
 <%@ include file="/resources/layouts/navbar.jsp" %>
 <br><br><br><br>
-<div class="container till_font">
+<div class="container">
         <div id="series-overview-name" class="greeting">${seriesName}</div>
         <button type="button" class="btn btn-default series-overview-add-chapter-button pull-right" data-toggle="modal"
                 data-target="#myModal">Add Chapter
@@ -49,30 +49,30 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title text-center text-bolding" >Add Chapter</h4>
+                        <h4 class="modal-title">Add Chapter</h4>
                     </div>
-                    <div class="modal-body light-grey-boxes">
+                    <div class="modal-body">
                         <div>
                             <div class="form-group">
-                                <input type="text" class="form-control input-lg" id="chapterTitle" placeholder="Chapter Title">
-                            </div>
+                                <label for="chapterTitle">Chapter Title </label>
+                                <input type="text" class="form-control input-lg" id="chapterTitle">
+                            </div
                             <div class="form-group">
-                                <textarea class="form-control" rows="7" id="chapterDescription" placeholder="Chapter Description"></textarea>
+                                <label for="chapterDescription">Chapter Description</label>
+                                <textarea class="form-control" rows="7" id="chapterDescription"></textarea>
                             </div>
                         </div>
                     </div>
-                    <div class="modal-footer light-grey-boxes no-line">
+                    <div class="modal-footer">
                         <button type="button" class="btn btn-default series-overview-create-chapter" data-dismiss="modal">Create Chapter</button>
                     </div>
                 </div>
             </div>
         </div>
-
-    <div id="result-container" class="">
-
-    </div>
+</div>
+<div id="result-container">
 
 </div>
-
+</div>
 </body>
 </html>

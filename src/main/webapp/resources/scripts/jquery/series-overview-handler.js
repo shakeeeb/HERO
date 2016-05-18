@@ -39,6 +39,7 @@ $(document).ready(function(){
                 window.location.replace("../workspace/loadChapter/" + currentChapterID);
             });
 
+
             $(".one-story").find(".series-overview-delete-chapter-button").click(function() {
                 // Get json. Recursively call getAllChapters
                 var currentChapterID = this.id;
