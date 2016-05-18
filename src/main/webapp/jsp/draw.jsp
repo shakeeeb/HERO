@@ -40,7 +40,7 @@
             <form>
                 <div id="top-tools-container" class="toolbar-item">
                     <div id="brush-width-slider">
-                        <div class="brush-width-item" > brush width:</div>
+                        <div class="brush-width-item picker-label" > brush width:</div>
                         <div class="brush-width-item">
                         <input type="range" title="" id="brush-width" name="width-slider" min="1" max="150">
                         </div>
@@ -48,25 +48,25 @@
 
 
                 <div id="font-dropdown" class="dropdown toolbar-item">
-                    <select title="" id="fonts">
+                    <select title="" id="fonts" class="orange-drop">
                         <option value="1">Serif</option>
                         <option value="2">San-serif</option>
                     </select>
-                    <input id="font-button" type="button" value="Change!"/>
+                    <input id="font-button" type="button" class="draw-top-buttons" value="Change!"/>
                 </div>
 
-                <div id="color-picker" class="dropdown toolbar-item">
+                <div id="color-picker" class="dropdown toolbar-item picker-label">
                     Color Selection:
-                    <input id="color-button" type="color" name="favcolor" value="#ff0000">
+                    <input id="color-button" type="color" name="favcolor" class="color-picker" value="#ff0000">
                 </div>
 
 
                     <div class="toolbar-item label-item-combo">
                         <%--<form action="#" class="drawing-upload-form">--%>
                             <%--<div id="drawing-upload-container" class="form-group">--%>
-                                <label class="label-item" for="drawing-upload-input">Upload Image</label>
+                                <label class="label-item picker-label" for="drawing-upload-input">Upload Image</label>
                                 <%--<br>--%>
-                                <input class="label-item" id="drawing-upload-input" type="file" name="coverupload" value="upload">
+                                <input class="label-item picker-label" id="drawing-upload-input" type="file" name="coverupload" value="upload">
                             <%--</div>--%>
                             <%--<br>--%>
                         <%--</form>--%>
@@ -74,7 +74,7 @@
                 </div>
 
                 <div class="toolbar-item">
-                    <input id="save-button" type="button" value="Save my drawing!"/>
+                    <input id="save-button" type="button" class="draw-top-buttons" value="Save my drawing!"/>
                 </div>
 
             </form>
@@ -89,27 +89,27 @@
             <!-- Drawing side toolbar -->
             <div id="drawing-side-toolbar">
                 <div id="selection-tool" class="drawing-tool">
-                    <i class="fa fa-hand-pointer-o fa-4x" aria-hidden="true"></i>
+                    <i class="orange-color-draw-logos fa fa-hand-pointer-o fa-4x" aria-hidden="true"></i>
                 </div>
 
                 <div id="pencil-tool" class="drawing-tool">
-                    <i class="fa fa-pencil fa-4x" aria-hidden="true"></i>
+                    <i class="orange-color-draw-logos fa fa-pencil fa-4x" aria-hidden="true"></i>
                 </div>
 
                 <div class="drawing-tool">
-                    <i class="fa fa-paint-brush fa-4x" aria-hidden="true"></i>
+                    <i class="orange-color-draw-logos fa fa-paint-brush fa-4x" aria-hidden="true"></i>
                 </div>
 
                 <div id="eraser-tool" class="drawing-tool">
-                    <i class="fa fa-eraser fa-4x" aria-hidden="true"></i>
+                    <i class="orange-color-draw-logos fa fa-eraser fa-4x" aria-hidden="true"></i>
                 </div>
 
                 <div id="text-tool" class="drawing-tool">
-                    <i class="fa fa-font fa-4x" aria-hidden="true"></i>
+                    <i class="orange-color-draw-logos fa fa-font fa-4x" aria-hidden="true"></i>
                 </div>
 
                 <div id="shape-tool" class="drawing-tool">
-                    <i class="fa fa-square fa-4x" aria-hidden="true"></i>
+                    <i class="orange-color-draw-logos fa fa-square fa-4x" aria-hidden="true"></i>
                 </div>
 
             </div>

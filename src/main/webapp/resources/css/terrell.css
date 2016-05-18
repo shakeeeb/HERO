@@ -4,6 +4,28 @@
     width: 100%;
 }
 
+.orange-color-draw-logos{
+    color:orange;
+    margin-left:52px;
+    margin-top:25px;
+}
+
+.picker-label{
+    color: #00ACC1;
+    font-weight:bold;
+}
+
+.color-picker{
+    background-color: white;
+}
+
+.orange-drop{
+    color:white;
+    background-color: #F57F17;
+    font-size: 18px;
+    font-weight: bold;
+}
+
 #chapter-form {
     padding: 10px;
     padding-top: 15px;
@@ -79,7 +101,7 @@
     width: 950px;
     height: 690px;
     margin-top:25px;
-    margin-left:-60px;
+    margin-left:200px;
 }
 
 .center-block- {
@@ -242,8 +264,8 @@
 
 .chapter-list-header {
     padding-left: 5px;
-    padding-top: 0px;
-    padding-bottom: 0px;
+    padding-top: 0;
+    padding-bottom: 0;
 
 }
 
@@ -320,8 +342,8 @@
     background-color: white;
     float: left;
     border: solid black 2px;
-    border-top: 0px;
-    border-left: 0px;
+    border-top: 0;
+    border-left: 0;
 }
 
 .drawing-tool {
@@ -389,8 +411,8 @@
     margin: 15px;
     margin-top: 12px;
     margin-bottom: 12px;
-    padding-left: 0px;
-    padding-right: 0px;
+    padding-left: 0;
+    padding-right: 0;
 }
 
 .chapter-level {

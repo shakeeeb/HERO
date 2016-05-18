@@ -55,7 +55,7 @@ $(document).ready(function() {
 
 
             loadTree(chapter.root, pages, 0);
-            alert("Loaded");
+            //alert("Loaded");
             loadOrphans();
 
 
@@ -161,7 +161,7 @@ $(document).ready(function() {
                 toPageID = pageID;
                 //need to have a handle to the glowing object, to make it un-glow
                 pageToLink = null;
-                alert("Linking " + fromPageID + " to " + toPageID);
+                //alert("Linking " + fromPageID + " to " + toPageID);
             $.post("/workspace/add/page-option", {"fromPage": fromPageID, "toPage": toPageID})
                 .done(function(data){
                     console.log(data);
