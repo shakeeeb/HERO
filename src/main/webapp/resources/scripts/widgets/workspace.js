@@ -161,7 +161,7 @@ $(document).ready(function() {
                 toPageID = pageID;
                 //need to have a handle to the glowing object, to make it un-glow
                 pageToLink = null;
-                //alert("Linking " + fromPageID + " to " + toPageID);
+                alert("Linking " + fromPageID + " to " + toPageID);
             $.post("/workspace/add/page-option", {"fromPage": fromPageID, "toPage": toPageID})
                 .done(function(data){
                     console.log(data);
@@ -469,7 +469,7 @@ $(document).ready(function() {
                     //otherwise we're setting the page for a page that exists
                     setPage(pageToEdit.getElementsByClassName("chapter-page")[0], pageID, level);
                 }
-
+                validateBottomRow();
             }
 
 
@@ -495,8 +495,8 @@ $(document).ready(function() {
             //page.style.backgroundImage = "url(\'" + datastorePage.imagePath +"\')";
             //page.style.backgroundSize = "cover";
             //page.style.backgroundRepeat = "no-repeat";
-
         }
+        validateBottomRow();
 
 
     }
@@ -522,6 +522,7 @@ $(document).ready(function() {
                     pageIds.push(data.Page.pageId);
                 }
                 //  console.log("success");
+                validateBottomRow();
             }).fail(function(data){
             console.log("failure");
         });
@@ -581,9 +582,6 @@ $(document).ready(function() {
                 pageCount++;
                 // check if fifth page is taken
             }
-            if(isUnused(level[4]) == false) {
-                pageCount++;
-            }
             return pageCount;
         }
 
@@ -620,7 +618,9 @@ $(document).ready(function() {
     validateBottomRow();
     function validateBottomRow() {
         var pageCountForBottomLevel = getPageCount($(".chapter-level").length -1 );
-        if(pageCountForBottomLevel >= 1) {
+        //alert("page Count: " + pageCountForBottomLevel);
+        console.log("page Count: " + pageCountForBottomLevel);
+        if(pageCountForBottomLevel > 0) {
             addRow();
 
         }
