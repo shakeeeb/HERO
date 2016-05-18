@@ -83,6 +83,17 @@
     height:34px;
 }
 
+.draw-top-buttons{
+    border-color:#F57F17;
+    border-width: 1px;
+    background-color: #F57F17;
+    background-image:linear-gradient(to bottom,#F57F17 100%,#F57F17 100%) !important;
+    color:white;
+    font-weight:bold;
+    font-size: 16px;
+    height:25px;
+}
+
 .footer {
     border: none;
     background-color: #36afcf;

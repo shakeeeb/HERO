@@ -4,6 +4,28 @@
     width: 100%;
 }
 
+.orange-color-draw-logos{
+    color:orange;
+    margin-left:52px;
+    margin-top:25px;
+}
+
+.picker-label{
+    color: #00ACC1;
+    font-weight:bold;
+}
+
+.color-picker{
+    background-color: white;
+}
+
+.orange-drop{
+    color:white;
+    background-color: #F57F17;
+    font-size: 18px;
+    font-weight: bold;
+}
+
 #chapter-form {
     padding: 10px;
     padding-top: 15px;
@@ -79,7 +101,7 @@
     width: 950px;
     height: 690px;
     margin-top:25px;
-    margin-left:20px;
+    margin-left:200px;
 }
 
 .center-block- {
