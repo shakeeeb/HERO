@@ -6,12 +6,12 @@ $(document).ready(function () {
     //if someone pressed the username of the person on the page
     //go to the user page with the username in the url
 
-    $(document).on("click",".result-author", function () {
-        console.log(this);
-        var email = $("#series_author").text();
-        var url = "/user?" + encodeURIComponent(email.trim());
-        window.location.href = url;
-    });
+    //$(document).on("click",".result-author", function () {
+    //    console.log(this);
+    //    var email = $("#series_author").text();
+    //    var url = "/user?" + encodeURIComponent(email.trim());
+    //    window.location.href = url;
+    //});
 
    var query = $("#test2").text();
 
@@ -21,13 +21,9 @@ $(document).ready(function () {
             // just add it to the page using the selector
             $("#result-list").html(data);
 
-            // this is just a testing function
-            $(".result-image-container").click(function() {
-                console.log("hello there");
-                console.log($(this).parent());
-                $(this).parent().attr("id");
-                console.log($(this).parent().attr("id"));
-                $(location).attr('href', "/chapter-index/"+$(this).parent().attr("id"));
+            $(".go-to-chapter-index").click(function() {
+                var seriesID = $(".go-to-chapter-index").attr("id");
+                window.location.replace("../chapter-index/" + seriesID);
 
             });
         })
@@ -51,4 +47,9 @@ $(document).ready(function () {
             });
     });
 
+    //$(".go-to-chapter-index").click(function() {
+    //    alert("hey");
+    //   var seriesID = $("this").attr('id');
+    //   // alert(seriesID);
+    //});
 });
