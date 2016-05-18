@@ -17,6 +17,8 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet">
 </head>
 <body>
+
+<%@ include file="/resources/layouts/navbar.jsp" %>
 <div id="chapter-workspace-container" class="till_font">
     <div id="chapter-form">
         <form onsubmit="updateChapter()" class="chapter-form">
@@ -35,7 +37,6 @@
 
             <button id="save-chapter-button" type="submit" class="center-block btn btn-default">save</button>
 
-            <button id="cancel-chapter-button" type="button" class="center-block btn btn-default btn-sm">cancel</button>
         </form>
     </div>
 
