@@ -109,11 +109,12 @@ public class DrawingPageController {
 
     // get BOTH
     @RequestMapping(value="get-image", method = RequestMethod.POST)
-    protected void getImage(HttpServletRequest request, HttpServletResponse response){
+    protected void getImage(HttpServletRequest request, HttpServletResponse response, ModelMap model){
 
         String SVG = request.getParameter("svg");
         String Json = request.getParameter("json");
         String pageID = request.getParameter("pagekey");
+        String chapterID = pageID.split("^")[0];
 
         // GRAB A PAGE FROM THE DATASTORE BY ID
         System.out.println("The page ID is: "+ pageID);
@@ -135,6 +136,9 @@ public class DrawingPageController {
         }
         pageSaving.setSVGString(SVG);
         pageSaving.setJsonString(Json);
+
+        model.addAttribute("chapterID", chapterID);
+
         ofy().save().entity(pageSaving).now();
         return;
     }

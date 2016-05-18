@@ -1,5 +1,7 @@
 package controller;
 
+import com.google.appengine.api.blobstore.BlobstoreService;
+import com.google.appengine.api.blobstore.BlobstoreServiceFactory;
 import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -99,6 +102,13 @@ public class EditSettingsController {
         }
 
         return json;
+    }
+
+    @RequestMapping(value="settings/load", method = RequestMethod.GET)
+    public String uploadPicture(ModelMap model, HttpSession session, HttpServletRequest req, HttpServletResponse res) {
+        //come here after the image is uploaded
+        System.out.println("attempt to upload a blobthingie");
+        return "settings";
     }
 
 

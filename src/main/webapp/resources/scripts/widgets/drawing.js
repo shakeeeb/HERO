@@ -137,7 +137,10 @@ $(document).ready(function(){
         .done(function() {
             console.log(pageID);
             console.log("Jason is cool");
-            window.location.replace("/chapter-workspace");
+            var cID = pageID.split("^")[0];
+            $(location).attr("href","../workspace/loadChapter/" + cID);
+            //window.location.replace("workspace/loadChapter/" + cID); // this has to go to the chapter workspace..
+            //$.get(){}
         })
         .fail(function() {
             console.log("Miuki is not cool");
