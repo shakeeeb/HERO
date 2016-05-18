@@ -15,8 +15,8 @@
 
     <!-- Get version 1.1.0 of Fabric.js from CDN -->
     <script src="/resources/scripts/fabric/fabric.js"></script>
-
     <script src="/resources/scripts/widgets/drawing.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet">
 
 </head>
 <body>
@@ -89,27 +89,27 @@
             <!-- Drawing side toolbar -->
             <div id="drawing-side-toolbar">
                 <div id="selection-tool" class="drawing-tool">
-                    {SELECTION}
+                    <i class="fa fa-hand-pointer-o fa-4x" aria-hidden="true"></i>
                 </div>
 
                 <div id="pencil-tool" class="drawing-tool">
-                    {PENCIL}
+                    <i class="fa fa-pencil fa-4x" aria-hidden="true"></i>
                 </div>
 
                 <div class="drawing-tool">
-                    {BRUSH}
+                    <i class="fa fa-paint-brush fa-4x" aria-hidden="true"></i>
                 </div>
 
                 <div id="eraser-tool" class="drawing-tool">
-                    {ERASER}
+                    <i class="fa fa-eraser fa-4x" aria-hidden="true"></i>
                 </div>
 
                 <div id="text-tool" class="drawing-tool">
-                    {TEXT}
+                    <i class="fa fa-font fa-4x" aria-hidden="true"></i>
                 </div>
 
                 <div id="shape-tool" class="drawing-tool">
-                    {RECTANGLE}
+                    <i class="fa fa-square fa-4x" aria-hidden="true"></i>
                 </div>
 
             </div>

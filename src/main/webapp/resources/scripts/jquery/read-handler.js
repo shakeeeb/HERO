@@ -10,6 +10,8 @@ $(document).ready(function () {
     var nextPageID = null;
     var pageList = null;
     var nextPage = null;
+    var seriesID = null;
+    var svgObject = null;
 
 
     //Glitch if a chapter only contains one page.
@@ -28,15 +30,27 @@ $(document).ready(function () {
     function loadPage(chapterID, pageID) { // Change this to /read/ + /chapterID + /pageNumber
         $.getJSON("/read/get/" + chapterID + "/" + pageID, function(data) {
         }).done(function (data) {
-            console.log(data.members.Chapter.members);
-            console.log(data.members.page.members);
-            console.log(data.members.pageOptions);
-            console.log(data.members.pageList);
-
             chapter = data.members.Chapter.members;
             currentPage = data.members.page.members;
             pageOptions = data.members.pageOptions;
             pageList = data.members.pageList;
+            seriesID = data.members.seriesID.value;
+            svgObject = data.members.page.members.SVGString.value;
+
+            console.log(chapter);
+            console.log(currentPage);
+            console.log(pageOptions);
+            console.log(pageList);
+            console.log(seriesID);
+            console.log(svgObject);
+
+
+            if (pageList.elements.length === 1)
+            {
+                // This should work. It doesn't. Kill me.
+                // It goes to read/chapter-index/One_Piece instead of /chapter-Index/One_Piece
+                //window.location.replace("../chapter-index/" + seriesID);
+            }
 
             $("#chapter-name-reader-page").text(currentPage.pageId.value);
             $("#page-number-reader-page").text(currentPage.pageNumber.value);
@@ -44,9 +58,12 @@ $(document).ready(function () {
 
             var numOptions = currentPage.numOptions.value;
             var optionText = currentPage.optionDescriptors.elements;
-            var pageSrc = currentPage.imagePath.value;
+            //var pageSrc = currentPage.imagePath.value;
 
-            $("#page-reader-example-img").attr("src", pageSrc);
+            //$("#page-reader-example-img").attr("src", pageSrc);
+            console.log("placing svg object");
+            $("#page-reader-main").html(svgObject);
+
 
             if(numOptions == 0) // It's the last page.
             {

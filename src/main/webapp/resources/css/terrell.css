@@ -219,6 +219,7 @@
     -moz-background-size: cover;
     background-size: cover;
     -o-background-size: cover;
+    padding: 50px;
 }
 
 .tagline {
@@ -422,6 +423,7 @@
 #svgContainer {
 
     position:absolute;
+    z-axis: -2;
 
 }
 
@@ -441,7 +443,6 @@
 .page-options {
     position: absolute;
     width:100%;
-    background-color: rgba(0, 0, 0, 0.75);
     bottom: 0;
     height: 50px;
     display: none;
@@ -455,4 +456,8 @@
 .edit-option {
     position:absolute; top:0; left:0;
     margin: 3px;
+}
+
+.page-glow {
+    box-shadow: 0 0 10px #ff0000;
 }

@@ -37,6 +37,7 @@ public class LastReadController {
 
         Chapter c = db.chapterRepo.getById(chapterID);
         String rootID = c.getRoot().getPageId();
+
         Series s = c.getSeries();
         String seriesID = s.getName();
         ArrayList<Chapter> chapterList = s.getChapters();

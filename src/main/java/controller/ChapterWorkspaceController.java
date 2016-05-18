@@ -295,4 +295,108 @@ public class ChapterWorkspaceController {
         // refresh page
     }
 
+
+    /**
+     *
+     * @param request
+     * @return
+     * note: uses two arrays one for options and one for option prompts because sending nested arrays in the request scope is weird
+     */
+    @RequestMapping(value="workspace/update/page-options", method = RequestMethod.POST)
+    protected @ResponseBody String updatePageOptions(HttpServletRequest request) {
+
+        // grab the page to edit and it its options from the requests parameters
+        if(request.getParameter("page") == null) {
+            return "error: page parameter is null";
+        }
+
+        String[] options = request.getParameterValues("options[]");
+        String[] optionPrompts = request.getParameterValues("optionPrompts[]");
+        if(options.length != optionPrompts.length) {
+            return "error: the number of options don't match the number of paths";
+        }
+
+        if(options == null) {
+            return "error: options parameter is null";
+        }
+
+        // grab the page to edit and its options from the datastore
+       Page pageToEdit = db.pageRepo.getById(request.getParameter("page"));
+        if(pageToEdit == null) {
+            return "error: page does not exist in datastore";
+        }
+
+        // clear previous options
+        pageToEdit.setOptions(new ArrayList<Page>()); // TODO: check if this is okay
+        pageToEdit.setOptionDescriptors(new ArrayList<String>());
+
+
+        // add each option to the page
+        for(int i = 0; i < options.length; i++) {
+
+            if(options[i] == null) {
+                return "error: null option";
+            }
+
+            Page option = db.pageRepo.getById(options[i]);
+            if(option == null) {
+                return "error: option doesn't exist inside datastore";
+            }
+
+            pageToEdit.setNext(option, optionPrompts[i], option.getChapter());
+            db.pageRepo.save(pageToEdit);
+        }
+
+        return "success";
+    }
+
+
+
+
+    /**
+     *
+     * @param request
+     * @return
+     * note: uses two arrays one for options and one for option prompts because sending nested arrays in the request scope is weird
+     */
+    @RequestMapping(value="workspace/add/page-option", method = RequestMethod.POST)
+    protected @ResponseBody String addPageOption(HttpServletRequest request) {
+
+        // grab pages being linked
+        if(request.getParameter("fromPage") == null) {
+            return "error: from page is null";
+        }
+
+        if(request.getParameter("toPage") == null) {
+            return "error: to page is null";
+        }
+
+        // grab the page to edit and its options from the datastore
+        Page fromPage = db.pageRepo.getById(request.getParameter("fromPage"));
+        if(fromPage == null) {
+            return "error: from page does not exist in datastore";
+        }
+
+        Page toPage = db.pageRepo.getById(request.getParameter("toPage"));
+        if(toPage == null) {
+            return "error: to page does not exist in the datastore";
+        }
+
+        if(fromPage.getPageId().contentEquals(toPage.getPageId())) {
+            return "error: attempting to link a page to itself";
+        }
+        // check if to page is already an option
+        for(int i = 0; i < fromPage.getOptions().size(); i++) {
+            if(toPage == fromPage.getOptions().get(i)) {
+                return "page already an option";
+            }
+        }
+
+        // add the option
+        fromPage.setNext(toPage,"",fromPage.getChapter());
+        db.pageRepo.save(fromPage);
+
+        return "success";
+    }
+
 }

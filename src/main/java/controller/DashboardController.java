@@ -33,13 +33,9 @@ public class DashboardController {
     @RequestMapping(value="dashboard", method = RequestMethod.GET)
     public String dashboardController(HttpServletResponse response, ModelMap model) throws IOException {
         UserService userService = UserServiceFactory.getUserService();
-        //UserData user = db.userRepo.getUserById(userService.getCurrentUser().getEmail());
-        //String email = user.getNickname();
-        UserData user = null;
 
         if(userService.getCurrentUser() != null) {
-            System.out.println("Get Current User");
-
+            UserData user = null;
         String email = userService.getCurrentUser().getNickname();
         if(!db.userRepo.exists(email)){
             //DNE

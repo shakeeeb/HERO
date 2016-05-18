@@ -7,12 +7,16 @@ $(document).ready(function () {
     var seriesDescription = null;
     var chapterID = null;
     var rootID = null;
+    var genre = null;
 
-    var tempSeriesID = $("#hidden-seriesID").html();
+    //var tempSeriesID = document.getElementById("hidden-seriesID").innerText;
+
+    //var tempSeriesID = $("#hidden-seriesID").html();
+    var tempSeriesID = $("#hidden-seriesID").text();
 
     if (!!tempSeriesID)
     {
-        seriesID = $("#hidden-seriesID").html();
+        seriesID = $("#hidden-seriesID").text();
     }
 
     chapterID = $("#hidden-chapterID").html();
@@ -34,6 +38,52 @@ $(document).ready(function () {
             seriesName = series.name.value;
             author = series.authorName.value;
             seriesDescription = series.description.value;
+            // need to get genre
+            genre = series.mainGenre.value;
+            switch (genre){
+                case "adventure":
+                    $(".series-banner").css("background", "orange");
+                    break;
+                case "action":
+                    $(".series-banner").css("background", "red");
+                    break;
+                case "comedy":
+                    $(".series-banner").css("background", "yellow");
+                    break;
+                case "fantasy":
+                    $(".series-banner").css("background", "lime");
+                    break;
+                case "horror":
+                    $(".series-banner").css("background", "black");
+                    break;
+                case "drama":
+                    $(".series-banner").css("background", "purple");
+                    break;
+                case "romance":
+                    $(".series-banner").css("background", "fuchsia");
+                    break;
+                case "sci-fi":
+                    $(".series-banner").css("background", "green");
+                    break;
+                case "kids":
+                    $(".series-banner").css("background", "teal");
+                    break;
+                case "slice-of-life":
+                    $(".series-banner").css("background", "blue");
+                    break;
+                case "food":
+                    $(".series-banner").css("background", "olive");
+                    break;
+                default:
+                    $(".series-banner").css("background", "silver");
+                    break;
+            }
+
+            $(".banner-text").text(seriesName);
+            $(".banner-text").css("fontSize", "500%");
+            //$(".banner-text").css("text-align", "center");
+            $(".banner-text").css("color", "white");
+            //$(".series-banner").css("text", );
 
 
 
@@ -44,11 +94,9 @@ $(document).ready(function () {
             if (isSubscribed) {
                 $("#subscribe-button").html("Unsubscribe");
             }
-            else
-            {
+            else {
                 $("#subscribe-button").html("Subscribe");
             }
-
             var currentChapter = null;
             if (numChapters > 0) {
                 for (var o = 1; o < numChapters + 1; o++)
@@ -84,15 +132,14 @@ $(document).ready(function () {
                     }
                 }
                 //loadPage(currentChapterID, currentPageID);
-                updateRecentlyViewed(currentChapterID, "/read/" + currentChapterID + "/" + currentPageID);
+                updateRecentlyViewed(currentChapterID, "/read/" + currentChapterID + "/" + currentPageID, seriesID);
 
                 //Don't load the page. Switch to the page and use the controller to get the information we need.
 
             });
 
             $("#chapter-index-start-from-beginning").click(function() {
-                updateRecentlyViewed(chapterID, "/read/" + chapterID + "/" + rootID);
-                window.location.replace("/read/" + chapterID + "/" + rootID);
+                updateRecentlyViewed(chapterID, "/read/" + chapterID + "/" + rootID, seriesID);
             });
 
             $("#subscribe-button").click(function(){
@@ -122,50 +169,20 @@ $(document).ready(function () {
         });
     }
 
-    function updateRecentlyViewed(chapterID, urlMapping) {
+    function updateRecentlyViewed(chapterID, urlMapping, seriesID) {
         $.getJSON("/chapter-index/updateRecentlyViewed/" + chapterID)
             .done(function (data) {
-                window.location.replace(urlMapping);
+                var hasPages = data.members.emptyChapter.elements[0].value;
+                console.log(hasPages);
+
+                if (hasPages === "empty")
+                {
+                    window.location.replace("../chapter-index/" + seriesID);
+                }
+                else {
+                    window.location.replace(urlMapping);
+                }
         });
     }
 
-    //function loadPage(chapterID, pageID) { // Change this to /read/ + /chapterID + /pageNumber
-    //    $.getJSON("/read/" + chapterID + "/" + pageID, function(data) {
-    //    }).done(function (data) {
-    //        console.log(data.members.Chapter.members);
-    //        console.log(data.members.page.members);
-    //        console.log(data.members.pageOptions);
-    //        console.log(data.members.pageList);
-    //
-    //        chapter = data.members.Chapter.members;
-    //        currentPage = data.members.page.members;
-    //        pageOptions = data.members.pageOptions;
-    //        pageList = data.members.pageList;
-    //
-    //        $("#chapter-name-reader-page").text(currentPage.pageId.value);
-    //        $("#page-number-reader-page").text(currentPage.pageNumber.value);
-    //
-    //
-    //        var numOptions = currentPage.numOptions.value;
-    //        var optionText = currentPage.optionDescriptors.elements;
-    //        var pageSrc = currentPage.imagePath.value;
-    //
-    //        $("#page-reader-example-img").attr("src", pageSrc);
-    //
-    //        for (var i = 1; i < numOptions + 1; i++)
-    //        {
-    //            var buttonHTML = "<div class=\"row pageOptions\">" +
-    //                "<button id=\"" + pageOptions.elements[i-1].members.pageId.value + "\" type=\"button\" class =\"optionButtons\">" +
-    //                optionText[i - 1].value + "</button> </div>";
-    //            $("#option-container").append(buttonHTML);
-    //        }
-    //
-    //        $(".optionButtons").click(function() {
-    //            $("#option-container").empty();
-    //
-    //            var nextPageID = this.id;
-    //            loadPage(chapterID, nextPageID);
-    //        });
-    //    });
-    //}
 });

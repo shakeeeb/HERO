@@ -28,8 +28,9 @@
     </div>
     <div id="pageImage" class="row">
             <div id="page-reader-main" class="col-md-8 col-md-offset-2">
-                <img id="page-reader-example-img"
-                     src="">
+                <!--<img id="page-reader-example-img"
+                     src="">-->
+
             </div>
     </div>
 
