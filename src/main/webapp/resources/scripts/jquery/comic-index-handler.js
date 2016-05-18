@@ -22,6 +22,9 @@ $(document).ready(function () {
                     seriesID = comics[o].name;
 
                     $(item).find(".series-image").attr('id',seriesID);
+                    var seriesID = $(item).find(".series-image").attr('id');
+                    $(item).find(".series-image").text(seriesID);
+
                     $("#comic-container").append(item);
                 }
             }

@@ -17,7 +17,8 @@
     <script id="hidden-template" type="text/x-custom-template">
         <div class="col-md-3 series-item">
             <a href="#">
-                <img class="img-responsive series-image" src="http://placehold.it/750x450" alt="">
+                <%--<img class="img-responsive series-image" src="http://placehold.it/750x450" alt="">--%>
+                <h1 class="series-image"></h1>
             </a>
         </div>
     </script>

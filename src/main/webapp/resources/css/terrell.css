@@ -273,7 +273,7 @@
     background-color: whitesmoke;
     border: solid 1px black;
     margin-bottom: 20px;
-
+    font-size: 28px;
 }
 
 .inline {
@@ -482,4 +482,9 @@
 
 .page-glow {
     box-shadow: 0 0 10px #ff0000;
+}
+
+.home-item {
+    margin-top:134px;
+    font-size: 24px;
 }

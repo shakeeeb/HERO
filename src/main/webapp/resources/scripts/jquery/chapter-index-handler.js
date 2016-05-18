@@ -104,7 +104,6 @@ $(document).ready(function () {
                     currentChapter = chapterList[o - 1]
                     var itemHTML = "<div class=\"chapter-list-item center-block-\" id=\"" + currentChapter.members.chapterId.value + "\">" +
                         "<div class=\"inline\">" +
-                        "<img src=\"https://placehold.it/125/ffa500/ffffff\">" +
                         "</div>" +
                         "<div class=\"inline\">" +
                         "<div id=\"" + currentChapter.members.chapterId.value + currentChapter.members.chapterNumber.value + "\">Chapter #: " + currentChapter.members.chapterNumber.value + "</div>" +

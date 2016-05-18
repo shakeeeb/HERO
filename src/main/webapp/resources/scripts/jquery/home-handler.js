@@ -14,21 +14,36 @@ $(document).ready(function() {
             if (recentlyUpdated.length === 8)
             {
                 $(".item-1").attr('id', recentlyUpdated[0].members.name.value);
-                //Change the attr of the src image here.
+                var item1id =$(".item-1").attr('id');
+                $(".item-1").text(item1id);
+
                 $(".item-2").attr('id', recentlyUpdated[1].members.name.value);
-                //Change the attr of the src image here.
+                var item2id =$(".item-2").attr('id');
+                $(".item-2").text(item2id);
+
                 $(".item-3").attr('id', recentlyUpdated[2].members.name.value);
-                //Change the attr of the src image here.
+                var item3id =$(".item-3").attr('id');
+                $(".item-3").text(item3id);
+
                 $(".item-4").attr('id', recentlyUpdated[3].members.name.value);
-                //Change the attr of the src image here.
+                var item4id =$(".item-4").attr('id');
+                $(".item-4").text(item4id);
+
                 $(".item-5").attr('id', recentlyUpdated[4].members.name.value);
-                //Change the attr of the src image here
+                var item5id =$(".item-5").attr('id');
+                $(".item-5").text(item5id);
+
                 $(".item-6").attr('id', recentlyUpdated[5].members.name.value);
-                //Change the attr of the src image here.
+                var item6id =$(".item-6").attr('id');
+                $(".item-6").text(item6id);
+
                 $(".item-7").attr('id', recentlyUpdated[6].members.name.value);
-                //Change the attr of the src image here.
+                var item7id =$(".item-7").attr('id');
+                $(".item-7").text(item7id);
+
                 $(".item-8").attr('id', recentlyUpdated[7].members.name.value);
-                //Change the attr of the src image here.
+                var item8id =$(".item-8").attr('id');
+                $(".item-8").text(item8id);
             }
 
             $(".item-1").on('click', loadItem1SeriesOverview);
