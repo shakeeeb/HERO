@@ -43,11 +43,11 @@
         <!-- Wrapper for slides -->
         <div class="carousel-inner" role="listbox">
             <div id="item-active" class="item active">
-                <img src="https://placehold.it/1200x400?text=Featured+1" width="1200" height="380">
+               <a href="/chapter-index/Science%20Shorts"><img src="/resources/images/banner/roofusseedybanner.jpg" width="1200" height="380"> </a>
             </div>
 
             <div id="" class="item">
-                <img src="https://placehold.it/1200x400?text=Featured+2" width="1200" height="380">
+              <a href=/chapter-index/Roofus%20and%20Seedy" ><img  src="/resources/images/banner/scienceshortsbanner.jpg" width="1200" height="380"> </a>
             </div>
         </div>
 
@@ -72,28 +72,28 @@
 
             <div class="carousel-inner">
                 <div class="item active">
-                    <div class="col-md-3 col-sm-4 col-xs-12"><a href="#"><img src="https://placehold.it/190x190?text=Latest+1" class="img-responsive item-1"></a></div>
+                    <div class="col-md-3 col-sm-4 col-xs-12 item-1 home-item"><a href="#">></a></div>
                 </div>
                 <div class="item">
-                    <div class="col-md-3 col-sm-4 col-xs-12"><a href="#"><img src="https://placehold.it/190x190?text=Latest+2" class="img-responsive item-2"></a></div>
+                    <div class="col-md-3 col-sm-4 col-xs-12 item-2 home-item"></div>
                 </div>
                 <div class="item">
-                    <div class="col-md-3 col-sm-4 col-xs-12"><a href="#"><img src="https://placehold.it/190x190?text=Latest+3" class="img-responsive item-3"></a></div>
+                    <div class="col-md-3 col-sm-4 col-xs-12 item-3 home-item"></div>
                 </div>
                 <div class="item">
-                    <div class="col-md-3 col-sm-4 col-xs-12"><a href="#"><img src="https://placehold.it/190x190?text=Latest+4" class="img-responsive item-4"></a></div>
+                    <div class="col-md-3 col-sm-4 col-xs-12 item-4 home-item"></div>
                 </div>
                 <div class="item">
-                    <div class="col-md-3 col-sm-4 col-xs-12"><a href="#"><img src="https://placehold.it/190x190?text=Latest+5" class="img-responsive item-5"></a></div>
+                    <div class="col-md-3 col-sm-4 col-xs-12 item-5 home-item"></div>
                 </div>
                 <div class="item">
-                    <div class="col-md-3 col-sm-4 col-xs-12"><a href="#"><img src="https://placehold.it/190x190?text=Latest+6" class="img-responsive item-6"></a></div>
+                    <div class="col-md-3 col-sm-4 col-xs-12 item-6 home-item"></div>
                 </div>
                 <div class="item">
-                    <div class="col-md-3 col-sm-4 col-xs-12"><a href="#"><img src="https://placehold.it/190x190?text=Latest+6" class="img-responsive item-7"></a></div>
+                    <div class="col-md-3 col-sm-4 col-xs-12 item-7 home-item"></div>
                 </div>
                 <div class="item">
-                    <div class="col-md-3 col-sm-4 col-xs-12"><a href="#"><img src="https://placehold.it/190x190?text=Latest+6" class="img-responsive item-8"></a></div>
+                    <div class="col-md-3 col-sm-4 col-xs-12 item-8 home-item"></div>
                 </div>
             </div>
 

@@ -68,6 +68,8 @@ $(document).ready(function() {
                 var item = $(template).clone();
                 $(item).find(".dashboard-img").attr('class', "img-responsive dashboard-img subscription");
                 $(item).find(".dashboard-img").attr('id', allSubscriptions[i].members.name.value);
+                var id = $(item).find(".dashboard-img").attr('id');
+                $(item).find(".dashboard-img").html(id);
                 $("#subscription-container").append(item);
             }
         }
@@ -83,6 +85,8 @@ $(document).ready(function() {
                 var item = $(template).clone();
                 $(item).find(".dashboard-img").attr('class', "img-responsive dashboard-img recent");
                 $(item).find(".dashboard-img").attr('id', recentlyViewed[i].members.name.value);
+                var id = $(item).find(".dashboard-img").attr('id');
+                $(item).find(".dashboard-img").html(id);
                 $("#recent-container").append(item);
             }
         }
@@ -102,6 +106,8 @@ $(document).ready(function() {
                 var item = $(template).clone();
                 $(item).find(".dashboard-img").attr('class', "img-responsive dashboard-img suggestions");
                 $(item).find(".dashboard-img").attr('id', suggestions[i].members.name.value);
+                var id = $(item).find(".dashboard-img").attr('id');
+                $(item).find(".dashboard-img").html(id);
                 $("#suggestion-container").append(item);
             }
         }

@@ -18,7 +18,7 @@
     <script id="hidden-template" type="text/x-custom-template">
         <div id="series-authored-story-1" class="orange-span one-story">
                 <span id="authored-story-1-image" class="author-story-wrap">
-                    <img src="/resources/images/logo.png" height="122px" width="122px">
+                    <img src="/resources/images/test/transparent_image.png/" height="122px" width="122px">
                 </span>
                 <span id="series-overview-story-1-information" class="author-story-wrap">
                     <span id="series-overview-chap-title" class="blue-box series-num-chapters">
