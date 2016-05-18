@@ -79,7 +79,7 @@
     width: 950px;
     height: 690px;
     margin-top:25px;
-    margin-left:-60px;
+    margin-left:350px;
 }
 
 .center-block- {
@@ -242,8 +242,8 @@
 
 .chapter-list-header {
     padding-left: 5px;
-    padding-top: 0px;
-    padding-bottom: 0px;
+    padding-top: 0;
+    padding-bottom: 0;
 
 }
 
@@ -320,8 +320,8 @@
     background-color: white;
     float: left;
     border: solid black 2px;
-    border-top: 0px;
-    border-left: 0px;
+    border-top: 0;
+    border-left: 0;
 }
 
 .drawing-tool {
@@ -389,8 +389,8 @@
     margin: 15px;
     margin-top: 12px;
     margin-bottom: 12px;
-    padding-left: 0px;
-    padding-right: 0px;
+    padding-left: 0;
+    padding-right: 0;
 }
 
 .chapter-level {
