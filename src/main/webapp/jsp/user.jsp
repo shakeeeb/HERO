@@ -16,8 +16,8 @@
 <%@ include file="/resources/layouts/navbar.jsp" %>
 <script src="/resources/scripts/jquery/user-handler.js"></script>
 <br><br><br><br>
-<div class="container">
-    <span class="col-lg-offset-1 col-lg-4 light-grey-boxes">
+<div class="row">
+    <span id="thisIDRightHar"class="col-lg-offset-1 col-lg-4 light-grey-boxes">
         <br>
         <br>
         <div id="user-information" class="center-text black-span white-boxes box-text-align">
@@ -27,18 +27,14 @@
             leo, lobortis sed tristique vel, finibus dictum velit. Curabitur sit amet magna vitae sapien fermentum
             iaculis ac ut urna.
         </div>
-
         <br>
-
     </span>
-
-    <span class="col-lg-offset-1 col-lg-6 light-grey-boxes" id="all_the_series">
-    <br>
-
-
-
+</div>
+<div class="row">
+     <span class="col-lg-offset-1 col-lg-6 light-grey-boxes" id="all_the_series">
         <br>
-        </span>
+        <br>
+    </span>
 </div>
 
 <div style="display:none;">

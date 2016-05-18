@@ -50,8 +50,6 @@
                     <li><a href="/dashboard">Dashboard</a></li>
                     <li><a href="/series-workspace">Make A Comic</a></li>
                     <li><a href="/comic-index">Comic Index</a></li>
-                    <li><a href="/workspace-tutorial">Workspace Tutorial</a></li>
-                    <li><a href="/drawing-tutorial">Drawing Tutorial</a></li>
                 </ul>
             </div> <!-- hamburger-->
 

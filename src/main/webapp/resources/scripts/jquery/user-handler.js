@@ -59,14 +59,14 @@ $(document).ready(function() {
                 for (var l = 0; l < length_of_array; l++)
                 {
                     var seriesHTML = "<span class=\"one-story\" id=\"authored-story-"+i +"\">" +
-                        "<span class=\"author-story-wrap\" id=\"authored-story-"+i +"-image\">" +
-                        "<img src=\"IMAGEHERE.png\" height=\"100px\" width=\"100px\" > </span>" +
+                        "<span class=\"author-story-wrap\" id=\"authored-story-"+i +"-image\">"+
                         "<span class=\"author-story-wrap\" id=\"authored-story-"+i+"-information\">"    +
-                        "<span class=\"black-span white-boxes user-story-title\" id=\"authored-story-"+i+"-title\">"    +
-                        data.members.series_list.elements[l].members.name.value   +
+                        "<span class=\"black-span white-boxes user-story-title\" id=\"authored-story-"+i+"-title\">"
+                           + data.members.series_list.elements[l].members.description.value +
                         "</span>"  +
                         "<span class=\"black-span white-boxes user-story-tags\" id=\"authored-story-"+i+"-tags\" >"   +
-                        data.members.series_list.elements[l].members.description.value   +
+
+                    data.members.series_list.elements[l].members.name.value+
                         "</span></span></span><br>";
                     $("#all_the_series").append(seriesHTML);
                 }
