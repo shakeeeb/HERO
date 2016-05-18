@@ -18,11 +18,11 @@
 <br><br><br><br><br><br><br><br><br>
     <h1 id="logo-placeholder"><img src="/resources/images/hero.png" height="200px"></h1>
 
-    <form id="home-search" class="navbar-form navbar-left navbar-input-group searchForm" role="search">
+    <form action="/search" method="get" id="home-search" class="navbar-form navbar-left navbar-input-group searchForm" role="search">
         <div class="input-group col-xs-12">
-            <input id="search-input" type="text" class="form-control till_font"  placeholder="Start your adventure...">
+            <input id="search-input" name="search-input" type="text" class="form-control"  placeholder="Start your adventure...">
                             <span class="input-group-btn">
-                                <button id="SearchButton" class="btn btn-default" type="button">Search</button>
+                                <button id="SearchButton" class="btn btn-default" type="submit">Search</button>
                             </span>
         </div>
     </form>

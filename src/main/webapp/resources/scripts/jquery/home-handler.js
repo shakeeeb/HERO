@@ -4,6 +4,8 @@ $(document).ready(function() {
 
     getRecentlyUpdated();
 
+    //$(".")
+
     function getRecentlyUpdated() {
 
         $.getJSON("/home/getRecentlyUpdated", function(data) {
