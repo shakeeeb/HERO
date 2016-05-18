@@ -19,10 +19,6 @@
 <div class="container">
     <span class="col-lg-offset-1 col-lg-4 light-grey-boxes">
         <br>
-        <div id="user-image" class="orange-span">
-            <img src="/resources/images/logo.png" height="346px" width="346px">
-        </div>
-
         <br>
         <div id="user-information" class="center-text black-span white-boxes box-text-align">
             <br>USER INFORMATION HERE<br>

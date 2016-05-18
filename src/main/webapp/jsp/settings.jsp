@@ -20,34 +20,23 @@
 
 <div class="row till_font">
     <div class="col-md-4 fixed-settings-page-column">
-        <div class="container">
-            <div class="row">
-                <img id="settings-profile-picture"src="https://placeholdit.imgix.net/~text?txtsize=23&txt=250×350&w=250&h=350">
-            </div>
-            <div class="row">
-                <button type="button" class="btn btn-md" id="upload-profile-picture">Upload Profile Picture</button>
-            </div>
-            <div class="row">
-                <button type="button" class="btn btn-md button-negative" id="edit-settings-cancel">Cancel</button>
-            </div>
-            <div class="row">
-                <button type="button" class="btn btn-lg button-ok" id="edit-settings-save">Save</button>
-            </div>
-        </div>
     </div>
     <div class="col-md-8 scrollit">
         <div class="row" id="settings-form">
             <form action="#" class="settings-form">
-                <div class="form-group">
-                    <input id="nickname" class="center-block" type="text" name="nickname" placeholder="Enter Your Nickname: ">
+                <div class="row">
+                    <div class="form-group">
+                        <input id="nickname" class="center-block" type="text" name="nickname" placeholder="Enter Your Nickname: ">
+                    </div>
                 </div>
                 <div class="form-group">
                     <textarea id="about-me" form="settings-form" placeholder="About Me:" class="center-block"></textarea>
                 </div>
             </form>
         </div>
-        <div class="row">
-
+        <div id="entire-div-to-the-left"class="row">
+            <button type="button" class="btn btn-md button-negative" id="edit-settings-cancel">Cancel</button>
+            <button type="button" class="btn btn-lg button-ok" id="edit-settings-save">Save</button>
         </div>
     </div>
 </div>

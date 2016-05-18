@@ -12,10 +12,14 @@
     <title>Hero - Dashboard</title>
     <%@ include file="/resources/layouts/styles.jsp" %>
     <%@ include file="/resources/layouts/scripts.jsp" %>
+    <link rel="stylesheet" href="/resources/css/ben.css">
     <script src="/resources/scripts/jquery/dashboard-handler.js"></script>
     <script id="hidden-template" type="text/x-custom-template">
         <div class="new-dash-picture">
-            <a href="#"><img src="https://placehold.it/190x190?text=Latest+6" class="img-responsive dashboard-img"></a>
+            <br>
+            <div id="dashboard-paragraph" class="container">
+                <h1 class="dashboard-img"></h1>
+            </div>
         </div>
     </script>
 </head>
@@ -51,11 +55,6 @@
             <br>
         </div>
         <div id="suggestion-container"class="dashboard-holders">
-            <%--<div class="new-dash-picture">Picture1</div>--%>
-            <%--<div class="new-dash-picture">Picture2</div>--%>
-            <%--<div class="new-dash-picture">Picture1</div>--%>
-            <%--<div class="new-dash-picture">Picture2</div>--%>
-            <%--<div class="new-dash-picture">Picture2</div>--%>
 
         </div>
     </div>

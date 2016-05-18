@@ -16,7 +16,7 @@
         <br>
         <span id="series-authored-story-1" class="light-grey-boxes black-span one-story series-authored-story">
                 <span id="authored-story-1-image" class="author-story-wrap">
-                    <img src="/resources/images/logo.png" height="100px" width="100px">
+                    <img src="/resources/images/test/transparent_image.png" height="100px" width="100px">
                 </span>
                 <span id="authored-story-1-information" class="author-story-wrap">
                     <span id="series-authored-chap-nums" class="white-boxes blue-box series-num-chapters">

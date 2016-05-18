@@ -46,7 +46,7 @@
                 <ul id="nav-dropdown-top" class="dropdown-menu">
                     <li><a href="/login">Sign In</a></li>
                     <li><a href="/logout">Sign Out</a></li>
-                    <li><a href="/settings">Settings</a></li>
+                    <li><a href="/settings/user">Settings</a></li>
                     <li><a href="/dashboard">Dashboard</a></li>
                     <li><a href="/series-workspace">Make A Comic</a></li>
                     <li><a href="/comic-index">Comic Index</a></li>

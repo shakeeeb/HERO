@@ -224,7 +224,7 @@ h3 {
 
 #edit-settings-save {
     margin-top: 20px;
-    margin-left: 168px;
+    margin-left: 25px;
 }
 
 #edit-settings-cancel {
@@ -235,13 +235,13 @@ h3 {
 #nickname {
     margin-top: 20px;
     margin-left: 30px;
-    width: 500px;
+    width: 800px;
     height: 100px;
     font-size: xx-large;
 }
 
 #about-me {
-    margin-left: 30px;
+    margin-left: 15px;
     margin-top: 30px;
     width: 800px;
     height: 400px;
@@ -323,4 +323,18 @@ h3 {
 
 .dropdown-button {
     width: 160px;
+}
+
+#dashboard-paragraph {
+    word-wrap: break-word;
+    width: 150px;
+}
+
+.settings-form {
+    margin-left: -200px;
+}
+
+#entire-div-to-the-left {
+    margin-left: -75px;
+    margin-top: -18px;
 }

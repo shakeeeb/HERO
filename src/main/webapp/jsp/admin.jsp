@@ -19,7 +19,7 @@
             <div class="col-md-11 col-md-push-1 row orange-span submitted-comics comic-span">
                 <div class="col-md-1">
                 <span class="pull-left comic_authorization_image">
-                <img id="img" src="https://placehold.it/170x170?text=Latest+2">
+                <img id="img" src="/resources/images/test/transparent_image.png" height="170px" width="170px">
                 </span>
                 </div>
                 <div class="col-md-2 col-md-offset-4">
@@ -56,7 +56,7 @@
             <div class="col-md-11 col-md-push-1 row orange-span submitted-comics">
                 <div class="col-md-1">
                 <span class="pull-left comic_authorization_image">
-                <img src="https://placehold.it/170x170?text=Latest+2">
+                <img src="/resources/images/test/transparent_image.png" height="170px" width="170px">
                 </span>
                 </div>
                 <div class="col-md-2 col-md-offset-4">
